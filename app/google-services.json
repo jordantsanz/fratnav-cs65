@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "256472567776",
+    "project_id": "fratnav-mjw",
+    "storage_bucket": "fratnav-mjw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256472567776:android:b81ceeee60f3da6b106585",
+        "android_client_info": {
+          "package_name": "com.example.fratnav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256472567776-c2c4j8gdlelli2ehon1p3gid6mp7sv07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv3pIFOMWacCL5wvHa7DK7Hsj9WnzV3-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256472567776-c2c4j8gdlelli2ehon1p3gid6mp7sv07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
