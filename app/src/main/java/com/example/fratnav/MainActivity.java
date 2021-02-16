@@ -1,5 +1,6 @@
 package com.example.fratnav;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                if (item.getItemId() == R.id.profile){
+                    Intent intent = new Intent(MainActivity.this, Profile.class);
+                    startActivity(intent);
+                }
+                if (item.getItemId() == R.id.forum){
+                    Intent intent = new Intent(MainActivity.this, Forum.class);
+                    startActivity(intent);
+                }
+                if (item.getItemId() == R.id.houses){
+                    Intent intent = new Intent(MainActivity.this, HousesSearch.class);
+                    startActivity(intent);
+                }
             }
         });
 
