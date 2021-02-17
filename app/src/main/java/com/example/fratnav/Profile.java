@@ -22,25 +22,28 @@ public class Profile extends AppCompatActivity {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
+        bottomBar.setSelectedItemId(R.id.profile);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Log.d("sad", "made it item clicked " + item.getTitle());
                 Toast.makeText(Profile.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                Log.d("rad", "didn;t make it");
-                switch (item.getItemId()) {
-                    case R.id.houses:
-                        Log.d("swtich", "houses");
-                        startActivity(new Intent(getApplicationContext(), HousesSearch.class));
-                    case R.id.home:
-                        Log.d("swtich", "profile");
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        Log.d("swtich", "forum");
-                    case R.id.forum:
-                        startActivity(new Intent(getApplicationContext(), Forum.class));
+                if (item.getItemId()==R.id.houses) {
+                    Log.d("swtich", "houses");
+                    startActivity(new Intent(Profile.this, HousesSearch.class));
+                    return true;
                 }
-                return true;
+                else if (item.getItemId()==R.id.home) {
+                    Log.d("swtich", "home");
+                    startActivity(new Intent(Profile.this, MainActivity.class));
+                    return true;
+                }
+                else if  (item.getItemId()==R.id.forum){
+                    Log.d("swtich", "forum");
+                    startActivity(new Intent(Profile.this, Forum.class));
+                    return true;
+                }
+                return false;
             }
 
         });
