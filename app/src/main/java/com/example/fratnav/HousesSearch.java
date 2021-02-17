@@ -2,6 +2,7 @@ package com.example.fratnav;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -18,25 +19,31 @@ public class HousesSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.houses_search);
+        Log.d("House", "house");
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
-        bottomBar.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.d("sad", "made it item clicked " + item.getTitle());
                 Toast.makeText(HousesSearch.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-                if (item.getItemId() == R.id.home){
-                    Intent intent = new Intent(HousesSearch.this, MainActivity.class);
-                    startActivity(intent);
+
+
+
+                Log.d("rad", "didn;t make it");
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        Log.d("swtich", "houses");
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    case R.id.profile:
+                        Log.d("swtich", "profile");
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        Log.d("swtich", "forum");
+                    case R.id.forum:
+                        startActivity(new Intent(getApplicationContext(), Forum.class));
                 }
-                if (item.getItemId() == R.id.forum){
-                    Intent intent = new Intent(HousesSearch.this, Forum.class);
-                    startActivity(intent);
-                }
-                if (item.getItemId() == R.id.profile){
-                    Intent intent = new Intent(HousesSearch.this, Profile.class);
-                    startActivity(intent);
-                }
+                return true;
             }
         });
     }

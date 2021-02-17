@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -24,26 +25,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("home", "home");
         Toolbar toolbar = findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
-        bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
-        bottomBar.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        setSupportActionBar(toolbar);
+        bottomBar = findViewById(R.id.bottomBar);
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.d("sad", "made it item clicked " + item.getTitle());
                 Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-                if (item.getItemId() == R.id.profile){
-                    Intent intent = new Intent(MainActivity.this, Profile.class);
-                    startActivity(intent);
+
+                Log.d("rad", "didn;t make it");
+                switch (item.getItemId()) {
+                    case R.id.houses:
+                        Log.d("swtich", "houses");
+                        startActivity(new Intent(getApplicationContext(), HousesSearch.class));
+                    case R.id.profile:
+                        Log.d("swtich", "profile");
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        Log.d("swtich", "forum");
+                    case R.id.forum:
+                        startActivity(new Intent(getApplicationContext(), Forum.class));
                 }
-                if (item.getItemId() == R.id.forum){
-                    Intent intent = new Intent(MainActivity.this, Forum.class);
-                    startActivity(intent);
-                }
-                if (item.getItemId() == R.id.houses){
-                    Intent intent = new Intent(MainActivity.this, HousesSearch.class);
-                    startActivity(intent);
-                }
+                return true;
             }
+
         });
 
     }
