@@ -37,15 +37,31 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="home"
-        android:layout_marginTop="100dp"/>
+        android:textSize="30dp"
+        android:text="General Rush Information"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bars"/>
 
+        <!-- info graphics here  -->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Your Feed"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/bars"/>
 
-
+        <!-- infinite scroll here  -->
+    </LinearLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
