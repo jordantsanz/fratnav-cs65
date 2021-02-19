@@ -1,17 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="#d2d2d2"-->
+<!--    tools:context=".HousesSearch">-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d2d2d2"
+    android:orientation="vertical"
     tools:context=".HousesSearch">
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.FratNav.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.FratNav.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--    <ScrollView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Browse By Houses:" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="454dp"
+        android:layout_gravity="center"
+        android:columnWidth="40dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp"
+        android:verticalSpacing="10dp">
+
+    </GridView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="30dp"
         android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:elevation="2dp"
         app:menu="@menu/navbar"
         app:labelVisibilityMode="unlabeled"
@@ -20,13 +76,19 @@
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
         />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    </ScrollView>-->
+
+    <!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" >-->
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="houses"
-        android:layout_marginTop="100dp"/>
+<!--    </ScrollView>-->
+</LinearLayout>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
