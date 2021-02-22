@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Profile extends AppCompatActivity {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
@@ -33,6 +38,7 @@ public class Profile extends AppCompatActivity {
     private EditText userText;
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
+    ListView postListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,6 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.profile);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        userText = (EditText) findViewById(R.id.editProfileText);
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
         if (currentUser == null) {
@@ -49,8 +54,6 @@ public class Profile extends AppCompatActivity {
             return;
         }
 
-        helloUser = findViewById(R.id.user);
-        helloUser.setText(currentUser.getEmail());
 
         // checks to see if data has been updated
         ValueEventListener changeListener = new ValueEventListener() {
@@ -62,7 +65,7 @@ public class Profile extends AppCompatActivity {
                         currentUser.getUid()).child("message")
                         .getValue(String.class);
 
-                helloUser.setText(change);
+//                helloUser.setText(change);
             }
 
             @Override
@@ -92,6 +95,14 @@ public class Profile extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        // setSupportActionBar(toolbar);
+        postListView = (ListView) findViewById(R.id.profileListView);
+
+        //need to change to post
+        ArrayList<String>arrayList= new ArrayList();
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.profile);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
