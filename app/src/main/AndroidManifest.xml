@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".CreateAccountActivity"></activity>
+        <activity android:name=".RealtimeFirebaseDB" />
+        <activity android:name=".Authentication" />
         <activity
-            android:name=".Authentication"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.FratNav.NoActionBar">
             <intent-filter>
@@ -20,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Forum"></activity>
-        <activity android:name=".HousesSearch"></activity>
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Forum" />
+        <activity android:name=".HousesSearch" />
+        <activity android:name=".Profile" />
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +18,12 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomBar;
+    private static FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,29 @@ public class MainActivity extends AppCompatActivity {
         Log.d("home", "home");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser == null){
+            Intent intent = new Intent(this, Authentication.class);
+            startActivity(intent);
+            finish();
+        }
+
+        try {
+            Log.d("cu", currentUser.toString());
+        }
+        catch(Exception e){
+            Intent intent = new Intent(this, Authentication.class);
+            startActivity(intent);
+            finish();
+        }
+
+        // checks to make sure the user is currently logged in; otherwise, send to authentication
+        if (currentUser == null) {
+            Log.d("null", "sup");
+            startActivity(new Intent(this, Authentication.class));
+            return;
+        }
         bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.home);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -79,4 +106,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void logout(MenuItem item) {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+    }
 }
