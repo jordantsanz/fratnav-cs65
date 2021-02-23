@@ -93,8 +93,6 @@ public class Profile extends AppCompatActivity {
         dbRef = database.getReference("/data");
         dbRef.addValueEventListener(changeListener);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
         postListView = (ListView) findViewById(R.id.profileListView);
