@@ -25,12 +25,21 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onBackClick"
+        android:text="back"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="58dp" />
+
     <ImageView
-        android:src="@drawable/aphi"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:src="@drawable/aphi"
         tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="92dp" />
+        tools:layout_editor_absoluteY="106dp" />
 
     <TextView
         android:id="@+id/house_name"
@@ -58,7 +67,7 @@
         android:layout_height="52dp"
         android:text="Alpha Phi is a national sorority, firstly established in 1872. The chapter at Dartmouth was established in 2006. There are 110 members at Dartmouth."
         tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="256dp" />
+        tools:layout_editor_absoluteY="267dp" />
 
     <Button
         android:id="@+id/subscribe_button"
@@ -138,7 +147,7 @@
         tools:layout_editor_absoluteX="43dp"
         tools:layout_editor_absoluteY="748dp"
         />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
+
