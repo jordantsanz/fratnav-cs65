@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.FratNav.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
+        android:theme="@style/Theme.FratNav.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,61 +18,96 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.FratNav.PopupOverlay" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onBackClick"
-        android:text="back"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="58dp" />
+        android:layout_gravity="bottom"
+        android:layout_margin="30dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:elevation="2dp"
+        app:menu="@menu/navbar"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="30dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemIconTint="@drawable/item_selector"
+        android:id="@+id/bottomBar"
+        />
+
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="11dp"
         android:src="@drawable/aphi"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="106dp" />
+        app:layout_constraintBottom_toTopOf="@+id/house_summary"
+        app:layout_constraintEnd_toStartOf="@+id/subscribers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/house_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="57dp"
         android:text="Alpha Phi"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="247dp"
-        tools:layout_editor_absoluteY="117dp" />
+        app:layout_constraintBottom_toTopOf="@+id/subscribers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/subscribers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="4dp"
         android:text="300+ Subscribers"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="151dp" />
+        app:layout_constraintBottom_toTopOf="@+id/subscribe_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/house_name" />
 
     <TextView
         android:id="@+id/house_summary"
         android:layout_width="343dp"
         android:layout_height="52dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="8dp"
         android:text="Alpha Phi is a national sorority, firstly established in 1872. The chapter at Dartmouth was established in 2006. There are 110 members at Dartmouth."
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="267dp" />
+        app:layout_constraintBottom_toTopOf="@+id/house_contacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/subscribe_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="106dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="41dp"
         android:text="subscribe"
-        tools:layout_editor_absoluteX="249dp"
-        tools:layout_editor_absoluteY="178dp">
+        app:layout_constraintBottom_toTopOf="@+id/house_summary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/subscribers">
 
     </Button>
 
@@ -84,61 +115,103 @@
         android:id="@+id/house_contacts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="226dp"
+        android:layout_marginBottom="26dp"
         android:text="Points of Contact:"
         android:textSize="18dp"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="337dp" />
+        app:layout_constraintBottom_toTopOf="@+id/president"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/house_summary" />
 
     <TextView
         android:id="@+id/president"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="58dp"
+        android:layout_marginEnd="289dp"
+        android:layout_marginBottom="35dp"
         android:text="President:"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toTopOf="@+id/house_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/house_contacts" />
 
     <TextView
         android:id="@+id/rush_chair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="239dp"
         android:text="Rush Chair:"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/president"
+        app:layout_constraintTop_toBottomOf="@+id/house_summary" />
 
     <TextView
         android:id="@+id/house_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="210dp"
+        android:layout_marginBottom="63dp"
         android:text="Self-Reported Stats:"
         android:textSize="18dp"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="441dp" />
+        app:layout_constraintBottom_toTopOf="@+id/house_tour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/president" />
 
     <TextView
         android:id="@+id/house_tour"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="270dp"
+        android:layout_marginBottom="30dp"
         android:text="House Tour:"
         android:textSize="18dp"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="529dp" />
+        app:layout_constraintBottom_toTopOf="@+id/explore_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/house_stats" />
 
     <Button
         android:id="@+id/explore_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="16dp"
         android:text="explore the house"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="629dp" />
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/house_tour"
+        app:layout_constraintTop_toBottomOf="@+id/house_stats" />
 
     <TextView
         android:id="@+id/reviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="296dp"
+        android:layout_marginBottom="5dp"
         android:text="Reviews:"
         android:textSize="18dp"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="702dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomBar" />
 
     <Button
         android:id="@+id/review_button"
@@ -148,7 +221,7 @@
         tools:layout_editor_absoluteX="43dp"
         tools:layout_editor_absoluteY="748dp"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
