@@ -54,6 +54,9 @@ public class Profile extends AppCompatActivity {
             return;
         }
 
+        TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
+        profileUsername.setText(currentUser.getEmail());
+
 
         // checks to see if data has been updated
         ValueEventListener changeListener = new ValueEventListener() {
@@ -93,8 +96,8 @@ public class Profile extends AppCompatActivity {
         dbRef = database.getReference("/data");
         dbRef.addValueEventListener(changeListener);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//         setSupportActionBar(toolbar);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
         postListView = (ListView) findViewById(R.id.profileListView);

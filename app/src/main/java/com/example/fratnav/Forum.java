@@ -38,6 +38,8 @@ public class Forum extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dbRefPosts;
     private DatabaseReference dbRefUsers;
+    private DatabaseReference dbRefHouses;
+    private DatabaseReference dbRefReviews;
     private EditText userText;
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
@@ -116,6 +118,23 @@ public class Forum extends AppCompatActivity {
                 };
 
 
+        ValueEventListener changeListener2 = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String change = dataSnapshot.child(
+                        currentUser.getUid()).child("message")
+                        .getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+
 
         database = FirebaseDatabase.getInstance();
         dbRefPosts = database.getReference("/posts");
@@ -123,6 +142,12 @@ public class Forum extends AppCompatActivity {
 
         dbRefUsers = database.getReference("/users");
         dbRefUsers.addValueEventListener(changeListener);
+
+        dbRefHouses = database.getReference("/houses");
+
+        dbRefReviews = database.getReference("/reviews");
+        dbRefReviews.addValueEventListener(changeListener2);
+
 
     }
     private void notifyUser(String message) {
