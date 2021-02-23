@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,11 @@ public class HousePage extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+
+    public void onBackClick(View view) {
+        startActivity(new Intent(HousePage.this,HousesSearch.class));
     }
 }
 

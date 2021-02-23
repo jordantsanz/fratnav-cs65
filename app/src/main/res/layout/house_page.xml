@@ -1,71 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/background"
-        app:elevation="2dp"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/item_selector"
-        app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explore_button"
-        app:menu="@menu/navbar" />
 
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:src="@drawable/aphi"
         tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="92dp" />
+        tools:layout_editor_absoluteY="106dp" />
 
     <TextView
         android:id="@+id/house_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOUSE NAME"
-        tools:layout_editor_absoluteX="283dp"
-        tools:layout_editor_absoluteY="92dp" />
+        android:text="Alpha Phi"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="247dp"
+        tools:layout_editor_absoluteY="117dp" />
 
     <TextView
         android:id="@+id/subscribers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="300+ Subscribers"
-        tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="127dp" />
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="224dp"
+        tools:layout_editor_absoluteY="151dp" />
 
     <TextView
         android:id="@+id/house_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="house summary..."
-        tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="162dp" />
+        android:layout_width="343dp"
+        android:layout_height="52dp"
+        android:text="Alpha Phi is a national sorority, firstly established in 1872. The chapter at Dartmouth was established in 2006. There are 110 members at Dartmouth."
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="267dp" />
 
     <Button
         android:id="@+id/subscribe_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="subscribe"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="197dp">
+        tools:layout_editor_absoluteX="249dp"
+        tools:layout_editor_absoluteY="178dp">
 
     </Button>
 
@@ -74,22 +58,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Points of Contact:"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="275dp" />
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <TextView
+        android:id="@+id/president"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="President:"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="387dp" />
+
+    <TextView
+        android:id="@+id/rush_chair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rush Chair:"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="387dp" />
 
     <TextView
         android:id="@+id/house_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Self-Reported Stats:"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="385dp" />
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="441dp" />
 
     <TextView
         android:id="@+id/house_tour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="House Tour:"
+        android:textSize="18dp"
         tools:layout_editor_absoluteX="45dp"
         tools:layout_editor_absoluteY="529dp" />
 
@@ -99,7 +102,26 @@
         android:layout_height="wrap_content"
         android:text="explore the house"
         tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="565dp" />
+        tools:layout_editor_absoluteY="629dp" />
+
+    <TextView
+        android:id="@+id/reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reviews:"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="702dp" />
+
+    <Button
+        android:id="@+id/review_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="leave a review"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="748dp"
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -14,27 +15,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HousesSearch extends AppCompatActivity {
     BottomNavigationView bottomBar;
-    GridView gridView;
-    static final String[] houses = new String[]{
-            "A", "B","C","D","E","F","G","H","I","J","K",
-            "L","M","N","O","P","Q","R","S","T","U","V",
-            "W","X","Y","Z"};
+    GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.houses_search);
+        setContentView(R.layout.house_search);
         Log.d("House", "house");
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        gridView = (GridView) findViewById(R.id.gridview);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, houses);
-        gridView.setAdapter(adapter);
+        gridLayout = (GridLayout) findViewById(R.id.grid_layout);
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.houses);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -61,13 +57,25 @@ public class HousesSearch extends AppCompatActivity {
                 return false;
             }
         });
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HousesSearch.this, HousePage.class);
-                startActivity(intent);
-            }
-        });
+        setSingleEvent(gridLayout);
+
+    }
+
+    // we are setting onClickListener for each element
+    private void setSingleEvent(GridLayout gridLayout) {
+        for(int i = 0; i<gridLayout.getChildCount();i++){
+            CardView cardView=(CardView)gridLayout.getChildAt(i);
+//            final int finalI= i;
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
+//                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HousesSearch.this,HousePage.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }
 
