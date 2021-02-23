@@ -25,6 +25,7 @@
         <activity android:name=".Forum" />
         <activity android:name=".HousesSearch" />
         <activity android:name=".Profile" />
+        <activity android:name=".HousePage"/>
     </application>
 
 </manifest>
