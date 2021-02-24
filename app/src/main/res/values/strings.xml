@@ -13,5 +13,7 @@
     <string name="password">Password:</string>
     <string name="forgotPassword">Forgot Password? </string>
     <string name="createAccountUnderline">Create Account <u>Here</u></string>
+    <string name="backgroundColor">#19191A</string>
+    <string name="textColor">#F7FFF7</string>
 
 </resources>
