@@ -26,6 +26,10 @@
         <activity android:name=".HousesSearch" />
         <activity android:name=".Profile" />
         <activity android:name=".HousePage"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
