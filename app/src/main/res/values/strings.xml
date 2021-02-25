@@ -15,5 +15,10 @@
     <string name="createAccountUnderline">Create Account <u>Here</u></string>
     <string name="backgroundColor">#19191A</string>
     <string name="textColor">#F7FFF7</string>
+    <string name="logIn">Log In</string>
+    <string name="logInInfo">Log In Information </string>
+    <string name="rushInfo">Rush Information</string>
+    <string name="profileInfo">Profile Information</string>
+    <string name="gender">Gender</string>
 
 </resources>

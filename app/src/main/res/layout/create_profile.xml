@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@string/backgroundColor"
     tools:context=".Authentication">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
+        android:textColor="@string/textColor"
         android:layout_marginTop="50dp"
         android:textSize="60dp"
         android:layout_gravity="center"/>
@@ -17,7 +19,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Information"
+        android:textColor="@string/textColor"
+        android:text="@string/profileInfo"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:textSize="20dp" />
@@ -25,51 +28,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Gender"
+        android:textColor="@string/textColor"
+        android:text="@string/gender"
         android:layout_marginLeft="25dp"
         />
     <EditText
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"/>
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/background"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
+        android:textColor="@string/textColor"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Sexuality"
-        android:layout_marginLeft="25dp"
-        />
+        android:layout_marginLeft="25dp" />
+
     <EditText
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="year"
-        android:layout_marginStart="25dp"/>
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"/>
+
     <EditText
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="House Affiliation"
-        android:layout_marginStart="25dp"/>
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="25dp">
             <RadioButton
+                android:textColor="@string/textColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="yes"
                 android:layout_marginRight="30dp"/>
             <RadioButton
+                android:textColor="@string/textColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="no">

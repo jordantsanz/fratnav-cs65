@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d2d2d2"
+    android:background="@string/backgroundColor"
 
     tools:context=".MainActivity">
 
@@ -29,22 +29,24 @@
         android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:text="General Rush Information"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/bars"/>
+        android:text="@string/rushInfo"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"/>
 
         <!-- info graphics here  -->
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:text="Your Feed"
         android:layout_marginTop="100dp"
-        android:background="@drawable/bars"/>
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"/>
 
         <!-- infinite scroll here  -->
     </LinearLayout>
