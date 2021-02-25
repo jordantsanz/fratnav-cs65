@@ -146,15 +146,15 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fraternities"
+            android:text="@string/fraternities"
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
             android:textColor="@string/textColor"
-            android:layout_marginRight="30dp"/>
+           />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="National Pan-Hellenic Council"
+            android:text="@string/nationalPanHellenic"
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
             android:textColor="@string/textColor">
@@ -171,7 +171,7 @@
             android:textColor="@string/textColor"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat"
-            android:text="Gender-Inclusive Houses">
+            android:text="@string/genderInclusiveHouses">
         </RadioButton>
         <RadioButton
             android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
             android:textColor="@string/textColor"
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
-            android:text="Sororities">
+            android:text="@string/sororities">
         </RadioButton>
     </LinearLayout>
 
@@ -191,7 +191,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
-        android:text="Create Account"/>
+        android:text="@string/createAccount"/>
 
 
 </LinearLayout>
