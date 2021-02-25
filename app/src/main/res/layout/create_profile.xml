@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     android:background="@string/backgroundColor"
+
     tools:context=".Authentication">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
+        android:fontFamily="@font/montserrat"
         android:textColor="@string/textColor"
         android:layout_marginTop="50dp"
-        android:textSize="60dp"
+        android:textSize="60sp"
         android:layout_gravity="center"/>
 
     <TextView
@@ -22,52 +25,65 @@
         android:textColor="@string/textColor"
         android:text="@string/profileInfo"
         android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:textSize="25sp"
         android:layout_marginTop="15dp"
-        android:textSize="25sp" />
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="18dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
         android:textColor="@string/textColor"
         android:text="@string/gender"
         android:layout_marginStart="25dp"
         />
     <EditText
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/createGender"/>
     <TextView
         android:layout_width="wrap_content"
         android:textColor="@string/textColor"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
         android:text="@string/sexuality"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginStart="25dp" />
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/createSexuality"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="year"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:text="@string/year"
         android:layout_marginStart="25dp"
         android:textColor="@string/textColor"/>
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/background"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:id="@+id/createYear"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,34 +91,48 @@
         android:layout_marginTop="10dp"
         android:text="@string/houseAffiliation"
         android:layout_marginStart="25dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
         android:textColor="@string/textColor"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createAffiliated">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp">
             <RadioButton
                 android:textColor="@string/textColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
                 android:layout_marginStart="30dp"/>
             <RadioButton
+                android:layout_marginStart="10dp"
                 android:textColor="@string/textColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no">
+                android:text="@string/no"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp">
             </RadioButton>
-    </LinearLayout>
+            </LinearLayout>
+        </RadioGroup>
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="110dp"
         android:layout_gravity="center"
-
+        android:background="@drawable/background"
+        android:fontFamily="@font/montserrat"
         android:text="@string/createAccount"/>
 
 

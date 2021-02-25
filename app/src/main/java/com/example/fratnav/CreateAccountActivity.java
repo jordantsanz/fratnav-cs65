@@ -118,7 +118,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             dbRef.child("User")
                                     .setValue(newUser, completionListener);
 
-                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            Intent intent = new Intent(getBaseContext(), CreateProfile.class);
                             Log.d("intentintent", "onComplete: ");
                             startActivity(intent);
                             finish();
@@ -135,5 +135,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 }
