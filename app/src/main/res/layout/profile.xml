@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d2d2d2"
+    android:background="@string/backgroundColor"
     tools:context=".Profile">
 
 
@@ -22,19 +22,28 @@
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="userName"
+        android:textColor="@string/textColor"
+        android:text="@string/username"
+        android:fontFamily="@font/montserrat_bold"
         android:layout_gravity="left"
         android:layout_marginLeft="55dp"
-        android:textSize="40dp"
+        android:textSize="30sp"
         android:layout_marginTop="90dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="affiliated:"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/affiliated"
+        android:textSize="16sp"
         android:layout_marginTop="150dp"
         android:layout_marginStart="55dp"
         />
@@ -42,35 +51,48 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="class year:"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/year"
+        android:textSize="16sp"
         android:layout_marginTop="170dp"
         android:layout_marginStart="55dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gender:"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/sexuality"
+        android:textSize="16sp"
         android:layout_marginTop="170dp"
         android:layout_marginStart="160dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="affiliated:"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/gender"
+        android:textSize="16sp"
         android:layout_marginTop="150dp"
         android:layout_marginStart="160dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Subscribed:"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20sp"
+        android:text="@string/subscribed"
         android:layout_marginTop="200dp"
         android:layout_marginStart="55dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notification Settings:"
-        android:textSize="20dp"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/notification"
+        android:textSize="20sp"
         android:layout_marginTop="300dp"
         android:layout_marginStart="55dp"/>
 
@@ -80,8 +102,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="400dp"
-        android:text="Past Post:"
-        android:textSize="20dp" />
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/past_posts"
+        android:textSize="20sp" />
 
 
     <LinearLayout
@@ -94,12 +118,18 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="on" />
+            android:textColor="@string/textColor"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/on"
+            android:textSize="16sp"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="off"
+            android:textColor="@string/textColor"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:text="@string/off"
             android:layout_marginStart="25dp"/>
     </LinearLayout>
 

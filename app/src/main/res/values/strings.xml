@@ -26,6 +26,14 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="year">Year:</string>
+    <string name="subscribed">Subscribed:</string>
+    <string name="affiliated">Affiliated:</string>
+    <string name="notification">Notification Settings:</string>
+    <string name="past_posts">Past Posts:</string>
+    <string name="username">Username</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+
 
 
  
