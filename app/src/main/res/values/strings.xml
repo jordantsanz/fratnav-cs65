@@ -11,6 +11,7 @@
     <string name="createAccount">Create Account</string>
     <string name="email">Email:</string>
     <string name="password">Password:</string>
+    <string name="confirmPassword">Confirm Password:</string>
     <string name="forgotPassword">Forgot Password? </string>
     <string name="createAccountUnderline">Create Account <u>Here</u></string>
     <string name="backgroundColor">#19191A</string>
@@ -19,6 +20,14 @@
     <string name="logInInfo">Log In Information </string>
     <string name="rushInfo">Rush Information</string>
     <string name="profileInfo">Profile Information</string>
-    <string name="gender">Gender</string>
+    <string name="gender">Gender:</string>
+    <string name="sexuality">Sexuality:</string>
+    <string name="houseAffiliation">House Affiliation</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="year">Year:</string>
+
+
+ 
 
 </resources>
