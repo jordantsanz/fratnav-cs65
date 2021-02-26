@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void logout(MenuItem item) {
+    public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         finish();
     }
