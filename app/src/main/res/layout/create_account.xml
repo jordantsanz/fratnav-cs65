@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@string/backgroundColor"
+    android:background="@color/backgroundColor"
     tools:context=".Authentication">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_marginTop="50dp"
         android:textSize="60sp"
         android:layout_gravity="center"/>
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logInInfo"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:textSize="25sp" />
@@ -31,7 +31,7 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:text="@string/email"
-        android:textColor="@string/textColor" />
+        android:textColor="@color/textColor" />
 
     <EditText
         android:id="@+id/createEmail"
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:text="@string/confirmPassword"
         android:layout_marginLeft="25dp"
@@ -61,7 +61,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_marginTop="20dp"
         android:text="@string/password"
         android:layout_marginStart="25dp"
@@ -76,7 +76,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_marginTop="20dp"
         android:text="@string/confirmPassword"
         android:layout_marginStart="25dp"
@@ -96,7 +96,6 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:onClick="createAccount"
-
         android:text="Next"/>
 
 

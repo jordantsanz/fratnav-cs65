@@ -30,4 +30,6 @@ public class House {
         this.urlToHouseTour = urlToHouseTour;
         this.reviews = reviews;
     }
+
+    public House(){}
 }

@@ -1,19 +1,25 @@
 package com.example.fratnav;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import com.example.fratnav.callbacks.getAllPostsCallback;
+import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,16 +28,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Forum extends AppCompatActivity {
+public class Forum extends ListActivity {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
     private static final String TAG = "RealtimeDB";
@@ -43,6 +46,11 @@ public class Forum extends AppCompatActivity {
     private EditText userText;
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
+
+    ArrayList<String> listItems=new ArrayList<String>();
+
+    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +67,6 @@ public class Forum extends AppCompatActivity {
             finish();
             return;
         }
-
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
@@ -140,6 +147,17 @@ public class Forum extends AppCompatActivity {
         dbRefPosts = database.getReference("/posts");
         dbRefPosts.addValueEventListener(changeListener);
 
+        PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
+            @Override
+            public void onCallback(ArrayList<Post> posts) {
+                Log.d("Posts", posts.toString());
+                for (int i = 0; i < posts.size(); i++){
+                    adapter.add(posts.get(i).text);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         dbRefUsers = database.getReference("/users");
         dbRefUsers.addValueEventListener(changeListener);
 
@@ -148,8 +166,31 @@ public class Forum extends AppCompatActivity {
         dbRefReviews = database.getReference("/reviews");
         dbRefReviews.addValueEventListener(changeListener2);
 
+        adapter=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                listItems);
 
-    }
+        ListView list = findViewById(android.R.id.list);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Click", "onItemClick: ");
+                String clickedItem=(String) list.getItemAtPosition(position);
+                Log.d("Click", clickedItem.toString());
+                Log.d("Click", String.valueOf(id));
+                PostDatabaseHelper.getPostById(clickedItem, new getPostByIdCallback() {
+                    @Override
+                    public void onCallback(Post post) {
+                        assert post != null;
+                        Log.d("Post", post.text);
+                    }
+                });
+                }});
+
+        }
+
+
     private void notifyUser(String message) {
         Toast.makeText(Forum.this, message,
                 Toast.LENGTH_SHORT).show();
@@ -158,8 +199,8 @@ public class Forum extends AppCompatActivity {
     public void savePost(View view) {
         Post post = new Post(currentUser.getDisplayName(), currentUser.getUid(), userText.getText().toString(),
                 new ArrayList<>(), new ArrayList<>(), 0);
-        dbRefPosts.child("Post")
-                .setValue(post, completionListener);
+
+        dbRefPosts.push().setValue(post);
         dbRefUsers.orderByChild("userID").equalTo(currentUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -203,5 +244,3 @@ public class Forum extends AppCompatActivity {
 
     }
 }
-
-

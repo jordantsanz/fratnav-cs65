@@ -115,11 +115,9 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                             database = FirebaseDatabase.getInstance();
                             dbRef = database.getReference("/users");
-                            dbRef.child("User")
-                                    .setValue(newUser, completionListener);
+                            dbRef.push().setValue(newUser);
 
                             Intent intent = new Intent(getBaseContext(), CreateProfile.class);
-                            Log.d("intentintent", "onComplete: ");
                             startActivity(intent);
                             finish();
 

@@ -9,4 +9,6 @@ public class Comment {
         this.username = username;
         this.comment = comment;
     }
+
+    public Comment(){}
 }

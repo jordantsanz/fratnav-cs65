@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@string/backgroundColor"
+    android:background="@color/backgroundColor"
     tools:context=".Profile">
 
     <androidx.core.widget.NestedScrollView
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profileUsername"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:text="@string/username"
         android:fontFamily="@font/montserrat_bold"
         android:textStyle="italic"
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/affiliated"
         android:textSize="16sp"
@@ -45,7 +45,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/year"
         android:textSize="16sp"
@@ -60,13 +60,13 @@
             android:layout_marginTop="120dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/sexuality"
-            android:textColor="@string/textColor"
+            android:textColor="@color/textColor"
             android:textSize="16sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/gender"
         android:textSize="16sp"
@@ -77,7 +77,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:textSize="20sp"
         android:text="@string/subscribed"
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:text="APhi"
                         android:textAlignment="center"
-                        android:textColor="@string/textColor"
+                        android:textColor="@color/textColor"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/notification"
         android:textSize="20sp"
@@ -148,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="390dp"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/past_posts"
         android:textSize="20sp" />
@@ -164,7 +164,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@string/textColor"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/montserrat"
             android:text="@string/on"
             android:textSize="16sp"/>
@@ -172,7 +172,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@string/textColor"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
             android:text="@string/off"

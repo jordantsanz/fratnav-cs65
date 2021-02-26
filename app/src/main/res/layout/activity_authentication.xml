@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@string/backgroundColor"
+    android:background="@color/backgroundColor"
     tools:context=".Authentication">
 
     <TextView
@@ -15,7 +15,7 @@
         android:text="@string/app_name"
         android:layout_marginTop="50dp"
         android:textSize="60dp"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_gravity="center"/>
     <ImageView
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/email"
-        android:textColor="@string/textColor" />
+        android:textColor="@color/textColor" />
 
     <EditText
         android:id="@+id/email"
@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/password"
-        android:textColor="@string/textColor" />
+        android:textColor="@color/textColor" />
 
     <EditText
         android:id="@+id/password"
@@ -70,7 +70,7 @@
         android:fontFamily="@font/montserrat"
         android:onClick="signinUsers"
         android:text="@string/logIn"
-        android:textColor="@string/textColor"
+        android:textColor="@color/textColor"
         android:layout_marginTop="25dp"
         android:layout_gravity="center"/>
     <LinearLayout
@@ -83,14 +83,14 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:textColor="@string/textColor"
+            android:textColor="@color/textColor"
             android:layout_height="wrap_content"
             android:text="@string/forgotPassword"
             android:fontFamily="@font/montserrat"
             android:layout_marginRight="10dp"/>
         <TextView
             android:layout_width="wrap_content"
-            android:textColor="@string/textColor"
+            android:textColor="@color/textColor"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="@string/createAccountUnderline"
