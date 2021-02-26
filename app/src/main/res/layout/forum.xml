@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d2d2d2"
+    android:background="@string/backgroundColor"
     tools:context=".Forum">
 <!--    <com.google.android.material.appbar.AppBarLayout-->
 <!--        android:layout_width="match_parent"-->
@@ -19,6 +19,15 @@
 <!--            app:popupTheme="@style/Theme.FratNav.PopupOverlay" />-->
 
 <!--    </com.google.android.material.appbar.AppBarLayout>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Your Feed"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"
+        android:fontFamily="@font/montserrat"/>
 
     <TextView
         android:layout_width="wrap_content"

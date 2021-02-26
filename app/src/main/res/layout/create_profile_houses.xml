@@ -5,63 +5,139 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
+    android:background="@string/backgroundColor"
+
     tools:context=".Authentication">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@string/textColor"
         android:layout_marginTop="50dp"
-        android:textSize="60dp"
+        android:textSize="60sp"
         android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Information"
+        android:textColor="@string/textColor"
+        android:text="@string/profileInfo"
         android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:textSize="25sp"
         android:layout_marginTop="15dp"
-        android:textSize="20dp" />
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Gender"
-        android:layout_marginLeft="25dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@string/textColor"
+        android:text="@string/gender"
+        android:layout_marginStart="25dp"
         />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/background"
+        android:layout_gravity="center"
+        android:id="@+id/createGender"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@string/textColor"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:text="@string/sexuality"
+        android:layout_marginStart="25dp" />
 
     <EditText
-        android:layout_width="375dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp" />
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/background"
+        android:layout_gravity="center"
+        android:id="@+id/createSexuality"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Sexuality"
-        android:layout_marginLeft="25dp"
-        />
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:text="@string/year"
+        android:layout_marginStart="25dp"
+        android:textColor="@string/textColor"/>
 
     <EditText
-        android:layout_width="375dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp" />
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:id="@+id/createYear"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="year"
+        android:text="@string/houseAffiliation"
+        android:layout_marginStart="25dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@string/textColor"/>
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/createAffiliated">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="25dp">
+            <RadioButton
+                android:textColor="@string/textColor"
+                android:id="@+id/createYesAffiliated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_marginStart="30dp"/>
+            <RadioButton
+                android:layout_marginStart="10dp"
+                android:textColor="@string/textColor"
+                android:layout_width="wrap_content"
+                android:id="@+id/createNoAffiliated"
+                android:layout_height="wrap_content"
+                android:text="@string/no"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp">
+            </RadioButton>
+        </LinearLayout>
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/interestedIn"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:textColor="@string/textColor"
         android:layout_marginStart="25dp"/>
 
-    <EditText
-        android:layout_width="375dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="House Affiliation"
-        android:layout_marginStart="25dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,22 +146,20 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="yes"
-            android:layout_marginRight="30dp"/>
+            android:text="@string/fraternities"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:textColor="@string/textColor"
+           />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="no">
+            android:text="@string/nationalPanHellenic"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:textColor="@string/textColor">
         </RadioButton>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Interested In:"
-        android:layout_marginStart="25dp"/>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,28 +168,18 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fraternities"
-            android:layout_marginRight="30dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sororities">
-        </RadioButton>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender-Inclusive Houses">
+            android:textColor="@string/textColor"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/genderInclusiveHouses">
         </RadioButton>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="National Pan-Hellenic Council">
+            android:textColor="@string/textColor"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:text="@string/sororities">
         </RadioButton>
     </LinearLayout>
 
@@ -123,10 +187,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-
-        android:text="Create Account"/>
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/background"
+        android:text="@string/createAccount"
+        android:onClick="createAccount2"/>
 
 
 </LinearLayout>
