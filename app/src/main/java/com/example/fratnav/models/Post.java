@@ -8,6 +8,7 @@ public class Post {
     public String username = "";
     public String userID = "";
     public String text = "";
+    public String title = "";
     public ArrayList<String> attributes;
     public ArrayList<Comment> comments;
     public int likes;

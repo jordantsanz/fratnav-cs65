@@ -1,12 +1,15 @@
 package com.example.fratnav.databaseHelpers;
 
 
+import android.renderscript.Sampler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.example.fratnav.models.Comment;
+import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,7 +72,35 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
         });
 }
 
-public static void createPost(){}
+    public static String createPost(Post post){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = db.getReference("/posts");
+        DatabaseReference newPostRef = dbRefHouses.push();
+        String id = newPostRef.getKey();
+        newPostRef.setValue(post);
+        return id;
+    }
+
+    public static void addPostComment(Post post, Comment comment){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = db.getReference("/posts");
+        dbRefPosts.orderByKey().equalTo(post.id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("post", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.child("comments").getRef().push().setValue(comment);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
 
 

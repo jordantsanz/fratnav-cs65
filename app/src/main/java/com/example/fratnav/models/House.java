@@ -13,10 +13,11 @@ public class House {
     public ArrayList<String> people;
     public ArrayList<String> stats;
     public String urlToHouseTour;
-    public ArrayList<Reviews> reviews;
+    public ArrayList<Review> reviews;
+    public String id;
 
     public House(String houseName, int subscribers, String summary, String date, boolean national, ArrayList<String> positions,
-                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Reviews> reviews){
+                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews){
 
         this.houseName = houseName;
         this.subscribers = subscribers;
@@ -31,4 +32,8 @@ public class House {
     }
 
     public House(){}
+
+    public void setId(String id){
+        this.id = id;
+    }
 }

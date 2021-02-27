@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -100,23 +101,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             User newUser = new User(email, randomUsername(), "Male", "gay", user.getUid(), 2022,
                                     true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
                                     false);
-
-                            // checks to see if data has been entered
-                            DatabaseReference.CompletionListener completionListener =
-                                    new DatabaseReference.CompletionListener() {
-                                        @Override
-                                        public void onComplete(DatabaseError databaseError,
-                                                               DatabaseReference databaseReference) {
-
-                                            if (databaseError != null) {
-                                                Log.d("completion", "onComplete: ");
-                                            }
-                                        }
-                                    };
-
-                            database = FirebaseDatabase.getInstance();
-                            dbRef = database.getReference("/users");
-                            dbRef.push().setValue(newUser);
+                            UserDatabaseHelper.createUser(newUser);
 
                             Intent intent = new Intent(getBaseContext(), CreateProfile.class);
                             startActivity(intent);

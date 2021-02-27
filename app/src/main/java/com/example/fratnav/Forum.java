@@ -3,6 +3,7 @@ package com.example.fratnav;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.annotation.Nullable;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,10 +49,10 @@ public class Forum extends ListActivity {
     private EditText userText;
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
+    private ArrayList<Post> arrayOfPosts;
 
-    ArrayList<String> listItems=new ArrayList<String>();
-
-    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    public static final String POST_ID_KEY = "postid_key";
+    public static final String USER_ID_KEY = "userid_key";
     PostsAdapter adapter;
 
     @Override
@@ -95,23 +97,6 @@ public class Forum extends ListActivity {
         });
 
 
-        // checks to see if data has been updated
-        ValueEventListener changeListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                String change = dataSnapshot.child(
-                        currentUser.getUid()).child("message")
-                        .getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                notifyUser("Database error: " + databaseError.toException());
-            }
-        };
-
         // checks to see if data has been entered
         completionListener =
                 new DatabaseReference.CompletionListener() {
@@ -126,27 +111,10 @@ public class Forum extends ListActivity {
                 };
 
 
-        ValueEventListener changeListener2 = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                String change = dataSnapshot.child(
-                        currentUser.getUid()).child("message")
-                        .getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
 
 
         database = FirebaseDatabase.getInstance();
         dbRefPosts = database.getReference("/posts");
-        dbRefPosts.addValueEventListener(changeListener);
 
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
@@ -160,7 +128,7 @@ public class Forum extends ListActivity {
         });
 
         // Construct the data source
-        ArrayList<Post> arrayOfPosts = new ArrayList<Post>();
+        arrayOfPosts = new ArrayList<Post>();
         // Create the adapter to convert the array to views
         adapter = new PostsAdapter(this, arrayOfPosts);
         // Attach the adapter to a ListView
@@ -177,6 +145,11 @@ public class Forum extends ListActivity {
                 Post post = adapter.getItem(position);
                 Toast.makeText(Forum.this, post.text, Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(Forum.this, PostActivity.class);
+                intent.putExtra(POST_ID_KEY, post.id);
+                intent.putExtra(USER_ID_KEY, currentUser.getUid());
+
+                startActivity(intent);
                 }});
 
         }
@@ -195,46 +168,11 @@ public class Forum extends ListActivity {
 
         dbRefPosts.push().setValue(post);
 
-        dbRefUsers.orderByChild("userID").equalTo(currentUser.getUid()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+        arrayOfPosts.add(post);
 
-                boolean yo = false;
-                for (DataSnapshot n : snapshot.getChildren()) {
-                    if(Objects.equals(n.getKey(), "Posts")){
-                        List<Post> posts = (List<Post>) n.getValue();
-                        assert posts != null;
-                        posts.add(post);
-                        yo = true;
-                    }
+        adapter.notifyDataSetChanged();
 
-                }
-                if (!yo){
-                    Log.d("ohoh", "onChildAdded: ");
-                }
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        UserDatabaseHelper.addPostToUser(post, currentUser);
 
     }
 }
