@@ -74,20 +74,31 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void createAccount(View view){
 
         EditText emailView = (EditText) findViewById(R.id.createEmail);
+        EditText emailViewConfirm = (EditText) findViewById(R.id.createEmailConfirm);
         EditText passwordView = (EditText) findViewById(R.id.createPassword);
+        EditText passwordViewConfirm = (EditText) findViewById(R.id.createPasswordConfirm);
+
 
         email = emailView.getText().toString();
         password = passwordView.getText().toString();
 
-        Log.d("email", email);
-        Log.d("password", password);
+        String emailCon = emailViewConfirm.getText().toString();
+        String passwordCon = passwordViewConfirm.getText().toString();
 
         if (email == null || password == null){
             Toast.makeText(CreateAccountActivity.this, "Please enter in email and password", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if (!email.equals(emailCon)){
+            Toast.makeText(this, "Your emails do not match!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if (!password.equals(passwordCon)){
+            Toast.makeText(this, "Your passwords do not match!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
