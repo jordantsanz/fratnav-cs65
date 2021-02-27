@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
         <activity android:name=".CreateAccountActivity"></activity>
-        <activity android:name=".RealtimeFirebaseDB" />
+        <activity android:name=".databaseHelpers.RealtimeFirebaseDB" />
         <activity android:name=".Authentication" />
         <activity
             android:name=".MainActivity"

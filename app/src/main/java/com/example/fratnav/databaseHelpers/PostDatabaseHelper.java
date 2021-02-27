@@ -1,14 +1,13 @@
-package com.example.fratnav;
+package com.example.fratnav.databaseHelpers;
 
 
-import android.provider.ContactsContract;
-import android.renderscript.Sampler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.example.fratnav.models.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

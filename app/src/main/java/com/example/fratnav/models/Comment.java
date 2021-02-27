@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.models;
 
 public class Comment {
 

@@ -18,8 +18,9 @@ import androidx.annotation.Nullable;
 
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
+import com.example.fratnav.models.Post;
+import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,7 +51,7 @@ public class Forum extends ListActivity {
     ArrayList<String> listItems=new ArrayList<String>();
 
     //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
-    ArrayAdapter<String> adapter;
+    PostsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,55 +153,48 @@ public class Forum extends ListActivity {
             public void onCallback(ArrayList<Post> posts) {
                 Log.d("Posts", posts.toString());
                 for (int i = 0; i < posts.size(); i++){
-                    adapter.add(posts.get(i).text);
+                    adapter.add(posts.get(i));
                 }
                 adapter.notifyDataSetChanged();
             }
         });
 
-        dbRefUsers = database.getReference("/users");
-        dbRefUsers.addValueEventListener(changeListener);
-
-        dbRefHouses = database.getReference("/houses");
-
-        dbRefReviews = database.getReference("/reviews");
-        dbRefReviews.addValueEventListener(changeListener2);
-
-        adapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listItems);
-
+        // Construct the data source
+        ArrayList<Post> arrayOfPosts = new ArrayList<Post>();
+        // Create the adapter to convert the array to views
+        adapter = new PostsAdapter(this, arrayOfPosts);
+        // Attach the adapter to a ListView
         ListView list = findViewById(android.R.id.list);
-        list.setAdapter(adapter);
+        list.setAdapter(adapter); // sets adapter for list
+
+
+
+        // on click listener for posts
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("Click", "onItemClick: ");
-                String clickedItem=(String) list.getItemAtPosition(position);
-                Log.d("Click", clickedItem.toString());
-                Log.d("Click", String.valueOf(id));
-                PostDatabaseHelper.getPostById(clickedItem, new getPostByIdCallback() {
-                    @Override
-                    public void onCallback(Post post) {
-                        assert post != null;
-                        Log.d("Post", post.text);
-                    }
-                });
+
+                Post post = adapter.getItem(position);
+                Toast.makeText(Forum.this, post.text, Toast.LENGTH_SHORT).show();
+
                 }});
 
         }
 
-
+    // if error
     private void notifyUser(String message) {
         Toast.makeText(Forum.this, message,
                 Toast.LENGTH_SHORT).show();
     }
 
+
+    // saves post currently
     public void savePost(View view) {
         Post post = new Post(currentUser.getDisplayName(), currentUser.getUid(), userText.getText().toString(),
                 new ArrayList<>(), new ArrayList<>(), 0);
 
         dbRefPosts.push().setValue(post);
+
         dbRefUsers.orderByChild("userID").equalTo(currentUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

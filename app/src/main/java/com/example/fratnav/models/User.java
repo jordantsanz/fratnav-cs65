@@ -1,6 +1,8 @@
-package com.example.fratnav;
+package com.example.fratnav.models;
 
-import java.lang.reflect.Array;
+import com.example.fratnav.models.House;
+import com.example.fratnav.models.Post;
+
 import java.util.ArrayList;
 import java.util.List;
 
