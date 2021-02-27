@@ -94,7 +94,6 @@ public class Authentication extends AppCompatActivity {
         if (user != null) {
             // Name, email address, and profile photo Url
             String uid = user.getUid();
-
         }
 
 
