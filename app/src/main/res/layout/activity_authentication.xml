@@ -42,6 +42,10 @@
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="15dp"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
       />
 
     <TextView
@@ -61,7 +65,11 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/background"
         android:fontFamily="@font/montserrat"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"/>
 
     <Button
         android:background="@drawable/background"

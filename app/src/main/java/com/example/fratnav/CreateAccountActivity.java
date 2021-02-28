@@ -29,6 +29,7 @@ import java.util.Random;
 public class CreateAccountActivity extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     String email;
+    String username;
     String password;
     FirebaseUser user;
     private static final String TAG = "RealtimeDB";
@@ -81,6 +82,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         email = emailView.getText().toString();
         password = passwordView.getText().toString();
+        username= randomUsername();
 
         String emailCon = emailViewConfirm.getText().toString();
         String passwordCon = passwordViewConfirm.getText().toString();
@@ -109,12 +111,15 @@ public class CreateAccountActivity extends AppCompatActivity {
                             user = mAuth.getCurrentUser();
                             assert user != null;
                             Toast.makeText(CreateAccountActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
-                            User newUser = new User(email, randomUsername(), "Male", "gay", user.getUid(), 2022,
-                                    true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
-                                    false);
-                            UserDatabaseHelper.createUser(newUser);
+//                            User newUser = new User(email, randomUsername(), "Male", "gay", user.getUid(), 2022,
+//                                    true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+//                                    false);
+//                            UserDatabaseHelper.createUser(newUser);
 
                             Intent intent = new Intent(getBaseContext(), CreateProfile.class);
+                            intent.putExtra("email", email);
+                            intent.putExtra("password", password);
+                            intent.putExtra("userName", username);
                             startActivity(intent);
                             finish();
 

@@ -45,6 +45,10 @@
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
         android:layout_gravity="center"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
         android:id="@+id/createGender"/>
     <TextView
         android:layout_width="wrap_content"
@@ -62,6 +66,10 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
         android:layout_gravity="center"
         android:id="@+id/createSexuality"/>
 
@@ -81,6 +89,11 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/background"
         android:layout_gravity="center"
+        android:inputType="number"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
         android:fontFamily="@font/montserrat"
         android:id="@+id/createYear"/>
 
@@ -136,7 +149,7 @@
         android:textSize="18sp"
         android:textColor="@color/textColor"
         android:layout_marginStart="25dp"/>
-
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,6 +171,7 @@
             android:textSize="16sp"
             android:textColor="@color/textColor">
         </RadioButton>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -182,8 +196,60 @@
         </RadioButton>
     </LinearLayout>
 
+-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <CheckBox
+            android:id="@+id/soroCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:text="@string/sororities"
+            android:layout_marginStart="25dp"/>
+
+        <CheckBox
+            android:id="@+id/natPanHelicChackBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/nationalPanHellenic"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <CheckBox
+            android:id="@+id/fratCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fraternities"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="25dp"/>
+
+        <CheckBox
+            android:id="@+id/genderInclusiveCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/genderInclusiveHouses"
+            android:layout_marginStart="25dp"/>
+    </LinearLayout>
 
     <Button
+        android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -191,7 +257,9 @@
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
         android:text="@string/createAccount"
-        android:onClick="createAccount2"/>
+        android:onClick="createAccount2" />
+
+
 
 
 </LinearLayout>

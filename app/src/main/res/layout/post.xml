@@ -1,15 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="350dp"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:background="@drawable/post_background">
     <TextView
         android:id="@+id/postUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/montserrat"
         android:text="@string/affiliated"/>
     <TextView
         android:id="@+id/postText"
         android:layout_width="wrap_content"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/montserrat"
         android:layout_height="wrap_content"
         android:text="@string/app_name"/>
 </LinearLayout>

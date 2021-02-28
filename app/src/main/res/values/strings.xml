@@ -37,6 +37,10 @@
     <string name="nationalPanHellenic">National Pan-Hellenic</string>
     <string name="fraternities">Fraternities</string>
     <string name="interestedIn">Interested In:</string>
+    <string name="feed">Your Feed</string>
+    <string name="filter">Filter</string>
+    <string name="forum">Forum</string>
+    <string name="post">POST</string>
 
 
 </resources>

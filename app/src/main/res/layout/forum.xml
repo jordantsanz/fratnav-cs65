@@ -4,44 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/backgroundColor"
     tools:context=".Forum">
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/Theme.FratNav.AppBarOverlay">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="?attr/colorPrimary"-->
-<!--            app:popupTheme="@style/Theme.FratNav.PopupOverlay" />-->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="Your Feed"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="25dp"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/montserrat"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter"
-        android:textSize="30dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginStart="55dp"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_baseline_filter_list_24"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="145dp"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -58,46 +22,87 @@
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
     />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Forum"
-        android:layout_marginTop="100dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/postText"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="POST"
-        android:onClick="savePost" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mostRecent" />
-</LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
-
-
-    <ListView
-        android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120dp" />
+        android:layout_height="793dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/feed"
+                android:textColor="@color/textColor"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/filter"
+                    android:textColor="@color/textColor"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/ic_baseline_filter_list_24" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:layout_marginTop="100dp"
+                android:text="@string/forum"
+                android:fontFamily="@font/montserrat"/>
+
+            <EditText
+                android:id="@+id/postText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background"
+                android:inputType="text"
+                android:paddingTop="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="5dp"
+                android:fontFamily="@font/montserrat"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:onClick="savePost"
+            android:text="@string/post"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/textColor" />
+
     </LinearLayout>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
