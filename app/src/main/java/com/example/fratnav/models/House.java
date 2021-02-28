@@ -7,7 +7,7 @@ public class House {
     public String houseName;
     public int subscribers;
     public String summary;
-    public String date;
+    public int date;
     public boolean national;
     public ArrayList<String> positions;
     public ArrayList<String> people;
@@ -16,7 +16,7 @@ public class House {
     public ArrayList<Review> reviews;
     public String id;
 
-    public House(String houseName, int subscribers, String summary, String date, boolean national, ArrayList<String> positions,
+    public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
                  ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews){
 
         this.houseName = houseName;
