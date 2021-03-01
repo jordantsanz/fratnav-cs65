@@ -8,12 +8,12 @@
     android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="30dp"
-        app:background="@drawable/background"
         app:elevation="2dp"
         app:menu="@menu/navbar"
         app:labelVisibilityMode="unlabeled"
@@ -21,6 +21,7 @@
         app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
+        android:background="@drawable/background"
         />
 
     <LinearLayout

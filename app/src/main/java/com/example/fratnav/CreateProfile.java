@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CreateProfile extends AppCompatActivity {
+public class CreateProfile extends AppCompatActivity  {
     private static FirebaseAuth mAuth;
     String gender;
     String sexuality;
-    Integer year;
+    String year;
     Integer affiliatedCheck;
     boolean affiliated;
     String email;
@@ -34,8 +38,8 @@ public class CreateProfile extends AppCompatActivity {
     String password;
     FirebaseUser user;
     CheckBox srat, frat, genderInclusive, natPanHelic;
-    Button createProfile;
     ArrayList<String> preferences;
+    Spinner spinner;
 
 
 
@@ -50,6 +54,21 @@ public class CreateProfile extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         password = getIntent().getStringExtra("password");
         username = getIntent().getStringExtra("userName");
+        spinner = findViewById(R.id.createYear);
+        ArrayList<String> yearOptions = new ArrayList<>();
+        yearOptions.add("2021");
+        yearOptions.add("2022");
+        yearOptions.add("2023");
+        yearOptions.add("2024");
+        yearOptions.add("2025");
+
+
+
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearOptions);
+
+        spinner.setAdapter(yearAdapter);
+
+
 
 
     }
@@ -57,12 +76,13 @@ public class CreateProfile extends AppCompatActivity {
     public void createAccount2(View view) {
         EditText genderView = (EditText) findViewById(R.id.createGender);
         EditText sexualityView = (EditText) findViewById(R.id.createSexuality);
-        EditText yearView = (EditText) findViewById(R.id.createYear);
+        Spinner yearView = (Spinner) findViewById(R.id.createYear);
         RadioGroup affiliatedView = (RadioGroup) findViewById(R.id.createAffiliated);
 
         gender = genderView.getText().toString();
         sexuality = sexualityView.getText().toString();
-        year = yearView.getInputType();
+
+        year = yearView.getSelectedItem().toString();
         affiliatedCheck = affiliatedView.getCheckedRadioButtonId();
         if (affiliatedCheck== R.id.createYesAffiliated){
             affiliated = true;
@@ -75,6 +95,7 @@ public class CreateProfile extends AppCompatActivity {
         natPanHelic = findViewById(R.id.natPanHelicChackBox);
         genderInclusive = findViewById(R.id.genderInclusiveCheckBox);
 
+        year = spinner.getSelectedItem().toString();
 
         user = AuthenticationHelper.getCurrentUser();
 
@@ -86,7 +107,7 @@ public class CreateProfile extends AppCompatActivity {
             sexuality ="N/A";
         }
         if (year == null){
-            year = 0;
+            year = "0";
         }
 
         preferences = new ArrayList<>();

@@ -71,7 +71,8 @@
                 android:textColor="@color/textColor"
                 android:layout_marginTop="100dp"
                 android:text="@string/forum"
-                android:fontFamily="@font/montserrat"/>
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"/>
 
             <EditText
                 android:id="@+id/postText"
@@ -85,10 +86,11 @@
                 android:paddingBottom="5dp"
                 android:fontFamily="@font/montserrat"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background"
+                android:background="@drawable/purple_background"
                 android:onClick="savePost"
                 android:text="@string/post"
                 android:fontFamily="@font/montserrat"
@@ -100,7 +102,8 @@
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
 
 

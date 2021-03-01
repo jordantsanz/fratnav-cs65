@@ -13,7 +13,7 @@ public class User {
     public String gender;
     public String sexuality;
     public String userID;
-    public int year;
+    public String year;
     public boolean houseAffiliation;
     public List<String> interestedIn;
     public List<House> subscribedTo;
@@ -21,7 +21,7 @@ public class User {
     public boolean notificationSettings;
     public boolean house;
 
-    public User(String email, String username, String gender, String sexuality, String userID, int year, boolean houseAffiliation,
+    public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
                 ArrayList<String> interestedIn, ArrayList<House> subscribedTo, ArrayList<Post> posts, boolean notificationSettings){
         this.email = email;
         this.username = username;

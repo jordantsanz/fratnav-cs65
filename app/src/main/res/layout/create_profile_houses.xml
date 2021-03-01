@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat"
         android:textSize="25sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -83,6 +83,20 @@
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"/>
 
+    <Spinner
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:fontFamily="@font/montserrat"
+        android:id="@+id/createYear"
+        android:layout_gravity="center"
+        android:background="@drawable/background"
+        android:spinnerMode="dropdown"
+        />
+<!--
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -94,8 +108,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
-        android:fontFamily="@font/montserrat"
-        android:id="@+id/createYear"/>
+        /> -->
 
     <TextView
         android:layout_width="wrap_content"
