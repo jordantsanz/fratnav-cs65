@@ -3,6 +3,7 @@ package com.example.fratnav.models;
 import com.example.fratnav.models.Comment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Post {
     public String username = "";
@@ -10,11 +11,11 @@ public class Post {
     public String text = "";
     public String title = "";
     public ArrayList<String> attributes;
-    public ArrayList<Comment> comments;
+    public HashMap<String, Comment> comments;
     public int likes;
     public String id;
 
-    public Post(String username, String userID, String text, ArrayList<String> attributes, ArrayList<Comment> comments, int likes){
+    public Post(String username, String userID, String text, ArrayList<String> attributes, HashMap<String, Comment> comments, int likes){
         this.username = username;
         this.userID = userID;
         this.text = text;

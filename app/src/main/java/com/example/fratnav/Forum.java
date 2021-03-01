@@ -34,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -164,7 +165,7 @@ public class Forum extends ListActivity {
     // saves post currently
     public void savePost(View view) {
         Post post = new Post(currentUser.getDisplayName(), currentUser.getUid(), userText.getText().toString(),
-                new ArrayList<>(), new ArrayList<>(), 0);
+                new ArrayList<>(), new HashMap<>(), 0);
 
         dbRefPosts.push().setValue(post);
 
@@ -173,6 +174,5 @@ public class Forum extends ListActivity {
         adapter.notifyDataSetChanged();
 
         UserDatabaseHelper.addPostToUser(post, currentUser);
-
     }
 }

@@ -33,6 +33,8 @@ public class PostDatabaseHelper {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    Log.d("ds", ds.toString());
+
                     Post post = ds.getValue(Post.class);
                     assert post != null;
                     post.setId(ds.getKey());
