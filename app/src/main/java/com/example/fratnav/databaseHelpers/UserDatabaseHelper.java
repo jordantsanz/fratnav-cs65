@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.fratnav.callbacks.getHouseByIdCallback;
+import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
@@ -47,7 +49,7 @@ public class UserDatabaseHelper {
     public static String createUser(User user){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRefUsers = db.getReference("/users");
-        DatabaseReference newUserRef = dbRefUsers.push();
+        DatabaseReference newUserRef = dbRefUsers.child(user.userID);
         Log.d("ref", newUserRef.toString());
         String id = newUserRef.getKey();
         newUserRef.setValue(user);
@@ -62,6 +64,30 @@ public class UserDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     ds.getRef().setValue(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public static void getUserById(String id, getUserByIdCallback myCallback){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = database.getReference("/users");
+        dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    User user = ds.getValue(User.class);
+                    assert user != null;
+                    myCallback.onCallback(user);
+
                 }
 
             }

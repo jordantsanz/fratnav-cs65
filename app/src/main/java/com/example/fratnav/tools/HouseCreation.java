@@ -17,7 +17,7 @@ public class HouseCreation {
         House Beta = new House("Beta Alpha Omega", 0, "",  1858, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
         House BonesGate = new House("Bones Gate", 0, "", 1901, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
         House ChiGam = new House("Chi Gam Epsilon", 0, "", 1905, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
-        House Herot = new House ("Chi Herot", 0, "", 1898, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
+        House Herot = new House ("Chi Hereot", 0, "", 1898, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
         House GDX = new House("Gamma Delta Chi", 0, "", 1908, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
         House TriKap = new House ("Kappa Kappa Kappa", 0, "", 1842, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
         House PhiDelt = new House("Phi Delta Alpha", 0, "", 1884, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>());
