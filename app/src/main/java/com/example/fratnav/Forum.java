@@ -83,14 +83,17 @@ public class Forum extends ListActivity {
                 if (item.getItemId()==R.id.houses) {
                     Log.d("swtich", "houses");
                     startActivity(new Intent(Forum.this, HousesSearch.class));
+                    finish();
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
                     Log.d("swtich", "profile");
                     startActivity(new Intent(Forum.this, Profile.class));
+                    finish();
                     return true;
                 } else if (item.getItemId()==R.id.home) {
                     Log.d("swtich", "home");
                     startActivity(new Intent(Forum.this, MainActivity.class));
+                    finish();
                     return true;
                 }
                 return false;

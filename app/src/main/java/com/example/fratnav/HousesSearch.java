@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +38,8 @@ public class HousesSearch extends AppCompatActivity {
     GridLayout gridLayout;
     FirebaseUser user;
 
+    public static final String HOUSE_NAME_KEY = "housekey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +55,18 @@ public class HousesSearch extends AppCompatActivity {
                 for (House house : houses){
                     HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext());
                     CardView cardView = housecard.makeCardView();
-                    Log.d("cardview", "onCallback: ");
+
                     cardView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 //                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
 //                            Toast.LENGTH_SHORT).show();
-                            Log.d("cardclick", "onClick: ");
+                            ViewGroup viewGroup = (ViewGroup) view;
+                            ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
+                            TextView houseNameTextView = (TextView) linearLayout.getChildAt(0);
+
                             Intent intent = new Intent(HousesSearch.this,HousePage.class);
+                            intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
                             startActivity(intent);
                         }
                     });
@@ -95,11 +104,8 @@ public class HousesSearch extends AppCompatActivity {
                 return false;
             }
         });
-        // setSingleEvent(gridLayout);
 
     }
-
-    // we are setting onClickListener for each element
 }
 
 

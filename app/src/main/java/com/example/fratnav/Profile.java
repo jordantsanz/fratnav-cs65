@@ -116,16 +116,19 @@ public class Profile extends AppCompatActivity {
                 if (item.getItemId()==R.id.houses) {
                     Log.d("swtich", "houses");
                     startActivity(new Intent(Profile.this, HousesSearch.class));
+                    finish();
                     return true;
                 }
                 else if (item.getItemId()==R.id.home) {
                     Log.d("swtich", "home");
                     startActivity(new Intent(Profile.this, MainActivity.class));
+                    finish();
                     return true;
                 }
                 else if  (item.getItemId()==R.id.forum){
                     Log.d("swtich", "forum");
                     startActivity(new Intent(Profile.this, Forum.class));
+                    finish();
                     return true;
                 }
                 return false;

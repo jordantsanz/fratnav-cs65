@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("home", "home");
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser == null){
@@ -66,14 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId()==R.id.houses) {
                     Log.d("swtich", "houses");
                     startActivity(new Intent(MainActivity.this, HousesSearch.class));
+                    finish();
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
                     Log.d("swtich", "profile");
                     startActivity(new Intent(MainActivity.this, Profile.class));
+                    finish();
                     return true;
                 } else if (item.getItemId()==R.id.forum) {
                     Log.d("swtich", "forum");
                     startActivity(new Intent(MainActivity.this, Forum.class));
+                    finish();
                     return true;
                 }
                 return false;

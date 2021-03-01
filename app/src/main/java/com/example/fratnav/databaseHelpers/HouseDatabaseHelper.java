@@ -43,9 +43,38 @@ public class HouseDatabaseHelper {
     }
 
 
+    public static void getHouseByName(String name, getHouseByIdCallback myCallback){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = database.getReference("/houses");
+        dbRefHouses.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    House house = ds.getValue(House.class);
+                    assert house != null;
+                    Log.d("house", house.toString());
+
+                    if (house.houseName.equals(name)){
+                        house.setId(ds.getKey());
+                        myCallback.onCallback(house);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("error", error.toString());
+            }
+        });
+
+    }
+
+
     public static void getHouseById(String id, getHouseByIdCallback myCallback){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = database.getReference("/posts");
+        DatabaseReference dbRefHouses = database.getReference("/houses");
         dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -62,7 +91,7 @@ public class HouseDatabaseHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("error", error.toString());
             }
         });
     }

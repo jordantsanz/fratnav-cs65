@@ -72,6 +72,26 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/house_date"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="260dp"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/house_national"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="290dp"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <TextView
                 android:id="@+id/house_contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
