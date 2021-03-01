@@ -44,7 +44,8 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/background" />
+        android:background="@drawable/background"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/textColor"
         android:textSize="18sp"
-        android:text="@string/confirmPassword"
+        android:text="@string/confirmEmail"
         android:layout_marginStart="25dp"
         />
     <EditText
@@ -66,7 +67,8 @@
         android:paddingBottom="5dp"
         android:inputType="textEmailAddress"
         android:id="@+id/createEmailConfirm"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:singleLine="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +88,8 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
         android:id="@+id/createPassword"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:singleLine="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,6 +104,7 @@
         android:background="@drawable/background"
         android:layout_width="300dp"
         android:paddingTop="5dp"
+        android:singleLine="true"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"

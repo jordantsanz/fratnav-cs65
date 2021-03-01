@@ -41,6 +41,7 @@
     <string name="filter">Filter</string>
     <string name="forum">Forum</string>
     <string name="post">POST</string>
+    <string name="confirmEmail">Confirm Email:</string>
 
 
 </resources>
