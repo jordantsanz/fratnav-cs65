@@ -44,15 +44,6 @@ public class HousesSearch extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
 
-        FirebaseUser user = AuthenticationHelper.getCurrentUser();
-
-        UserDatabaseHelper.getUserById(user.getUid(), new getUserByIdCallback(){
-            @Override
-            public void onCallback(User user){
-                Log.d("user", user.email);
-            }
-        });
-
         HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
@@ -109,22 +100,6 @@ public class HousesSearch extends AppCompatActivity {
     }
 
     // we are setting onClickListener for each element
-    private void setSingleEvent(GridLayout gridLayout) {
-        for(int i = 0; i<gridLayout.getChildCount();i++){
-            CardView cardView=(CardView)gridLayout.getChildAt(i);
-//            final int finalI= i;
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
-//                            Toast.LENGTH_SHORT).show();
-                    Log.d("cardclick", "onClick: ");
-                    Intent intent = new Intent(HousesSearch.this,HousePage.class);
-                    startActivity(intent);
-                }
-            });
-        }
-    }
 }
 
 

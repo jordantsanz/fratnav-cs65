@@ -18,7 +18,7 @@ public class HousePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.house_page);
+        setContentView(R.layout.houses_page);
         Log.d("House", "house");
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
