@@ -81,7 +81,7 @@ public class HouseCardView {
 
 
         LinearLayout l = new LinearLayout(context);
-        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         l.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
         l.setOrientation(LinearLayout.VERTICAL);
         l.setVerticalGravity(Gravity.CENTER_VERTICAL);
@@ -89,7 +89,7 @@ public class HouseCardView {
         l.setLayoutParams(lparams);
 
         TextView tv = new TextView(context);
-        ViewGroup.LayoutParams p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tv.setTextColor(context.getColor(R.color.black));
         tv.setTextSize(18);
@@ -98,7 +98,7 @@ public class HouseCardView {
         tv.setLayoutParams(p);
 
         ImageView iv = new ImageView(context);
-        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         imageParams.gravity = Gravity.CENTER_HORIZONTAL;
         iv.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.aphi));
