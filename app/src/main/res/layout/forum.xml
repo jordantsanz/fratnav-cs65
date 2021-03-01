@@ -38,10 +38,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/montserrat"
                 android:text="@string/feed"
                 android:textColor="@color/textColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:fontFamily="@font/montserrat"
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,8 +53,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:fontFamily="@font/montserrat"
                     android:text="@string/filter"
+                    android:fontFamily="@font/montserrat"
                     android:textColor="@color/textColor"
                     android:textSize="25sp" />
 
@@ -69,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/forum"
                 android:fontFamily="@font/montserrat"
                 android:textSize="18sp"/>
@@ -87,14 +88,13 @@
                 android:fontFamily="@font/montserrat"/>
 
             <androidx.appcompat.widget.AppCompatButton
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/purple_background"
                 android:onClick="savePost"
                 android:text="@string/post"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor" />
+                android:fontFamily="@font/cabin"
+                android:textColor="@color/backgroundColor" />
 
         </LinearLayout>
 
