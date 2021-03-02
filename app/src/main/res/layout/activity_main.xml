@@ -51,7 +51,7 @@
         android:textSize="30sp"
         android:fontFamily="@font/montserrat"
         android:text="@string/rushInfo"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"/>
 
