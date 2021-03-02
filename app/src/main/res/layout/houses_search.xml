@@ -37,15 +37,17 @@
             android:orientation="vertical"
             >
 
-
-
-            <SearchView
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/purple_background"/>
+                android:background="@drawable/purple_background"
+                android:queryHint="Search by House Name">
+
+            </androidx.appcompat.widget.SearchView>
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package com.example.fratnav;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
@@ -28,6 +30,7 @@ import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.HouseCardView;
 import com.example.fratnav.models.User;
+import com.example.fratnav.tools.HouseAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -48,13 +51,14 @@ public class HousesSearch extends AppCompatActivity {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
-
+//        initSearchWidgets();
         HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
                 for (House house : houses){
                     HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext());
                     CardView cardView = housecard.makeCardView();
+                    cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
 
                     cardView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -106,6 +110,32 @@ public class HousesSearch extends AppCompatActivity {
         });
 
     }
+
+//    private void initSearchWidgets(){
+//        SearchView searchView = (SearchView) findViewById(R.id.search_view);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                ArrayList<House> filteredHouses = new ArrayList<House>();
+//                HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
+//                    @Override
+//                    public void onCallback(ArrayList<House> houses) {
+//                        for (House house : houses) {
+//                            if (house.houseName.toLowerCase().contains(newText.toLowerCase())) {
+//                                filteredHouses.add(house);
+//                            }
+//                        }
+//                        HouseAdapter adapter
+//
+//                return false;
+//            }
+//        });
+//    }
 }
 
 
