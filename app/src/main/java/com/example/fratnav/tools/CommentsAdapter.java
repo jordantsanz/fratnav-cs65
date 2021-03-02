@@ -25,7 +25,7 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         Comment comment = getItem(position);
         // Lookup view for data population
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.comment, parent, false);
         }
         TextView commentUser = (TextView) convertView.findViewById(R.id.commentUser);
         TextView commentText = (TextView) convertView.findViewById(R.id.commentText);

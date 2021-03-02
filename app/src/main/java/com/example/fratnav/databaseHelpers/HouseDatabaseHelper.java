@@ -104,4 +104,24 @@ public class HouseDatabaseHelper {
         newHouseRef.setValue(house);
         return id;
     }
+
+
+    public static void addUrlToHouse(String houseId, String url){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = db.getReference("/houses");
+        dbRefHouses.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.child("urlToHouseTour").getRef().setValue(url);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("error", error.toString());
+            }
+        });
+    }
 }

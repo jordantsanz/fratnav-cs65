@@ -17,10 +17,10 @@ public class House {
     public String urlToHouseTour;
     public ArrayList<Review> reviews;
     public String id;
-    public Drawable imageName;
+    public int imageName;
 
     public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
-                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, Drawable imageName){
+                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, int imageName){
 
         this.houseName = houseName;
         this.subscribers = subscribers;

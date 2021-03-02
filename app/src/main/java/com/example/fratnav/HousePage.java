@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,8 @@ public class HousePage extends AppCompatActivity {
                 }
 
                 houseNationalView.setText(n);
+                ImageView imageView = findViewById(R.id.housePageImage);
+                imageView.setImageResource(house.imageName);
             }
         });
         houseNameTextView.setText(name);

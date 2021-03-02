@@ -62,7 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         StringBuilder randomStringBuilder = new StringBuilder();
         randomStringBuilder.append("User");
         String string = String.valueOf(UUID.randomUUID());
-        string = string.substring(0, 8);
+        string = string.substring(0, 6);
         randomStringBuilder.append(string);
 //        int randomLength = generator.nextInt(20);
 //        char tempChar;

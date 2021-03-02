@@ -134,7 +134,7 @@
         android:paddingEnd="15dp"
         android:textSize="16sp"
         android:layout_marginTop="165dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/purple_background"
         android:text="@string/updateProfile"
         android:onClick="edit"/>
@@ -146,6 +146,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:textSize="16sp"
+            android:onClick="imagePicker"
             android:layout_marginTop="165dp"
             android:textColor="@color/textColor"
             android:layout_marginStart="225dp"
@@ -260,7 +261,18 @@
             android:text="@string/off"
             android:layout_marginStart="25dp"/>
         </RadioGroup>
+
+
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        </LinearLayout>
+
+
 
 
 
@@ -269,9 +281,14 @@
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:layout_marginTop="460dp"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+
+
     </androidx.core.widget.NestedScrollView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
