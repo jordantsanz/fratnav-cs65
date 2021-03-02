@@ -14,35 +14,35 @@ public class HouseCreation {
 
     public void createHouses() {
         // Fraternities
-        House AlphaChi = new House("Alpha Chi Alpha", 0, "",1919, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.axa);
-        House Beta = new House("Beta Alpha Omega", 0, "",  1858, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.beta);
-        House BonesGate = new House("Bones Gate", 0, "", 1901, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.bg);
-        House ChiGam = new House("Chi Gam Epsilon", 0, "", 1905, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.chigam);
-        House Herot = new House ("Chi Hereot", 0, "", 1898, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.heorot);
-        House GDX = new House("Gamma Delta Chi", 0, "", 1908, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.gdx);
-        House TriKap = new House ("Kappa Kappa Kappa", 0, "", 1842, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.trikap);
-        House PhiDelt = new House("Phi Delta Alpha", 0, "", 1884, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.phidelta);
-        House PsiU = new House ("Psi Upsilon", 0, "", 1841, true , new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.psiu);
-        House SigNu = new House ("Sigma Nu", 0, "", 1901,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.signu1);
-        House TDX = new House("Theta Delta Chi", 0, "",  1869, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.tdx);
-        House Zete = new House( "Zeta PSi",0, "",  1853, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.zetapsi);
+        House AlphaChi = new House("Alpha Chi", 0, "",1919, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.ic_axa);
+        House Beta = new House("Beta", 0, "",  1858, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.beta);
+        House BonesGate = new House("BG", 0, "", 1901, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.bg);
+        House ChiGam = new House("Chi Gam", 0, "", 1905, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.chigam);
+        House Herot = new House ("Hereot", 0, "", 1898, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.heorot);
+        House GDX = new House("GDX", 0, "", 1908, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.gdx);
+        House TriKap = new House ("Tri-Kap", 0, "", 1842, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.trikap);
+        House PhiDelt = new House("Phi Delt", 0, "", 1884, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.phidelta);
+        House PsiU = new House ("Psi U", 0, "", 1841, true , new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.psiu);
+        House SigNu = new House ("Sig Nu", 0, "", 1901,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.signu1);
+        House TDX = new House("TDX", 0, "",  1869, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.tdx);
+        House Zete = new House( "Zete",0, "",  1853, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.zetapsi);
         //Sororities
-        House APhi = new House("Alpha Phi", 0, "", 2006, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.aphi1);
-        House AZD = new House("Alpha Xi Delta",0, "", 1997 ,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.axid);
-        House ChiDelt = new House("Chi Delta", 0,"", 1984, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.chidelt);
-        House EKT = new House("Epsilon Kapppa Theta", 0, "", 1981, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.ekt);
-        House KD = new House("Kappa Delta",0, "", 2009, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kd);
-        House KDE = new House("Kappa Delta Epsilon", 0, "", 1980, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kde);
-        House Kappa = new House("Kappa Kappa Gamma", 0, "",  1976, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kkg);
-        House SigDelt = new House("Sigma Delta", 0, "", 1976, false , new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.sigdelt);
+        House APhi = new House("APhi", 0, "", 2006, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.aphi1);
+        House AZD = new House("AXiD",0, "", 1997 ,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.axid);
+        House ChiDelt = new House("Chi Delt", 0,"", 1984, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.chidelt);
+        House EKT = new House("EKT", 0, "", 1981, false, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.ekt);
+        House KD = new House("KD",0, "", 2009, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kd);
+        House KDE = new House("KDE", 0, "", 1980, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kde);
+        House Kappa = new House("Kappa", 0, "",  1976, true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.kkg);
+        House SigDelt = new House("Sigma Delt", 0, "", 1976, false , new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.sigdelt);
         //Gender Inclusive
         House AlphaTheta = new House("Alpha Theta", 0, "", 1921, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.alphatheta);
         House phiTau = new House("Phi Tau", 0, "", 1905, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.phitau);
-        House Tabard = new House("The Tabard", 0, "", 1857, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.tabard);
+        House Tabard = new House("Tabard", 0, "", 1857, false,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.tabard);
         //National Pan Helic Council
-        House APA = new House("Alpha Phi Alpha Fraternity, Inc.", 0, "", 1972, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.alphas);
-        House AKA = new House("Alpha Kappa Alpha Sorority, Inc",0, "", 1983, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.aka);
-        House Deltas = new House("Delta Sigma Theta Sorority, Inc",0,"",1935, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.deltas);
+        House APA = new House("Alphas", 0, "", 1972, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.alphas);
+        House AKA = new House("AKA",0, "", 1983, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.aka);
+        House Deltas = new House("Deltas",0,"",1935, true, new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.deltas);
 
         houses = new ArrayList<>();
         houses.add(AlphaChi);

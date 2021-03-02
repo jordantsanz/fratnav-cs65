@@ -1,6 +1,8 @@
 package com.example.fratnav;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,12 +18,24 @@ import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.models.House;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 import org.w3c.dom.Text;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class HousePage extends AppCompatActivity {
     BottomNavigationView bottomBar;
     public House theHouse;
+    private VrPanoramaView mVRPanoramaView;
+    public VrPanoramaView.Options options;
+    public Bitmap bp;
+    public String url;
+    public static final String URL_KEY = "Url_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +96,32 @@ public class HousePage extends AppCompatActivity {
                 houseNationalView.setText(n);
                 ImageView imageView = findViewById(R.id.housePageImage);
                 imageView.setImageResource(house.imageName);
+
+                url = house.urlToHouseTour;
             }
         });
         houseNameTextView.setText(name);
 
-    }
 
+
+
+    }
 
     public void onBackClick(View view) {
         startActivity(new Intent(HousePage.this,HousesSearch.class));
         finish();
+    }
+
+    public void onHouseTour(View view) {
+        if (!url.equals("")) {
+            Intent i = new Intent(this, HouseTourActivity.class);
+            i.putExtra(URL_KEY, url);
+            startActivity(i);
+        }
+        else{
+            Toast.makeText(this, "Sorry, this house has not uploaded a virtual tour yet.", Toast.LENGTH_LONG).show();
+        }
+
     }
 }
 

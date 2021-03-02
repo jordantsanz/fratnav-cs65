@@ -31,6 +31,7 @@ import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
+import com.example.fratnav.tools.HouseCreation;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -231,6 +232,8 @@ public class Profile extends AppCompatActivity {
 
 
     public void edit(View view) {
+//        HouseCreation hc = new HouseCreation();
+//        hc.createHouses();
         Intent intent = new Intent(this, updateProfile.class);
         startActivity(intent);
 

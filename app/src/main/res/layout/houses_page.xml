@@ -145,6 +145,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textColor="@color/textColor"
+                android:onClick="onHouseTour"
                 android:text="explore the house" />
 
             <TextView
@@ -174,6 +175,8 @@
 
         </android.widget.RelativeLayout>
     </ScrollView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomBar"

@@ -55,6 +55,7 @@ public class HousesSearch extends AppCompatActivity {
         HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
+                Log.d("house", houses.toString());
                 for (House house : houses){
                     HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
                     CardView cardView = housecard.makeCardView();
