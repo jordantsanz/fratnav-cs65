@@ -7,6 +7,15 @@
     tools:context=".PostActivity"
     android:background="@color/backgroundColor">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="793dp"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -24,7 +33,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
-        android:layout_marginTop="40dp"
         android:textSize="18sp"
         android:layout_marginStart="25dp"
         android:id="@+id/postActivityText" />
@@ -34,7 +42,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/commentEditText"
         android:background="@drawable/background"
-        android:layout_marginTop="70dp"
         android:layout_marginStart="25dp"
         android:singleLine="true"
         android:textSize="18sp"
@@ -49,15 +56,18 @@
         android:text="@string/submitComment"
         android:id="@+id/submitcomment"
         android:onClick="createNewComment"
-        android:layout_marginTop="110dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
         android:paddingStart="15sp"
         android:paddingEnd="15sp"/>
+    </LinearLayout>
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center"/>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
