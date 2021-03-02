@@ -28,10 +28,13 @@
         app:menu="@menu/navbar"
         app:labelVisibilityMode="unlabeled"
         app:itemIconSize="30dp"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemIconTint="@drawable/item_selector"
-        android:id="@+id/bottomBar"
         android:background="@drawable/background"
+        app:itemIconTint="@drawable/item_selector"
+
+        app:itemRippleColor="@android:color/transparent"
+
+        android:id="@+id/bottomBar"
+
         />
 
     <LinearLayout
