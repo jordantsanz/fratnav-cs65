@@ -15,6 +15,7 @@ import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
+import com.example.fratnav.tools.HouseCreation;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -137,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();
     }
-
 //    if using menu on toolbar
 //    public void logout(MenuItem item) {
 //        FirebaseAuth.getInstance().signOut();

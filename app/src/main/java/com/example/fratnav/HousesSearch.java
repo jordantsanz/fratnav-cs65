@@ -56,7 +56,7 @@ public class HousesSearch extends AppCompatActivity {
             @Override
             public void onCallback(ArrayList<House> houses) {
                 for (House house : houses){
-                    HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext());
+                    HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
                     CardView cardView = housecard.makeCardView();
                     cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
 
@@ -67,7 +67,7 @@ public class HousesSearch extends AppCompatActivity {
 //                            Toast.LENGTH_SHORT).show();
                             ViewGroup viewGroup = (ViewGroup) view;
                             ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
-                            TextView houseNameTextView = (TextView) linearLayout.getChildAt(0);
+                            TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
 
                             Intent intent = new Intent(HousesSearch.this,HousePage.class);
                             intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());

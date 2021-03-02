@@ -29,6 +29,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -178,8 +179,8 @@ public class Profile extends AppCompatActivity {
         // setSupportActionBar(toolbar);
         postListView = (ListView) findViewById(R.id.profileListView);
 
-        //need to change to post
-        ArrayList<String>arrayList= new ArrayList();
+        //need to change to post // changed by will
+        ArrayList<Post>arrayList= new ArrayList();
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);

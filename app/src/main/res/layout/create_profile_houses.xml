@@ -258,7 +258,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_marginStart="33dp">
         <CheckBox
             android:id="@+id/soroCheckbox"
             android:layout_width="wrap_content"
@@ -267,13 +267,13 @@
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
             android:text="@string/sororities"
-            android:layout_marginStart="25dp"/>
+            />
 
         <CheckBox
             android:id="@+id/natPanHelicChackBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/nationalPanHellenic"
             android:textColor="@color/textColor"
@@ -281,7 +281,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:layout_gravity="center">
         <CheckBox
@@ -305,14 +305,17 @@
             android:layout_marginStart="25dp"/>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
+        android:textColor="@color/textColor"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:fontFamily="@font/montserrat"
-        android:background="@drawable/background"
+        android:background="@drawable/teal_background"
         android:text="@string/createAccount"
         android:onClick="createAccount2" />
 
