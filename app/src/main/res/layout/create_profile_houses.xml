@@ -46,15 +46,13 @@
         android:text="@string/gender"
         android:layout_marginStart="25dp"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/genderRadioGroup"
-            android:layout_marginStart="25dp">
+            android:layout_marginStart="25dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/genderMale"
@@ -76,7 +74,6 @@
                 android:textColor="@color/textColor"/>
 
 
-
                 <RadioButton
                     android:id="@+id/genderNonBinary"
                     android:layout_width="wrap_content"
@@ -85,9 +82,8 @@
                     android:fontFamily="@font/montserrat"
                     android:textSize="18sp"
                     android:textColor="@color/textColor"/>
-
         </RadioGroup>
-    </LinearLayout>
+
     <!--
     <EditText
         android:layout_width="300dp"
@@ -176,7 +172,8 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/createAffiliated">
+        android:id="@+id/createAffiliated"
+        android:checkedButton="@+id/gender">
 
             <RadioButton
                 android:textColor="@color/textColor"
@@ -195,10 +192,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                >
+                android:textSize="18sp">
             </RadioButton>
-
     </RadioGroup>
 
 
@@ -314,7 +309,7 @@
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"

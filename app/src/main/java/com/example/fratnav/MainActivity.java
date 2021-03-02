@@ -174,26 +174,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK) {
-//            //Image Uri will not be null for RESULT_OK
-//            val fileUri = data?.data
-//            imgProfile.setImageURI(fileUri)
-//
-//            //You can get File object from intent
-//            val file:File = ImagePicker.getFile(data)!!
-//
-//                    //You can also get File Path from intent
-//                    val filePath:String = ImagePicker.getFilePath(data)!!
-//        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-//            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-//        } else {
-//            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
 
     public void upload(Uri filepath){
         File file = new File(filepath.getPath());
@@ -216,4 +196,10 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 0);
         }
     }
+
+//    if using menu on toolbar
+//    public void logout(MenuItem item) {
+//        FirebaseAuth.getInstance().signOut();
+//        finishAffinity();
+//    }
 }

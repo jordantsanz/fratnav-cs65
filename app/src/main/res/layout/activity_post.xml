@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostActivity">
+    tools:context=".PostActivity"
+    android:background="@color/backgroundColor">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:layout_marginStart="25dp"
+        android:id="@+id/postActivityUser" />
+
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        android:layout_marginStart="25dp"
         android:id="@+id/postActivityText" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/commentEditText" />
+        android:id="@+id/commentEditText"
+        android:background="@drawable/background"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="25dp"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/teal_background"
+        android:text="@string/submitComment"
         android:id="@+id/submitcomment"
-        android:onClick="createNewComment"/>
+        android:onClick="createNewComment"
+        android:layout_marginTop="110dp"
+        android:layout_marginStart="25dp"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"/>
 
-</LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:id="@+id/commentListView"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

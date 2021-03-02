@@ -161,4 +161,10 @@ public class Profile extends AppCompatActivity {
         dbRef.child(currentUser.getUid()).child("message")
                 .setValue(userText.getText().toString(), completionListener);
     }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        finishAffinity();
+    }
+
 }
