@@ -113,4 +113,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();
     }
+
+//    if using menu on toolbar
+//    public void logout(MenuItem item) {
+//        FirebaseAuth.getInstance().signOut();
+//        finishAffinity();
+//    }
 }
