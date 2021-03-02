@@ -26,12 +26,19 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.example.fratnav.callbacks.getAllPostsCallback;
+import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
+import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.tools.HouseCreation;
+
+
+import com.example.fratnav.tools.PostsAdapter;
+
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,6 +66,8 @@ public class Profile extends AppCompatActivity {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
+    PostsAdapter adapter;
+    public ArrayList<Post> arrayOfPosts;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
     String affiliated;
@@ -131,6 +140,27 @@ public class Profile extends AppCompatActivity {
                 profileGender.setText(gender);
                 profileYear.setText(year);
                 profileAffiliated.setText(affiliated);
+
+                arrayOfPosts = new ArrayList<>();
+                PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Post> posts) {
+                        Log.d("posts", posts.toString());;
+                        for (int i = posts.size() - 1; i > -1; i--){
+                            Post post = posts.get(i);
+                            arrayOfPosts.add(post);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+
+                // Create the adapter to convert the array to views
+                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
+                // Attach the adapter to a ListView
+                ListView list = findViewById(android.R.id.list);
+                list.setAdapter(adapter); // sets adapter for list
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -178,11 +208,13 @@ public class Profile extends AppCompatActivity {
 //         setSupportActionBar(toolbar);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
-        postListView = (ListView) findViewById(R.id.profileListView);
 
-        //need to change to post // changed by will
-        ArrayList<Post>arrayList= new ArrayList();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+
+        // Construct the data source
+        if (arrayOfPosts == null) {
+            arrayOfPosts = new ArrayList<Post>();
+        }
+
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.profile);
@@ -232,6 +264,8 @@ public class Profile extends AppCompatActivity {
 
 
     public void edit(View view) {
+//        HouseCreation hc = new HouseCreation();
+//        hc.createHouses();
         Intent intent = new Intent(this, updateProfile.class);
         startActivity(intent);
 
@@ -266,9 +300,8 @@ public class Profile extends AppCompatActivity {
         }
         else if (resultCode == ImagePicker.RESULT_ERROR) {
             assert data != null;
-            Toast.makeText(this, data.toString(), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cancelled.", Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -31,7 +31,7 @@ public class PostDatabaseHelper {
         database = FirebaseDatabase.getInstance();
         dbRefPosts = database.getReference("/posts");
         ArrayList<Post> posts = new ArrayList<>();
-        dbRefPosts.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRefPosts.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -50,6 +50,32 @@ public class PostDatabaseHelper {
                 Log.d("Error", error.getMessage());
             }
     });
+}
+
+
+public static void getAllPostsByUser(String userId, getAllPostsCallback myCallback){
+        database = FirebaseDatabase.getInstance();
+        dbRefPosts = database.getReference("/posts");
+        dbRefPosts.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Post> posts = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+                    assert post != null;
+                    if (post.userID.equals(userId)){
+                        posts.add(post);
+                    }
+                }
+
+                myCallback.onCallback(posts);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("error", error.toString());
+            }
+        });
 }
 
 public static void getPostById(String id, getPostByIdCallback myCallback){

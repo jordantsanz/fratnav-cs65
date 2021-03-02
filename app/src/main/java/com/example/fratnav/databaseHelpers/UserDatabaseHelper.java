@@ -31,12 +31,13 @@ public class UserDatabaseHelper {
         dbRefUser.orderByKey().equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+                Log.d("userSnapshot", snapshot.toString());
                 for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("userSnapshotds", ds.toString());
                     ds.child("posts").getRef().push().setValue(post.id);
-                }
+                   }
 
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

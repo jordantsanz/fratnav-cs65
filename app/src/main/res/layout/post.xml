@@ -3,15 +3,18 @@
     android:layout_height="200dp"
     android:orientation="vertical"
     android:background="@drawable/post_background"
+    android:paddingBottom="30dp"
     android:layout_gravity="center_horizontal">
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/postUser"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_bold"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"/>
     <TextView
         android:layout_width="300dp"
@@ -20,6 +23,7 @@
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="40dp"
+        android:textSize="14sp"
         android:id="@+id/postText"/>
 
     <ImageView

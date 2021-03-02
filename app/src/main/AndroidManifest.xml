@@ -2,19 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fratnav">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:requestLegacyExternalStorage="true"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
+        <activity android:name=".HouseTourActivity"></activity>
+
         <service
             android:name="com.onecode.s3.service.S3UploadService"
             android:exported="false" />
-        <activity android:name=".PostActivity"></activity>
-        <activity android:name=".updateProfile"></activity>
+
+        <activity android:name=".PostActivity" />
+        <activity android:name=".updateProfile" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".CreateProfile" />
         <activity android:name=".databaseHelpers.RealtimeFirebaseDB" />
@@ -37,14 +46,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>
