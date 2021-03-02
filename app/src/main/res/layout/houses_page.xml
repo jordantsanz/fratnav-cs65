@@ -22,7 +22,8 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="55dp"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="40dp"
+                android:id="@+id/housePageImage"/>
 
             <TextView
                 android:id="@+id/house_name"

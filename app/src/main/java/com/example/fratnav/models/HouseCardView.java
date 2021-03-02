@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.fratnav.R;
 
@@ -63,10 +64,12 @@ public class HouseCardView {
 
     public String name;
     public Context context;
+    public int drawable;
 
-    public HouseCardView(String name, Context context){
+    public HouseCardView(String name, Context context, int drawable){
         this.name = name;
         this.context = context;
+        this.drawable = drawable;
     }
 
     public CardView makeCardView(){ // need to put drawable in there as well
@@ -77,9 +80,6 @@ public class HouseCardView {
         cd.setRadius(8);
         cd.setLayoutParams(params);
 
-
-
-
         LinearLayout l = new LinearLayout(context);
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         l.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
@@ -89,22 +89,30 @@ public class HouseCardView {
         l.setLayoutParams(lparams);
 
         TextView tv = new TextView(context);
-        ViewGroup.LayoutParams p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tv.setTextColor(context.getColor(R.color.black));
+        tv.setGravity(Gravity.BOTTOM);
+        tv.setTextColor(context.getColor(R.color.white));
         tv.setTextSize(18);
-        tv.setTypeface(null, Typeface.BOLD);
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.montserrat);
+        tv.setTypeface(typeface);
         tv.setText(name);
+
+
         tv.setLayoutParams(p);
+
 
         ImageView iv = new ImageView(context);
         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         imageParams.gravity = Gravity.CENTER_HORIZONTAL;
-        iv.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.aphi));
+        iv.setImageDrawable(ContextCompat.getDrawable(context, drawable));
 
-        l.addView(tv);
+        imageParams.setMargins(0, 0, 0, 35);
+
+
         l.addView(iv);
+        l.addView(tv);
 
         cd.addView(l);
 

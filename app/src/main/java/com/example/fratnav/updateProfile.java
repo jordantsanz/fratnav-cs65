@@ -52,7 +52,7 @@ public class updateProfile extends AppCompatActivity {
             public void onCallback(User user) {
 
             }
-        }
+        });
 
 
     }
