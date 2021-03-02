@@ -36,6 +36,7 @@ public class updateProfile extends AppCompatActivity {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
+    Integer position;
     Spinner spinner;
     Spinner sexualitySpinner;
     DatabaseReference.CompletionListener completionListener;
@@ -91,14 +92,63 @@ public class updateProfile extends AppCompatActivity {
                 RadioButton maleButton = findViewById(R.id.genderUpdateMale);
                 RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
                 RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
-                RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
+                //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
+
 
                 RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
-                RadioButton notAffilated = findViewById(R.id.updateNoAffiliated);
+
+                switch (user.year) {
+                    case "2021":
+                        spinner.setSelection(0);
+                        break;
+                    case "2022":
+                        spinner.setSelection(1);
+                        break;
+                    case "2023":
+                        spinner.setSelection(2);
+                        break;
+                    case "2024":
+                        spinner.setSelection(3);
+                        break;
+                    case "2025":
+                        spinner.setSelection(4);
+                        break;
+                }
+                Log.d("user sexuality",user.sexuality);
+                switch (user.sexuality){
+                    case "Heterosexual":
+                        sexualitySpinner.setSelection(0);
+                        break;
+                    case "Lesbian":
+                        sexualitySpinner.setSelection(1);
+                        break;
+                    case "Gay":
+                        sexualitySpinner.setSelection(2);
+                        break;
+                    case "Bisexual":
+                        sexualitySpinner.setSelection(3);
+                        break;
+                    case "Transgender":
+                        sexualitySpinner.setSelection(4);
+                        break;
+                    case "Queer":
+                        sexualitySpinner.setSelection(5);
+                        break;
+                    case "N/A":
+                        sexualitySpinner.setSelection(6);
+                        break;
+
+                }
+
+
+                spinner.setPrompt(user.year);
+                sexualitySpinner.setPrompt(user.sexuality);
                 CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
                 CheckBox frat = findViewById(R.id.fratCheckboxUpdate);
                 CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
                 CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
+
+
                 if (user.interestedIn != null){
                     for (int i = 0; i < user.interestedIn.size(); i++) {
                         //Log.d("user",user.interestedIn.toString());
