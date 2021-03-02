@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.fratnav.callbacks.getAllPostsCallback;
+import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.House;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PostDatabaseHelper {
@@ -85,7 +87,7 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
 
     public static void addPostComment(Post post, Comment comment){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = db.getReference("/posts");
+        DatabaseReference dbRefPosts = db.getReference("/posts");
         dbRefPosts.orderByKey().equalTo(post.id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,6 +97,49 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                 }
 
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public static void getAllCommentsByPostId(Post post, getCommentsByPostIdCallback myCallback){
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefPosts = database.getReference("/posts");
+        dbRefPosts.orderByKey().equalTo(post.id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("postSnapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Object obj = ds.child("comments").getValue();
+                    if (obj == null){
+                        myCallback.onCallback(new ArrayList<Comment>());
+                    }
+                    else {
+                        ds.child("comments").getRef().orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                ArrayList<Comment> comments = new ArrayList<Comment>();
+                                for (DataSnapshot ds : snapshot.getChildren()){
+                                    comments.add(ds.getValue(Comment.class));
+                                }
+
+                                myCallback.onCallback(comments);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        Log.d("obj", obj.toString());
+                    }
+
+                }
             }
 
             @Override
