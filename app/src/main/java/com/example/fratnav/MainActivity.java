@@ -47,14 +47,12 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
-    String key = "AKIAYLJMLQUVXCV5377P";
-    String secret = "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";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkPermissions();
         Log.d("home", "home");
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -138,63 +136,6 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();
-    }
-
-    public void imagePicker(View view){
-        ImagePicker.Companion.with(this)
-                .crop()	    			//Crop image(Optional), Check Customization for more option
-                .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                .start();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK){
-            assert data != null;
-            Uri uri = data.getData();
-            Log.d("uri", uri.toString());
-
-
-
-            new Thread() {
-                @Override
-                public void run() {
-                    upload(uri);
-
-                }
-            }.start();
-    }
-        else if (resultCode == ImagePicker.RESULT_ERROR) {
-            assert data != null;
-            Toast.makeText(this, data.toString(), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
-        }
-
-}
-
-    public void upload(Uri filepath){
-        File file = new File(filepath.getPath());
-        AmazonS3Client s3Client =   new AmazonS3Client(new BasicAWSCredentials( key, secret ));
-        PutObjectRequest por =    new PutObjectRequest("greeknav", "testfile.png", file);
-        PutObjectResult result = s3Client.putObject( por );
-        StringBuilder builder = new StringBuilder();
-        builder.append("https://greeknav.s3.amazonaws.com/");
-        builder.append("testfile");
-        String extension = FilenameUtils.getExtension(filepath.toString());
-        builder.append(extension);
-    }
-
-    private void checkPermissions() {
-        if(Build.VERSION.SDK_INT < 23)
-            return;
-
-        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 0);
-        }
     }
 
 //    if using menu on toolbar
