@@ -9,6 +9,14 @@
     android:background="@color/backgroundColor"
 
     tools:context=".Authentication">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +46,49 @@
         android:text="@string/gender"
         android:layout_marginStart="25dp"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderRadioGroup"
+            android:layout_marginStart="25dp">
+
+            <RadioButton
+                android:id="@+id/genderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textColor="@color/textColor">
+
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/genderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textColor="@color/textColor"/>
+
+
+
+                <RadioButton
+                    android:id="@+id/genderNonBinary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nonBinary"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"/>
+
+        </RadioGroup>
+    </LinearLayout>
+    <!--
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -50,6 +101,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp"
         android:id="@+id/createGender"/>
+        -->
     <TextView
         android:layout_width="wrap_content"
         android:textColor="@color/textColor"
@@ -60,7 +112,7 @@
         android:text="@string/sexuality"
         android:layout_marginStart="25dp" />
 
-    <EditText
+    <Spinner
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
@@ -125,11 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/createAffiliated">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="25dp">
+
             <RadioButton
                 android:textColor="@color/textColor"
                 android:id="@+id/createYesAffiliated"
@@ -140,16 +188,17 @@
                 android:textSize="18sp"
                 android:layout_marginStart="30dp"/>
             <RadioButton
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="25dp"
                 android:textColor="@color/textColor"
                 android:layout_width="wrap_content"
                 android:id="@+id/createNoAffiliated"
                 android:layout_height="wrap_content"
                 android:text="@string/no"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp">
+                android:textSize="18sp"
+                >
             </RadioButton>
-        </LinearLayout>
+
     </RadioGroup>
 
 
@@ -265,14 +314,13 @@
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/background"
         android:text="@string/createAccount"
         android:onClick="createAccount2" />
 
-
-
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

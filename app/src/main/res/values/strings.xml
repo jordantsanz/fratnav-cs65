@@ -42,6 +42,10 @@
     <string name="forum">Forum</string>
     <string name="post">post</string>
     <string name="confirmEmail">Confirm Email:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="nonBinary">Non-Binary</string>
+
 
 
 </resources>

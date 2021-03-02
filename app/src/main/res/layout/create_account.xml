@@ -113,12 +113,13 @@
         android:id="@+id/createPasswordConfirm"
         android:layout_gravity="center"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/purple_background"
+        android:background="@drawable/teal_background"
         android:layout_gravity="center"
+        android:textColor="@color/textColor"
         android:onClick="createAccount"
         android:text="Next"/>
 

@@ -32,6 +32,7 @@ public class CreateProfile extends AppCompatActivity  {
     String sexuality;
     String year;
     Integer affiliatedCheck;
+    Integer genderCheck;
     boolean affiliated;
     String email;
     String username;
@@ -40,6 +41,7 @@ public class CreateProfile extends AppCompatActivity  {
     CheckBox srat, frat, genderInclusive, natPanHelic;
     ArrayList<String> preferences;
     Spinner spinner;
+    Spinner sexualitySpinner;
 
 
 
@@ -55,6 +57,8 @@ public class CreateProfile extends AppCompatActivity  {
         password = getIntent().getStringExtra("password");
         username = getIntent().getStringExtra("userName");
         spinner = findViewById(R.id.createYear);
+        sexualitySpinner =findViewById(R.id.createSexuality);
+
         ArrayList<String> yearOptions = new ArrayList<>();
         yearOptions.add("2021");
         yearOptions.add("2022");
@@ -62,11 +66,23 @@ public class CreateProfile extends AppCompatActivity  {
         yearOptions.add("2024");
         yearOptions.add("2025");
 
-
-
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearOptions);
 
+
+        ArrayList<String> sexualityOptions = new ArrayList<>();
+        sexualityOptions.add("Heterosexual");
+        sexualityOptions.add("Lesbian");
+        sexualityOptions.add("Gay");
+        sexualityOptions.add("Bisexual");
+        sexualityOptions.add("Transgender");
+        sexualityOptions.add("Queer");
+        sexualityOptions.add("N/A");
+        ArrayAdapter<String> sexualityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexualityOptions);
+
+
+
         spinner.setAdapter(yearAdapter);
+        sexualitySpinner.setAdapter(sexualityAdapter);
 
 
 
@@ -74,13 +90,28 @@ public class CreateProfile extends AppCompatActivity  {
     }
 
     public void createAccount2(View view) {
-        EditText genderView = (EditText) findViewById(R.id.createGender);
-        EditText sexualityView = (EditText) findViewById(R.id.createSexuality);
-        Spinner yearView = (Spinner) findViewById(R.id.createYear);
-        RadioGroup affiliatedView = (RadioGroup) findViewById(R.id.createAffiliated);
+       // EditText genderView = (EditText) findViewById(R.id.createGender);
 
-        gender = genderView.getText().toString();
-        sexuality = sexualityView.getText().toString();
+        Spinner yearView =findViewById(R.id.createYear);
+        RadioGroup affiliatedView = (RadioGroup) findViewById(R.id.createAffiliated);
+        RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
+       // gender = genderView.getText().toString();
+        sexuality = sexualitySpinner.getSelectedItem().toString();
+
+        genderCheck= genderRadioGroup.getCheckedRadioButtonId();
+
+        if(genderCheck==R.id.genderMale){
+            gender ="Male";
+        }
+        else if (genderCheck == R.id.genderFemale){
+            gender = "Female";
+        }
+        else if (genderCheck == R.id.genderNonBinary){
+            gender = "Non-Binary";
+        }
+        else{
+            gender = "N/A";
+        }
 
         year = yearView.getSelectedItem().toString();
         affiliatedCheck = affiliatedView.getCheckedRadioButtonId();

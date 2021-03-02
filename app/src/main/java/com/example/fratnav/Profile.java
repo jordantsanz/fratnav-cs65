@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.fratnav.callbacks.getUserByIdCallback;
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,8 +57,20 @@ public class Profile extends AppCompatActivity {
             return;
         }
 
+
         TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
-        profileUsername.setText(currentUser.getEmail());
+        String useriD = currentUser.getUid();
+        Log.d("firebaseuser", currentUser.getUid());
+
+        UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                Log.d("username", user.username);
+                String userName= user.username;
+                profileUsername.setText(userName);
+            }
+        });
+
 
 
         // checks to see if data has been updated
