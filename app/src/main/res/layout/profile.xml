@@ -36,6 +36,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginStart="280dp"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/cabin"
             android:onClick="logout"
             android:background="@drawable/purple_background"
@@ -126,8 +127,29 @@
             android:layout_marginStart="270dp" />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:paddingStart="15dp"
+        android:textColor="@color/textColor"
+        android:paddingEnd="15dp"
+        android:textSize="16sp"
+        android:layout_marginTop="165dp"
+        android:layout_marginStart="55dp"
+        android:background="@drawable/purple_background"
+        android:text="@string/updateProfile"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textSize="16sp"
+            android:layout_marginTop="165dp"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="225dp"
+            android:background="@drawable/teal_background"
+            android:text="@string/uploadPhoto"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -136,7 +158,7 @@
         android:fontFamily="@font/montserrat"
         android:textSize="20sp"
         android:text="@string/subscribed"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="220dp"
         android:layout_marginStart="55dp"/>
 
         <GridLayout
@@ -144,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="225dp"
+            android:layout_marginTop="255dp"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:layout_weight="1"
@@ -194,7 +216,7 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/notification"
         android:textSize="20sp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="330dp"
         android:layout_marginStart="55dp"/>
 
     <TextView
@@ -202,7 +224,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="420dp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/past_posts"
@@ -211,9 +233,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="335dp"
+        android:layout_marginTop="365dp"
         android:layout_marginStart="55dp">
         <RadioGroup
             android:layout_width="wrap_content"
@@ -244,8 +266,8 @@
     <ListView
         android:id="@+id/profileListView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="430dp"/>
+        android:layout_height="270dp"
+        android:layout_marginTop="460dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.core.widget.NestedScrollView>

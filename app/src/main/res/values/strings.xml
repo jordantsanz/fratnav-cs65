@@ -47,6 +47,8 @@
     <string name="nonBinary">Non-Binary</string>
     <string name="submitComment">Submit Comment</string>
     <string name="logout">logout</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="uploadPhoto">Upload Photo</string>
 
 
 </resources>
