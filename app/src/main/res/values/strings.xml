@@ -46,7 +46,7 @@
     <string name="female">Female</string>
     <string name="nonBinary">Non-Binary</string>
     <string name="submitComment">Submit Comment</string>
-
+    <string name="logout">logout</string>
 
 
 </resources>

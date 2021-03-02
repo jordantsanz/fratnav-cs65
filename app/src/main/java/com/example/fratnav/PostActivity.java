@@ -21,13 +21,16 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        TextView username = (TextView)findViewById(R.id.postActivityUser);
         TextView textView = (TextView) findViewById(R.id.postActivityText);
+
 
         PostDatabaseHelper.getPostById(getIntent().getStringExtra(Forum.POST_ID_KEY), new getPostByIdCallback() {
             @Override
             public void onCallback(Post post) {
                 thePost = post;
                 textView.setText(post.text);
+                username.setText(post.username);
             }
         });
     }
