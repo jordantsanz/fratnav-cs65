@@ -77,8 +77,11 @@
                 android:id="@+id/house_date"
                 android:fontFamily="@font/montserrat"
                 android:layout_marginStart="55dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:layout_marginTop="260dp"
                 android:textColor="@color/textColor"
+                android:background="@drawable/rounded_corner_view_purple"
                 android:textSize="16sp" />
 
             <TextView
@@ -89,6 +92,9 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="290dp"
                 android:textColor="@color/textColor"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/rounded_corner_view_teal"
                 android:textSize="16sp" />
 
             <TextView
@@ -160,6 +166,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
                 android:textSize="14sp"
+                android:layout_marginBottom="100dp"
                 android:text="leave a review" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
