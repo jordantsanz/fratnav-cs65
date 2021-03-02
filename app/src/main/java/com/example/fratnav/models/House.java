@@ -1,5 +1,7 @@
 package com.example.fratnav.models;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 
 public class House {
@@ -15,9 +17,10 @@ public class House {
     public String urlToHouseTour;
     public ArrayList<Review> reviews;
     public String id;
+    public Drawable imageName;
 
     public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
-                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews){
+                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, Drawable imageName){
 
         this.houseName = houseName;
         this.subscribers = subscribers;
@@ -29,6 +32,7 @@ public class House {
         this.stats = stats;
         this.urlToHouseTour = urlToHouseTour;
         this.reviews = reviews;
+        this.imageName = imageName;
     }
 
     public House(){}

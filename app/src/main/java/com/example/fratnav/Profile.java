@@ -2,6 +2,7 @@ package com.example.fratnav;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,11 @@ public class Profile extends AppCompatActivity {
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
-
+    String affiliated;
+    String userName;
+    String sexuality;
+    String year;
+    String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,10 @@ public class Profile extends AppCompatActivity {
 
 
         TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
+        TextView profileSexuality = (TextView) findViewById(R.id.sexualityResponse);
+        TextView profileGender = (TextView) findViewById(R.id.genderResponse);
+        TextView profileYear = (TextView) findViewById(R.id.yearResponse);
+        TextView profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
         String useriD = currentUser.getUid();
         Log.d("firebaseuser", currentUser.getUid());
 
@@ -66,8 +75,41 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onCallback(User user) {
                 Log.d("username", user.username);
-                String userName= user.username;
+                if (user.username != null){
+                    userName= user.username;
+                }
+                else{
+                    userName="N/A";
+                }
+                if(user.sexuality!=null) {
+                    sexuality = user.sexuality;
+                }
+                else{
+                    sexuality="N/A";
+                }
+                if(user.year != null) {
+                    year = user.year;
+                }
+                else{
+                    year = "N/A";
+                }
+                if(user.gender!=null) {
+                    gender = user.gender;
+                }
+                else{
+                    gender = "N/A";
+                }
+                if (user.houseAffiliation){
+                    affiliated= "Yes";
+                }
+                else{
+                    affiliated = "No";
+                }
                 profileUsername.setText(userName);
+                profileSexuality.setText(sexuality);
+                profileGender.setText(gender);
+                profileYear.setText(year);
+                profileAffiliated.setText(affiliated);
             }
         });
 
