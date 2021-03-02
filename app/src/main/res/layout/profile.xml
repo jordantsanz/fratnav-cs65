@@ -134,7 +134,7 @@
         android:paddingEnd="15dp"
         android:textSize="16sp"
         android:layout_marginTop="165dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/purple_background"
         android:text="@string/updateProfile"/>
 
