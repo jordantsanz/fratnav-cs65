@@ -4,6 +4,7 @@ import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -17,12 +18,12 @@ public class User {
     public boolean houseAffiliation;
     public List<String> interestedIn;
     public List<House> subscribedTo;
-    public List<Post> posts;
+    public HashMap<String, String> posts;
     public boolean notificationSettings;
     public boolean house;
 
     public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
-                ArrayList<String> interestedIn, ArrayList<House> subscribedTo, ArrayList<Post> posts, boolean notificationSettings){
+                ArrayList<String> interestedIn, ArrayList<House> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
         this.email = email;
         this.username = username;
         this.gender = gender;
@@ -32,7 +33,7 @@ public class User {
         this.houseAffiliation = houseAffiliation;
         this.interestedIn = interestedIn;
         this.subscribedTo = subscribedTo;
-        this.posts = new ArrayList<>();
+        this.posts = new HashMap<>();
         this.notificationSettings = notificationSettings;
         this.house = false;
     }

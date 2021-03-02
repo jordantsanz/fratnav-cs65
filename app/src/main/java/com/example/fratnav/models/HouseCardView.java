@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,7 +107,39 @@ public class HouseCardView {
         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         imageParams.gravity = Gravity.CENTER_HORIZONTAL;
-        iv.setImageDrawable(ContextCompat.getDrawable(context, drawable));
+
+        boolean bool = false;
+        if (drawable == R.drawable.signu1){
+            bool = true;
+        }
+        Log.d("areTheyTheSame", String.valueOf(bool));
+
+        int image = 0;
+        switch(name){
+            case "Sig Nu":
+                image = R.drawable.signu1;
+                break;
+            case "TDX":
+                image = R.drawable.tdx;
+                break;
+            case "Zete":
+                image = R.drawable.zetapsi;
+                break;
+            case "Sigma Delt":
+                image = R.drawable.sigdelt;
+                break;
+            case "Tabard":
+                image = R.drawable.tabard;
+                break;
+            case "Tri-Kap":
+                image = R.drawable.trikap;
+                break;
+            default:
+                image = drawable;
+                break;
+        }
+
+        iv.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), image, null));
 
         imageParams.setMargins(0, 0, 0, 35);
 

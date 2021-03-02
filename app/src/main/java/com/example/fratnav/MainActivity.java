@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
 
                 if (item.getItemId()==R.id.houses) {
                     Log.d("swtich", "houses");

@@ -29,8 +29,8 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         TextView postUser = (TextView) convertView.findViewById(R.id.postUser);
         TextView postText = (TextView) convertView.findViewById(R.id.postText);
         // Populate the data into the template view using the data object
-        postUser.setText(post.userID);
-        Log.d("postuser", post.stringify());
+        String userDisplay = "@" + post.username;
+        postUser.setText(userDisplay);
         postText.setText(post.text);
         // Return the completed view to render on screen
         return convertView;

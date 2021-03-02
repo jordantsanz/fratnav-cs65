@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CreateProfile extends AppCompatActivity  {
@@ -155,7 +156,7 @@ public class CreateProfile extends AppCompatActivity  {
             preferences.add("National Pan-Hellenic");
         }
 
-        User newUser = new User( email, username, gender, sexuality, user.getUid(), year, affiliated, preferences, new ArrayList<>(), new ArrayList<>(), false);
+        User newUser = new User( email, username, gender, sexuality, user.getUid(), year, affiliated, preferences, new ArrayList<>(), new HashMap<>(), false);
 
         UserDatabaseHelper.createUser(newUser);
 

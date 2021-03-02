@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
@@ -68,7 +70,12 @@ public class PostActivity extends AppCompatActivity {
 
         arrayOfComments.add(comment);
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
         adapter.notifyDataSetChanged();
         PostDatabaseHelper.addPostComment(thePost, comment);
+
+        Toast.makeText(this, "Comment left.", Toast.LENGTH_SHORT).show();
     }
 }

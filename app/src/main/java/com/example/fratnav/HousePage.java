@@ -51,7 +51,6 @@ public class HousePage extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Log.d("sad", "made it item clicked " + item.getTitle());
-                    Toast.makeText(HousePage.this, item.getTitle(), Toast.LENGTH_SHORT).show();
 
                     if (item.getItemId() == R.id.home) {
                         Log.d("swtich", "home");

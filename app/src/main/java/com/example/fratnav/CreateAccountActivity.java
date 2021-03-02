@@ -3,10 +3,12 @@ package com.example.fratnav;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -74,6 +76,42 @@ public class CreateAccountActivity extends AppCompatActivity {
         EditText passwordView = (EditText) findViewById(R.id.createPassword);
         EditText passwordViewConfirm = (EditText) findViewById(R.id.createPasswordConfirm);
 
+        emailView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        emailViewConfirm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        passwordView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        passwordViewConfirm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
 
         email = emailView.getText().toString();
         password = passwordView.getText().toString();
@@ -105,7 +143,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             user = mAuth.getCurrentUser();
                             assert user != null;
-                            Toast.makeText(CreateAccountActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAccountActivity.this, "New user created: now tell us about yourself!", Toast.LENGTH_LONG).show();
 //                            User newUser = new User(email, randomUsername(), "Male", "gay", user.getUid(), 2022,
 //                                    true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
 //                                    false);
@@ -129,6 +167,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 
