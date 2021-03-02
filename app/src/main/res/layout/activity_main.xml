@@ -38,9 +38,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/montserrat"
         android:text="@string/rushInfo"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"/>
 
@@ -49,8 +50,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="Your Feed"
+        android:textSize="30sp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/feed"
         android:layout_marginTop="100dp"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"/>
