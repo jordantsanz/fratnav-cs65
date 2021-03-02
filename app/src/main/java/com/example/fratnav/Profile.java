@@ -210,4 +210,12 @@ public class Profile extends AppCompatActivity {
         finishAffinity();
     }
 
+    public void edit(View view){
+        Intent intent = new Intent(this, updateProfile.class);
+        startActivity(intent);
+
+
+
+    }
+
 }

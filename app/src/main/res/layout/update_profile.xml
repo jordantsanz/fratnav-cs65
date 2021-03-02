@@ -15,17 +15,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"
-                android:layout_marginTop="50dp"
-                android:textSize="60sp"
-                android:layout_gravity="center"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +26,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat"
                 android:textSize="25sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -50,12 +42,12 @@
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/genderRadioGroup"
+                android:id="@+id/genderUpdateRadioGroup"
                 android:layout_marginStart="25dp"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/genderMale"
+                    android:id="@+id/genderUpdateMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/male"
@@ -65,7 +57,7 @@
 
                 </RadioButton>
                 <RadioButton
-                    android:id="@+id/genderFemale"
+                    android:id="@+id/genderUpdateFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/female"
@@ -75,7 +67,7 @@
 
 
                 <RadioButton
-                    android:id="@+id/genderNonBinary"
+                    android:id="@+id/genderUpdateNonBinary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nonBinary"
@@ -84,20 +76,6 @@
                     android:textColor="@color/textColor"/>
             </RadioGroup>
 
-            <!--
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/montserrat"
-                android:background="@drawable/background"
-                android:layout_gravity="center"
-                android:paddingTop="5dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="5dp"
-                android:id="@+id/createGender"/>
-                -->
             <TextView
                 android:layout_width="wrap_content"
                 android:textColor="@color/textColor"
@@ -119,7 +97,7 @@
                 android:paddingEnd="20dp"
                 android:paddingBottom="5dp"
                 android:layout_gravity="center"
-                android:id="@+id/createSexuality"/>
+                android:id="@+id/updateSexuality"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,24 +117,12 @@
                 android:paddingEnd="20dp"
                 android:paddingBottom="5dp"
                 android:fontFamily="@font/montserrat"
-                android:id="@+id/createYear"
+                android:id="@+id/updateYear"
                 android:layout_gravity="center"
                 android:background="@drawable/background"
                 android:spinnerMode="dropdown"
                 />
-            <!--
-                <EditText
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/background"
-                    android:layout_gravity="center"
-                    android:inputType="number"
-                    android:paddingTop="5dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:paddingBottom="5dp"
-                    /> -->
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -173,11 +139,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/createAffiliated"
-                android:checkedButton="@+id/gender">
+                android:checkedButton="@+id/affiliationUpdate"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:textColor="@color/textColor"
-                    android:id="@+id/createYesAffiliated"
+                    android:id="@+id/updateYesAffiliated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
@@ -188,7 +155,7 @@
                     android:layout_marginStart="25dp"
                     android:textColor="@color/textColor"
                     android:layout_width="wrap_content"
-                    android:id="@+id/createNoAffiliated"
+                    android:id="@+id/updateNoAffiliated"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
                     android:fontFamily="@font/montserrat"
@@ -206,61 +173,15 @@
                 android:textSize="18sp"
                 android:textColor="@color/textColor"
                 android:layout_marginStart="25dp"/>
-            <!--
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="25dp">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fraternities"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColor"
-                   />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nationalPanHellenic"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColor">
-                </RadioButton>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="25dp">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/genderInclusiveHouses">
-                </RadioButton>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="16sp"
-                    android:text="@string/sororities">
-                </RadioButton>
-            </LinearLayout>
 
-        -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="33dp">
                 <CheckBox
-                    android:id="@+id/soroCheckbox"
+                    android:id="@+id/soroCheckboxUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColor"
@@ -270,7 +191,7 @@
                     />
 
                 <CheckBox
-                    android:id="@+id/natPanHelicChackBox"
+                    android:id="@+id/natPanHelicChackBoxUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -285,7 +206,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center">
                 <CheckBox
-                    android:id="@+id/fratCheckbox"
+                    android:id="@+id/fratCheckboxUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fraternities"
@@ -295,7 +216,7 @@
                     android:layout_marginStart="25dp"/>
 
                 <CheckBox
-                    android:id="@+id/genderInclusiveCheckBox"
+                    android:id="@+id/genderInclusiveCheckBoxUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColor"
@@ -306,18 +227,18 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/createAccount"
+                android:id="@+id/updateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_gravity="center"
                 android:textColor="@color/textColor"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:fontFamily="@font/montserrat"
                 android:background="@drawable/teal_background"
-                android:text="@string/createAccount"
-                android:onClick="createAccount2" />
+                android:text="@string/updateProfile"
+                android:onClick="update"/>
 
         </LinearLayout>
     </ScrollView>
