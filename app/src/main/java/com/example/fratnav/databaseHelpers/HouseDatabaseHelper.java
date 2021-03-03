@@ -21,14 +21,16 @@ public class HouseDatabaseHelper {
 
     public static void getAllHouses(getAllHousesCallback myCallback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefPosts = database.getReference("/houses");
+        DatabaseReference dbRefHouses = database.getReference("/houses").child("housesnew");
         ArrayList<House> houses = new ArrayList<>();
-        dbRefPosts.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRefHouses.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("datasnapshot", dataSnapshot.toString());
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     House house = ds.getValue(House.class);
                     assert house != null;
+                    Log.d("house", house.houseName);
                     house.setId(ds.getKey());
                     houses.add(house);
                 }
@@ -45,7 +47,7 @@ public class HouseDatabaseHelper {
 
     public static void getHouseByName(String name, getHouseByIdCallback myCallback){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = database.getReference("/houses");
+        DatabaseReference dbRefHouses = database.getReference("/houses").child("housesnew");
         dbRefHouses.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,7 +76,7 @@ public class HouseDatabaseHelper {
 
     public static void getHouseById(String id, getHouseByIdCallback myCallback){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = database.getReference("/houses");
+        DatabaseReference dbRefHouses = database.getReference("/houses").child("housesnew");
         dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -98,7 +100,7 @@ public class HouseDatabaseHelper {
 
     public static String createHouse(House house){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = db.getReference("/houses");
+        DatabaseReference dbRefHouses = db.getReference("/houses").child("housesnew");
         DatabaseReference newHouseRef = dbRefHouses.push();
         String id = newHouseRef.getKey();
         newHouseRef.setValue(house);
@@ -108,7 +110,8 @@ public class HouseDatabaseHelper {
 
     public static void addUrlToHouse(String houseId, String url){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = db.getReference("/houses");
+        DatabaseReference dbRefHouses = db.getReference("/houses").child("housesnew");
+
         dbRefHouses.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,11 +27,19 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.example.fratnav.callbacks.getAllPostsCallback;
+import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
+import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
+import com.example.fratnav.tools.HouseCreation;
+
+
+import com.example.fratnav.tools.PostsAdapter;
+
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,15 +67,22 @@ public class Profile extends AppCompatActivity {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
+    PostsAdapter adapter;
+    public ArrayList<Post> arrayOfPosts;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
-    String affiliated;
-    String userName;
-    String sexuality;
-    String year;
-    String gender;
+    public static String affiliated;
+    public static String userName;
+    public static String sexuality;
+    public static String year;
+    public static String gender;
     String key = "AKIAYLJMLQUVXCV5377P"; // will secure these soon
     String secret = "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";
+    public static TextView profileSexuality;
+    public static TextView profileUsername;
+    public static TextView profileGender;
+    public static TextView profileYear;
+    public static TextView profileAffiliated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +99,31 @@ public class Profile extends AppCompatActivity {
         }
 
 
-        TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
-        TextView profileSexuality = (TextView) findViewById(R.id.sexualityResponse);
-        TextView profileGender = (TextView) findViewById(R.id.genderResponse);
-        TextView profileYear = (TextView) findViewById(R.id.yearResponse);
-        TextView profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
+        profileUsername = (TextView) findViewById(R.id.profileUsername);
+        profileSexuality = (TextView) findViewById(R.id.sexualityResponse);
+        profileGender = (TextView) findViewById(R.id.genderResponse);
+        profileYear = (TextView) findViewById(R.id.yearResponse);
+        profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
+
+        RadioButton notifOn = findViewById(R.id.notificationOn);
+        RadioButton notifOff = findViewById(R.id.notificationOff);
+
+
+
+        notifOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), true);
+            }
+        });
+
+        notifOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), false);
+            }
+        });
+
         String useriD = currentUser.getUid();
         Log.d("firebaseuser", currentUser.getUid());
 
@@ -130,6 +166,34 @@ public class Profile extends AppCompatActivity {
                 profileGender.setText(gender);
                 profileYear.setText(year);
                 profileAffiliated.setText(affiliated);
+
+                if (user.notificationSettings){
+                    notifOn.setChecked(true);
+                }
+                else{
+                    notifOff.setChecked(true);
+                }
+
+                arrayOfPosts = new ArrayList<>();
+                PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Post> posts) {
+                        Log.d("posts", posts.toString());;
+                        for (int i = posts.size() - 1; i > -1; i--){
+                            Post post = posts.get(i);
+                            arrayOfPosts.add(post);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+
+                // Create the adapter to convert the array to views
+                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
+                // Attach the adapter to a ListView
+                ListView list = findViewById(android.R.id.list);
+                list.setAdapter(adapter); // sets adapter for list
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -177,11 +241,13 @@ public class Profile extends AppCompatActivity {
 //         setSupportActionBar(toolbar);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
-        postListView = (ListView) findViewById(R.id.profileListView);
 
-        //need to change to post // changed by will
-        ArrayList<Post>arrayList= new ArrayList();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+
+        // Construct the data source
+        if (arrayOfPosts == null) {
+            arrayOfPosts = new ArrayList<Post>();
+        }
+
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.profile);
@@ -214,6 +280,45 @@ public class Profile extends AppCompatActivity {
         });
     }
 
+    public static void refresh() {
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                Log.d("username", user.username);
+                if (user.username != null) {
+                    userName = user.username;
+                } else {
+                    userName = "N/A";
+                }
+                if (user.sexuality != null) {
+                    sexuality = user.sexuality;
+                } else {
+                    sexuality = "N/A";
+                }
+                if (user.year != null) {
+                    year = user.year;
+                } else {
+                    year = "N/A";
+                }
+                if (user.gender != null) {
+                    gender = user.gender;
+                } else {
+                    gender = "N/A";
+                }
+                if (user.houseAffiliation) {
+                    affiliated = "Yes";
+                } else {
+                    affiliated = "No";
+                }
+                profileUsername.setText(userName);
+                profileSexuality.setText(sexuality);
+                profileGender.setText(gender);
+                profileYear.setText(year);
+                profileAffiliated.setText(affiliated);
+            }
+        });
+    }
+
     private void notifyUser(String message) {
         Toast.makeText(Profile.this, message,
                 Toast.LENGTH_SHORT).show();
@@ -231,6 +336,8 @@ public class Profile extends AppCompatActivity {
 
 
     public void edit(View view) {
+//        HouseCreation hc = new HouseCreation();
+//        hc.createHouses();
         Intent intent = new Intent(this, updateProfile.class);
         startActivity(intent);
 
@@ -265,9 +372,8 @@ public class Profile extends AppCompatActivity {
         }
         else if (resultCode == ImagePicker.RESULT_ERROR) {
             assert data != null;
-            Toast.makeText(this, data.toString(), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cancelled.", Toast.LENGTH_SHORT).show();
         }
 
     }

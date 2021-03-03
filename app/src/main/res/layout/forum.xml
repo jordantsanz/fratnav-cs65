@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".Forum">
 
 
@@ -22,6 +24,17 @@
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
     />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/purple_background"
+        android:onClick="openPostCreate"
+        android:text="@string/post"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="250dp"
+        android:fontFamily="@font/cabin"
+        android:textColor="@color/backgroundColor" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,15 +79,8 @@
                     android:background="@drawable/ic_baseline_filter_list_24" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:layout_marginTop="20dp"
-                android:text="@string/forum"
-                android:fontFamily="@font/montserrat"
-                android:textSize="18sp"/>
 
+<!--
             <EditText
                 android:id="@+id/postText"
                 android:layout_width="match_parent"
@@ -85,16 +91,9 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserrat"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/purple_background"
-                android:onClick="savePost"
-                android:text="@string/post"
-                android:fontFamily="@font/cabin"
-                android:textColor="@color/backgroundColor" />
+-->
 
         </LinearLayout>
 
@@ -106,12 +105,15 @@
             android:padding="20dp"
             android:layout_margin="10dp"
             >
-        <ListView
-            android:id="@android:id/list"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:dividerHeight="10.0sp" />
         </FrameLayout>
 
 

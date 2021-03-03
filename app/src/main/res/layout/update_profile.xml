@@ -238,7 +238,7 @@
                 android:fontFamily="@font/montserrat"
                 android:background="@drawable/teal_background"
                 android:text="@string/updateProfile"
-                android:onClick="update"/>
+                />
 
         </LinearLayout>
     </ScrollView>

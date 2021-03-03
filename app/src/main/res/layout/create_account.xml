@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".Authentication">
     <TextView
         android:layout_width="wrap_content"
