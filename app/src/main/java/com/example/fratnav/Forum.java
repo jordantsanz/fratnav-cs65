@@ -55,11 +55,12 @@ public class Forum extends ListActivity {
     private EditText userText;
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
-    private ArrayList<Post> arrayOfPosts;
+    public static ArrayList<Post> arrayOfPosts;
+
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
-    PostsAdapter adapter;
+    public static PostsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +72,16 @@ public class Forum extends ListActivity {
         Log.d("drawable", String.valueOf(R.drawable.signu1));
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        userText = (EditText) findViewById(R.id.postText);
-
-        userText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
+//        userText = (EditText) findViewById(R.id.postText);
+//
+//        userText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    hideKeyboard(v);
+//                }
+//            }
+//        });
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
         if (currentUser == null) {
@@ -214,5 +215,10 @@ public class Forum extends ListActivity {
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void openPostCreate(View view) {
+        Intent intent = new Intent (Forum.this, CreatePost.class);
+        startActivity(intent);
     }
 }

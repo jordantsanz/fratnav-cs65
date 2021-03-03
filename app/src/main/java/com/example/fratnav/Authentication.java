@@ -82,6 +82,11 @@ public class Authentication extends AppCompatActivity {
         textview.setText(text);
 
     }
+    public void forgotPassword(View view){
+        Intent intent = new Intent(Authentication.this, ForgotPassword.class);
+        startActivity(intent);
+        finish();
+    }
     public void signinUsers(View view){
         EditText emailV = (EditText) findViewById(R.id.email);
         EditText passwordV = (EditText) findViewById(R.id.password);

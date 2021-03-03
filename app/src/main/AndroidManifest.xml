@@ -16,12 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
-        <activity android:name=".HouseTourActivity"></activity>
+        <activity android:name=".HouseTourActivity"/>
+        <activity android:name=".ForgotPassword"/>
 
         <service
             android:name="com.onecode.s3.service.S3UploadService"
             android:exported="false" />
-
+        <activity android:name=".CreatePost" />
         <activity android:name=".PostActivity" />
         <activity android:name=".updateProfile" />
         <activity android:name=".CreateAccountActivity" />
