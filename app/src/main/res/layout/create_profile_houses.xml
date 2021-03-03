@@ -263,7 +263,7 @@
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:layout_gravity="center"
         android:textColor="@color/textColor"
         android:paddingStart="15dp"
