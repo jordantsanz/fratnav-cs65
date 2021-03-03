@@ -40,6 +40,11 @@ public class User {
 
     public User(){}
 
+    public User(String userId, boolean notificationSettings){
+        this.userID = userId;
+        this.notificationSettings = notificationSettings;
+    }
+
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> map = new HashMap<>();
 
@@ -49,6 +54,13 @@ public class User {
         map.put("houseAffiliation", this.houseAffiliation);
         map.put("interestedIn", this.interestedIn);
 
+        return map;
+    }
+
+    public HashMap<String, Object> toMapNotif(){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("notificationSettings", this.notificationSettings);
         return map;
     }
 }

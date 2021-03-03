@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -103,6 +104,26 @@ public class Profile extends AppCompatActivity {
         profileGender = (TextView) findViewById(R.id.genderResponse);
         profileYear = (TextView) findViewById(R.id.yearResponse);
         profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
+
+        RadioButton notifOn = findViewById(R.id.notificationOn);
+        RadioButton notifOff = findViewById(R.id.notificationOff);
+
+
+
+        notifOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), true);
+            }
+        });
+
+        notifOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), false);
+            }
+        });
+
         String useriD = currentUser.getUid();
         Log.d("firebaseuser", currentUser.getUid());
 
@@ -145,6 +166,13 @@ public class Profile extends AppCompatActivity {
                 profileGender.setText(gender);
                 profileYear.setText(year);
                 profileAffiliated.setText(affiliated);
+
+                if (user.notificationSettings){
+                    notifOn.setChecked(true);
+                }
+                else{
+                    notifOff.setChecked(true);
+                }
 
                 arrayOfPosts = new ArrayList<>();
                 PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {

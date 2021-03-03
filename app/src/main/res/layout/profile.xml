@@ -262,6 +262,7 @@
             android:textColor="@color/textColor"
             android:fontFamily="@font/montserrat"
             android:text="@string/on"
+            android:id="@+id/notificationOn"
             android:textSize="16sp"/>
 
         <RadioButton
@@ -271,6 +272,7 @@
             android:fontFamily="@font/montserrat"
             android:textSize="16sp"
             android:text="@string/off"
+            android:id="@+id/notificationOff"
             android:layout_marginStart="25dp"/>
         </RadioGroup>
 

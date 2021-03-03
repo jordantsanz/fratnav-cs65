@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -111,7 +112,6 @@ public class UserDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("snapshot", snapshot.toString());
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("updatesmap", userUpdates.toString());
                     Log.d("updates", ds.getRef().updateChildren(userUpdates).toString());
                 }
 
@@ -124,5 +124,26 @@ public class UserDatabaseHelper {
             }
         });
 
+    }
+
+    public static void updateUserNotifSettings(String userId, boolean notifOn){
+        User user = new User(userId, notifOn);
+        HashMap<String, Object> map = user.toMapNotif();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbUserRef = database.getReference("/users");
+        dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.getRef().updateChildren(map);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     }
