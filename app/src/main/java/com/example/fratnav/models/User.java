@@ -3,6 +3,7 @@ package com.example.fratnav.models;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +18,13 @@ public class User {
     public String year;
     public boolean houseAffiliation;
     public List<String> interestedIn;
-    public List<House> subscribedTo;
+    public HashMap<String, String> subscribedTo;
     public HashMap<String, String> posts;
     public boolean notificationSettings;
     public boolean house;
 
     public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
-                ArrayList<String> interestedIn, ArrayList<House> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
+                ArrayList<String> interestedIn, HashMap<String, String> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
         this.email = email;
         this.username = username;
         this.gender = gender;
@@ -45,6 +46,24 @@ public class User {
         this.notificationSettings = notificationSettings;
     }
 
+
+    // To create a house user account
+    public User(String email, String userId, String username, boolean house){
+        this.email = email;
+        this.userID = userId;
+        this.house = house;
+        this.username = username;
+
+        this.gender = "";
+        this.sexuality = "";
+        this.year = "";
+        this.houseAffiliation = true;
+        this.interestedIn = new ArrayList<>();
+        this.subscribedTo = new HashMap<>();
+        this.posts = new HashMap<>();
+        this.notificationSettings = false;
+    }
+
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> map = new HashMap<>();
 
@@ -56,6 +75,7 @@ public class User {
 
         return map;
     }
+
 
     public HashMap<String, Object> toMapNotif(){
         HashMap<String, Object> map = new HashMap<>();

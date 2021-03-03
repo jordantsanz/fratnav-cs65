@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.onboarding;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,20 +12,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
-import com.example.fratnav.models.User;
+import com.example.fratnav.MainActivity;
+import com.example.fratnav.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.UUID;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class CreateAccountActivity extends AppCompatActivity {

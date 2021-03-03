@@ -1,35 +1,28 @@
-package com.example.fratnav;
+package com.example.fratnav.forum;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.fratnav.callbacks.getAllHousesCallback;
+import com.example.fratnav.onboarding.Authentication;
+import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getUserByIdCallback;
-import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
-import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
-import com.example.fratnav.tools.PostsAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -7,7 +7,7 @@
     android:background="@color/backgroundColor"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    tools:context=".Forum">
+    tools:context=".forum.Forum">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

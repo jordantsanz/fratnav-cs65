@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.onboarding;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fratnav.MainActivity;
+import com.example.fratnav.R;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.User;
@@ -156,7 +158,7 @@ public class CreateProfile extends AppCompatActivity  {
             preferences.add("National Pan-Hellenic");
         }
 
-        User newUser = new User( email, username, gender, sexuality, user.getUid(), year, affiliated, preferences, new ArrayList<>(), new HashMap<>(), false);
+        User newUser = new User( email, username, gender, sexuality, user.getUid(), year, affiliated, preferences, new HashMap<>(), new HashMap<>(), false);
 
         UserDatabaseHelper.createUser(newUser);
 

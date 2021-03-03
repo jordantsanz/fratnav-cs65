@@ -88,7 +88,8 @@ public class ReviewDatabaseHelper {
 
         // add to reviews database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = database.getReference("/reviews");
+        DatabaseReference dbRefReviews = database.getReference("/reviews");
+        dbRefReviews.push().setValue(review);
 
     }
 

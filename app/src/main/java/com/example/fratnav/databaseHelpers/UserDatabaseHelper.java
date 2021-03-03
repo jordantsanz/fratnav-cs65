@@ -1,13 +1,10 @@
 package com.example.fratnav.databaseHelpers;
 
-import android.provider.ContactsContract;
-import android.renderscript.Sampler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.fratnav.Profile;
-import com.example.fratnav.callbacks.getHouseByIdCallback;
+import com.example.fratnav.profile.Profile;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
@@ -19,9 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class UserDatabaseHelper {
 
@@ -54,30 +49,11 @@ public class UserDatabaseHelper {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRefUsers = db.getReference("/users");
         DatabaseReference newUserRef = dbRefUsers.child(user.userID);
-        Log.d("ref", newUserRef.toString());
         String id = newUserRef.getKey();
         newUserRef.setValue(user);
         return id;
     }
 
-    public static void editUser(User user){
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefUsers = db.getReference("/users");
-        dbRefUsers.orderByKey().equalTo(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    ds.getRef().setValue(user);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 
     public static void getUserById(String id, getUserByIdCallback myCallback){
@@ -143,6 +119,47 @@ public class UserDatabaseHelper {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    public static void addHouseToUserSubscribed(House house, String userId){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefUsers = db.getReference("/users");
+
+        dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.child("subscribedTo").getRef().child(house.id).setValue(house.houseName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    public static void removeHouseFromUserSubscribed(House house, String userId){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefUsers = db.getReference("/users");
+
+        dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.child("subscribedTo").getRef().child(house.id).removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("error", error.toString());
             }
         });
     }

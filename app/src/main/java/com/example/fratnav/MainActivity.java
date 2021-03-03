@@ -1,49 +1,24 @@
 package com.example.fratnav;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.internal.Constants;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.PutObjectResult;
-import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
-import com.example.fratnav.tools.HouseCreation;
-import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.example.fratnav.forum.Forum;
+import com.example.fratnav.houses.HousesSearch;
+import com.example.fratnav.onboarding.Authentication;
+import com.example.fratnav.profile.Profile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.onecode.s3.model.S3Credentials;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.os.Environment;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import org.apache.commons.io.FilenameUtils;
-
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomBar;
