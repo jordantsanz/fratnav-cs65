@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.fratnav.Profile;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.models.House;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class UserDatabaseHelper {
@@ -98,5 +100,29 @@ public class UserDatabaseHelper {
 
             }
         });
+    }
+
+    public static void updateUserProfile(String userId, User user){
+        HashMap<String, Object> userUpdates = user.toMap();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbUserRef = database.getReference("/users");
+        dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("updatesmap", userUpdates.toString());
+                    Log.d("updates", ds.getRef().updateChildren(userUpdates).toString());
+                }
+
+                Profile.refresh();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
     }

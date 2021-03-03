@@ -70,13 +70,18 @@ public class Profile extends AppCompatActivity {
     public ArrayList<Post> arrayOfPosts;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
-    String affiliated;
-    String userName;
-    String sexuality;
-    String year;
-    String gender;
+    public static String affiliated;
+    public static String userName;
+    public static String sexuality;
+    public static String year;
+    public static String gender;
     String key = "AKIAYLJMLQUVXCV5377P"; // will secure these soon
     String secret = "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";
+    public static TextView profileSexuality;
+    public static TextView profileUsername;
+    public static TextView profileGender;
+    public static TextView profileYear;
+    public static TextView profileAffiliated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +98,11 @@ public class Profile extends AppCompatActivity {
         }
 
 
-        TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
-        TextView profileSexuality = (TextView) findViewById(R.id.sexualityResponse);
-        TextView profileGender = (TextView) findViewById(R.id.genderResponse);
-        TextView profileYear = (TextView) findViewById(R.id.yearResponse);
-        TextView profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
+        profileUsername = (TextView) findViewById(R.id.profileUsername);
+        profileSexuality = (TextView) findViewById(R.id.sexualityResponse);
+        profileGender = (TextView) findViewById(R.id.genderResponse);
+        profileYear = (TextView) findViewById(R.id.yearResponse);
+        profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
         String useriD = currentUser.getUid();
         Log.d("firebaseuser", currentUser.getUid());
 
@@ -244,6 +249,45 @@ public class Profile extends AppCompatActivity {
                 return false;
             }
 
+        });
+    }
+
+    public static void refresh() {
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                Log.d("username", user.username);
+                if (user.username != null) {
+                    userName = user.username;
+                } else {
+                    userName = "N/A";
+                }
+                if (user.sexuality != null) {
+                    sexuality = user.sexuality;
+                } else {
+                    sexuality = "N/A";
+                }
+                if (user.year != null) {
+                    year = user.year;
+                } else {
+                    year = "N/A";
+                }
+                if (user.gender != null) {
+                    gender = user.gender;
+                } else {
+                    gender = "N/A";
+                }
+                if (user.houseAffiliation) {
+                    affiliated = "Yes";
+                } else {
+                    affiliated = "No";
+                }
+                profileUsername.setText(userName);
+                profileSexuality.setText(sexuality);
+                profileGender.setText(gender);
+                profileYear.setText(year);
+                profileAffiliated.setText(affiliated);
+            }
         });
     }
 

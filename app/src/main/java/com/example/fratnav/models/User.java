@@ -39,4 +39,16 @@ public class User {
     }
 
     public User(){}
+
+    public HashMap<String, Object> toMap(){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("gender", this.gender);
+        map.put("sexuality", this.sexuality);
+        map.put("year", this.year);
+        map.put("houseAffiliation", this.houseAffiliation);
+        map.put("interestedIn", this.interestedIn);
+
+        return map;
+    }
 }

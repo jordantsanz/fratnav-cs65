@@ -2,10 +2,12 @@ package com.example.fratnav;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -26,7 +28,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class updateProfile extends AppCompatActivity {
     BottomNavigationView bottomBar;
@@ -36,6 +41,7 @@ public class updateProfile extends AppCompatActivity {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
+    private String username;
     Integer position;
     Spinner spinner;
     Spinner sexualitySpinner;
@@ -89,6 +95,8 @@ public class updateProfile extends AppCompatActivity {
             @Override
             public void onCallback(User user) {
 
+                username = user.username;
+
                 RadioButton maleButton = findViewById(R.id.genderUpdateMale);
                 RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
                 RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
@@ -96,6 +104,7 @@ public class updateProfile extends AppCompatActivity {
 
 
                 RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
+                RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
 
                 switch (user.year) {
                     case "2021":
@@ -181,9 +190,19 @@ public class updateProfile extends AppCompatActivity {
                     affiliate.setChecked(true);
                 }
                 else{
-                    affiliate.setChecked(true);
+                    notAffiliate.setChecked(true);
                 }
 
+            }
+        });
+
+
+        Button updateButton = findViewById(R.id.updateAccount);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAccount();
             }
         });
 
@@ -193,7 +212,70 @@ public class updateProfile extends AppCompatActivity {
 
 
 
-    public void updateAccount(View view){
+    public void updateAccount(){
+
+        String gender = "";
+        String sexuality = "";
+        String year = "";
+        boolean houseAffiliation = false;
+        ArrayList<String> interestedIn = new ArrayList<>();
+
+
+        // find gender
+        RadioGroup genderGroup = findViewById(R.id.genderUpdateRadioGroup);
+        int id = genderGroup.getCheckedRadioButtonId();
+        RadioButton rb = findViewById(id);
+
+        gender = rb.getText().toString();
+
+
+        // find sexuality
+
+        Spinner sexualitySpinner = findViewById(R.id.updateSexuality);
+        sexuality = sexualitySpinner.getSelectedItem().toString();
+
+        // find year
+        Spinner yearSpinner = findViewById(R.id.updateYear);
+        year = yearSpinner.getSelectedItem().toString();
+
+        // find affiliation
+        RadioGroup affiliatedGroup = findViewById(R.id.createAffiliated);
+        int idaff = affiliatedGroup.getCheckedRadioButtonId();
+        RadioButton afButton = findViewById(idaff);
+
+        String houseAffiliationString = afButton.getText().toString();
+
+        Log.d("affil", houseAffiliationString);
+
+        if (houseAffiliationString.equals("yes")){
+            houseAffiliation = true;
+        }
+
+        // find interested in
+
+        CheckBox soroCheckbox = findViewById(R.id.soroCheckboxUpdate);
+        CheckBox fratCheckbox = findViewById(R.id.fratCheckboxUpdate);
+        CheckBox panCheckbox = findViewById(R.id.natPanHelicChackBoxUpdate);
+        CheckBox genderIncCheckbox = findViewById(R.id.genderInclusiveCheckBoxUpdate);
+
+        if (soroCheckbox.isChecked()){
+            interestedIn.add("Sororities");
+        }
+        if (fratCheckbox.isChecked()){
+            interestedIn.add("Fraternities");
+        }
+        if (panCheckbox.isChecked()){
+            interestedIn.add("National Pan-Hellenic");
+        }
+        if (genderIncCheckbox.isChecked()){
+            interestedIn.add("Gender Inclusive Houses");
+        }
+
+        User user = new User(currentUser.getEmail(), username, gender, sexuality, currentUser.getUid(),
+        year, houseAffiliation, interestedIn, new ArrayList<>(), new HashMap<>(), false);
+
+        UserDatabaseHelper.updateUserProfile(currentUser.getUid(), user);
+
         finish();
     }
 }
