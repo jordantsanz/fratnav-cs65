@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.example.fratnav.Authentication;
-import com.example.fratnav.Profile;
+import com.example.fratnav.onboarding.Authentication;
+import com.example.fratnav.profile.Profile;
 import com.example.fratnav.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
 
 public class RealtimeFirebaseDB extends AppCompatActivity {
 

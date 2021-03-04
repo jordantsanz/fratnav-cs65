@@ -1,26 +1,27 @@
-package com.example.fratnav;
+package com.example.fratnav.forum;
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.example.fratnav.onboarding.Authentication;
+import com.example.fratnav.houses.HousesSearch;
+import com.example.fratnav.MainActivity;
+import com.example.fratnav.profile.Profile;
+import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getAllPostsCallback;
-import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
@@ -30,17 +31,12 @@ import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 public class Forum extends ListActivity {
     BottomNavigationView bottomBar;

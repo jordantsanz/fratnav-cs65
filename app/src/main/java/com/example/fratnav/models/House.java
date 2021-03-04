@@ -3,6 +3,7 @@ package com.example.fratnav.models;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class House {
 
@@ -20,7 +21,7 @@ public class House {
     public int imageName;
 
     public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
-                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, int imageName){
+                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, int imageName, String houseId){
 
         this.houseName = houseName;
         this.subscribers = subscribers;
@@ -33,11 +34,22 @@ public class House {
         this.urlToHouseTour = urlToHouseTour;
         this.reviews = reviews;
         this.imageName = imageName;
+        this.id = id;
     }
 
     public House(){}
 
     public void setId(String id){
         this.id = id;
+    }
+
+
+    public HashMap<String, Object> toMap(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("postitions", positions);
+        map.put("people", people);
+        map.put("stats", stats);
+
+        return map;
     }
 }

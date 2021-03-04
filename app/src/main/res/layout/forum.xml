@@ -7,7 +7,7 @@
     android:background="@color/backgroundColor"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    tools:context=".Forum">
+    tools:context=".forum.Forum">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,20 +18,22 @@
         android:background="@drawable/background"
         app:elevation="2dp"
         app:menu="@menu/navbar"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
         app:itemIconSize="30dp"
         app:itemRippleColor="@android:color/transparent"
+        app:itemTextColor="@color/teal"
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
     />
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:background="@drawable/purple_background"
         android:onClick="openPostCreate"
         android:text="@string/post"
+        android:textSize="18sp"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="250dp"
+        android:layout_marginStart="280dp"
         android:fontFamily="@font/cabin"
         android:textColor="@color/backgroundColor" />
 
@@ -66,8 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:text="@string/filter"
                     android:fontFamily="@font/montserrat"
+                    android:text="@string/filter"
                     android:textColor="@color/textColor"
                     android:textSize="25sp" />
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".Profile">
+    tools:context=".profile.Profile">
 
 
     <androidx.core.widget.NestedScrollView
@@ -144,10 +144,11 @@
         android:textSize="16sp"
         android:layout_below="@id/yearResponse"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="40dp"
         android:background="@drawable/purple_background"
         android:text="@string/updateProfile"
-        android:onClick="edit"/>
+        android:onClick="edit"
+        android:id="@+id/updateProfile"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="150dp"
@@ -165,30 +166,29 @@
             android:text="@string/logout"/>
 
     <TextView
+        android:id="@+id/subscribed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:textSize="20sp"
         android:text="@string/subscribed"
-        android:layout_below="@id/yearResponse"
-        android:layout_marginTop="80dp"
+        android:layout_below="@id/updateProfile"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"/>
 
-        <GridLayout
-            android:id="@+id/profilegrid"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="255dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
-            android:layout_weight="1"
-            android:alignmentMode="alignMargins"
-            android:columnCount="1"
-            android:rowCount="1"
-            android:columnOrderPreserved="false"
-            android:padding="5dp">
+            <GridLayout
+                android:id="@+id/profile_grid"
+                android:layout_below="@id/subscribed"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:alignmentMode="alignMargins"
+                android:columnCount="4"
+                android:rowCount="1"
+                android:columnOrderPreserved="false"
+                android:padding="14dp"
+                >
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview"
@@ -231,8 +231,7 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/notification"
         android:textSize="20sp"
-        android:layout_below="@id/profilegrid"
-        android:layout_marginTop="80dp"
+        android:layout_below="@id/profile_grid"
         android:layout_marginStart="25dp"/>
 
     <TextView
@@ -252,7 +251,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="365dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/settings"
         android:layout_marginStart="55dp">
         <RadioGroup
             android:layout_width="wrap_content"
@@ -295,6 +295,29 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_below="@id/rv_posts"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/montserrat"
+                android:text="Reviews:"
+                android:textSize="20sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reviews"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 
 
@@ -335,7 +358,8 @@
         android:background="@drawable/background"
         app:elevation="2dp"
         app:menu="@menu/navbar"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/teal"
         app:itemIconSize="30dp"
         app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"

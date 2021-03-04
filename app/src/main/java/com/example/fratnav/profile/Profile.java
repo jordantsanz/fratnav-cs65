@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.profile;
 
 import android.Manifest;
 import android.app.Activity;
@@ -7,14 +7,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,17 +28,22 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.example.fratnav.MainActivity;
+import com.example.fratnav.R;
+import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllPostsCallback;
-import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.forum.Forum;
+import com.example.fratnav.houses.HousesSearch;
+import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
-import com.example.fratnav.tools.HouseCreation;
 
 
+import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.tools.PostsAdapter;
 
 import com.example.fratnav.tools.RVPostsAdapter;
@@ -57,9 +60,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
-import java.util.Calendar;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -137,6 +138,14 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onCallback(User user) {
                 Log.d("username", user.username);
+
+                HouseDatabaseHelper.getHousesByUserSubscribed(user.subscribedTo, new getAllHousesCallback() {
+                    @Override
+                    public void onCallback(ArrayList<House> houses) {
+                        Log.d("housesFound", houses.toString());
+                    }
+                });
+
                 if (user.username != null){
                     userName= user.username;
                 }
@@ -351,6 +360,7 @@ public class Profile extends AppCompatActivity {
 
 
     public void edit(View view) {
+        // for easy changing of house initial pages
 //        HouseCreation hc = new HouseCreation();
 //        hc.createHouses();
         Intent intent = new Intent(this, updateProfile.class);
@@ -412,7 +422,7 @@ public class Profile extends AppCompatActivity {
         Log.d("stringbuilder", url);
 
         // will put in house user id here
-        HouseDatabaseHelper.addUrlToHouse("-MUf40ida5oWaHqNwnix", url);
+        HouseDatabaseHelper.addUrlToHouse(currentUser.getUid(), url);
     }
 
     private void checkPermissions() {

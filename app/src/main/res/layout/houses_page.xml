@@ -21,30 +21,41 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="55dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="40dp"
+                android:background="@drawable/post_background"
+                android:padding="10dp"
                 android:id="@+id/housePageImage"/>
+
+            <LinearLayout
+                android:layout_marginStart="230dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/top"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
 
             <TextView
                 android:id="@+id/house_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
                 android:layout_marginTop="45dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="HOUSE NAME"
-                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:textColor="@color/textColor"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/subscribers"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="260dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@id/house_name"
                 android:fontFamily="@font/montserrat"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="# Subscribers"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
@@ -53,24 +64,26 @@
                 android:id="@+id/subscribe_button"
                 android:layout_width="130dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/subscribers"
-                android:layout_marginStart="255dp"
+                android:layout_marginTop="15dp"
                 android:textSize="18sp"
                 android:textColor="@color/textColor"
                 android:fontFamily="@font/cabin"
                 android:textAllCaps="false"
+                android:layout_gravity="center"
                 android:text="subscribe"
+                android:onClick="subscribe"
                 android:background="@drawable/teal_background"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/house_summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="220dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/housePageImage"
                 android:fontFamily="@font/montserrat"
-                android:text="House Summary"
+                android:text="House Summary:"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
@@ -82,7 +95,7 @@
                 android:layout_marginStart="55dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:layout_marginTop="260dp"
+                android:layout_below="@id/house_summary"
                 android:textColor="@color/textColor"
                 android:background="@drawable/rounded_corner_view_purple"
                 android:textSize="16sp" />
@@ -93,41 +106,75 @@
                 android:id="@+id/house_national"
                 android:fontFamily="@font/montserrat"
                 android:layout_marginStart="55dp"
-                android:layout_marginTop="290dp"
+                android:layout_below="@id/house_date"
                 android:textColor="@color/textColor"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:background="@drawable/rounded_corner_view_teal"
                 android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/montserrat"
+                android:id="@+id/summaryResponse"
+                android:textSize="16sp"
+                android:layout_below="@id/house_national"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="45dp"
+                />
 
             <TextView
                 android:id="@+id/house_contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="350dp"
+                android:layout_marginStart="25dp"
+                android:layout_below="@id/summaryResponse"
                 android:fontFamily="@font/montserrat"
                 android:text="Points of Contact:"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/montserrat"
+                android:id="@+id/contactsResponse"
+                android:textSize="16sp"
+                android:layout_below="@id/house_contacts"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="45dp"
+                />
+
+            <TextView
                 android:id="@+id/house_stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="490dp"
+                android:layout_marginStart="25dp"
+                android:layout_below="@id/contactsResponse"
                 android:fontFamily="@font/montserrat"
                 android:text="Self-Reported Stats:"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/montserrat"
+                android:id="@+id/statsResponse"
+                android:textSize="16sp"
+                android:layout_below="@id/house_stats"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="45dp"
+                />
 
             <TextView
                 android:id="@+id/house_tour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="600dp"
+                android:layout_marginStart="25dp"
+                android:layout_below="@id/statsResponse"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
@@ -138,8 +185,9 @@
                 android:id="@+id/explore_button"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="590dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@id/house_tour"
+                android:layout_below="@id/statsResponse"
                 android:fontFamily="@font/cabin"
                 android:background="@drawable/purple_background"
                 android:textAllCaps="false"
@@ -152,8 +200,9 @@
                 android:id="@+id/reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="670dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="25dp"
+                android:layout_below="@id/explore_button"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
@@ -163,8 +212,9 @@
                 android:id="@+id/review_button"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="650dp"
-                android:layout_marginStart="200dp"
+                android:layout_below="@id/explore_button"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="150dp"
                 android:fontFamily="@font/cabin"
                 android:background="@drawable/purple_background"
                 android:textAllCaps="false"
@@ -173,7 +223,24 @@
                 android:layout_marginBottom="100dp"
                 android:text="leave a review" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reviews"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
         </android.widget.RelativeLayout>
+
     </ScrollView>
 
 
@@ -193,7 +260,8 @@
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/teal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
