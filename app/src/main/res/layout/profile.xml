@@ -39,20 +39,9 @@
         android:fontFamily="@font/montserrat_bold"
         android:textStyle="italic"
         android:layout_gravity="start"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="25dp"
         android:textSize="30sp"
         android:layout_marginTop="40dp"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="280dp"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/cabin"
-            android:onClick="logout"
-            android:background="@drawable/purple_background"
-            android:text="@string/logout"/>
 
         <TextView
         android:layout_width="wrap_content"
@@ -61,8 +50,9 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/affiliated"
         android:textSize="16sp"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:layout_below="@id/profileUsername"
         />
 
         <TextView
@@ -72,8 +62,9 @@
             android:fontFamily="@font/montserrat"
             android:id="@+id/affiliatedResponse"
             android:textSize="16sp"
-            android:layout_marginTop="100dp"
-            android:layout_marginStart="145dp"
+            android:layout_below="@id/profileUsername"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="120dp"
             />
 
 
@@ -84,8 +75,9 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/year"
         android:textSize="16sp"
-        android:layout_marginTop="125dp"
-        android:layout_marginStart="55dp"
+        android:layout_below="@id/affiliatedResponse"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
         />
         <TextView
             android:layout_width="wrap_content"
@@ -94,16 +86,18 @@
             android:fontFamily="@font/montserrat"
             android:id="@+id/yearResponse"
             android:textSize="16sp"
-            android:layout_marginTop="125dp"
-            android:layout_marginStart="108dp"
+            android:layout_below="@id/affiliatedResponse"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="80dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="190dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat"
+            android:layout_below="@id/genderResponse"
             android:text="@string/sexuality"
             android:textColor="@color/textColor"
             android:textSize="16sp" />
@@ -114,8 +108,9 @@
             android:fontFamily="@font/montserrat"
             android:id="@+id/sexualityResponse"
             android:textSize="16sp"
-            android:layout_marginTop="125dp"
-            android:layout_marginStart="280dp"
+            android:layout_below="@id/genderResponse"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="285dp"
             />
 
     <TextView
@@ -123,9 +118,10 @@
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
+        android:layout_below="@id/profileUsername"
+        android:layout_marginTop="15dp"
         android:text="@string/gender"
         android:textSize="16sp"
-        android:layout_marginTop="100dp"
         android:layout_marginStart="190dp" />
 
         <TextView
@@ -135,7 +131,8 @@
             android:fontFamily="@font/montserrat"
             android:id="@+id/genderResponse"
             android:textSize="16sp"
-            android:layout_marginTop="100dp"
+            android:layout_below="@id/profileUsername"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="270dp" />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -145,25 +142,27 @@
         android:textColor="@color/textColor"
         android:paddingEnd="15dp"
         android:textSize="16sp"
-        android:layout_marginTop="165dp"
+        android:layout_below="@id/yearResponse"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="50dp"
         android:background="@drawable/purple_background"
         android:text="@string/updateProfile"
         android:onClick="edit"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cabin"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:textSize="16sp"
-            android:onClick="imagePicker"
-            android:layout_marginTop="165dp"
+            android:onClick="logout"
+            android:layout_below="@id/sexualityResponse"
+            android:layout_marginTop="15dp"
             android:textColor="@color/textColor"
             android:layout_marginStart="225dp"
             android:background="@drawable/teal_background"
-            android:text="@string/uploadPhoto"/>
+            android:text="@string/logout"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -172,8 +171,9 @@
         android:fontFamily="@font/montserrat"
         android:textSize="20sp"
         android:text="@string/subscribed"
-        android:layout_marginTop="220dp"
-        android:layout_marginStart="55dp"/>
+        android:layout_below="@id/yearResponse"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="25dp"/>
 
         <GridLayout
             android:id="@+id/profilegrid"
@@ -224,21 +224,24 @@
 
 
     <TextView
+        android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/notification"
         android:textSize="20sp"
-        android:layout_marginTop="330dp"
-        android:layout_marginStart="55dp"/>
+        android:layout_below="@id/profilegrid"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="25dp"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/pastPosts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginStart="25dp"
+        android:layout_below="@id/settings"
+        android:layout_marginTop="60dp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:text="@string/past_posts"
@@ -279,26 +282,38 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pastPosts"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginStart="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
+    </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:layout_margin="10dp"
-            >
-            <ListView
-                android:id="@android:id/list"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:dividerHeight="10.0sp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="20dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            >-->
+<!--            <ListView-->
+<!--                android:id="@android:id/list"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="400dp"-->
+<!--                android:dividerHeight="10.0sp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginBottom="10dp"/>-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -22,6 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -40,6 +43,7 @@ import com.example.fratnav.tools.HouseCreation;
 
 import com.example.fratnav.tools.PostsAdapter;
 
+import com.example.fratnav.tools.RVPostsAdapter;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +71,9 @@ public class Profile extends AppCompatActivity {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
-    PostsAdapter adapter;
+    //PostsAdapter adapter;
+    RVPostsAdapter adapter;
+
     public ArrayList<Post> arrayOfPosts;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
@@ -189,10 +195,19 @@ public class Profile extends AppCompatActivity {
 
 
                 // Create the adapter to convert the array to views
-                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
+                //adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
                 // Attach the adapter to a ListView
-                ListView list = findViewById(android.R.id.list);
-                list.setAdapter(adapter); // sets adapter for list
+//                ListView list = findViewById(android.R.id.list);
+//                list.setAdapter(adapter); // sets adapter for list
+                RecyclerView recyclerView = findViewById(R.id.rv_posts);
+                LinearLayoutManager horizontalLayoutManager =
+                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(horizontalLayoutManager);
+                recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                        DividerItemDecoration.HORIZONTAL));
+                adapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
+                recyclerView.setAdapter(adapter);
+
                 adapter.notifyDataSetChanged();
             }
         });
