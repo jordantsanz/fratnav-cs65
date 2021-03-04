@@ -1,7 +1,10 @@
 package com.example.fratnav.houses;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -42,6 +45,8 @@ public class HousePage extends AppCompatActivity {
     public boolean subbed = false;
     Button subscribeButton;
     public ImageView iv;
+    Dialog dialog;
+
 
 
     @Override
@@ -52,6 +57,20 @@ public class HousePage extends AppCompatActivity {
         currentUser = AuthenticationHelper.getCurrentUser();
 
         subscribeButton = findViewById(R.id.subscribe_button);
+
+        dialog = new Dialog(this);
+
+        Button reviewButton = (Button) findViewById(R.id.review_button);
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.setContentView(R.layout.review);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
 
 
         Log.d("House", "house");

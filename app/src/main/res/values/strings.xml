@@ -81,8 +81,11 @@
     <string name="home">Home</string>
     <string name="explore">Explore</string>
     <string name="profile">Profile</string>
-
-
-
+    <string name="likes">Likes</string>
+    <string name="poc">POC</string>
+    <string name="LGBTQ">LGBTQ</string>
+    <string name="firstGen">First-Gen</string>
+    <string name="lowIncome">Low Income</string>
+    <string name="personalTags">Personal Tags:</string>
 
 </resources>

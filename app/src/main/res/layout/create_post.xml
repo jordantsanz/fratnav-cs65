@@ -57,6 +57,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/personalTags"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/textColor"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/textColor"
         android:textSize="22sp"
@@ -415,5 +425,72 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScroll2"
+        android:layout_marginStart="30dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tags"
+        android:layout_marginTop="465dp">
+
+    <LinearLayout
+        android:id="@+id/personalTags"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textOn="@string/poc"
+            android:textOff="@string/poc"
+            android:id="@+id/pocTag"
+            android:textColor="@drawable/tags_font_color"
+            android:background="@drawable/person_tags_selector"
+            />
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textOn="@string/LGBTQ"
+            android:textOff="@string/LGBTQ"
+            android:id="@+id/lgbtqTag"
+            android:textColor="@drawable/tags_font_color"
+            android:background="@drawable/person_tags_selector"
+            />
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textOn="@string/firstGen"
+            android:textOff="@string/firstGen"
+            android:id="@+id/firstGenTag"
+            android:textColor="@drawable/tags_font_color"
+            android:background="@drawable/person_tags_selector"
+            />
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textOn="@string/lowIncome"
+            android:textOff="@string/lowIncome"
+            android:id="@+id/lowIncome"
+            android:textColor="@drawable/tags_font_color"
+            android:background="@drawable/person_tags_selector"
+        />
+     </LinearLayout>
+    </HorizontalScrollView>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
