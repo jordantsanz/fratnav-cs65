@@ -4,9 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/createPostRelativeLayout"
     android:background="@color/backgroundColor">
 
     <androidx.appcompat.widget.AppCompatButton
+
         android:layout_width="wrap_content"
         android:fontFamily="@font/cabin"
         android:layout_height="wrap_content"
@@ -61,22 +63,28 @@
         android:layout_marginTop="120dp"
         android:layout_marginStart="40dp"
         android:id="@+id/createPostUsername"/>
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="320dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/tagsHouses"
-        android:textColor="@color/textColor"
-        android:textSize="18sp" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:background="@drawable/ic_baseline_info_24"
-        android:layout_marginStart="140dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="320dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/tagsHouses"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/houseTagsInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_baseline_info_24"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScroll"
@@ -92,262 +100,314 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/frat_button_selector"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/axa"
-                android:textColor="@drawable/tags_font_color"
-                android:background="@drawable/frat_button_selector"
-                />
-            <androidx.appcompat.widget.AppCompatButton
+                android:textOn="@string/axa"
+                android:textOff="@string/axa"
+                android:id="@+id/axaTag"
+                android:textColor="@drawable/tags_font_color" />
+
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/AKA"
+                android:textOn="@string/AKA"
+                android:textOff="@string/AKA"
+                android:id="@+id/akaTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/national_pan_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/aPhi"
+                android:textOn="@string/aPhi"
+                android:textOff="@string/aPhi"
+                android:id="@+id/aPhiTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/alphas"
+                android:textOn="@string/alphas"
+                android:textOff="@string/alphas"
+                android:id="@+id/alphasTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/national_pan_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/alphaTheta"
+                android:textOn="@string/alphaTheta"
+                android:textOff="@string/alphaTheta"
+                android:id="@+id/alphaThetaTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/gender_inclusive_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/AZiD"
+                android:textOn="@string/AZiD"
+                android:textOff="@string/AZiD"
+                android:id="@+id/aXiDTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/bg"
+                android:textOn="@string/bg"
+                android:textOff="@string/bg"
+                android:id="@+id/bGTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/beta"
+                android:textOn="@string/beta"
+                android:textOff="@string/beta"
+                android:id="@+id/betaTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/chiDelt"
+                android:textOn="@string/chiDelt"
+                android:textOff="@string/chiDelt"
+                android:id="@+id/chiDeltTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/chiGam"
+                android:textOn="@string/chiGam"
+                android:textOff="@string/chiGam"
+                android:id="@+id/chiGamTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/deltas"
+                android:textOn="@string/deltas"
+                android:textOff="@string/deltas"
+                android:id="@+id/deltasTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/national_pan_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/ekt"
+                android:textOn="@string/ekt"
+                android:textOff="@string/ekt"
+                android:id="@+id/ektTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/gdx"
+                android:textOn="@string/gdx"
+                android:textOff="@string/gdx"
+                android:id="@+id/gdxTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/hereot"
+                android:textOn="@string/hereot"
+                android:textOff="@string/hereot"
+                android:id="@+id/hereotTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/kappa"
+                android:textOn="@string/kappa"
+                android:textOff="@string/kappa"
+                android:id="@+id/kappaTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/kd"
+                android:textOn="@string/kd"
+                android:textOff="@string/kd"
+                android:id="@+id/kdTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/kde"
+                android:textOn="@string/kde"
+                android:textOff="@string/kde"
+                android:id="@+id/kdeTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/triKap"
+                android:textOn="@string/triKap"
+                android:textOff="@string/triKap"
+                android:id="@+id/triKapTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/phiDelt"
+                android:textOn="@string/phiDelt"
+                android:textOff="@string/phiDelt"
+                android:id="@+id/phiDeltTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/phiTau"
+                android:textOn="@string/phiTau"
+                android:textOff="@string/phiTau"
+                android:id="@+id/phiTauTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/gender_inclusive_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/psiU"
+                android:textOn="@string/psiU"
+                android:textOff="@string/psiU"
+                android:id="@+id/psiUTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/sigDelt"
+                android:textOn="@string/sigDelt"
+                android:textOff="@string/sigDelt"
+                android:id="@+id/sigDeltTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/sororities_selector"
             />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/sigNu"
+                android:textOn="@string/sigNu"
+                android:textOff="@string/sigNu"
+                android:id="@+id/sigNuTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/Tabard"
+                android:textOn="@string/Tabard"
+                android:textOff="@string/Tabard"
+                android:id="@+id/tabardTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/gender_inclusive_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/tdx"
+                android:textOn="@string/tdx"
+                android:textOff="@string/tdx"
+                android:id="@+id/tdxTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="@string/zete"
+                android:textOn="@string/zete"
+                android:textOff="@string/zete"
+                android:id="@+id/zeteTag"
                 android:textColor="@drawable/tags_font_color"
                 android:background="@drawable/frat_button_selector"
                 />

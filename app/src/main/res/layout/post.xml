@@ -13,7 +13,7 @@
         android:fontFamily="@font/montserrat_bold"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"
-        android:textSize="18sp"
+        android:textSize="21sp"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"/>
     <TextView
@@ -23,22 +23,29 @@
         android:textColor="@color/textColor"
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="40dp"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:id="@+id/postText"/>
-
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/comment"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="10dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/heart"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
         android:layout_marginStart="270dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/comment" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/heart"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
 
 
 

@@ -78,7 +78,9 @@
     <string name="phiTau">Phi Tau</string>
     <string name="postHint">Type Post Here</string>
     <string name="resetPassword">Reset Password</string>
-
+    <string name="home">Home</string>
+    <string name="explore">Explore</string>
+    <string name="profile">Profile</string>
 
 
 

@@ -2,17 +2,25 @@ package com.example.fratnav;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
 import com.example.fratnav.callbacks.getAllHousesCallback;
@@ -43,6 +51,10 @@ public class CreatePost extends AppCompatActivity {
     EditText userText;
     TextView userName;
     DatabaseReference.CompletionListener completionListener;
+    ImageView info;
+    PopupWindow popupWindow;
+    LayoutInflater layoutInflater;
+    CoordinatorLayout coordinatorLayout;
 
     LinearLayout linearLayout;
 
@@ -54,19 +66,26 @@ public class CreatePost extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userName = (TextView) findViewById(R.id.createPostUsername);
         userText = (EditText) findViewById(R.id.postUserText);
+        info = (ImageView) findViewById(R.id.houseTagsInformation);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.createPostRelativeLayout);
 
-//        userText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    hideKeyboard(v);
-//                }
-//            }
-//        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.house_tag_popup, null);
+                popupWindow = new PopupWindow(container, 360, 240, true);
+                popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 300, 340);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
 
-        //Tags
-        //linearLayout = findViewById(R.id.linearLayoutInHorizontalScroll);
-        //buildHorizontalScroll();
 
 
         if (currentUser == null) {
@@ -100,33 +119,12 @@ public class CreatePost extends AppCompatActivity {
         dbRefPosts = database.getReference("/posts");
     }
 
-//    public void buildHorizontalScroll(){
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        layoutParams.setMargins(0, 10, 30, 10);
-//
-//        HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
-//            @Override
-//            public void onCallback(ArrayList<House> houses) {
-//                for (int i = 0; i < houses.size(); i++) {
-//                    final Button btCategory = new Button(CreatePost.this);
-//                    btCategory.setTextSize(16);
-//                    btCategory.setBackground(ContextCompat.getDrawable(CreatePost.this, R.drawable.frat_tag_background));
-//                    btCategory.setText(houses.get(i).houseName);
-//                    btCategory.setLayoutParams(layoutParams);
-//                    //btCategory.setOnClickListener(new onClickListenter);
-//
-//                }
-//
-//            }
-//        });
-//
-//
-//
-//    }
+
 
     public void cancelPost(View view) {
         Intent intent = new Intent(CreatePost.this, Forum.class);
         startActivity(intent);
+        finish();
 
     }
     public void hideKeyboard(View view) {
