@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.forum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,14 +11,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
+import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.tools.CommentsAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PostActivity extends AppCompatActivity {

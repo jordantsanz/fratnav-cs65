@@ -61,6 +61,7 @@
                 android:fontFamily="@font/cabin"
                 android:textAllCaps="false"
                 android:text="subscribe"
+                android:onClick="subscribe"
                 android:background="@drawable/teal_background"/>
 
             <TextView

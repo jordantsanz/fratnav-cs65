@@ -16,19 +16,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
-        <activity android:name=".HouseTourActivity"/>
-        <activity android:name=".ForgotPassword"/>
+        <activity android:name=".houses.HouseTourActivity"/>
+        <activity android:name=".onboarding.ForgotPassword"/>
 
         <service
             android:name="com.onecode.s3.service.S3UploadService"
             android:exported="false" />
-        <activity android:name=".CreatePost" />
-        <activity android:name=".PostActivity" />
-        <activity android:name=".updateProfile" />
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".forum.CreatePost" />
+        <activity android:name=".forum.PostActivity" />
+        <activity android:name=".profile.updateProfile" />
+        <activity android:name=".onboarding.CreateAccountActivity" />
         <activity android:name=".CreateProfile" />
         <activity android:name=".databaseHelpers.RealtimeFirebaseDB" />
-        <activity android:name=".Authentication" />
+        <activity android:name=".onboarding.Authentication" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -39,10 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Forum" />
-        <activity android:name=".HousesSearch" />
-        <activity android:name=".Profile" />
-        <activity android:name=".HousePage" />
+        <activity android:name=".forum.Forum" />
+        <activity android:name=".houses.HousesSearch" />
+        <activity android:name=".profile.Profile" />
+        <activity android:name=".houses.HousePage" />
 
         <meta-data
             android:name="preloaded_fonts"

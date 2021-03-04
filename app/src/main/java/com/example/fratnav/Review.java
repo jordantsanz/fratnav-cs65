@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.houses.HousePage;
 import com.example.fratnav.models.User;
+import com.example.fratnav.onboarding.Authentication;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

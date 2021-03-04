@@ -1,10 +1,8 @@
-package com.example.fratnav;
+package com.example.fratnav.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.UserData;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,24 +12,22 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.User;
+import com.example.fratnav.onboarding.Authentication;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class updateProfile extends AppCompatActivity {
     BottomNavigationView bottomBar;
@@ -272,7 +268,7 @@ public class updateProfile extends AppCompatActivity {
         }
 
         User user = new User(currentUser.getEmail(), username, gender, sexuality, currentUser.getUid(),
-        year, houseAffiliation, interestedIn, new ArrayList<>(), new HashMap<>(), false);
+        year, houseAffiliation, interestedIn, new HashMap<>(), new HashMap<>(), false);
 
         UserDatabaseHelper.updateUserProfile(currentUser.getUid(), user);
 

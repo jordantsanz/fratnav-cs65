@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.houses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import com.example.fratnav.R;
+import com.example.fratnav.houses.HousePage;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 import java.io.IOException;

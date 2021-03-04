@@ -173,11 +173,31 @@ public class HouseCardView {
             case "Deltas":
                 image = R.drawable.deltas;
                 break;
+            case "AXiD":
+                image = R.drawable.axid;
+                break;
+            case "Beta":
+                image = R.drawable.beta;
+                break;
+            case "BG":
+                image = R.drawable.bg;
+                break;
+            case "APhi":
+                image = R.drawable.aphi1;
+                break;
+            case "Alpha Theta":
+                image = R.drawable.alphatheta;
+                break;
+            case "Alphas":
+                image = R.drawable.alphas;
+                break;
+            case "AKA":
+                image = R.drawable.aka;
+                break;
             default:
                 image = drawable;
                 break;
         }
-        Log.d("name", name);
         iv.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), image, null));
 
         imageParams.setMargins(0, 0, 0, 35);
@@ -187,6 +207,8 @@ public class HouseCardView {
         l.addView(tv);
 
         cd.addView(l);
+
+        Log.d("cd", cd.toString());
 
         return cd;
     }

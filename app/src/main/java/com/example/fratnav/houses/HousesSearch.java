@@ -1,4 +1,4 @@
-package com.example.fratnav;
+package com.example.fratnav.houses;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,30 +7,21 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import com.example.fratnav.MainActivity;
+import com.example.fratnav.profile.Profile;
+import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getAllHousesCallback;
-import com.example.fratnav.callbacks.getUserByIdCallback;
-import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
-import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.HouseCardView;
-import com.example.fratnav.models.User;
-import com.example.fratnav.tools.HouseAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -70,7 +61,7 @@ public class HousesSearch extends AppCompatActivity {
                             ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
                             TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
 
-                            Intent intent = new Intent(HousesSearch.this,HousePage.class);
+                            Intent intent = new Intent(HousesSearch.this, HousePage.class);
                             intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
                             startActivity(intent);
                         }
