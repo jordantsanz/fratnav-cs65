@@ -189,7 +189,7 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                     Post post = ds.getValue(Post.class);
                     assert post != null;
                     ds.child("likes").getRef().setValue(post.likes + 1);
-                    ds.child("usersLiked").getRef().push().setValue(userId);
+                    ds.child("usersLiked").getRef().child(userId).setValue(userId);
                     myCallback.onCallback(post.likes + 1);
                 }
             }

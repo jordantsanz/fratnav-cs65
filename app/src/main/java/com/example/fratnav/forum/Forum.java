@@ -222,8 +222,6 @@ public class Forum extends ListActivity {
             @Override
             public void onCallback(ArrayList<Post> posts) {
                 arrayOfPosts = posts;
-                Log.d("goodness", posts.get(30).text);
-                Log.d("goodness", posts.get(30).usersLiked.toString());
                 adapter.notifyDataSetChanged();
             }
         });
@@ -258,19 +256,16 @@ public class Forum extends ListActivity {
             }
         }
 
-        assert post.usersLiked != null;
-
-
-        Log.d("userDidLike", String.valueOf(userDidLike));
-
 
                 if (userDidLike){
                     PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
                         @Override
                         public void onCallback(int likes) {
                             Forum.refresh();
-                            post.usersLiked.remove(randomKey, currentUserInfo.userID);
+                            Log.d("like", "removeLike");
+                            post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
                             post.likes -= 1;
+                            Log.d("postprof", post.usersLiked.toString());
 
                             /// need to change heart image drawable here:
                         }
@@ -282,8 +277,12 @@ public class Forum extends ListActivity {
                     PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
                         @Override
                         public void onCallback(int likes) {
+                            Log.d("like", "addLike");
                             Forum.refresh();
-                            post.usersLiked.put(randomKey, currentUserInfo.userID);
+                            if (post.usersLiked == null){
+                                post.usersLiked = new HashMap<>();
+                            }
+                            post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
                             post.likes += 1;
 
                             // need to change heart image drawable here:
