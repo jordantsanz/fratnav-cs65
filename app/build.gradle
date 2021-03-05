@@ -58,6 +58,7 @@ dependencies {
     implementation 'commons-logging:commons-logging:1.1.1'
     implementation 'commons-io:commons-io:2.6'
     implementation 'com.google.vr:sdk-panowidget:1.80.0'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
 
 

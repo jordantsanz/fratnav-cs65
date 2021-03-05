@@ -21,6 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:fontFamily="@font/cabin"
         android:layout_marginStart="300dp"
         android:id="@+id/likes"/>
     <TextView
@@ -56,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/like"
+            android:id="@+id/heart"
             android:layout_marginStart="10dp"
             android:layout_gravity="center"
             />
