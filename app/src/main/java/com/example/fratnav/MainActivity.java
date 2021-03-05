@@ -16,8 +16,11 @@ import com.anychart.core.pert.Milestones;
 import com.anychart.core.pert.Tasks;
 import com.anychart.core.ui.Tooltip;
 import com.anychart.enums.TreeFillingMethod;
+import com.example.fratnav.callbacks.getUserByIdCallback;
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.houses.HousesSearch;
+import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.View;
 
@@ -39,6 +43,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
+    public static final String USER_HOUSE_BOOL = "userbool";
+    boolean isHouse;
 
 
     @Override
@@ -57,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                isHouse = user.house;
+            }
+        });
 
         try {
             Log.d("cu", currentUser.toString());
@@ -86,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
                     Log.d("swtich", "profile");
-                    startActivity(new Intent(MainActivity.this, Profile.class));
+                    Intent intent = new Intent(MainActivity.this, Profile.class);
+                    intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
+                    startActivity(intent);
                     finish();
                     return true;
                 } else if (item.getItemId()==R.id.forum) {

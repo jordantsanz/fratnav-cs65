@@ -58,6 +58,7 @@ public class Forum extends ListActivity {
     DatabaseReference.CompletionListener completionListener;
     public static ArrayList<Post> arrayOfPosts;
     public String randomKey;
+    boolean isHouse;
 
 
     public static final String POST_ID_KEY = "postid_key";
@@ -81,6 +82,7 @@ public class Forum extends ListActivity {
             @Override
             public void onCallback(User user) {
                 currentUserInfo = user;
+                isHouse = user.house;
             }
         });
 
@@ -98,8 +100,9 @@ public class Forum extends ListActivity {
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
                     Log.d("swtich", "profile");
-                    startActivity(new Intent(Forum.this, Profile.class));
-                    finish();
+                    Intent intent = new Intent(Forum.this, Profile.class);
+                    intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
+                    startActivity(intent);
                     return true;
                 } else if (item.getItemId()==R.id.home) {
                     Log.d("swtich", "home");

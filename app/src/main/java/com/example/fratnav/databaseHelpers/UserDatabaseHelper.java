@@ -56,6 +56,7 @@ public class UserDatabaseHelper {
 
 
 
+
     public static void getUserById(String id, getUserByIdCallback myCallback){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbRefHouses = database.getReference("/users");

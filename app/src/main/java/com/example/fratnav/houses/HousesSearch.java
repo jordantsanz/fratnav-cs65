@@ -3,6 +3,7 @@ package com.example.fratnav.houses;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.fratnav.MainActivity;
+import com.example.fratnav.callbacks.getUserByIdCallback;
+import com.example.fratnav.databaseHelpers.AuthenticationHelper;
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.models.User;
 import com.example.fratnav.profile.Profile;
 import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getAllHousesCallback;
@@ -31,6 +36,7 @@ public class HousesSearch extends AppCompatActivity {
     BottomNavigationView bottomBar;
     GridLayout gridLayout;
     FirebaseUser user;
+    boolean isHouse;
 
     public static final String HOUSE_NAME_KEY = "housekey";
 
@@ -39,6 +45,15 @@ public class HousesSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.houses_search);
         Log.d("House", "house");
+        FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
+
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                isHouse = user.house;
+            }
+        });
+
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
@@ -88,9 +103,9 @@ public class HousesSearch extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId()==R.id.profile){
-                    Log.d("swtich", "profile");
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
-                    finish();
+                    Intent intent = new Intent(HousesSearch.this, Profile.class);
+                    intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
+                    startActivity(intent);
                     return true;
                 }
                 else if (item.getItemId()==R.id.forum){

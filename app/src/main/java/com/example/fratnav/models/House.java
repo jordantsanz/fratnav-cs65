@@ -19,6 +19,10 @@ public class House {
     public HashMap<String, Review> reviews;
     public String id;
     public int imageName;
+    public String president;
+    public String vicePresident;
+    public String treasurer;
+    public String rushChair;
 
     public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
                  ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, HashMap<String, Review> reviews, int imageName, String houseId){
@@ -35,9 +39,17 @@ public class House {
         this.reviews = reviews;
         this.imageName = imageName;
         this.id = id;
+
     }
 
     public House(){}
+
+    public House(String president, String vicePresident, String treasurer, String rushChair){
+        this.president = president;
+        this.vicePresident = vicePresident;
+        this.treasurer = treasurer;
+        this.rushChair = rushChair;
+    }
 
     public void setId(String id){
         this.id = id;

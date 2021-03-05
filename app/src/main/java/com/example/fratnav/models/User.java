@@ -23,6 +23,7 @@ public class User {
     public HashMap<String, Review> reviews;
     public boolean notificationSettings;
     public boolean house;
+    public String houseId;
 
     public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
                 ArrayList<String> interestedIn, HashMap<String, String> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
@@ -49,21 +50,12 @@ public class User {
 
 
     // To create a house user account
-    public User(String email, String userId, String username, boolean house){
+    public User(String email, String userId, String username, boolean house, String houseId){
         this.email = email;
         this.userID = userId;
         this.house = house;
         this.username = username;
-
-        this.gender = "";
-        this.sexuality = "";
-        this.year = "";
-        this.houseAffiliation = true;
-        this.interestedIn = new ArrayList<>();
-        this.subscribedTo = new HashMap<>();
-        this.posts = new HashMap<>();
-        this.reviews = new HashMap<>();
-        this.notificationSettings = false;
+        this.houseId = houseId;
     }
 
     public HashMap<String, Object> toMap(){
