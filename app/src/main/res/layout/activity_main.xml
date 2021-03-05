@@ -19,6 +19,15 @@
 <!--        android:elevation="4dp"-->
 <!--        />-->
 
+
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_view"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="20dp" />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +36,7 @@
         app:elevation="2dp"
         app:menu="@menu/navbar"
         app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/teal"
+        app:itemTextColor="@color/backgroundColor"
         app:itemIconSize="30dp"
         android:background="@drawable/background"
         app:itemIconTint="@drawable/item_selector"

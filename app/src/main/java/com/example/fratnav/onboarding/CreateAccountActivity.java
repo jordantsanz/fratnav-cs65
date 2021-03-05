@@ -5,11 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.fratnav.MainActivity;
@@ -35,12 +43,36 @@ public class CreateAccountActivity extends AppCompatActivity {
     private static final String TAG = "RealtimeDB";
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
+    ImageView info;
+    LinearLayout linearLayout;
+    PopupWindow popupWindow;
+    LayoutInflater layoutInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
         mAuth = FirebaseAuth.getInstance();
+        info = (ImageView) findViewById(R.id.passwordInfo);
+        linearLayout = (LinearLayout) findViewById(R.id.createaccountLinearLayout);
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.password_popup, null);
+                popupWindow = new PopupWindow(container, 320, 100, true);
+                popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY, 300, 820);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
 
 
 
