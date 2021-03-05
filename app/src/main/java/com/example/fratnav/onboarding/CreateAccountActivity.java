@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,7 +42,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
         mAuth = FirebaseAuth.getInstance();
+        Button createAccountButton = findViewById(R.id.createAccountButton);
 
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAccount(v);
+            }
+        });
 
 
     }
@@ -58,7 +66,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 // adapted from stack overflow
     public static String randomUsername() {
-        Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
         randomStringBuilder.append("User");
         String string = String.valueOf(UUID.randomUUID());

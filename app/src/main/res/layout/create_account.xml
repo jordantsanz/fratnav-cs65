@@ -130,6 +130,7 @@
         android:fontFamily="@font/montserrat"
         android:textColor="@color/textColor"
         android:onClick="createAccount"
+        android:id="@+id/createAccountButton"
         android:text="Next"/>
 
 
