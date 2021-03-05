@@ -1,0 +1,159 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/grey_background"
+    android:paddingBottom="30dp"
+    android:layout_gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/postUser"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="25dp"
+        android:textColor="@color/textColor"
+        android:textSize="21sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Safety:"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/safety_review"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/5"
+            android:fontFamily="@font/montserrat"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="85dp"
+        android:layout_marginStart="25dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inclusivity:"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/inclusive_review"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/5"
+            android:fontFamily="@font/montserrat"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="120dp"
+        android:layout_marginStart="25dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Basement:"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/basement_review"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/5"
+            android:fontFamily="@font/montserrat"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="155dp"
+        android:layout_marginStart="25dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Overall:"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/overall_review"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="/5"
+            android:fontFamily="@font/montserrat"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments:"
+        android:textSize="18sp"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="25dp"
+        android:fontFamily="@font/montserrat"/>
+
+    <TextView
+        android:id="@+id/review_comment"
+        android:layout_width="310dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/post_background"
+        android:layout_marginTop="240dp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/textColor"/>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
