@@ -1,16 +1,22 @@
 package com.example.fratnav.houses;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Rating;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.fratnav.MainActivity;
+import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
+import com.example.fratnav.models.Review;
 import com.example.fratnav.profile.Profile;
 import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
@@ -45,7 +53,8 @@ public class HousePage extends AppCompatActivity {
     public boolean subbed = false;
     Button subscribeButton;
     public ImageView iv;
-    Dialog dialog;
+    AlertDialog.Builder dialog;
+    User currentUserInfo;
 
 
 
@@ -56,26 +65,18 @@ public class HousePage extends AppCompatActivity {
 
         currentUser = AuthenticationHelper.getCurrentUser();
 
-        subscribeButton = findViewById(R.id.subscribe_button);
-
-        dialog = new Dialog(this);
-
-        Button reviewButton = (Button) findViewById(R.id.review_button);
-
-        reviewButton.setOnClickListener(new View.OnClickListener() {
+        // get current user's info
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
-            public void onClick(View v) {
-                dialog.setContentView(R.layout.review);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
+            public void onCallback(User user) {
+                currentUserInfo = user;
             }
         });
 
+        subscribeButton = findViewById(R.id.subscribe_button);
 
-        Log.d("House", "house");
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        dialog = new AlertDialog.Builder(this);
+
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         if (bottomBar != null) {
             bottomBar.setSelectedItemId(R.id.houses);
@@ -150,7 +151,14 @@ public class HousePage extends AppCompatActivity {
         houseNameTextView.setText(name);
 
 
-
+        Button makeReviewButton = findViewById(R.id.review_button);
+        makeReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReviewDialog dialog = new ReviewDialog(HousePage.this, theHouse, currentUserInfo, currentUser);
+                dialog.show();
+            }
+        });
 
     }
 
@@ -279,6 +287,7 @@ public class HousePage extends AppCompatActivity {
         }
         iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
     }
+
 
 }
 

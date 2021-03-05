@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
+import com.google.android.gms.common.data.DataBufferSafeParcelable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -165,6 +167,53 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                         Log.d("obj", obj.toString());
                     }
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public static void addLiketoPost(String userId, String postId, likePostCallback myCallback){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefPosts = db.getReference("/posts");
+        dbRefPosts.orderByKey().equalTo(postId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+                    assert post != null;
+                    ds.child("likes").getRef().setValue(post.likes + 1);
+                    ds.child("usersLiked").getRef().push().setValue(userId);
+                    myCallback.onCallback(post.likes + 1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void removeLikefromPost(String userId, String postId, likePostCallback myCallback){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefPosts = db.getReference("/posts");
+        dbRefPosts.orderByKey().equalTo(postId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+                    assert post != null;
+                    ds.child("likes").getRef().setValue(post.likes - 1);
+                    ds.child("usersLiked").getRef().child(userId).removeValue();
+                    myCallback.onCallback(post.likes - 1);
                 }
             }
 

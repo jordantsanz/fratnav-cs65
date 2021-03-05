@@ -17,6 +17,7 @@ import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +37,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -137,24 +139,105 @@ public class CreatePost extends AppCompatActivity {
 
     // saves post currently
     public void savePost(View view) {
-        Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
-                new ArrayList<>(), new HashMap<>(), 0);
+        ArrayList<ToggleButton> toggles = new ArrayList<>();
+        ToggleButton axaTag = findViewById(R.id.axaTag);
+        ToggleButton akaTag = findViewById(R.id.akaTag);
+        ToggleButton aphiTag = findViewById(R.id.aPhiTag);
+        ToggleButton alphasTag = findViewById(R.id.alphasTag);
+        ToggleButton alphaThetaTag = findViewById(R.id.alphaThetaTag);
+        ToggleButton axidTag = findViewById(R.id.aXiDTag);
+        ToggleButton bgTag = findViewById(R.id.bGTag);
+        ToggleButton betaTag = findViewById(R.id.betaTag);
+        ToggleButton chiDeltTag = findViewById(R.id.chiDeltTag);
+        ToggleButton chiGamTag = findViewById(R.id.chiGamTag);
+        ToggleButton deltasTag = findViewById(R.id.deltasTag);
+        ToggleButton ektTag = findViewById(R.id.ektTag);
+        ToggleButton gdxTag = findViewById(R.id.gdxTag);
+        ToggleButton hereotTag = findViewById(R.id.hereotTag);
+        ToggleButton kappaTag = findViewById(R.id.kappaTag);
+        ToggleButton kdTag = findViewById(R.id.kdTag);
+        ToggleButton kdeTag = findViewById(R.id.kdeTag);
+        ToggleButton trikapTag = findViewById(R.id.triKapTag);
+        ToggleButton phiDeltTag = findViewById(R.id.phiDeltTag);
+        ToggleButton phiTauTag = findViewById(R.id.phiTauTag);
+        ToggleButton psiUTag = findViewById(R.id.psiUTag);
+        ToggleButton sigDeltTag = findViewById(R.id.sigDeltTag);
+        ToggleButton sigNuTag = findViewById(R.id.sigNuTag);
+        ToggleButton tabardTag = findViewById(R.id.tabardTag);
+        ToggleButton tdxTag = findViewById(R.id.tdxTag);
+        ToggleButton zeteTag = findViewById(R.id.zeteTag);
 
-        DatabaseReference pushRef = dbRefPosts.push();
+        ToggleButton pocTag = findViewById(R.id.pocTag);
+        ToggleButton lgbtTag = findViewById(R.id.lgbtqTag);
+        ToggleButton firstGenTag = findViewById(R.id.firstGenTag);
+        ToggleButton lowincTag = findViewById(R.id.lowIncome);
 
-        post.id = pushRef.getKey();
+        toggles.add(axaTag);
+        toggles.add(akaTag);
+        toggles.add(aphiTag);
+        toggles.add(alphasTag);
+        toggles.add(alphaThetaTag);
+        toggles.add(axidTag);
+        toggles.add(bgTag);
+        toggles.add(betaTag);
+        toggles.add(chiDeltTag);
+        toggles.add(chiGamTag);
+        toggles.add(deltasTag);
+        toggles.add(ektTag);
+        toggles.add(gdxTag);
+        toggles.add(hereotTag);
+        toggles.add(kappaTag);
+        toggles.add(kdTag);
+        toggles.add(kdeTag);
+        toggles.add(trikapTag);
+        toggles.add(phiDeltTag);
+        toggles.add(phiTauTag);
+        toggles.add(psiUTag);
+        toggles.add(sigDeltTag);
+        toggles.add(sigNuTag);
+        toggles.add(tabardTag);
+        toggles.add(tdxTag);
+        toggles.add(zeteTag);
+        toggles.add(pocTag);
+        toggles.add(lgbtTag);
+        toggles.add(firstGenTag);
+        toggles.add(lowincTag);
 
-        pushRef.setValue(post);
+        ArrayList<String> names = new ArrayList<>();
 
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    // issues here
-        Forum.arrayOfPosts.add(0, post);
-        Forum.adapter.notifyDataSetChanged();
-        UserDatabaseHelper.addPostToUser(post, currentUser);
+        for (ToggleButton toggle : toggles){
+            if (toggle.isChecked()){
+                names.add(toggle.getText().toString());
+            }
+        }
 
-        Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
-        finish();
+
+
+
+
+        if (names.size() <= 3) {
+            Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
+                    names, new HashMap<>(), 0);
+
+            DatabaseReference pushRef = dbRefPosts.push();
+
+            post.id = pushRef.getKey();
+
+            pushRef.setValue(post);
+
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            // issues here
+            Forum.arrayOfPosts.add(0, post);
+            Forum.adapter.notifyDataSetChanged();
+            UserDatabaseHelper.addPostToUser(post, currentUser);
+
+            Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Please only select a maximum of three tags.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -18,7 +18,7 @@
         android:textSize="18sp"
         android:text="@string/post"
         android:layout_marginTop="25dp"
-        android:id="@+id/postSave"
+        android:id="@+id/reviewSave"
 
         />
 
@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saftey:"
+            android:text="Safety:"
             android:textSize="18sp"
             android:fontFamily="@font/montserrat"/>
 
@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
+            android:id="@+id/safetyRating"
         />
     </LinearLayout>
     <LinearLayout
@@ -60,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:id="@+id/inclusivityRating"
             />
     </LinearLayout>
     <LinearLayout
@@ -80,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:id="@+id/basementRating"
             />
     </LinearLayout>
     <LinearLayout
@@ -100,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="42dp"
+            android:id="@+id/overallRating"
             />
     </LinearLayout>
     <TextView
@@ -112,7 +116,7 @@
         android:fontFamily="@font/montserrat"/>
 
     <EditText
-        android:id="@+id/postUserText"
+        android:id="@+id/reviewUserEditText"
         android:layout_width="360dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"

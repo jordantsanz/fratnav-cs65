@@ -16,12 +16,12 @@ public class House {
     public ArrayList<String> people;
     public ArrayList<String> stats;
     public String urlToHouseTour;
-    public ArrayList<Review> reviews;
+    public HashMap<String, Review> reviews;
     public String id;
     public int imageName;
 
     public House(String houseName, int subscribers, String summary, int date, boolean national, ArrayList<String> positions,
-                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, ArrayList<Review> reviews, int imageName, String houseId){
+                 ArrayList<String> people, ArrayList<String> stats, String urlToHouseTour, HashMap<String, Review> reviews, int imageName, String houseId){
 
         this.houseName = houseName;
         this.subscribers = subscribers;

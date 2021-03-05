@@ -2,6 +2,7 @@ package com.example.fratnav.models;
 
 import com.example.fratnav.models.Comment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +14,7 @@ public class Post {
     public ArrayList<String> attributes;
     public HashMap<String, Comment> comments;
     public int likes;
+    public HashMap<String, String> usersLiked;
     public String id;
 
     public Post(String username, String userID, String text, ArrayList<String> attributes, HashMap<String, Comment> comments, int likes){
@@ -22,6 +24,7 @@ public class Post {
         this.attributes = attributes;
         this.comments = comments;
         this.likes = likes;
+        this.usersLiked = new HashMap<>();
     }
 
     public Post(){}

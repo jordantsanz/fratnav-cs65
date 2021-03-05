@@ -5,6 +5,7 @@ import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.models.House;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class HouseCreation {
@@ -80,7 +81,7 @@ public class HouseCreation {
     public static void createHouse(String username, String id){
         switch(username){
             case "signu":
-                House SigNu = new House ("Sig Nu", 0, "", 1901,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new ArrayList<>(), R.drawable.signu1, id);
+                House SigNu = new House ("Sig Nu", 0, "", 1901,true,  new ArrayList<>(),  new ArrayList<>(),new ArrayList<>(), "", new HashMap<>(), R.drawable.signu1, id);
                 HouseDatabaseHelper.createHouse(SigNu);
                 break;
         }

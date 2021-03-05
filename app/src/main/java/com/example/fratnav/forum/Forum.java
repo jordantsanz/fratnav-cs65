@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.MainActivity;
@@ -37,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class Forum extends ListActivity {
     BottomNavigationView bottomBar;
@@ -52,6 +57,7 @@ public class Forum extends ListActivity {
     private TextView helloUser;
     DatabaseReference.CompletionListener completionListener;
     public static ArrayList<Post> arrayOfPosts;
+    public String randomKey;
 
 
     public static final String POST_ID_KEY = "postid_key";
@@ -62,22 +68,8 @@ public class Forum extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
-        Log.d("Forum", "forum");
-
-
-        Log.d("drawable", String.valueOf(R.drawable.signu1));
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        userText = (EditText) findViewById(R.id.postText);
-//
-//        userText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    hideKeyboard(v);
-//                }
-//            }
-//        });
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
         if (currentUser == null) {
@@ -92,8 +84,7 @@ public class Forum extends ListActivity {
             }
         });
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.forum);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -166,17 +157,24 @@ public class Forum extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Post post = adapter.getItem(position);
+                if (position != -1) {
+                    Log.d("position", String.valueOf(position));
+                    long viewId = view.getId();
+                    Log.d("click", String.valueOf(viewId));
+                    Post post = adapter.getItem(position);
 
-                Intent intent = new Intent(Forum.this, PostActivity.class);
-                intent.putExtra(POST_ID_KEY, post.id);
-                intent.putExtra(USER_ID_KEY, currentUserInfo.username);
+
+                    Intent intent = new Intent(Forum.this, PostActivity.class);
+                    intent.putExtra(POST_ID_KEY, post.id);
+                    intent.putExtra(USER_ID_KEY, currentUserInfo.username);
 
 
-                startActivity(intent);
-                }});
+                    startActivity(intent);
+                }}});
 
         }
+
+
 
     // if error
     private void notifyUser(String message) {
@@ -217,4 +215,81 @@ public class Forum extends ListActivity {
         Intent intent = new Intent (Forum.this, CreatePost.class);
         startActivity(intent);
     }
+
+
+    public static void refresh(){
+        PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
+            @Override
+            public void onCallback(ArrayList<Post> posts) {
+                arrayOfPosts = posts;
+                Log.d("goodness", posts.get(30).text);
+                Log.d("goodness", posts.get(30).usersLiked.toString());
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    public void onHeartClick(View v){
+        View parentRow = (View) v.getParent().getParent();
+        ListView lv = (ListView) parentRow.getParent();
+        int position = lv.getPositionForView(parentRow);
+        if (position == -1){
+            return;
+        }
+        Post post = adapter.getItem(position);
+        assert post != null;
+        Log.d("heartClick", post.id);
+
+        if (randomKey == null){
+            randomKey = UUID.randomUUID().toString();
+        }
+
+        boolean userDidLike = false;
+
+        if (post.usersLiked != null){
+            Log.d("userDidLike", post.usersLiked.toString());
+            for (String userId : post.usersLiked.values()){
+                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+                if (userId.equals(currentUserInfo.userID)){
+                    userDidLike = true;
+                    break;
+                }
+            }
+        }
+
+        assert post.usersLiked != null;
+
+
+        Log.d("userDidLike", String.valueOf(userDidLike));
+
+
+                if (userDidLike){
+                    PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                        @Override
+                        public void onCallback(int likes) {
+                            Forum.refresh();
+                            post.usersLiked.remove(randomKey, currentUserInfo.userID);
+                            post.likes -= 1;
+
+                            /// need to change heart image drawable here:
+                        }
+                    });
+
+
+                }
+                else{
+                    PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                        @Override
+                        public void onCallback(int likes) {
+                            Forum.refresh();
+                            post.usersLiked.put(randomKey, currentUserInfo.userID);
+                            post.likes += 1;
+
+                            // need to change heart image drawable here:
+                        }
+                    });
+
+                }
+            }
 }

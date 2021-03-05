@@ -19,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,21 +31,22 @@ import com.example.fratnav.MainActivity;
 import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllPostsCallback;
+import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
+import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
+import com.example.fratnav.models.Review;
 import com.example.fratnav.models.User;
 
 
 import com.example.fratnav.onboarding.Authentication;
-import com.example.fratnav.tools.PostsAdapter;
 
-import com.example.fratnav.tools.RVPostsAdapter;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -74,6 +74,8 @@ public class Profile extends AppCompatActivity {
     private TextView helloUser;
     //PostsAdapter adapter;
     RVPostsAdapter adapter;
+    RVReviewsAdapter adapterReviews;
+    public ArrayList<Review> arrayOfReviews;
 
     public ArrayList<Post> arrayOfPosts;
     DatabaseReference.CompletionListener completionListener;
@@ -202,6 +204,19 @@ public class Profile extends AppCompatActivity {
                     }
                 });
 
+                arrayOfReviews = new ArrayList<>();
+                ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Review> reviews) {
+                        Log.d("reviews", reviews.toString());
+                        for (int i = reviews.size() - 1; i > -1; i--){
+                            Review review = reviews.get(i);
+                            arrayOfReviews.add(review);
+                        }
+                        adapterReviews.notifyDataSetChanged();
+                    }
+                });
+
 
                 // Create the adapter to convert the array to views
                 //adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
@@ -218,6 +233,18 @@ public class Profile extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
 
                 adapter.notifyDataSetChanged();
+
+
+                RecyclerView recyclerViewreviews = findViewById(R.id.rv_reviews);
+                LinearLayoutManager horizontalLayoutManager2 =
+                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+                recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
+                recyclerViewreviews.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                        DividerItemDecoration.HORIZONTAL));
+                adapterReviews = new RVReviewsAdapter(getApplicationContext(), arrayOfReviews);
+                recyclerViewreviews.setAdapter(adapterReviews);
+
+                adapterReviews.notifyDataSetChanged();
             }
         });
 

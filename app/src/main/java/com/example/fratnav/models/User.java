@@ -20,6 +20,7 @@ public class User {
     public List<String> interestedIn;
     public HashMap<String, String> subscribedTo;
     public HashMap<String, String> posts;
+    public HashMap<String, Review> reviews;
     public boolean notificationSettings;
     public boolean house;
 
@@ -61,6 +62,7 @@ public class User {
         this.interestedIn = new ArrayList<>();
         this.subscribedTo = new HashMap<>();
         this.posts = new HashMap<>();
+        this.reviews = new HashMap<>();
         this.notificationSettings = false;
     }
 

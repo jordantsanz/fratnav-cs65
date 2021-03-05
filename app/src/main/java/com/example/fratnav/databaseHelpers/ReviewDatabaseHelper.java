@@ -1,5 +1,7 @@
 package com.example.fratnav.databaseHelpers;
 
+import android.provider.ContactsContract;
+import android.renderscript.Sampler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -88,13 +90,35 @@ public class ReviewDatabaseHelper {
 
         // add to reviews database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefReviews = database.getReference("/reviews");
-        dbRefReviews.push().setValue(review);
+
+        // store in user
+        addReviewToObject(database.getReference("/users"), review, review.userID);
+
+        // store in house
+        addReviewToObject(database.getReference("/houses"), review, review.houseId);
 
     }
 
 
-    public static void addReviewToUser(Review review, String userId){}
+    public static void addReviewToObject(DatabaseReference ref, Review review, String id){
+        ref.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
 
-    public static void addReviewtoHouse(Review review, String houseId){}
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    ds.child("reviews").getRef().push().setValue(review);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    public static void addReviewtoHouse(DatabaseReference ref, Review review, String houseId){}
 }
