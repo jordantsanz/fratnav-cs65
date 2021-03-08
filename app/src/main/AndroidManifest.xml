@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,12 +18,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FratNav">
-        <activity android:name=".houses.HouseTourActivity"/>
-        <activity android:name=".onboarding.ForgotPassword"/>
+
+        <service
+            android:name=".tools.MyFirebaseMessagingIdService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".tools.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <activity android:name=".houses.HouseTourActivity" />
+        <activity android:name=".onboarding.ForgotPassword" />
+
 
         <service
             android:name="com.onecode.s3.service.S3UploadService"
             android:exported="false" />
+
         <activity android:name=".forum.CreatePost" />
         <activity android:name=".forum.PostActivity" />
         <activity android:name=".profile.updateProfile" />
@@ -38,8 +60,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+            </intent-filter>
         </activity>
-        <activity android:name=".forum.Forum" />
+        <activity
+            android:name=".forum.Forum"
+            android:permission="com.google.android.c2dm.permission.SEND" />
         <activity android:name=".houses.HousesSearch" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".houses.HousePage" />

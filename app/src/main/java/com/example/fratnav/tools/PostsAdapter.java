@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +49,8 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         currentUser = AuthenticationHelper.getCurrentUser();
         currentUserId = currentUser.getUid();
         Log.d("post", post.id);
+
+
 
 
 

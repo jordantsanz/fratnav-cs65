@@ -23,6 +23,8 @@ public class User {
     public HashMap<String, Review> reviews;
     public boolean notificationSettings;
     public boolean house;
+    public String houseId;
+    public String token;
 
     public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
                 ArrayList<String> interestedIn, HashMap<String, String> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
@@ -38,6 +40,7 @@ public class User {
         this.posts = new HashMap<>();
         this.notificationSettings = notificationSettings;
         this.house = false;
+        this.token = "";
     }
 
     public User(){}
@@ -47,23 +50,19 @@ public class User {
         this.notificationSettings = notificationSettings;
     }
 
+    public User(String userId, String token){
+        this.token = token;
+        this.userID = userId;
+    }
+
 
     // To create a house user account
-    public User(String email, String userId, String username, boolean house){
+    public User(String email, String userId, String username, boolean house, String houseId){
         this.email = email;
         this.userID = userId;
         this.house = house;
         this.username = username;
-
-        this.gender = "";
-        this.sexuality = "";
-        this.year = "";
-        this.houseAffiliation = true;
-        this.interestedIn = new ArrayList<>();
-        this.subscribedTo = new HashMap<>();
-        this.posts = new HashMap<>();
-        this.reviews = new HashMap<>();
-        this.notificationSettings = false;
+        this.houseId = houseId;
     }
 
     public HashMap<String, Object> toMap(){
@@ -83,6 +82,13 @@ public class User {
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("notificationSettings", this.notificationSettings);
+        return map;
+    }
+
+    public HashMap<String, Object> toMapToken(){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("token", this.token);
         return map;
     }
 }

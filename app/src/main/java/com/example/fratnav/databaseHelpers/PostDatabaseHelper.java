@@ -13,6 +13,7 @@ import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
+import com.example.fratnav.models.User;
 import com.google.android.gms.common.data.DataBufferSafeParcelable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PostDatabaseHelper {
 
@@ -215,6 +217,60 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                     ds.child("usersLiked").getRef().child(userId).removeValue();
                     myCallback.onCallback(post.likes - 1);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void getAllSubscribedPosts(User user, getAllPostsCallback myCallback){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefHouses = database.getReference("/houses");
+        dbRefHouses.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> postKeys = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("snapshot", ds.toString());
+                    if (user.subscribedTo != null) {
+                        for (String houseId : user.subscribedTo.keySet()) {
+                            if (Objects.equals(ds.getKey(), houseId)) {
+                                for (DataSnapshot postKeyDs : ds.child("posts").getChildren()) {
+                                    Log.d("postkeyds", postKeyDs.toString());
+                                    postKeys.add(postKeyDs.getValue(String.class));
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        myCallback.onCallback(new ArrayList<>());
+                    }
+                }
+
+                DatabaseReference dbRefPosts = database.getReference("/posts");
+                dbRefPosts.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<Post> posts = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()){
+                            for (String postKey : postKeys){
+                                if (Objects.equals(ds.getKey(), postKey)){
+                                    posts.add(ds.getValue(Post.class));
+                                }
+                            }
+                        }
+                        Log.d("posts", posts.toString());
+                        myCallback.onCallback(posts);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override

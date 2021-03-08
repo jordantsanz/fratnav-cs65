@@ -16,7 +16,8 @@
         android:textColor="@color/textColor"
         android:textSize="21sp"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:onClick="onUsernameClick"/>
 
     <TextView
         android:layout_width="wrap_content"

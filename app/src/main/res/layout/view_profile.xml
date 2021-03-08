@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".profile.Profile">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/profile_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintTop_toBottomOf="parent">
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/profileUsername"
+                        android:textColor="@color/textColor"
+                        android:text=""
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textStyle="italic"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="25dp"
+                        android:textSize="30sp"
+                        android:layout_marginTop="40dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/affiliated"
+                        android:textSize="16sp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_below="@id/profileUsername"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:id="@+id/affiliatedResponse"
+                        android:textSize="16sp"
+                        android:layout_below="@id/profileUsername"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="120dp"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/year"
+                        android:textSize="16sp"
+                        android:layout_below="@id/affiliatedResponse"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="25dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:id="@+id/yearResponse"
+                        android:textSize="16sp"
+                        android:layout_below="@id/affiliatedResponse"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="80dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="190dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:layout_below="@id/genderResponse"
+                        android:text="@string/sexuality"
+                        android:textColor="@color/textColor"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:id="@+id/sexualityResponse"
+                        android:textSize="16sp"
+                        android:layout_below="@id/genderResponse"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="285dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:layout_below="@id/profileUsername"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/gender"
+                        android:textSize="16sp"
+                        android:layout_marginStart="190dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:id="@+id/genderResponse"
+                        android:textSize="16sp"
+                        android:layout_below="@id/profileUsername"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="270dp" />
+
+                    <TextView
+                        android:id="@+id/subscribed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:textSize="20sp"
+                        android:text="@string/subscribed"
+                        android:layout_below="@id/yearResponse"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="25dp"/>
+
+                    <!--            <androidx.recyclerview.widget.RecyclerView-->
+                    <!--                android:id="@+id/rv_subscribed"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_below="@id/subscribed"-->
+                    <!--                android:orientation="horizontal"-->
+                    <!--                android:padding="10dp"-->
+                    <!--                android:layout_marginStart="20sp"-->
+                    <!--                android:layout_marginLeft="20dp"-->
+                    <!--                android:layout_marginRight="20dp"-->
+                    <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">-->
+                    <!--            <ImageView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:id="@+id/subscribed_image"/>-->
+                    <!--       -->
+                    <!--                <TextView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:id="@+id/subscribed_name"/>-->
+                    <!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+
+                    <HorizontalScrollView
+                        android:id="@+id/grid_scroll"
+                        android:layout_below="@id/subscribed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+
+                            <GridLayout
+                                android:id="@+id/profile_grid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:alignmentMode="alignMargins"
+                                android:rowCount="1"
+                                android:columnOrderPreserved="false"
+                                android:padding="14dp"
+                                >
+
+                                <!--            <androidx.cardview.widget.CardView-->
+                                <!--                android:id="@+id/cardview"-->
+                                <!--                android:layout_width="match_parent"-->
+                                <!--                android:layout_height="wrap_content"-->
+                                <!--                app:cardBackgroundColor="#2D2F35"-->
+                                <!--                app:cardCornerRadius="4dp"-->
+                                <!--                app:cardElevation="3dp"-->
+                                <!--                app:cardUseCompatPadding="true">-->
+
+                                <!--                <LinearLayout-->
+                                <!--                    android:layout_width="match_parent"-->
+                                <!--                    android:layout_height="match_parent"-->
+                                <!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+                                <!--                    android:layout_margin="6dp"-->
+                                <!--                    android:orientation="vertical">-->
+
+                                <!--                    <TextView-->
+                                <!--                        android:id="@+id/house_name"-->
+                                <!--                        android:layout_width="match_parent"-->
+                                <!--                        android:layout_height="wrap_content"-->
+                                <!--                        android:text="APhi"-->
+                                <!--                        android:textAlignment="center"-->
+                                <!--                        android:textColor="@color/textColor"-->
+                                <!--                        android:textSize="20sp"-->
+                                <!--                        android:textStyle="bold" />-->
+
+                                <!--                </LinearLayout>-->
+
+                                <!--            </androidx.cardview.widget.CardView>-->
+
+                            </GridLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+
+
+                    <TextView
+                        android:id="@+id/pastPosts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_below="@id/grid_scroll"
+                        android:layout_marginTop="60dp"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/past_posts"
+                        android:textSize="20sp" />
+
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_posts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pastPosts"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <TextView
+                        android:id="@+id/reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_below="@id/rv_posts"
+                        android:textColor="@color/textColor"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Reviews:"
+                        android:textSize="20sp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_reviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/reviews"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+
+
+                <!--        <LinearLayout-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:orientation="vertical"-->
+                <!--            android:padding="20dp"-->
+                <!--            android:layout_margin="10dp"-->
+                <!--            >-->
+                <!--            <ListView-->
+                <!--                android:id="@android:id/list"-->
+                <!--                android:layout_marginTop="15dp"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="400dp"-->
+                <!--                android:dividerHeight="10.0sp"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                android:layout_marginBottom="10dp"/>-->
+                <!--        </LinearLayout>-->
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="30dp"
+        android:background="@drawable/background"
+        app:elevation="2dp"
+        app:menu="@menu/navbar"
+        app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/teal"
+        app:itemIconSize="30dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemIconTint="@drawable/item_selector"
+        android:id="@+id/bottomBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

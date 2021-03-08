@@ -236,7 +236,7 @@ public class CreatePost extends AppCompatActivity {
             // issues here
             Forum.arrayOfPosts.add(0, post);
             Forum.adapter.notifyDataSetChanged();
-            UserDatabaseHelper.addPostToUser(post, currentUser);
+            UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
             Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
             finish();

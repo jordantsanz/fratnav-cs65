@@ -68,7 +68,13 @@ public class Forum extends ListActivity {
     DatabaseReference.CompletionListener completionListener;
     public static ArrayList<Post> arrayOfPosts;
     public String randomKey;
+
     Dialog filterDialog;
+
+    boolean isHouse;
+    public ListView list;
+
+
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
@@ -95,6 +101,7 @@ public class Forum extends ListActivity {
             @Override
             public void onCallback(User user) {
                 currentUserInfo = user;
+                isHouse = user.house;
             }
         });
 
@@ -136,8 +143,9 @@ public class Forum extends ListActivity {
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
                     Log.d("swtich", "profile");
-                    startActivity(new Intent(Forum.this, Profile.class));
-                    finish();
+                    Intent intent = new Intent(Forum.this, Profile.class);
+                    intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
+                    startActivity(intent);
                     return true;
                 } else if (item.getItemId()==R.id.home) {
                     Log.d("swtich", "home");
@@ -165,28 +173,36 @@ public class Forum extends ListActivity {
 
 
 
-
-        database = FirebaseDatabase.getInstance();
-        dbRefPosts = database.getReference("/posts");
+        list = findViewById(android.R.id.list);
 
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
+                // Construct the data source
+                arrayOfPosts = new ArrayList<Post>();
+                // Create the adapter to convert the array to views
+                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
                 Log.d("Posts", posts.toString());
                 for (int i = posts.size() - 1; i > -1; i--){
                     adapter.add(posts.get(i));
+
                 }
                 adapter.notifyDataSetChanged();
+
+
+                // Attach the adapter to a ListView
+
+                list.setAdapter(adapter); // sets adapter for list
+
+                for (Post post : arrayOfPosts){
+                    Log.d("bruh", "onCreate: ");
+                }
             }
         });
 
-        // Construct the data source
-        arrayOfPosts = new ArrayList<Post>();
-        // Create the adapter to convert the array to views
-        adapter = new PostsAdapter(this, arrayOfPosts);
-        // Attach the adapter to a ListView
-        ListView list = findViewById(android.R.id.list);
-        list.setAdapter(adapter); // sets adapter for list
+
+
+
 
 
 
@@ -240,7 +256,7 @@ public class Forum extends ListActivity {
 
         adapter.notifyDataSetChanged();
 
-        UserDatabaseHelper.addPostToUser(post, currentUser);
+        UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
         Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
     }
@@ -339,4 +355,38 @@ public class Forum extends ListActivity {
 
                 }
             }
+
+
+
+    public void onUsernameClick(View v){
+        View parentRow = (View) v.getParent();
+        Log.d("listview", parentRow.getParent().toString());
+        ListView lv = (ListView) parentRow.getParent();
+        Log.d("listview", lv.toString());
+        int position = lv.getPositionForView(parentRow);
+        Log.d("listview", String.valueOf(position));
+        if (position == -1){
+            return;
+        }
+
+        Post post = adapter.getItem(position);
+        assert post != null;
+        Log.d("listview", post.username);
+        assert post != null;
+        Log.d("heartClick", post.id);
+        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        intent.putExtra(USER_ID_KEY, post.userID);
+        startActivity(intent);
+
+    }
+
+
+    public void setFilledHearts(int position){
+        View v = list.getChildAt(position - list.getFirstVisiblePosition());
+
+        if (v == null){
+            Log.d("nullV", String.valueOf(position));
+            return;
+        }
+    }
 }

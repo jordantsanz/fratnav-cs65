@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.fratnav.MainActivity;
+import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.models.Review;
 import com.example.fratnav.profile.Profile;
@@ -39,6 +40,8 @@ import com.example.fratnav.models.House;
 import com.example.fratnav.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 public class HousePage extends AppCompatActivity {
@@ -55,6 +58,8 @@ public class HousePage extends AppCompatActivity {
     public ImageView iv;
     AlertDialog.Builder dialog;
     User currentUserInfo;
+    public int subscribers;
+    public boolean isHouse;
 
 
     @Override
@@ -69,6 +74,7 @@ public class HousePage extends AppCompatActivity {
             @Override
             public void onCallback(User user) {
                 currentUserInfo = user;
+                isHouse = user.house;
             }
         });
 
@@ -89,11 +95,12 @@ public class HousePage extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                         return true;
-                    } else if (item.getItemId() == R.id.profile) {
-                        Log.d("swtich", "profile");
-                        startActivity(new Intent(getApplicationContext(), Profile.class));
-                        finish();
-                        return true;
+                    }
+              else if (item.getItemId()==R.id.profile){
+                            Intent intent = new Intent(HousePage.this, Profile.class);
+                            intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
+                            startActivity(intent);
+                            return true;
                     } else if (item.getItemId() == R.id.forum) {
                         Log.d("swtich", "forum");
                         startActivity(new Intent(getApplicationContext(), Forum.class));
@@ -116,6 +123,7 @@ public class HousePage extends AppCompatActivity {
             @Override
             public void onCallback(House house) {
                 theHouse = house;
+                subscribers = theHouse.subscribers;
                 Log.d("house", theHouse.toString());
                 TextView houseDateView = findViewById(R.id.house_date);
                 houseDateView.setText(String.valueOf(theHouse.date));
@@ -127,6 +135,10 @@ public class HousePage extends AppCompatActivity {
                 } else {
                     n = "Local";
                 }
+
+                TextView subscribersText = findViewById(R.id.subscribers);
+                String subs = String.valueOf(subscribers) + " Subscribers";
+                subscribersText.setText(subs);
 
                 houseNationalView.setText(n);
                 iv = findViewById(R.id.housePageImage);
@@ -184,9 +196,35 @@ public class HousePage extends AppCompatActivity {
     public void subscribe(View view) {
         if (subbed) {
             UserDatabaseHelper.removeHouseFromUserSubscribed(theHouse, currentUser.getUid());
+            HouseDatabaseHelper.removeSubscriberFromCount(theHouse.id, new likePostCallback() {
+                @Override
+                public void onCallback(int likes) {
+                    TextView subscribersView = findViewById(R.id.subscribers);
+                    subscribers -= 1;
+                    if (subscribers <= 0){
+                        subscribers = 0;
+                    }
+                    String subs = String.valueOf(subscribers) + " Subscribers";
+                    subscribersView.setText(subs);
+                }
+            });
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(theHouse.houseName);
             Toast.makeText(getApplicationContext(), "You unsubscribed from " + theHouse.houseName + ".", Toast.LENGTH_SHORT).show();
         } else {
             UserDatabaseHelper.addHouseToUserSubscribed(theHouse, currentUser.getUid());
+            HouseDatabaseHelper.addSubscriberToCount(theHouse.id, new likePostCallback() {
+                @Override
+                public void onCallback(int likes) {
+                    TextView subscribersView = findViewById(R.id.subscribers);
+                    subscribers += 1;
+                    if (subscribers <= 0){
+                        subscribers = 0;
+                    }
+                    String subs = String.valueOf(subscribers) + " Subscribers";
+                    subscribersView.setText(subs);
+                }
+            });
+            FirebaseMessaging.getInstance().subscribeToTopic(theHouse.houseName);
             Toast.makeText(getApplicationContext(), "You subscribed to " + theHouse.houseName + "!", Toast.LENGTH_SHORT).show();
         }
         subbed = !subbed;
