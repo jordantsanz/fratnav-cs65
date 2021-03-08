@@ -39,6 +39,8 @@ import com.example.fratnav.models.House;
 import com.example.fratnav.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 public class HousePage extends AppCompatActivity {
@@ -182,10 +184,12 @@ public class HousePage extends AppCompatActivity {
     public void subscribe(View view){
         if (subbed){
             UserDatabaseHelper.removeHouseFromUserSubscribed(theHouse, currentUser.getUid());
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(theHouse.houseName);
             Toast.makeText(getApplicationContext(), "You unsubscribed from " + theHouse.houseName + ".", Toast.LENGTH_SHORT).show();
         }
         else {
             UserDatabaseHelper.addHouseToUserSubscribed(theHouse, currentUser.getUid());
+            FirebaseMessaging.getInstance().subscribeToTopic(theHouse.houseName);
             Toast.makeText(getApplicationContext(), "You subscribed to " + theHouse.houseName + "!", Toast.LENGTH_SHORT).show();
         }
         subbed = !subbed;

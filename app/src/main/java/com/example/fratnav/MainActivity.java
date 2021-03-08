@@ -1,17 +1,17 @@
 package com.example.fratnav;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.PertDataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pert;
-import com.anychart.charts.Pie;
 import com.anychart.core.pert.Milestones;
 import com.anychart.core.pert.Tasks;
 import com.anychart.core.ui.Tooltip;
@@ -20,25 +20,32 @@ import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.houses.HousesSearch;
+import com.example.fratnav.models.MySingleton;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomBar;
@@ -55,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+//        FirebaseFunctions functions = FirebaseFunctions.getInstance();
+//        functions.useEmulator("10.0.2.2.", 5001);
+
+
+
 
 
 
@@ -236,9 +249,5 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();
     }
-//    if using menu on toolbar
-//    public void logout(MenuItem item) {
-//        FirebaseAuth.getInstance().signOut();
-//        finishAffinity();
-//    }
+
 }

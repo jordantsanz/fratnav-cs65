@@ -23,7 +23,7 @@ public class UserDatabaseHelper {
     public static FirebaseDatabase database;
     public static DatabaseReference dbRefUser;
 
-    public static void addPostToUser(Post post, FirebaseUser user){
+    public static void addPostToUser(Post post, FirebaseUser user, User currentUserInfo){
         database = FirebaseDatabase.getInstance();
         dbRefUser = database.getReference("/users");
         dbRefUser.orderByKey().equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -42,6 +42,23 @@ public class UserDatabaseHelper {
 
             }
         });
+        if (currentUserInfo.house) {
+            DatabaseReference dbRefHouses = database.getReference("/houses");
+            dbRefHouses.orderByKey().equalTo(currentUserInfo.houseId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Log.d("Datasnapshot", "onDataChange: ");
+                    for (DataSnapshot ds : snapshot.getChildren()){
+                        ds.child("posts").getRef().push().setValue(post.id);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
         };
 
 
@@ -93,6 +110,28 @@ public class UserDatabaseHelper {
                 }
 
                 Profile.refresh();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    public static void addTokenToUser(String userId, String token){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbUserRef = database.getReference("/users");
+        Log.d("settingToken", "addTokenToUser: ");
+        dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("snapChild", ds.toString());
+                    ds.getRef().child("token").setValue(token);
+                }
             }
 
             @Override

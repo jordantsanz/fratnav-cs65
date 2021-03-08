@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "256472567776",
+    "firebase_url": "https://fratnav-mjw-default-rtdb.firebaseio.com",
     "project_id": "fratnav-mjw",
     "storage_bucket": "fratnav-mjw.appspot.com"
   },

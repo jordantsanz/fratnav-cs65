@@ -204,7 +204,7 @@ public class Forum extends ListActivity {
 
         adapter.notifyDataSetChanged();
 
-        UserDatabaseHelper.addPostToUser(post, currentUser);
+        UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
         Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
     }
@@ -294,4 +294,28 @@ public class Forum extends ListActivity {
 
                 }
             }
+
+
+
+    public void onUsernameClick(View v){
+        View parentRow = (View) v.getParent();
+        Log.d("listview", parentRow.getParent().toString());
+        ListView lv = (ListView) parentRow.getParent();
+        Log.d("listview", lv.toString());
+        int position = lv.getPositionForView(parentRow);
+        Log.d("listview", String.valueOf(position));
+        if (position == -1){
+            return;
+        }
+
+        Post post = adapter.getItem(position);
+        assert post != null;
+        Log.d("listview", post.username);
+        assert post != null;
+        Log.d("heartClick", post.id);
+        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        intent.putExtra(USER_ID_KEY, post.userID);
+        startActivity(intent);
+
+    }
 }
