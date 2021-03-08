@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -152,8 +153,9 @@ public class Forum extends ListActivity {
 
                 list.setAdapter(adapter); // sets adapter for list
 
-                for (Post post : arrayOfPosts){
+                for (int i = 0; i < arrayOfPosts.size(); i += 1){
                     Log.d("bruh", "onCreate: ");
+                    setFilledHearts(i, arrayOfPosts.get(i), currentUserInfo.userID);
                 }
             }
         });
@@ -329,12 +331,26 @@ public class Forum extends ListActivity {
     }
 
 
-    public void setFilledHearts(int position){
+    public void setFilledHearts(int position, Post post, String userId){
         View v = list.getChildAt(position - list.getFirstVisiblePosition());
 
         if (v == null){
             Log.d("nullV", String.valueOf(position));
             return;
         }
+        boolean found = false;
+        for (String id : post.usersLiked.keySet()){
+            Log.d("id", id);
+            if (id.equals(userId)){
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            ImageButton heart = v.findViewById(R.id.heart);
+            heart.setBackgroundResource(R.drawable.filled_heart);
+        }
+
     }
 }

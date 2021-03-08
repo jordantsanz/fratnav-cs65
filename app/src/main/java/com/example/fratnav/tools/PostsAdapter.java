@@ -3,6 +3,7 @@ package com.example.fratnav.tools;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
 
 
-
-
-
-
-
         // Lookup view for data population
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post, parent, false);
@@ -116,6 +112,8 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         postText.setText(post.text);
         String likes = post.likes +"";
         postLikes.setText(likes);
+
+        MediaStore.CAMERA
 
 
 //        if (post.likes == 0){
