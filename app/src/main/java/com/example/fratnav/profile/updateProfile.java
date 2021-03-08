@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,9 +28,11 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.example.fratnav.R;
+import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.models.House;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -60,6 +63,8 @@ public class updateProfile extends AppCompatActivity {
     Integer position;
     Spinner spinner;
     Spinner sexualitySpinner;
+    public House theHouse;
+    public String userId;
     DatabaseReference.CompletionListener completionListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +78,13 @@ public class updateProfile extends AppCompatActivity {
             finish();
             return;
         }
-        String userId = currentUser.getUid();
+        userId = currentUser.getUid();
 
         boolean ishouse = getIntent().getBooleanExtra(Profile.HOUSE_BOOLEAN_KEY, false);
 
         if (ishouse){
             setContentView(R.layout.update_houseprofile);
+            setHouseProfile();
         }
         else {
             setContentView(R.layout.update_profile);
@@ -369,5 +375,100 @@ public class updateProfile extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 0);
         }
 
+    }
+
+    public void setHouseProfile(){
+        UserDatabaseHelper.getUserById(userId, new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                String houseId = user.houseId;
+                HouseDatabaseHelper.getHouseById(houseId, new getHouseByIdCallback() {
+                    @Override
+                    public void onCallback(House house) {
+                        theHouse = house;
+                        TextView houseName = findViewById(R.id.house_name);
+                        houseName.setText(house.houseName);
+
+                        RadioButton nationalB = findViewById(R.id.national);
+                        RadioButton localB = findViewById(R.id.local);
+
+                        if (house.national){
+                            nationalB.setChecked(true);
+                        }else {
+                            localB.setChecked(true);
+                        }
+
+                        EditText editSum = findViewById(R.id.edit_summary);
+                        editSum.setText(house.summary);
+
+                        EditText pres = findViewById(R.id.edit_president);
+                        EditText vp = findViewById(R.id.edit_vp);
+                        EditText treas = findViewById(R.id.edit_treasurer);
+                        EditText rush = findViewById(R.id.edit_rc);
+
+                        pres.setText(house.president);
+                        vp.setText(house.vicePresident);
+                        treas.setText(house.treasurer);
+                        rush.setText(house.rushChair);
+
+                        EditText tot = findViewById(R.id.edit_total);
+                        EditText poc = findViewById(R.id.edit_poc);
+                        EditText queer = findViewById(R.id.edit_lgbtq);
+
+                        tot.setText(house.totalMembers);
+                        poc.setText(house.pocMembers);
+                        queer.setText(house.queerMembers);
+                    }
+                });
+            }
+        });
+    }
+
+    public void onSaveProfile(View v){
+        RadioButton nationalB = findViewById(R.id.national);
+        RadioButton localB = findViewById(R.id.local);
+
+        boolean national = false;
+        String summary = "";
+        String president = "";
+        String vice = "";
+        String treasurer = "";
+        String rushChair = "";
+        String totalMembers = "";
+        String queerMembers = "";
+        String pocMembers = "";
+
+        if (nationalB.isChecked()){
+            national = true;
+        }
+
+        EditText editSum = findViewById(R.id.edit_summary);
+        summary = editSum.getText().toString();
+
+
+        EditText pres = findViewById(R.id.edit_president);
+        EditText vp = findViewById(R.id.edit_vp);
+        EditText treas = findViewById(R.id.edit_treasurer);
+        EditText rush = findViewById(R.id.edit_rc);
+
+        president = pres.getText().toString();
+        vice = vp.getText().toString();
+        treasurer = treas.getText().toString();
+        rushChair = rush.getText().toString();
+
+
+        EditText tot = findViewById(R.id.edit_total);
+        EditText poc = findViewById(R.id.edit_poc);
+        EditText queer = findViewById(R.id.edit_lgbtq);
+
+        totalMembers = tot.getText().toString();
+        pocMembers = poc.getText().toString();
+        queerMembers = queer.getText().toString();
+
+        House house = new House(theHouse.id, theHouse.houseName, summary, president, vice, treasurer, rushChair,
+                totalMembers, pocMembers, queerMembers);
+
+        HouseDatabaseHelper.updateHouse(house);
+        finish();
     }
 }

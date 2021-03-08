@@ -391,6 +391,13 @@
                 android:textSize="16sp"
                 android:text="House Tour:" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onSaveProfile"
+                android:text="Save profile"
+                android:id="@+id/saveProfileButton"/>
+
 
 
         </android.widget.RelativeLayout>

@@ -24,6 +24,9 @@ public class House {
     public String vicePresident = "";
     public String treasurer = "";
     public String rushChair = "";
+    public String totalMembers = "";
+    public String queerMembers = "";
+    public String pocMembers = "";
     public HashMap<String, String> posts;
 
     /**
@@ -53,6 +56,9 @@ public class House {
         this.positions = positions;
         this.people = people;
         this.stats = stats;
+        this.totalMembers = "";
+        this.pocMembers = "";
+        this.queerMembers = "";
         this.urlToHouseTour = urlToHouseTour;
         this.reviews = reviews;
         this.imageName = imageName;
@@ -77,11 +83,17 @@ public class House {
      * @param treasurer - name of the treasurer of the house
      * @param rushChair - name of the rush chair in the house
      */
-    public House(String president, String vicePresident, String treasurer, String rushChair){
+    public House(String id, String houseName, String summary, String president, String vicePresident, String treasurer, String rushChair, String totalMembers, String pocMembers, String queerMembers){
         this.president = president;
         this.vicePresident = vicePresident;
         this.treasurer = treasurer;
         this.rushChair = rushChair;
+        this.id = id;
+        this.houseName = houseName;
+        this.totalMembers = totalMembers;
+        this.pocMembers = pocMembers;
+        this.queerMembers = queerMembers;
+        this.summary = summary;
     }
 
     public void setId(String id){
@@ -95,10 +107,14 @@ public class House {
      */
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> map = new HashMap<>();
+        map.put("summary" ,summary);
         map.put("president", president);
         map.put("vicePresident", vicePresident);
         map.put("treasurer", treasurer);
         map.put("rushChair", rushChair);
+        map.put("totalMembers", totalMembers);
+        map.put("pocMembers", pocMembers);
+        map.put("queerMembers", queerMembers);
 
         return map;
     }

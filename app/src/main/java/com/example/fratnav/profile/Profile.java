@@ -101,7 +101,7 @@ public class Profile extends AppCompatActivity {
     public static TextView profileYear;
     public static TextView profileAffiliated;
     public User currentUserInfo;
-    public String useriD;
+    public static String useriD;
     public HashMap<String,String> subscribedtO;
 
     boolean ishouse;
@@ -128,7 +128,7 @@ public class Profile extends AppCompatActivity {
                 setHouseProfile();
             } else {
                 setContentView(R.layout.profile);
-                setUserProfile();
+                setUserProfile(false);
             }
         }
         else{
@@ -142,8 +142,8 @@ public class Profile extends AppCompatActivity {
                         setHouseProfile();
                     }
                     else{
-                        setContentView(R.layout.profile);
-                        setUserProfile();
+                        setContentView(R.layout.view_profile);
+                        setUserProfile(true);
                     }
                 }
             });
@@ -151,7 +151,7 @@ public class Profile extends AppCompatActivity {
     }
 
     public static void refresh() {
-        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+        UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
                 Log.d("username", user.username);
@@ -212,7 +212,7 @@ public class Profile extends AppCompatActivity {
     public void setHouseProfile(){
         Log.d("houseProf", "setHouseProfile: ");;
         setNavBar();
-        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+        UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
                 TextView houseName = findViewById(R.id.house_name);
@@ -226,9 +226,9 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    public void setUserProfile(){
+    public void setUserProfile(boolean viewing){
 
-        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+        UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
 
@@ -238,25 +238,29 @@ public class Profile extends AppCompatActivity {
                 profileYear = (TextView) findViewById(R.id.yearResponse);
                 profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
 
-                RadioButton notifOn = findViewById(R.id.notificationOn);
-                RadioButton notifOff = findViewById(R.id.notificationOff);
 
 
 
-                notifOn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), true);
-                    }
-                });
 
-                notifOff.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), false);
-                    }
-                });
+                if (!viewing) {
+                    RadioButton notifOn = findViewById(R.id.notificationOn);
+                    RadioButton notifOff = findViewById(R.id.notificationOff);
 
+                    notifOn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            UserDatabaseHelper.updateUserNotifSettings(useriD, true);
+                        }
+                    });
+
+                    notifOff.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            UserDatabaseHelper.updateUserNotifSettings(useriD, false);
+                        }
+                    });
+
+                }
                 arrayofSubscribedTo = new ArrayList<>();
                 gridLayout = (GridLayout)findViewById(R.id.profile_grid);
 
@@ -320,7 +324,9 @@ public class Profile extends AppCompatActivity {
                 profileAffiliated.setText(affiliated);
 
                 setNavBar();
-                setNotifications(user);
+                if (!viewing) {
+                    setNotifications(user);
+                }
                 renderPosts();
                 renderReviews();
                 renderHousesSubscribed(user);
@@ -495,14 +501,14 @@ public class Profile extends AppCompatActivity {
         notifOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), true);
+                UserDatabaseHelper.updateUserNotifSettings(useriD, true);
             }
         });
 
         notifOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), false);
+                UserDatabaseHelper.updateUserNotifSettings(useriD, false);
             }
         });
         if (user.notificationSettings){

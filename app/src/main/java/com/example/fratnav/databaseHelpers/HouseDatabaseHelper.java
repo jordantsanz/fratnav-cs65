@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
@@ -174,6 +175,50 @@ public class HouseDatabaseHelper {
                 Log.d("snapshot", snapshot.toString());
                 for (DataSnapshot ds : snapshot.getChildren()){
                     ds.getRef().updateChildren(updates);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void removeSubscriberFromCount(String houseId, likePostCallback myCallback){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefPosts = db.getReference("/houses");
+        dbRefPosts.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    House house = ds.getValue(House.class);
+                    assert house != null;
+                    ds.child("subscribers").getRef().setValue(house.subscribers - 1);
+                    myCallback.onCallback(house.subscribers - 1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public static void addSubscriberToCount(String houseId, likePostCallback myCallback){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRefPosts = db.getReference("/houses");
+        dbRefPosts.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("snapshot", snapshot.toString());
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    House house = ds.getValue(House.class);
+                    assert house != null;
+                    ds.child("subscribers").getRef().setValue(house.subscribers + 1);
+                    myCallback.onCallback(house.subscribers + 1);
                 }
             }
 

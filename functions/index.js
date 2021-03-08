@@ -5,7 +5,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-exports.pushNotificationLike = functions.database.ref('/houses/{houseId}')
+exports.pushNotificationLike = functions.database.ref('/houses/{houseId}/posts')
     .onWrite(async (change, context) => {
     console.log('Push notification event triggered');
     console.log(context, 'context');
