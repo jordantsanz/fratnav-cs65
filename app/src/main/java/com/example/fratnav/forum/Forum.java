@@ -153,7 +153,6 @@ public class Forum extends ListActivity {
 
                 for (Post post : arrayOfPosts){
                     Log.d("bruh", "onCreate: ");
-                    setFilledHearts(post, list);
                 }
             }
         });
