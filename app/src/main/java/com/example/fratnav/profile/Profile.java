@@ -36,6 +36,7 @@ import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getAllReviewsCallback;
+import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
@@ -218,6 +219,15 @@ public class Profile extends AppCompatActivity {
                 TextView houseName = findViewById(R.id.house_name);
                 houseName.setText(user.username);
 
+                HouseDatabaseHelper.getHouseById(user.houseId, new getHouseByIdCallback() {
+                    @Override
+                    public void onCallback(House house) {
+                        TextView subscribersText = findViewById(R.id.subscribers);
+                        String subs = String.valueOf(house.subscribers) + " Subscribers";
+                        subscribersText.setText(subs);
+                    }
+                });
+
                 setNotifications(user);
                 renderPosts();
                 renderReviews();
@@ -237,6 +247,7 @@ public class Profile extends AppCompatActivity {
                 profileGender = (TextView) findViewById(R.id.genderResponse);
                 profileYear = (TextView) findViewById(R.id.yearResponse);
                 profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
+
 
 
 

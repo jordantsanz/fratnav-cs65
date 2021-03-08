@@ -130,28 +130,37 @@ public class Forum extends ListActivity {
 
 
 
-
-        database = FirebaseDatabase.getInstance();
-        dbRefPosts = database.getReference("/posts");
+        ListView list = findViewById(android.R.id.list);
 
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
+                // Construct the data source
+                arrayOfPosts = new ArrayList<Post>();
+                // Create the adapter to convert the array to views
+                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
                 Log.d("Posts", posts.toString());
                 for (int i = posts.size() - 1; i > -1; i--){
                     adapter.add(posts.get(i));
+
                 }
                 adapter.notifyDataSetChanged();
+
+
+                // Attach the adapter to a ListView
+
+                list.setAdapter(adapter); // sets adapter for list
+
+                for (Post post : arrayOfPosts){
+                    Log.d("bruh", "onCreate: ");
+                    setFilledHearts(post, list);
+                }
             }
         });
 
-        // Construct the data source
-        arrayOfPosts = new ArrayList<Post>();
-        // Create the adapter to convert the array to views
-        adapter = new PostsAdapter(this, arrayOfPosts);
-        // Attach the adapter to a ListView
-        ListView list = findViewById(android.R.id.list);
-        list.setAdapter(adapter); // sets adapter for list
+
+
+
 
 
 
