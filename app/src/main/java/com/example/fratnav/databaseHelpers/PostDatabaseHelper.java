@@ -235,13 +235,18 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                 ArrayList<String> postKeys = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     Log.d("snapshot", ds.toString());
-                    for (String houseId : user.subscribedTo.keySet()){
-                        if (Objects.equals(ds.getKey(), houseId)){
-                            for (DataSnapshot postKeyDs : ds.child("posts").getChildren()){
-                                Log.d("postkeyds", postKeyDs.toString());
-                                postKeys.add(postKeyDs.getValue(String.class));
+                    if (user.subscribedTo != null) {
+                        for (String houseId : user.subscribedTo.keySet()) {
+                            if (Objects.equals(ds.getKey(), houseId)) {
+                                for (DataSnapshot postKeyDs : ds.child("posts").getChildren()) {
+                                    Log.d("postkeyds", postKeyDs.toString());
+                                    postKeys.add(postKeyDs.getValue(String.class));
+                                }
                             }
                         }
+                    }
+                    else{
+                        myCallback.onCallback(new ArrayList<>());
                     }
                 }
 

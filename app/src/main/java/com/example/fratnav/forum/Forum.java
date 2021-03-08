@@ -59,6 +59,7 @@ public class Forum extends ListActivity {
     public static ArrayList<Post> arrayOfPosts;
     public String randomKey;
     boolean isHouse;
+    public ListView list;
 
 
     public static final String POST_ID_KEY = "postid_key";
@@ -130,7 +131,7 @@ public class Forum extends ListActivity {
 
 
 
-        ListView list = findViewById(android.R.id.list);
+        list = findViewById(android.R.id.list);
 
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
@@ -325,5 +326,15 @@ public class Forum extends ListActivity {
         intent.putExtra(USER_ID_KEY, post.userID);
         startActivity(intent);
 
+    }
+
+
+    public void setFilledHearts(int position){
+        View v = list.getChildAt(position - list.getFirstVisiblePosition());
+
+        if (v == null){
+            Log.d("nullV", String.valueOf(position));
+            return;
+        }
     }
 }
