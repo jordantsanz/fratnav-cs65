@@ -1,22 +1,32 @@
 package com.example.fratnav.forum;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.onboarding.Authentication;
@@ -58,11 +68,15 @@ public class Forum extends ListActivity {
     DatabaseReference.CompletionListener completionListener;
     public static ArrayList<Post> arrayOfPosts;
     public String randomKey;
-
+    Dialog filterDialog;
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
     public static PostsAdapter adapter;
+    ImageView filter;
+    PopupWindow popupWindow;
+    LayoutInflater layoutInflater;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +97,30 @@ public class Forum extends ListActivity {
                 currentUserInfo = user;
             }
         });
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.forumCoordinatorLayout);
+        filter = (ImageView) findViewById(R.id.filter);
+
+
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.tag_filter_popup, null);
+                popupWindow = new PopupWindow(container, 520, 240, true);
+                Log.d("popupWindo", popupWindow.toString());
+                popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 250, 240);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
 
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
@@ -183,6 +221,7 @@ public class Forum extends ListActivity {
     }
 
 
+
     // saves post currently
     public void savePost(View view) {
         Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
@@ -245,6 +284,10 @@ public class Forum extends ListActivity {
 
         boolean userDidLike = false;
 
+        ImageView heart = findViewById(R.id.heart);
+        heart.getTag();
+
+
         if (post.usersLiked != null){
             Log.d("userDidLike", post.usersLiked.toString());
             for (String userId : post.usersLiked.values()){
@@ -267,7 +310,10 @@ public class Forum extends ListActivity {
                             post.likes -= 1;
                             Log.d("postprof", post.usersLiked.toString());
 
-                            /// need to change heart image drawable here:
+
+                            /// need to change heart image drawable here
+                            heart.setBackgroundResource(R.drawable.like);
+
                         }
                     });
 
@@ -285,7 +331,9 @@ public class Forum extends ListActivity {
                             post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
                             post.likes += 1;
 
-                            // need to change heart image drawable here:
+
+
+
                         }
                     });
 

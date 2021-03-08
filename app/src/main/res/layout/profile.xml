@@ -359,7 +359,7 @@
         app:elevation="2dp"
         app:menu="@menu/navbar"
         app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/teal"
+        app:itemTextColor="@color/backgroundColor"
         app:itemIconSize="30dp"
         app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"
