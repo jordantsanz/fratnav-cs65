@@ -59,16 +59,22 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
     implementation 'com.google.vr:sdk-panowidget:1.80.0'
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+    implementation 'com.github.baoyachi:StepView:1.9'
+    implementation 'com.github.vipulasri:timelineview:1.1.5'
+
+
     apply plugin: 'com.google.gms.google-services'  // Google Services plugin
     implementation platform('com.google.firebase:firebase-bom:26.6.0')
     implementation 'com.google.firebase:firebase-auth:18.0.0'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
 
+
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation "com.android.support:support-compat:28.0.0"
+    implementation 'com.android.support:support-compat:28.0.0'
     // implementation 'com.google.firebase:firebase-admin:7.1.0'
 
     implementation 'com.google.firebase:firebase-messaging:17.5.0'

@@ -62,7 +62,6 @@ public class HousePage extends AppCompatActivity {
     public boolean isHouse;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +106,11 @@ public class HousePage extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Forum.class));
                         finish();
                         return true;
+                    } else if (item.getItemId()==R.id.houses) {
+                        Log.d("swtich", "houses");
+                        startActivity(new Intent(getApplicationContext(), HousesSearch.class));
+                        finish();
+                        return true;
                     }
                     return false;
                 }
@@ -126,10 +130,9 @@ public class HousePage extends AppCompatActivity {
 
                 TextView houseNationalView = findViewById(R.id.house_national);
                 String n = "";
-                if (theHouse.national){
+                if (theHouse.national) {
                     n = "National";
-                }
-                else{
+                } else {
                     n = "Local";
                 }
 
@@ -175,7 +178,7 @@ public class HousePage extends AppCompatActivity {
     }
 
     public void onBackClick(View view) {
-        startActivity(new Intent(HousePage.this,HousesSearch.class));
+        startActivity(new Intent(HousePage.this, HousesSearch.class));
         finish();
     }
 
@@ -184,15 +187,14 @@ public class HousePage extends AppCompatActivity {
             Intent i = new Intent(this, HouseTourActivity.class);
             i.putExtra(URL_KEY, url);
             startActivity(i);
-        }
-        else{
+        } else {
             Toast.makeText(this, "Sorry, this house has not uploaded a virtual tour yet.", Toast.LENGTH_LONG).show();
         }
 
     }
 
-    public void subscribe(View view){
-        if (subbed){
+    public void subscribe(View view) {
+        if (subbed) {
             UserDatabaseHelper.removeHouseFromUserSubscribed(theHouse, currentUser.getUid());
             HouseDatabaseHelper.removeSubscriberFromCount(theHouse.id, new likePostCallback() {
                 @Override
@@ -208,8 +210,7 @@ public class HousePage extends AppCompatActivity {
             });
             FirebaseMessaging.getInstance().unsubscribeFromTopic(theHouse.houseName);
             Toast.makeText(getApplicationContext(), "You unsubscribed from " + theHouse.houseName + ".", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             UserDatabaseHelper.addHouseToUserSubscribed(theHouse, currentUser.getUid());
             HouseDatabaseHelper.addSubscriberToCount(theHouse.id, new likePostCallback() {
                 @Override
@@ -228,20 +229,19 @@ public class HousePage extends AppCompatActivity {
         }
         subbed = !subbed;
 
-        if (subbed){
+        if (subbed) {
             String t = "Unsubscribe";
             subscribeButton.setText(t);
-        }
-        else{
+        } else {
             String t = "Subscribe";
             subscribeButton.setText(t);
         }
     }
 
 
-    public void setImageView(String name){
+    public void setImageView(String name) {
         int image = 0;
-        switch(name){
+        switch (name) {
             case "Sig Nu":
                 image = R.drawable.signu1;
                 break;

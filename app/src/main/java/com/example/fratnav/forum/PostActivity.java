@@ -14,10 +14,13 @@ import android.widget.Toast;
 import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
+import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
+import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.Post;
+import com.example.fratnav.models.User;
 import com.example.fratnav.tools.CommentsAdapter;
 
 import java.util.ArrayList;
@@ -36,6 +39,11 @@ public class PostActivity extends AppCompatActivity {
 
         TextView username = (TextView)findViewById(R.id.postActivityUser);
         TextView textView = (TextView) findViewById(R.id.postActivityText);
+        TextView userSexuality = (TextView) findViewById(R.id.postActivityUserSexuality);
+        TextView userGender= (TextView) findViewById(R.id.postActivityUserGender);
+        TextView userAffilation= (TextView) findViewById(R.id.postActivityUserAffiliation);
+        TextView userYear= (TextView) findViewById(R.id.postActivityUserYear);
+
 
         arrayOfComments = new ArrayList<>();
         adapter = new CommentsAdapter(getApplicationContext(), arrayOfComments);
@@ -47,6 +55,24 @@ public class PostActivity extends AppCompatActivity {
                 thePost = post;
                 textView.setText(post.text);
                 username.setText(post.username);
+                UserDatabaseHelper.getUserById(post.userID, new getUserByIdCallback() {
+                    @Override
+                    public void onCallback(User user) {
+                        if (user.houseAffiliation){
+                            String affiliated = "Affiliated";
+                            userAffilation.setText(affiliated);
+                        }
+                        else{
+                            String notAffiliated = "Not Affiliated";
+                            userAffilation.setText(notAffiliated);
+                        }
+
+                        userGender.setText(user.gender);
+                        userSexuality.setText(user.sexuality);
+                        userYear.setText(user.year);
+
+                    }
+                });
 
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
@@ -60,6 +86,7 @@ public class PostActivity extends AppCompatActivity {
                 });
             }
         });
+
 
         ListView list = findViewById(android.R.id.list);
         list.setAdapter(adapter); // sets adapter for list

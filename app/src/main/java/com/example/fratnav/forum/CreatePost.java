@@ -1,7 +1,10 @@
 package com.example.fratnav.forum;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -54,8 +57,8 @@ public class CreatePost extends AppCompatActivity {
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     CoordinatorLayout coordinatorLayout;
+    Dialog filterDialog;
 
-    LinearLayout linearLayout;
 
 
     @Override
@@ -73,8 +76,8 @@ public class CreatePost extends AppCompatActivity {
             public void onClick(View v) {
                 layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.house_tag_popup, null);
-                popupWindow = new PopupWindow(container, 360, 240, true);
-                popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 300, 340);
+                popupWindow = new PopupWindow(container, 340, 240, true);
+                popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 340, 420);
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -84,6 +87,7 @@ public class CreatePost extends AppCompatActivity {
                 });
             }
         });
+
 
 
 
@@ -136,6 +140,8 @@ public class CreatePost extends AppCompatActivity {
         Toast.makeText(CreatePost.this, message,
                 Toast.LENGTH_SHORT).show();
     }
+
+
 
     // saves post currently
     public void savePost(View view) {

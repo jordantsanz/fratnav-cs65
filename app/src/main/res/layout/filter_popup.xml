@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:id="@+id/filterCoordinatorLayout"
+    android:background="@drawable/grey_background"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="chose one to filter the houses"/>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="60dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textOn="@string/sororities"
+        android:textOff="@string/sororities"
+        android:id="@+id/soroTag"
+        android:textColor="@drawable/tags_font_color"
+        android:background="@drawable/sororities_selector"
+        />
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textOn="@string/fraternities"
+        android:textOff="@string/fraternities"
+        android:id="@+id/fratTag"
+        android:textColor="@drawable/tags_font_color"
+        android:background="@drawable/frat_button_selector"
+        />
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textOn="@string/genderInclusiveHouses"
+        android:textOff="@string/genderInclusiveHouses"
+        android:id="@+id/genderInclusiveTag"
+        android:textColor="@drawable/tags_font_color"
+        android:background="@drawable/gender_inclusive_selector"
+        />
+    <androidx.appcompat.widget.AppCompatToggleButton
+    android:layout_marginStart="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:textOn="@string/nationalPanHellenic"
+    android:textOff="@string/nationalPanHellenic"
+    android:id="@+id/nationalPanHellicTag"
+    android:textColor="@drawable/tags_font_color"
+    android:background="@drawable/national_pan_selector" />
+    </LinearLayout>
+    </HorizontalScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
