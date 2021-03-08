@@ -80,7 +80,12 @@ public class MainActivity extends AppCompatActivity {
 //        functions.useEmulator("10.0.2.2.", 5001);
 
 
-        assert currentUser != null;
+        // checks to make sure the user is currently logged in; otherwise, send to authentication
+        if (currentUser == null) {
+            startActivity(new Intent(this, Authentication.class));
+            finish();
+            return;
+        }
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
