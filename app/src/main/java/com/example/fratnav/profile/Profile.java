@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +44,7 @@ import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.models.House;
+import com.example.fratnav.models.HouseCardView;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.Review;
 import com.example.fratnav.models.User;
@@ -65,6 +69,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Profile extends AppCompatActivity {
@@ -78,9 +83,11 @@ public class Profile extends AppCompatActivity {
     //PostsAdapter adapter;
     RVPostsAdapter adapter;
     RVReviewsAdapter adapterReviews;
+    GridLayout gridLayout;
+//    RVSubscribedAdapter adapterHouses;
     public ArrayList<Review> arrayOfReviews;
-
     public ArrayList<Post> arrayOfPosts;
+    public ArrayList<House> arrayofSubscribedTo;
     DatabaseReference.CompletionListener completionListener;
     ListView postListView;
     public static String affiliated;
@@ -95,6 +102,7 @@ public class Profile extends AppCompatActivity {
     public static TextView profileAffiliated;
     public User currentUserInfo;
     public String useriD;
+    public HashMap<String,String> subscribedtO;
 
     boolean ishouse;
 
@@ -230,6 +238,50 @@ public class Profile extends AppCompatActivity {
                 profileYear = (TextView) findViewById(R.id.yearResponse);
                 profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
 
+                RadioButton notifOn = findViewById(R.id.notificationOn);
+                RadioButton notifOff = findViewById(R.id.notificationOff);
+
+
+
+                notifOn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), true);
+                    }
+                });
+
+                notifOff.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UserDatabaseHelper.updateUserNotifSettings(currentUser.getUid(), false);
+                    }
+                });
+
+                arrayofSubscribedTo = new ArrayList<>();
+                gridLayout = (GridLayout)findViewById(R.id.profile_grid);
+
+                HouseDatabaseHelper.getHousesByUserSubscribed(user.subscribedTo, new getAllHousesCallback() {
+                    @Override
+                    public void onCallback(ArrayList<House> houses) {
+                        Log.d("housesFound", houses.toString());
+                        for (int i = houses.size() -1; i > -1; i --){
+                            Log.d("housesss", houses.toString());
+                            House house = houses.get(i);
+                            arrayofSubscribedTo.add(house);
+                        }
+                        Log.d("subscribeee",arrayofSubscribedTo.toString());
+                        for (House house : arrayofSubscribedTo) {
+                            HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
+                            CardView cardView = housecard.makeSmallCardView();
+                            Log.d("here", "lol");
+                            cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+
+                            //adapterHouses.notifyDataSetChanged();
+                            gridLayout.addView(cardView);
+
+                        }
+                    }
+                });
 
                 if (user.username != null){
                     userName= user.username;
@@ -273,6 +325,72 @@ public class Profile extends AppCompatActivity {
                 renderReviews();
                 renderHousesSubscribed(user);
 
+                arrayOfPosts = new ArrayList<>();
+                PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Post> posts) {
+                        Log.d("posts", posts.toString());;
+                        for (int i = posts.size() - 1; i > -1; i--){
+                            Post post = posts.get(i);
+                            arrayOfPosts.add(post);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+                arrayOfReviews = new ArrayList<>();
+                ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Review> reviews) {
+                        Log.d("reviews", reviews.toString());
+                        for (int i = reviews.size() - 1; i > -1; i--){
+                            Review review = reviews.get(i);
+                            arrayOfReviews.add(review);
+                        }
+                        adapterReviews.notifyDataSetChanged();
+                    }
+                });
+
+
+//                HouseDatabaseHelper.getHousesByUserSubscribed(subscribedtO, new getAllHousesCallback() {
+//                    @Override
+//                    public void onCallback(ArrayList<House> houses) {
+//                        Log.d("hereee","lol");
+//                        Log.d("hereee",houses.toString());
+//                        for (int i = houses.size() -1; i > -1; i --){
+//                            Log.d("housesss", houses.toString());
+//                            House house = houses.get(i);
+//                            arrayofSubscribedTo.add(house);
+//                        }
+//                        Log.d("subscribeee",arrayofSubscribedTo.toString());
+//                        for (House house : arrayofSubscribedTo) {
+//                            HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
+//                            CardView cardView = housecard.makeCardView();
+//                            cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+//
+//                            //adapterHouses.notifyDataSetChanged();
+//                            gridLayout.addView(cardView);
+//
+//                        }
+//
+//                    }
+//                });
+
+
+
+                // Create the adapter to convert the array to views
+                //adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
+                // Attach the adapter to a ListView
+//                ListView list = findViewById(android.R.id.list);
+//                list.setAdapter(adapter); // sets adapter for list
+                RecyclerView recyclerView = findViewById(R.id.rv_posts);
+                LinearLayoutManager horizontalLayoutManager =
+                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(horizontalLayoutManager);
+                recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                        DividerItemDecoration.HORIZONTAL));
+                adapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
+                recyclerView.setAdapter(adapter);
 
             }
 
@@ -280,6 +398,17 @@ public class Profile extends AppCompatActivity {
         });
 
     }
+
+//                RecyclerView recyclerViewhouses = findViewById(R.id.rv_subscribed);
+//                LinearLayoutManager horizontalLayoutManager3 =
+//                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+//                recyclerViewhouses.setLayoutManager(horizontalLayoutManager3);
+//                recyclerViewhouses.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+//                        DividerItemDecoration.HORIZONTAL));
+//                adapterHouses = new RVSubscribedAdapter(getApplicationContext(), arrayofSubscribedTo);
+//                recyclerViewhouses.setAdapter(adapterHouses);
+//
+//                adapterHouses.notifyDataSetChanged();
 
 
     public void renderPosts(){
@@ -326,6 +455,9 @@ public class Profile extends AppCompatActivity {
 
 
     public void renderReviews(){
+                if (arrayofSubscribedTo == null) {
+                    arrayofSubscribedTo = new ArrayList<House>();
+                }
 
         arrayOfReviews = new ArrayList<>();
         ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {

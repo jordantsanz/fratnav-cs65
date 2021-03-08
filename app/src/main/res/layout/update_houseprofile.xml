@@ -292,23 +292,92 @@
                 android:text="Self-Reported Stats:"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
-            <EditText
-                android:id="@+id/edit_stats"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/total_members"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/house_stats"
+                android:fontFamily="@font/montserrat"
+                android:text="Total Members:"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/poc_members"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/total_members"
+                android:fontFamily="@font/montserrat"
+                android:text="POC Members:"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/queer_members"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/poc_members"
+                android:fontFamily="@font/montserrat"
+                android:text="LGBTQ+ Members:"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+
+            <EditText
+                android:id="@+id/edit_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@id/house_stats"
                 android:paddingStart="15dp"
                 android:inputType="text"
                 android:paddingEnd="15dp"
-                android:hint="Click to edit Stats"
-                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:hint="CLICK TO EDIT"
+                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"/>
+
+            <EditText
+                android:id="@+id/edit_poc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@id/edit_total"
+                android:paddingStart="15dp"
+                android:inputType="text"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:hint="CLICK TO EDIT"
+                android:textColorHint="@color/textColor"
+                android:background="@drawable/post_background"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/textColor"/>
+
+            <EditText
+                android:id="@+id/edit_lgbtq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@id/edit_poc"
+                android:paddingStart="15dp"
+                android:inputType="text"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:hint="CLICK TO EDIT"
+                android:textColorHint="@color/textColor"
+                android:background="@drawable/post_background"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/textColor"/>
+
 
             <TextView
                 android:id="@+id/house_tour"
@@ -316,26 +385,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="25dp"
-                android:layout_below="@id/edit_stats"
+                android:layout_below="@id/queer_members"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
                 android:text="House Tour:" />
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/explore_button"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="590dp"
-                android:layout_marginLeft="200dp"
-                android:fontFamily="@font/cabin"
-                android:background="@drawable/purple_background"
-                android:textAllCaps="false"
-                android:textSize="14sp"
-                android:textColor="@color/textColor"
-                android:onClick="onHouseTour"
-                android:text="explore the house" />
 
         </android.widget.RelativeLayout>
     </ScrollView>
