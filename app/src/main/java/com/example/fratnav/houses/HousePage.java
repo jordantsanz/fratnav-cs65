@@ -148,6 +148,13 @@ public class HousePage extends AppCompatActivity {
                 String total = "Total Members: ";
                 String summary = "House Summary: ";
 
+                ReviewDatabaseHelper.getReviewsByHouseId(house.id, new getAllReviewsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Review> reviews) {
+                        Log.d("reviews", reviews.toString());
+                    }
+                });
+
                 TextView houseNationalView = findViewById(R.id.house_national);
                 String n = "";
                 if (theHouse.national) {

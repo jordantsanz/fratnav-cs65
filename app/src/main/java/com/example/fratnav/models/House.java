@@ -27,7 +27,9 @@ public class House {
     public String totalMembers = "";
     public String queerMembers = "";
     public String pocMembers = "";
+    public String houseType = "";
     public HashMap<String, String> posts;
+    public String query = "";
 
     /**
      * Use this constructor to make an initial house!
@@ -68,6 +70,8 @@ public class House {
         this.treasurer = "";
         this.rushChair = "";
         this.posts = new HashMap<>();
+        this.houseType = "";
+        this.query = "";
 
     }
 
