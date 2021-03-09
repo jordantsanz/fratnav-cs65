@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,8 +80,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     boolean isHouse;
     public ListView list;
-
-
+    public HashMap<String, String> tags;
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
@@ -92,10 +92,40 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     public static RVPostsAdapter postsAdapter;
     RecyclerView recyclerViewforum;
 
+
+    /// booleans for houses
+    boolean axaOn;
+    boolean akaOn;
+    boolean aphiOn;
+    boolean alphasOn;
+    boolean alphathetaOn;
+    boolean axidOn;
+    boolean bgOn;
+    boolean betaOn;
+    boolean chideltOn;
+    boolean chigamOn;
+    boolean deltasOn;
+    boolean ektOn;
+    boolean gdxOn;
+    boolean hereotOn;
+    boolean kappaOn;
+    boolean kdOn;
+    boolean kdeOn;
+    boolean trikapOn;
+    boolean phideltOn;
+    boolean phitauOn;
+    boolean psiuOn;
+    boolean sigdeltOn;
+    boolean signuOn;
+    boolean tabardOn;
+    boolean tdxOn;
+    boolean zeteOn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
+        tags = new HashMap<>();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -133,6 +163,9 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                         return true;
                     }
                 });
+
+                setOnClickListeners(container);
+                setCurrentColors();
             }
         });
 
@@ -472,6 +505,422 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);
         startActivity(intent);
+
+    }
+
+
+    public void setOnClickListeners(ViewGroup container){
+        ToggleButton axa = container.findViewById(R.id.axaTag);
+        axa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("axa")){
+                    tags.remove("axa");
+                    axaOn = false;
+                }
+                else{
+                    tags.put("axa", "");
+                    axaOn = true;
+                }
+
+                axa.setChecked(axaOn);
+            }
+        });
+
+        ToggleButton aka = container.findViewById(R.id.akaTag);
+        aka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("aka")){
+                    tags.remove("aka");
+                    akaOn = false;
+                }
+                else{
+                    tags.put("aka", "");
+                    akaOn = true;
+                }
+
+                aka.setChecked(akaOn);
+            }
+        });
+
+        ToggleButton aphi = container.findViewById(R.id.aPhiTag);
+        String string = "aphi";
+        aphi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey(string)){
+                    tags.remove(string);
+                    aphiOn = false;
+                }
+                else{
+                    tags.put(string, "");
+                    aphiOn = true;
+                }
+
+                aphi.setChecked(aphiOn);
+            }
+        });
+
+
+        ToggleButton alphas = container.findViewById(R.id.alphasTag);
+        string = "alphas";
+        String finalString = string;
+        alphas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey(finalString)){
+                    tags.remove(finalString);
+                    alphasOn = false;
+                }
+                else{
+                    tags.put(finalString, "");
+                    alphasOn = true;
+                }
+
+                alphas.setChecked(alphasOn);
+            }
+        });
+
+        ToggleButton alphatheta = container.findViewById(R.id.alphaThetaTag);
+        alphatheta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("alphatheta")){
+                    tags.remove("alphatheta");
+                    aphiOn = false;
+                }
+                else{
+                    tags.put("alphatheta", "");
+                    aphiOn = true;
+                }
+
+                alphatheta.setChecked(alphathetaOn);
+            }
+        });
+
+        ToggleButton axid = container.findViewById(R.id.aXiDTag);
+        axid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("axid")){
+                    tags.remove("axid");
+                    axidOn = false;
+                }
+                else{
+                    tags.put("axid", "");
+                    axidOn = true;
+                }
+
+                axid.setChecked(axidOn);
+            }
+        });
+
+        ToggleButton bg = container.findViewById(R.id.bGTag);
+        bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("bg")){
+                    tags.remove("bg");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("bg", "");
+                    bgOn = true;
+                }
+
+                bg.setChecked(bgOn);
+            }
+        });
+
+        ToggleButton beta = container.findViewById(R.id.betaTag);
+        beta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("beta")){
+                    tags.remove("beta");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("beta", "");
+                    betaOn = true;
+                }
+
+                beta.setChecked(betaOn);
+            }
+        });
+
+        ToggleButton chidelt = container.findViewById(R.id.chiDeltTag);
+        chidelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("chidelt")){
+                    tags.remove("chidelt");
+                    chideltOn = false;
+                }
+                else{
+                    tags.put("chidelt", "");
+                    chideltOn = true;
+                }
+
+                chidelt.setChecked(chideltOn);
+            }
+        });
+
+        ToggleButton chigam = container.findViewById(R.id.chiGamTag);
+        chigam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("chigam")){
+                    tags.remove("chigam");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("chigam", "");
+                    bgOn = true;
+                }
+
+                chigam.setChecked(chigamOn);
+            }
+        });
+
+        ToggleButton deltas = container.findViewById(R.id.deltasTag);
+        deltas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("deltas")){
+                    tags.remove("deltas");
+                    deltasOn = false;
+                }
+                else{
+                    tags.put("deltas", "");
+                    deltasOn = true;
+                }
+
+                deltas.setChecked(deltasOn);
+            }
+        });
+
+        ToggleButton ekt = container.findViewById(R.id.ektTag);
+        ekt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("ekt")){
+                    tags.remove("ekt");
+                    ektOn = false;
+                }
+                else{
+                    tags.put("ekt", "");
+                    ektOn = true;
+                }
+
+                ekt.setChecked(ektOn);
+            }
+        });
+
+        ToggleButton gdx = container.findViewById(R.id.gdxTag);
+        gdx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("gdx")){
+                    tags.remove("gdx");
+                    gdxOn = false;
+                }
+                else{
+                    tags.put("gdx", "");
+                    gdxOn = true;
+                }
+
+                gdx.setChecked(gdxOn);
+            }
+        });
+
+        ToggleButton hereot = container.findViewById(R.id.hereotTag);
+        hereot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("hereot")){
+                    tags.remove("hereot");
+                    hereotOn = false;
+                }
+                else{
+                    tags.put("hereot", "");
+                    hereotOn = true;
+                }
+
+                hereot.setChecked(hereotOn);
+            }
+        });
+
+        ToggleButton kappa = container.findViewById(R.id.kappaTagSearch);
+        kappa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kappa")){
+                    tags.remove("kappa");
+                    kappaOn = false;
+                }
+                else{
+                    tags.put("kappa", "");
+                    kappaOn = true;
+                }
+
+                kappa.setChecked(kappaOn);
+            }
+        });
+
+        ToggleButton kd = container.findViewById(R.id.kdTag);
+        kd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kd")){
+                    tags.remove("kd");
+                    kdOn = false;
+                }
+                else{
+                    tags.put("kd", "");
+                    kdOn = true;
+                }
+
+                kd.setChecked(kdOn);
+            }
+        });
+
+        ToggleButton kde = container.findViewById(R.id.kdeTag);
+        kde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kde")){
+                    tags.remove("kde");
+                    kdeOn = false;
+                }
+                else{
+                    tags.put("kde", "");
+                    kdeOn = true;
+                }
+
+                kde.setChecked(kdeOn);
+            }
+        });
+
+        ToggleButton trikap = container.findViewById(R.id.triKapTag);
+        trikap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("trikap")){
+                    tags.remove("trikap");
+                    trikapOn = false;
+                }
+                else{
+                    tags.put("trikap", "");
+                    trikapOn = true;
+                }
+
+                trikap.setChecked(trikapOn);
+            }
+        });
+
+        ToggleButton phidelt = container.findViewById(R.id.phiDeltTag);
+        phidelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("phidelt")){
+                    tags.remove("phidelt");
+                    phideltOn = false;
+                }
+                else{
+                    tags.put("phidelt", "");
+                    phideltOn = true;
+                }
+
+                phidelt.setChecked(phideltOn);
+            }
+        });
+
+        ToggleButton phitau = container.findViewById(R.id.phiTauTag);
+        phitau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("phitau")){
+                    tags.remove("phitau");
+                    phitauOn = false;
+                }
+                else{
+                    tags.put("phitau", "");
+                    phitauOn = true;
+                }
+
+                phitau.setChecked(phitauOn);
+            }
+        });
+
+        ToggleButton sigdelt = container.findViewById(R.id.sigDeltTag);
+        sigdelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("sigdelt")){
+                    tags.remove("sigdelt");
+                    sigdeltOn = false;
+                }
+                else{
+                    tags.put("sigdelt", "");
+                    sigdeltOn = true;
+                }
+
+                sigdelt.setChecked(sigdeltOn);
+            }
+        });
+
+        ToggleButton signu = container.findViewById(R.id.sigNuTag);
+        signu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("signu")){
+                    tags.remove("signu");
+                    signuOn = false;
+                }
+                else{
+                    tags.put("signu", "");
+                    signuOn = true;
+                }
+
+                signu.setChecked(signuOn);
+            }
+        });
+
+        ToggleButton tabard = container.findViewById(R.id.tabardTag);
+        tabard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("tabard")){
+                    tags.remove("tabard");
+                    tabardOn = false;
+                }
+                else{
+                    tags.put("tabard", "");
+                    tabardOn = true;
+                }
+
+                tabard.setChecked(tabardOn);
+            }
+        });
+
+        ToggleButton bg = container.findViewById(R.id.bGTag);
+        bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("bg")){
+                    tags.remove("bg");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("bg", "");
+                    bgOn = true;
+                }
+
+                bg.setChecked(bgOn);
+            }
+        });
 
     }
 
