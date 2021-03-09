@@ -113,6 +113,7 @@ public class ReviewDatabaseHelper {
 
 
     public static void addReviewToObject(DatabaseReference ref, Review review, String id){
+        Log.d("houseid", review.houseId);
         ref.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

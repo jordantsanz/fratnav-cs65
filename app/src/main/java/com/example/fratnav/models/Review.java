@@ -11,11 +11,12 @@ public class Review {
     public float basementRating;
     public float overallRating;
     public String houseId;
+    public String houseName;
 
     public Review(){}
 
     public Review(String description, String username, String userID, float safetyRating, float inclusivityRating, float basementRating,
-                  float overallRating, String houseId){
+                  float overallRating, String houseId, String houseName){
         this.description = description;
         this.username = username;
         this.userID = userID;
@@ -24,6 +25,7 @@ public class Review {
         this.basementRating = basementRating;
         this.overallRating = overallRating;
         this.houseId = houseId;
+        this.houseName = houseName;
     }
 
 

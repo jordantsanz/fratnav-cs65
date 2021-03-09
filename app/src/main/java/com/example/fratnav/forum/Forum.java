@@ -464,6 +464,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
                 if (userId.equals(currentUserInfo.userID)){
                     userDidLike = true;
+                    heart.setBackgroundResource(R.drawable.filledlike);
                     break;
                 }
             }
