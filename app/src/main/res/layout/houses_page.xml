@@ -18,7 +18,8 @@
 
         <android.widget.RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="135dp">
 
             <ImageView
                 android:layout_width="150dp"
@@ -230,7 +231,7 @@
                 android:text="@string/leaveReview" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_reviews"
+                android:id="@+id/rv_housereviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/reviews"

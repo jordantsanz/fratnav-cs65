@@ -22,6 +22,7 @@ import com.anychart.core.ui.Tooltip;
 import com.anychart.enums.TreeFillingMethod;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
+import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
@@ -57,6 +58,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -66,6 +68,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomBar;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public User currentUserInfo;
     RVPostsAdapter postsAdapter;
     RecyclerView recyclerViewfeed;
+    public String randomKey;
 
 
     @Override
@@ -253,6 +257,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void onHeartClick(View v){
+        View parentRow = (View) v.getParent().getParent();
+        Log.d("parentRow", parentRow.toString());
+        RecyclerView rv = (RecyclerView) parentRow.getParent();
+        Log.d("recycle", rv.toString());
+        int position = rv.getChildLayoutPosition(parentRow);
+        Post post = postsAdapter.getItem(position);
+        assert post != null;
+        Log.d("heartClick", post.id);
+
+        if (randomKey == null){
+            randomKey = UUID.randomUUID().toString();
+        }
+
+        boolean userDidLike = false;
+
+        ImageView heart = findViewById(R.id.heart);
+        heart.getTag();
+
+
+        if (post.usersLiked != null){
+            Log.d("userDidLike", post.usersLiked.toString());
+            for (String userId : post.usersLiked.values()){
+                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+                if (userId.equals(currentUserInfo.userID)){
+                    userDidLike = true;
+                    break;
+                }
+            }
+        }
+
+        if (userDidLike){
+            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                @Override
+                public void onCallback(int likes) {
+                    Forum.refresh();
+                    Log.d("like", "removeLike");
+                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
+                    post.likes -= 1;
+                    Log.d("postprof", post.usersLiked.toString());
+
+
+                }
+            });
+
+
+        }
+        else{
+            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                @Override
+                public void onCallback(int likes) {
+                    Log.d("like", "addLike");
+                    Forum.refresh();
+                    if (post.usersLiked == null){
+                        post.usersLiked = new HashMap<>();
+                    }
+                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
+                    post.likes += 1;
+
+                }
+            });
+
+        }
+    }
+
     @Override
     public void onClick(View v) {
         Log.d("hereee", "lol");
@@ -273,18 +342,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //from GitHubRep
-    private static class CustomPertDataEntry extends PertDataEntry {
-        CustomPertDataEntry(String id, String description, String name, String fullName) {
-            super(id, name, fullName);
-            setValue("description", description);
-        }
 
-        CustomPertDataEntry(String id, String description, String name, String[] dependsOn, String fullName) {
-            super(id, name, fullName, dependsOn);
-            setValue("description", description);
-        }
-    }
 
 
 

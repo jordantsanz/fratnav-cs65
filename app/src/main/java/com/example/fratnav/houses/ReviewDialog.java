@@ -87,6 +87,9 @@ public class ReviewDialog extends Dialog {
             @Override
             public void onCallback(boolean didFinish) {
 
+                        dismiss();
+                        //notify
+
                 }
         });
 
