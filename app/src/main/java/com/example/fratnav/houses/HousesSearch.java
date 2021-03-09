@@ -5,15 +5,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.service.autofill.UserData;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.fratnav.MainActivity;
 import com.example.fratnav.callbacks.getUserByIdCallback;
@@ -36,7 +43,14 @@ public class HousesSearch extends AppCompatActivity {
     BottomNavigationView bottomBar;
     GridLayout gridLayout;
     FirebaseUser user;
+
+    ImageView filter;
+    PopupWindow popupWindow;
+    LayoutInflater layoutInflater;
+    ConstraintLayout coordinatorLayout;
+
     boolean isHouse;
+
 
     public static final String HOUSE_NAME_KEY = "housekey";
 
@@ -57,6 +71,30 @@ public class HousesSearch extends AppCompatActivity {
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
+
+        coordinatorLayout = (ConstraintLayout) findViewById(R.id.houseSearchConstrainLayout);
+        filter = (ImageView) findViewById(R.id.searchFilter);
+
+
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.filter_popup, null);
+                popupWindow = new PopupWindow(container, 520, 240, true);
+                popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 250, 180);
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+
 //        initSearchWidgets();
         HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
             @Override

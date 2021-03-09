@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
+    android:id="@+id/forumCoordinatorLayout"
     android:clickable="true"
     android:focusableInTouchMode="true"
     tools:context=".forum.Forum">
@@ -21,7 +22,7 @@
         app:labelVisibilityMode="labeled"
         app:itemIconSize="30dp"
         app:itemRippleColor="@android:color/transparent"
-        app:itemTextColor="@color/teal"
+        app:itemTextColor="@color/backgroundColor"
         app:itemIconTint="@drawable/item_selector"
         android:id="@+id/bottomBar"
     />
@@ -74,11 +75,13 @@
                     android:textSize="25sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/filter"
+                    android:layout_width="23dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/ic_baseline_filter_list_24" />
+                    android:background="@drawable/ic_baseline_filter_list_24"
+              />
             </LinearLayout>
 
 

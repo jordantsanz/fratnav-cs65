@@ -3,6 +3,10 @@ package com.example.fratnav;
 import android.content.Intent;
 import android.os.Bundle;
 
+
+import com.anychart.chart.common.dataentry.PertDataEntry;
+import com.baoyachi.stepview.VerticalStepView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,6 +25,7 @@ import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.forum.PostActivity;
 import com.example.fratnav.houses.HousesSearch;
@@ -39,6 +44,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.service.autofill.UserData;
 import android.util.Log;
@@ -200,82 +206,27 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-//        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-//        Pie pie = AnyChart.pie();
-//        List<DataEntry> data = new ArrayList<>();
-//        data.add(new ValueDataEntry("Jordan", 50));
-//        data.add(new ValueDataEntry("Will", 30));
-//        data.add(new ValueDataEntry("Melisa ", 20));
-//        pie.data(data);
-//        anyChartView.setChart(pie);
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        Pert pert = AnyChart.pert();
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new CustomPertDataEntry("1", "start talking to brother of houses you are intersted in", "21S", "Spring Term"));
-        data.add(new CustomPertDataEntry("2","continue talking to brothers, attend rush events of houses that you are interested in", "21X",  new String[]{"1"} ,"Summer Term"));
-        data.add(new CustomPertDataEntry("3", "attend information sessions and fill out rush interest from sent out by the IFC", "21F", new String[]{"2"}, "Fall Term"));
-        data.add(new CustomPertDataEntry("4","meet as many people as you can, try getting to know people outside of the typical basement scene", "22W", new String[]{"3"}, "Winter Term"));
-
-        pert.data(data, TreeFillingMethod.AS_TABLE);
-
-       pert.padding(50d, 0d, 0d, 50d);
+        VerticalStepView setpview5 = (VerticalStepView) findViewById(R.id.step_view0);
+        List<String> list0 = new ArrayList<>();
+        list0.add(getResources().getString(R.string.TwentyOneSpring));
+        list0.add(getResources().getString(R.string.TwentyOneSummer));
+        list0.add(getResources().getString(R.string.TwentyOneFall));
+        list0.add(getResources().getString(R.string.TwentyTwoWinter));
 
 
-        pert.title().enabled(true);
-        pert.title()
-                .text("General Rush Flow");
+        setpview5//设置完成的步数
+                .reverseDraw(false)//default is true
+                .setStepViewTexts(list0)//总步骤
+//                .setLinePaddingProportion(0.85f)//设置indicator线与线间距的比例系数
+                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsViewIndicator完成线的颜色
+                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))//设置StepsViewIndicator未完成线的颜色
+                .setStepViewComplectedTextColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsView text完成线的颜色
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))//设置StepsView text未完成线的颜色
+//                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))//设置StepsViewIndicator CompleteIcon
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));//设置StepsViewIndicator DefaultIcon
+               // .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
 
-        Tasks tasks = pert.tasks();
-        tasks.upperLabels().format(
-                "function() {\n" +
-                        "    return this.item.get('fullName');\n" +
-                        "  }");
-
-        tasks.lowerLabels().format("advice: {%description}");
-
-        Tooltip tooltip = tasks.tooltip();
-        tooltip.separator(true)
-                .titleFormat(
-                        "function() {\n" +
-                                "      return this.item.get('fullName');\n" +
-                                "    }");
-
-
-        Milestones milestones = pert.milestones();
-        milestones.color("#2C81D5")
-                .size("6.5%");
-        milestones.hovered().fill("#2C81D5", 0.75d);
-        milestones.tooltip().format("" +
-                "function() {\n" +
-                "  var result = '';\n" +
-                "  var i = 0;\n" +
-                "  if (this['successors'] && this['successors'].length) {\n" +
-                "    result += 'Successors:';\n" +
-                "    for (i = 0; i < this['successors'].length; i++) {\n" +
-                "      result += '\\n - ' + this['successors'][i].get('fullName');\n" +
-                "    }\n" +
-                "    if (this['predecessors'] && this['predecessors'].length)\n" +
-                "      result += '\\n\\n';\n" +
-                "  }\n" +
-                "  if (this['predecessors'] && this['predecessors'].length) {\n" +
-                "    result += 'Predecessors:';\n" +
-                "    for (i = 0; i < this['predecessors'].length; i++) {\n" +
-                "      result += '\\n - ' + this['predecessors'][i].get('fullName');\n" +
-                "    }\n" +
-                "  }\n" +
-                "  return result;\n" +
-                "}");
-
-        Milestones critMilestones = pert.criticalPath().milestones();
-        critMilestones.labels().format(
-                "function() {\n" +
-                        "    return this['creator'] ? this['creator'].get('name') : this['isStart'] ? 'Start' : 'Finish';\n" +
-                        "  }");
-        critMilestones.color("#E24B26");
-
-
-        anyChartView.setChart(pert);
 
     }
     //from GitHubRep

@@ -8,26 +8,78 @@
     android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginStart="55dp"-->
+<!--        android:orientation="horizontal">-->
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        style="@style/HeaderBar"-->
-<!--        app:theme="@style/Theme.FratNav.AppBarOverlay"-->
-<!--        app:popupTheme="@style/Theme.FratNav.AppBarOverlay"-->
-<!--        android:elevation="4dp"-->
-<!--        />-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/activity_main_recycler_view"/>-->
 
+<!--    </LinearLayout>-->
 
-        <com.anychart.AnyChartView
-            android:id="@+id/any_chart_view"
+    <ScrollView
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_height="300dp"
-            android:layout_marginStart="20dp" />
+            android:layout_height="wrap_content">
+        <com.baoyachi.stepview.VerticalStepView
+            android:id="@+id/step_view0"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            />
+        </LinearLayout>
+    </ScrollView>
 
-
+<!--    <TextView-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/textColor"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="12sp"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:layout_marginStart="80dp"-->
+<!--        android:text="start talking to brothers of houses you are interested in"-->
+<!--        android:fontFamily="@font/cabin"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/textColor"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="12sp"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:layout_marginStart="150dp"-->
+<!--        android:text="continue talking to brothers, and attend rush events"-->
+<!--        android:fontFamily="@font/cabin"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/textColor"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="12sp"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:layout_marginStart="210dp"-->
+<!--        android:text="attend info sessions and fill out the rush form sent by the IFC"-->
+<!--        android:fontFamily="@font/cabin"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="75dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/textColor"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="12sp"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:layout_marginStart="280dp"-->
+<!--        android:text="meet as many people as you can, try getting to know brothers outside of the basement scene"/>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +124,7 @@
         android:textSize="30sp"
         android:fontFamily="@font/montserrat"
         android:text="@string/feed"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="200dp"
         android:layout_marginStart="25dp"
         android:textColor="@color/textColor"/>
 

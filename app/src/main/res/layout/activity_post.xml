@@ -25,10 +25,64 @@
         android:textSize="16sp"
         android:layout_marginStart="25dp"
         android:id="@+id/postActivityUser" />
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/background"
+                android:id="@+id/postActivityUserAffiliation"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/background"
+                android:id="@+id/postActivityUserYear"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/background"
+                android:id="@+id/postActivityUserGender"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/background"
+                android:id="@+id/postActivityUserSexuality"/>
 
+
+
+        </LinearLayout>
+        </HorizontalScrollView>
 
 
     <TextView
+        android:layout_marginTop="5dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
@@ -38,8 +92,9 @@
         android:id="@+id/postActivityText" />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:id="@+id/commentEditText"
         android:background="@drawable/background"
         android:layout_marginStart="25dp"
@@ -47,6 +102,8 @@
         android:textSize="18sp"
         android:paddingStart="15sp"
         android:paddingEnd="15sp"
+        android:paddingTop="05dp"
+        android:paddingBottom="05dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
