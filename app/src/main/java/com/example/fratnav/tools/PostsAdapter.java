@@ -171,6 +171,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
     }
 
 
+
     @SuppressLint("ResourceAsColor")
     public void setBackgrounds(TextView tag1, TextView tag2, TextView tag3){
         ArrayList<TextView> tags = new ArrayList<>();
@@ -275,6 +276,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
                 default:
                     tag.setBackgroundResource(R.drawable.post_background);
             }
+
         }
     }
 }

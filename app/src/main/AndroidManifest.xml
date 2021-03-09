@@ -88,6 +88,7 @@
         <activity
             android:name=".forum.Forum"
             android:permission="com.google.android.c2dm.permission.SEND" />
+        
         <activity android:name=".houses.HousesSearch" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".houses.HousePage" />

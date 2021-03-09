@@ -19,6 +19,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,15 +28,14 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/housePageImage"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_marginStart="55dp"
-                        android:layout_marginTop="40dp"
-                        android:id="@+id/housePageImage"/>
+                        android:layout_marginTop="40dp" />
 
                     <TextView
                         android:id="@+id/house_name"
@@ -44,7 +44,7 @@
                         android:layout_marginStart="230dp"
                         android:layout_marginTop="45dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="HOUSE NAME"
+                        android:text="@string/houseName"
                         android:textAlignment="center"
                         android:textColor="@color/textColor"
                         android:textSize="24sp" />
@@ -53,59 +53,46 @@
                         android:id="@+id/subscribers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/house_name"
                         android:layout_marginStart="260dp"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@id/house_name"
                         android:fontFamily="@font/montserrat"
-                        android:text="# Subscribers"
+                        android:text="@string/subscribers"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
-
 
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/cabin"
-                        android:paddingStart="15dp"
-                        android:textColor="@color/textColor"
-                        android:paddingEnd="15dp"
-                        android:textSize="16sp"
-                        android:layout_marginTop="10dp"
                         android:layout_below="@id/housePageImage"
                         android:layout_marginStart="225dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/purple_background"
+                        android:fontFamily="@font/cabin"
+                        android:onClick="edit"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/updateProfile"
-                        android:onClick="edit"/>
+                        android:textColor="@color/textColor"
+                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/logout"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/housePageImage"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/teal_background"
                         android:fontFamily="@font/cabin"
+                        android:onClick="logout"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp"
-                        android:onClick="logout"
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@id/housePageImage"
+                        android:text="@string/logout"
                         android:textColor="@color/textColor"
-                        android:layout_marginStart="50dp"
-                        android:background="@drawable/teal_background"
-                        android:text="@string/logout"/>
+                        android:textSize="16sp" />
 
-
-                    <TextView
-                        android:id="@+id/notification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
-                        android:fontFamily="@font/montserrat"
-                        android:text="@string/notification"
-                        android:layout_below="@+id/logout"
-                        android:textSize="20sp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="25dp"/>
 
                     <TextView
                         android:id="@+id/pastPosts"
@@ -113,80 +100,46 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="350dp"
-                        android:textColor="@color/textColor"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/past_posts"
+                        android:textColor="@color/textColor"
                         android:textSize="20sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_below="@id/notification"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="25dp">
-                        <RadioGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:weightSum="2"
-                            android:orientation="horizontal">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/textColor"
-                                android:fontFamily="@font/montserrat"
-                                android:text="@string/on"
-                                android:id="@+id/notificationOn"
-                                android:textSize="16sp"/>
-
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/textColor"
-                                android:fontFamily="@font/montserrat"
-                                android:textSize="16sp"
-                                android:text="@string/off"
-                                android:id="@+id/notificationOff"
-                                android:layout_marginStart="25dp"/>
-                        </RadioGroup>
-
-
-                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_posts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/pastPosts"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
                         android:layout_marginStart="20sp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
                     </androidx.recyclerview.widget.RecyclerView>
+
                     <TextView
                         android:id="@+id/reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
                         android:layout_below="@id/rv_posts"
-                        android:textColor="@color/textColor"
+                        android:layout_marginStart="25dp"
                         android:fontFamily="@font/montserrat"
-                        android:text="Reviews:"
+                        android:text="@string/houseReviews"
+                        android:textColor="@color/textColor"
                         android:textSize="20sp" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_reviews"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/reviews"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
                         android:layout_marginStart="20sp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -198,28 +151,22 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-
-
     </androidx.core.widget.NestedScrollView>
 
 
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="30dp"
         android:background="@drawable/background"
         app:elevation="2dp"
-        app:menu="@menu/navbar"
-        app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/teal"
         app:itemIconSize="30dp"
-        app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"
-        android:id="@+id/bottomBar"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemTextColor="@color/teal"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:menu="@menu/navbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

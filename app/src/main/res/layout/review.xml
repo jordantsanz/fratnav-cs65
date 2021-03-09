@@ -1,132 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/createPostRelativeLayout"
+    android:layout_width="400dp"
+    android:layout_height="700dp"
     android:background="@drawable/grey_background">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="100dp"
-        android:fontFamily="@font/cabin"
-        android:layout_height="wrap_content"
-        android:background="@drawable/purple_background"
-        android:layout_marginStart="255dp"
-        android:textColor="@color/textColor"
 
-        android:textSize="18sp"
-        android:text="@string/post"
-        android:layout_marginTop="25dp"
+    <TextView
+        android:id="@+id/postUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/textColor"
+        android:textSize="21sp" />
+
+    <TextView
+        android:id="@+id/postHouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/background"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/dialog_choose_text_color"
+        android:textSize="21sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reviewSave"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/purple_background"
+
+        android:fontFamily="@font/cabin"
+        android:text="@string/post"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
 
         />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Safety:"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat"/>
+            android:fontFamily="@font/montserrat"
+            android:text="@string/reviewSafety"
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/safetyRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:id="@+id/safetyRating"
-        />
+            android:layout_marginStart="43dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="180dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inclusivity:"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat"/>
+            android:fontFamily="@font/montserrat"
+            android:text="@string/reviewInclusivity"
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/inclusivityRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:id="@+id/inclusivityRating"
-            />
+            android:layout_marginStart="10dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="240dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Basement:"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat"/>
+            android:fontFamily="@font/montserrat"
+            android:text="@string/reviewBasement"
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/basementRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:id="@+id/basementRating"
-            />
+            android:layout_marginStart="10dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Overall:"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat"/>
+            android:fontFamily="@font/montserrat"
+            android:text="@string/reviewOverall"
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/overallRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
-            android:id="@+id/overallRating"
-            />
+            android:layout_marginStart="42dp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comments:"
-        android:textSize="18sp"
-        android:layout_marginTop="365dp"
         android:layout_marginStart="30dp"
-        android:fontFamily="@font/montserrat"/>
+        android:layout_marginTop="365dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/reviewComments"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/reviewUserEditText"
-        android:layout_width="360dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/post_background"
+        android:fontFamily="@font/montserrat"
+        android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:background="@drawable/post_background"
-        android:layout_marginTop="400dp"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/textColor"/>
-
+        android:textColor="@color/textColor" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

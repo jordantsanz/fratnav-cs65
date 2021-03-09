@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    >
+    android:background="@color/backgroundColor">
 
     <ScrollView
         android:id="@+id/housepage_scroll"
@@ -19,61 +17,60 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/housePageImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/post_background"
-                android:padding="10dp"
-                android:id="@+id/housePageImage"/>
+                android:padding="10dp" />
 
             <LinearLayout
-                android:layout_marginStart="230dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/top"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                >
-
-            <TextView
-                android:id="@+id/house_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="HOUSE NAME"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:textColor="@color/textColor"
-                android:textSize="24sp" />
+                android:layout_marginStart="230dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/subscribers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/montserrat"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="# Subscribers"
-                android:textColor="@color/textColor"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/house_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center"
+                    android:text="HOUSE NAME"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/subscribers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="# Subscribers"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="125dp"
+                android:background="@drawable/teal_background"
                 android:fontFamily="@font/cabin"
+                android:onClick="imagePicker"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textSize="16sp"
-                android:onClick="imagePicker"
-                android:layout_marginTop="125dp"
+                android:text="@string/uploadPhoto"
                 android:textColor="@color/textColor"
-                android:layout_marginStart="240dp"
-                android:background="@drawable/teal_background"
-                android:text="@string/uploadPhoto"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/house_summary"
@@ -82,134 +79,116 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="220dp"
                 android:fontFamily="@font/montserrat"
-                android:text="House Summary:"
+                android:text="@string/houseSummary"
                 android:textColor="@color/textColor"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:id="@+id/housetype"
-                android:layout_below="@id/house_summary"
-                android:layout_marginStart="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:fontFamily="@font/montserrat"
-                    android:text="National"
-                    android:id="@+id/national"
-                    android:textSize="16sp"/>
+                android:layout_below="@id/house_summary"
+                android:layout_marginStart="40dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <RadioButton
+                    android:id="@+id/national"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textColor"
                     android:fontFamily="@font/montserrat"
-                    android:textSize="16sp"
-                    android:text="Local"
+                    android:text="@string/national"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <RadioButton
                     android:id="@+id/local"
-                    android:layout_marginStart="25dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/local"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
             </RadioGroup>
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/house_date"-->
-<!--                android:fontFamily="@font/montserrat"-->
-<!--                android:layout_marginStart="55dp"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:paddingRight="10dp"-->
-<!--                android:layout_marginTop="260dp"-->
-<!--                android:textColor="@color/textColor"-->
-<!--                android:background="@drawable/rounded_corner_view_purple"-->
-<!--                android:textSize="16sp" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/house_national"-->
-<!--                android:fontFamily="@font/montserrat"-->
-<!--                android:layout_marginStart="55dp"-->
-<!--                android:layout_marginTop="290dp"-->
-<!--                android:textColor="@color/textColor"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:paddingRight="10dp"-->
-<!--                android:background="@drawable/rounded_corner_view_teal"-->
-<!--                android:textSize="16sp" />-->
             <EditText
                 android:id="@+id/edit_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/housetype"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@id/housetype"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
-                android:padding="5dp"
-                android:hint="Click to edit House Summary"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/houseSummaryHint"
+                android:inputType="text"
+                android:padding="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
 
             <TextView
                 android:id="@+id/house_contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/edit_summary"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/edit_summary"
                 android:fontFamily="@font/montserrat"
-                android:text="Points of Contact:"
+                android:text="@string/pointsOfContacts"
                 android:textColor="@color/textColor"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/president"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/house_contacts"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/house_contacts"
                 android:fontFamily="@font/montserrat"
-                android:text="President:"
+                android:text="@string/president"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/vp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/president"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/president"
                 android:fontFamily="@font/montserrat"
-                android:text="Vice President:"
+                android:text="@string/vice"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/treasurer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/vp"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/vp"
                 android:fontFamily="@font/montserrat"
-                android:text="Treasurer:"
+                android:text="@string/tres"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/rushchair"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/treasurer"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/treasurer"
                 android:fontFamily="@font/montserrat"
-                android:text="Rush Chair:"
+                android:text="@string/rushChair"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
@@ -217,112 +196,115 @@
                 android:id="@+id/edit_president"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/house_contacts"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="5dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="number"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <EditText
                 android:id="@+id/edit_vp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_president"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="10dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="number"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <EditText
                 android:id="@+id/edit_treasurer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_vp"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="10dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="number"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <EditText
                 android:id="@+id/edit_rc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_treasurer"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="8dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="number"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <TextView
                 android:id="@+id/house_stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/rushchair"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
-                android:layout_below="@id/rushchair"
                 android:fontFamily="@font/montserrat"
-                android:text="Self-Reported Stats:"
+                android:text="@string/stats"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/total_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/house_stats"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/house_stats"
                 android:fontFamily="@font/montserrat"
-                android:text="Total Members:"
+                android:text="@string/totalMembers"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/poc_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/total_members"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/total_members"
                 android:fontFamily="@font/montserrat"
-                android:text="POC Members:"
+                android:text="@string/pocMembers"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/queer_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/poc_members"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/poc_members"
                 android:fontFamily="@font/montserrat"
-                android:text="LGBTQ+ Members:"
+                android:text="@string/queerMembers"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
@@ -331,78 +313,95 @@
                 android:id="@+id/edit_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/house_stats"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="5dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <EditText
                 android:id="@+id/edit_poc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_total"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="10dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
             <EditText
                 android:id="@+id/edit_lgbtq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_poc"
-                android:paddingStart="15dp"
-                android:inputType="text"
-                android:paddingEnd="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="230dp"
                 android:layout_marginTop="10dp"
-                android:hint="CLICK TO EDIT"
-                android:textColorHint="@color/textColor"
                 android:background="@drawable/post_background"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/textColor"/>
+                android:hint="@string/clickToEdit"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
 
             <TextView
                 android:id="@+id/house_tour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="25dp"
                 android:layout_below="@id/queer_members"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
+                android:text="@string/houseTour"
                 android:textColor="@color/textColor"
-                android:textSize="16sp"
-                android:text="House Tour:" />
+                android:textSize="16sp" />
 
-            <Button
+            <com.google.vr.sdk.widgets.pano.VrPanoramaView
+                android:id="@+id/vrPanoramaView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onSaveProfile"
-                android:text="Save profile"
-                android:id="@+id/saveProfileButton"/>
+                android:layout_below="@id/house_tour"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp">
 
+            </com.google.vr.sdk.widgets.pano.VrPanoramaView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/saveProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vrPanoramaView"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/teal_background"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center_horizontal"
+                android:onClick="onSaveProfile"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/updateProfile"
+                android:textColor="@color/textColor" />
 
 
         </android.widget.RelativeLayout>
     </ScrollView>
-
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -420,7 +419,8 @@
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"
+        app:itemTextColor="@color/backgroundColor"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

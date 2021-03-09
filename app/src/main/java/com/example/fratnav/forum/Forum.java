@@ -26,7 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.onboarding.Authentication;
@@ -40,6 +44,8 @@ import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
+import com.example.fratnav.profile.RVPostsAdapter;
+import com.example.fratnav.profile.RVReviewsAdapter;
 import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,7 +59,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class Forum extends ListActivity {
+public class Forum extends AppCompatActivity implements View.OnClickListener{
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
     private static User currentUserInfo;
@@ -83,6 +89,8 @@ public class Forum extends ListActivity {
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     CoordinatorLayout coordinatorLayout;
+    public static RVPostsAdapter postsAdapter;
+    RecyclerView recyclerViewforum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,63 +181,78 @@ public class Forum extends ListActivity {
 
 
 
-        list = findViewById(android.R.id.list);
 
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
-                // Construct the data source
-                arrayOfPosts = new ArrayList<Post>();
-                // Create the adapter to convert the array to views
-                adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
-                Log.d("Posts", posts.toString());
                 for (int i = posts.size() - 1; i > -1; i--){
-                    adapter.add(posts.get(i));
-
+                    Post post = posts.get(i);
+                    arrayOfPosts.add(post);
                 }
-                adapter.notifyDataSetChanged();
-
-
-                // Attach the adapter to a ListView
-
+                postsAdapter.notifyDataSetChanged();
                 list.setAdapter(adapter); // sets adapter for list
-
-                for (int i = 0; i < arrayOfPosts.size(); i += 1){
-                    Log.d("bruh", "onCreate: ");
-                    setFilledHearts(i, arrayOfPosts.get(i), currentUserInfo.userID);
-                }
             }
         });
 
+        // Construct the data source
+        if (arrayOfPosts == null) {
+            arrayOfPosts = new ArrayList<Post>();
+        }
 
+        recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
+        LinearLayoutManager verticalLayoutManager =
+                new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewforum.setLayoutManager(verticalLayoutManager);
+        recyclerViewforum.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                DividerItemDecoration.HORIZONTAL));
+        postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
+        recyclerViewforum.setAdapter(postsAdapter);
 
-
+        postsAdapter.notifyDataSetChanged();
 
 
 
         // on click listener for posts
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (position != -1) {
+//                    Log.d("position", String.valueOf(position));
+//                    long viewId = view.getId();
+//                    Log.d("click", String.valueOf(viewId));
+//                    Post post = adapter.getItem(position);
+//
+//
+//                    Intent intent = new Intent(Forum.this, PostActivity.class);
+//                    intent.putExtra(POST_ID_KEY, post.id);
+//                    intent.putExtra(USER_ID_KEY, currentUserInfo.username);
+//
+//
+//                    startActivity(intent);
+//                }}});
 
-                if (position != -1) {
-                    Log.d("position", String.valueOf(position));
-                    long viewId = view.getId();
-                    Log.d("click", String.valueOf(viewId));
-                    Post post = adapter.getItem(position);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("hereee", "lol");
+        int position = recyclerViewforum.getChildAdapterPosition(v);
+        if (position!=-1) {
+            Log.d("position", String.valueOf(position));
+            long viewId = v.getId();
+            Log.d("click", String.valueOf(viewId));
+            Post post = postsAdapter.getItem(position);
 
 
-                    Intent intent = new Intent(Forum.this, PostActivity.class);
-                    intent.putExtra(POST_ID_KEY, post.id);
-                    intent.putExtra(USER_ID_KEY, currentUserInfo.username);
+            Intent intent = new Intent(Forum.this, PostActivity.class);
+            intent.putExtra(POST_ID_KEY, post.id);
+            intent.putExtra(USER_ID_KEY, currentUserInfo.username);
 
 
-                    startActivity(intent);
-                }}});
-
+            startActivity(intent);
         }
-
-
+    }
 
     // if error
     private void notifyUser(String message) {
@@ -255,7 +278,7 @@ public class Forum extends ListActivity {
 
         arrayOfPosts.add(0, post);
 
-        adapter.notifyDataSetChanged();
+        postsAdapter.notifyDataSetChanged();
 
         UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
@@ -278,12 +301,84 @@ public class Forum extends ListActivity {
             @Override
             public void onCallback(ArrayList<Post> posts) {
                 arrayOfPosts = posts;
-                adapter.notifyDataSetChanged();
+                postsAdapter.notifyDataSetChanged();
             }
         });
 
     }
 
+//    public void onHeartClick(View v){
+//        View parentRow = (View) v.getParent().getParent();
+//        ListView lv = (ListView) parentRow.getParent();
+//        int position = lv.getPositionForView(parentRow);
+//        if (position == -1){
+//            return;
+//        }
+//        Post post = adapter.getItem(position);
+//        assert post != null;
+//        Log.d("heartClick", post.id);
+//
+//        if (randomKey == null){
+//            randomKey = UUID.randomUUID().toString();
+//        }
+//
+//        boolean userDidLike = false;
+//
+//        ImageView heart = findViewById(R.id.heart);
+//        heart.getTag();
+//
+//
+//        if (post.usersLiked != null){
+//            Log.d("userDidLike", post.usersLiked.toString());
+//            for (String userId : post.usersLiked.values()){
+//                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+//                if (userId.equals(currentUserInfo.userID)){
+//                    userDidLike = true;
+//                    break;
+//                }
+//            }
+//        }
+//
+//
+//        if (userDidLike){
+//            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
+//                @Override
+//                public void onCallback(int likes) {
+//                    Forum.refresh();
+//                    Log.d("like", "removeLike");
+//                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
+//                    post.likes -= 1;
+//                    Log.d("postprof", post.usersLiked.toString());
+//
+//
+//                    /// need to change heart image drawable here
+//                    heart.setBackgroundResource(R.drawable.like);
+//
+//                }
+//            });
+//
+//
+//        }
+//        else{
+//            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
+//                @Override
+//                public void onCallback(int likes) {
+//                    Log.d("like", "addLike");
+//                    Forum.refresh();
+//                    if (post.usersLiked == null){
+//                        post.usersLiked = new HashMap<>();
+//                    }
+//                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
+//                    post.likes += 1;
+//
+//
+//
+//
+//                }
+//            });
+//
+//        }
+//    }
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
         ListView lv = (ListView) parentRow.getParent();
@@ -329,7 +424,7 @@ public class Forum extends ListActivity {
 
 
                             /// need to change heart image drawable here
-                            heart.setBackgroundResource(R.drawable.like);
+                            //heart.setBackgroundResource(R.drawable.like);
 
                         }
                     });
@@ -358,28 +453,28 @@ public class Forum extends ListActivity {
             }
 
 
-
-
-    public void setFilledHearts(int position, Post post, String userId){
-        View v = list.getChildAt(position - list.getFirstVisiblePosition());
-
-        if (v == null){
-            Log.d("nullV", String.valueOf(position));
+    public void onUsernameClick(View v){
+        View parentRow = (View) v.getParent();
+        Log.d("listview", parentRow.getParent().toString());
+        RecyclerView rv = (RecyclerView) parentRow.getParent();
+        Log.d("listview", rv.toString());
+        int position = rv.getChildLayoutPosition(parentRow);
+        Log.d("listview", String.valueOf(position));
+        if (position == -1){
             return;
         }
-        boolean found = false;
-        for (String id : post.usersLiked.keySet()){
-            Log.d("id", id);
-            if (id.equals(userId)){
-                found = true;
-                break;
-            }
-        }
 
-        if (found) {
-            ImageButton heart = v.findViewById(R.id.heart);
-            heart.setBackgroundResource(R.drawable.filled_heart);
-        }
+        Post post = postsAdapter.getItem(position);
+        assert post != null;
+        Log.d("listview", post.username);
+        assert post != null;
+        Log.d("heartClick", post.id);
+        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        intent.putExtra(USER_ID_KEY, post.userID);
+        startActivity(intent);
 
     }
+
+
 }
+

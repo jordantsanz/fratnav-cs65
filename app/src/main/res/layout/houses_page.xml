@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="HOUSE NAME"
+                android:text="@string/houseName"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/textColor"
@@ -56,7 +56,7 @@
                 android:fontFamily="@font/montserrat"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="# Subscribers"
+                android:text="@string/subscribers"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/cabin"
                 android:textAllCaps="false"
                 android:layout_gravity="center"
-                android:text="subscribe"
+                android:text="@string/subscribe"
                 android:onClick="subscribe"
                 android:background="@drawable/teal_background"/>
             </LinearLayout>
@@ -83,7 +83,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/housePageImage"
                 android:fontFamily="@font/montserrat"
-                android:text="House Summary:"
+                android:text="@string/houseSummary"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
 
@@ -110,8 +110,9 @@
                 android:textColor="@color/textColor"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_corner_view_teal"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,9 +132,10 @@
                 android:layout_marginStart="25dp"
                 android:layout_below="@id/summaryResponse"
                 android:fontFamily="@font/montserrat"
-                android:text="Points of Contact:"
+                android:text="@string/pointsOfContacts"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -143,7 +145,7 @@
                 android:id="@+id/contactsResponse"
                 android:textSize="16sp"
                 android:layout_below="@id/house_contacts"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginStart="45dp"
                 />
 
@@ -154,7 +156,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_below="@id/contactsResponse"
                 android:fontFamily="@font/montserrat"
-                android:text="Self-Reported Stats:"
+                android:text="@string/stats"
                 android:textColor="@color/textColor"
                 android:textSize="16sp" />
             <TextView
@@ -165,7 +167,7 @@
                 android:id="@+id/statsResponse"
                 android:textSize="16sp"
                 android:layout_below="@id/house_stats"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginStart="45dp"
                 />
 
@@ -174,11 +176,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@id/statsResponse"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
-                android:text="House Tour:" />
+                android:text="@string/houseTour" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -191,10 +194,11 @@
                 android:fontFamily="@font/cabin"
                 android:background="@drawable/purple_background"
                 android:textAllCaps="false"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textColor="@color/textColor"
                 android:onClick="onHouseTour"
-                android:text="explore the house" />
+                android:text="@string/exploreHouse" />
 
             <TextView
                 android:id="@+id/reviews"
@@ -206,7 +210,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
-                android:text="Reviews:" />
+                android:text="@string/houseReviews" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/review_button"
@@ -221,7 +225,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="14sp"
                 android:layout_marginBottom="100dp"
-                android:text="leave a review" />
+                android:text="@string/leaveReview" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reviews"

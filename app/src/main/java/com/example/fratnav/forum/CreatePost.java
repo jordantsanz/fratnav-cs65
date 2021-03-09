@@ -235,7 +235,7 @@ public class CreatePost extends AppCompatActivity {
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
             // issues here
             Forum.arrayOfPosts.add(0, post);
-            Forum.adapter.notifyDataSetChanged();
+            Forum.postsAdapter.notifyDataSetChanged();
             UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
             Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
