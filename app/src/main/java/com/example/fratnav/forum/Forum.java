@@ -54,10 +54,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.UUID;
 
 public class Forum extends AppCompatActivity implements View.OnClickListener{
@@ -111,7 +114,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
-    public static PostsAdapter adapter;
     ImageView filter;
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
@@ -537,16 +539,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         axa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("axa")){
-                    tags.remove("axa");
+                if (tags.containsKey("Alpha Chi")){
+                    tags.remove("Alpha Chi");
                     axaOn = false;
                 }
                 else{
-                    tags.put("axa", "");
+                    tags.put("Alpha Chi", "");
                     axaOn = true;
                 }
 
                 axa.setChecked(axaOn);
+                filter();
             }
         });
 
@@ -554,16 +557,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         aka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("aka")){
-                    tags.remove("aka");
+                if (tags.containsKey("AKA")){
+                    tags.remove("AKA");
                     akaOn = false;
                 }
                 else{
-                    tags.put("aka", "");
+                    tags.put("AKA", "");
                     akaOn = true;
                 }
 
                 aka.setChecked(akaOn);
+                filter();
             }
         });
 
@@ -571,16 +575,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         aphi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("aphi")){
-                    tags.remove("aphi");
+                if (tags.containsKey("Aphi")){
+                    tags.remove("Aphi");
                     aphiOn = false;
                 }
                 else{
-                    tags.put("aphi", "");
+                    tags.put("Aphi", "");
                     aphiOn = true;
                 }
 
                 aphi.setChecked(aphiOn);
+                filter();
             }
         });
 
@@ -589,16 +594,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         alphas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("alphas")){
-                    tags.remove("alphas");
+                if (tags.containsKey("ΑΦΑ")){
+                    tags.remove("ΑΦΑ");
                     alphasOn = false;
                 }
                 else{
-                    tags.put("alphas", "");
+                    tags.put("ΑΦΑ", "");
                     alphasOn = true;
                 }
 
                 alphas.setChecked(alphasOn);
+                filter();
             }
         });
 
@@ -606,8 +612,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         alphatheta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("alphatheta")){
-                    tags.remove("alphatheta");
+                if (tags.containsKey("Alpha Theta")){
+                    tags.remove("Alpha Theta");
                     aphiOn = false;
                 }
                 else{
@@ -616,6 +622,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 }
 
                 alphatheta.setChecked(alphathetaOn);
+                filter();
             }
         });
 
@@ -623,16 +630,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         axid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("axid")){
-                    tags.remove("axid");
+                if (tags.containsKey("AXiD")){
+                    tags.remove("AXiD");
                     axidOn = false;
                 }
                 else{
-                    tags.put("axid", "");
+                    tags.put("AXiD", "");
                     axidOn = true;
                 }
 
                 axid.setChecked(axidOn);
+                filter();
             }
         });
 
@@ -640,16 +648,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("bg")){
-                    tags.remove("bg");
+                if (tags.containsKey("BG")){
+                    tags.remove("BG");
                     bgOn = false;
                 }
                 else{
-                    tags.put("bg", "");
+                    tags.put("BG", "");
                     bgOn = true;
                 }
 
                 bg.setChecked(bgOn);
+                filter();
             }
         });
 
@@ -657,16 +666,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         beta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("beta")){
-                    tags.remove("beta");
+                if (tags.containsKey("Beta")){
+                    tags.remove("Beta");
                     bgOn = false;
                 }
                 else{
-                    tags.put("beta", "");
+                    tags.put("Beta", "");
                     betaOn = true;
                 }
 
                 beta.setChecked(betaOn);
+                filter();
             }
         });
 
@@ -674,16 +684,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         chidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("chidelt")){
-                    tags.remove("chidelt");
+                if (tags.containsKey("Chi Delt")){
+                    tags.remove("Chi Delt");
                     chideltOn = false;
                 }
                 else{
-                    tags.put("chidelt", "");
+                    tags.put("Chi Delt", "");
                     chideltOn = true;
                 }
 
                 chidelt.setChecked(chideltOn);
+                filter();
             }
         });
 
@@ -691,16 +702,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         chigam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("chigam")){
-                    tags.remove("chigam");
+                if (tags.containsKey("Chi Gam")){
+                    tags.remove("Chi Gam");
                     bgOn = false;
                 }
                 else{
-                    tags.put("chigam", "");
+                    tags.put("Chi Gam", "");
                     bgOn = true;
                 }
 
                 chigam.setChecked(chigamOn);
+                filter();
             }
         });
 
@@ -708,16 +720,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         deltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("deltas")){
-                    tags.remove("deltas");
+                if (tags.containsKey("ΔΣΘ")){
+                    tags.remove("ΔΣΘ");
                     deltasOn = false;
                 }
                 else{
-                    tags.put("deltas", "");
+                    tags.put("ΔΣΘ", "");
                     deltasOn = true;
                 }
 
                 deltas.setChecked(deltasOn);
+                filter();
             }
         });
 
@@ -725,16 +738,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         ekt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("ekt")){
-                    tags.remove("ekt");
+                if (tags.containsKey("EKT")){
+                    tags.remove("EKT");
                     ektOn = false;
                 }
                 else{
-                    tags.put("ekt", "");
+                    tags.put("EKT", "");
                     ektOn = true;
                 }
 
                 ekt.setChecked(ektOn);
+                filter();
             }
         });
 
@@ -742,16 +756,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         gdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("gdx")){
-                    tags.remove("gdx");
+                if (tags.containsKey("GDX")){
+                    tags.remove("GDX");
                     gdxOn = false;
                 }
                 else{
-                    tags.put("gdx", "");
+                    tags.put("GDX", "");
                     gdxOn = true;
                 }
 
                 gdx.setChecked(gdxOn);
+                filter();
             }
         });
 
@@ -759,16 +774,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         hereot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("hereot")){
-                    tags.remove("hereot");
+                if (tags.containsKey("Hereot")){
+                    tags.remove("Hereot");
                     hereotOn = false;
                 }
                 else{
-                    tags.put("hereot", "");
+                    tags.put("Hereot", "");
                     hereotOn = true;
                 }
 
                 hereot.setChecked(hereotOn);
+                filter();
             }
         });
 
@@ -776,16 +792,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         kappa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("kappa")){
-                    tags.remove("kappa");
+                if (tags.containsKey("Kappa")){
+                    tags.remove("Kappa");
                     kappaOn = false;
                 }
                 else{
-                    tags.put("kappa", "");
+                    tags.put("Kappa", "");
                     kappaOn = true;
                 }
 
                 kappa.setChecked(kappaOn);
+                filter();
             }
         });
 
@@ -793,16 +810,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         kd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("kd")){
-                    tags.remove("kd");
+                if (tags.containsKey("KD")){
+                    tags.remove("KD");
                     kdOn = false;
                 }
                 else{
-                    tags.put("kd", "");
+                    tags.put("KD", "");
                     kdOn = true;
                 }
 
                 kd.setChecked(kdOn);
+                filter();
             }
         });
 
@@ -810,16 +828,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         kde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("kde")){
-                    tags.remove("kde");
+                if (tags.containsKey("KDE")){
+                    tags.remove("KDE");
                     kdeOn = false;
                 }
                 else{
-                    tags.put("kde", "");
+                    tags.put("KDE", "");
                     kdeOn = true;
                 }
 
                 kde.setChecked(kdeOn);
+                filter();
             }
         });
 
@@ -827,16 +846,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         trikap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("trikap")){
-                    tags.remove("trikap");
+                if (tags.containsKey("Tri-Kap")){
+                    tags.remove("Tri-Kap");
                     trikapOn = false;
                 }
                 else{
-                    tags.put("trikap", "");
+                    tags.put("Tri-Kap", "");
                     trikapOn = true;
                 }
 
                 trikap.setChecked(trikapOn);
+                filter();
             }
         });
 
@@ -844,16 +864,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         phidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("phidelt")){
-                    tags.remove("phidelt");
+                if (tags.containsKey("Phi Delt")){
+                    tags.remove("Phi Delt");
                     phideltOn = false;
                 }
                 else{
-                    tags.put("phidelt", "");
+                    tags.put("Phi Delt", "");
                     phideltOn = true;
                 }
 
                 phidelt.setChecked(phideltOn);
+                filter();
             }
         });
 
@@ -861,32 +882,34 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         phitau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("phitau")){
-                    tags.remove("phitau");
+                if (tags.containsKey("Phi Tau")){
+                    tags.remove("Phi Tau");
                     phitauOn = false;
                 }
                 else{
-                    tags.put("phitau", "");
+                    tags.put("Phi Tau", "");
                     phitauOn = true;
                 }
 
                 phitau.setChecked(phitauOn);
+                filter();
             }
         });
         psiu = container.findViewById(R.id.psiUTagSearch);
         psiu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("psiu")){
-                    tags.remove("psiu");
+                if (tags.containsKey("Psi U")){
+                    tags.remove("Psi U");
                     psiuOn = false;
                 }
                 else{
-                    tags.put("psiu", "");
+                    tags.put("Psi U", "");
                     psiuOn = true;
                 }
 
                 psiu.setChecked(psiuOn);
+                filter();
             }
         });
 
@@ -895,16 +918,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         sigdelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("sigdelt")){
-                    tags.remove("sigdelt");
+                if (tags.containsKey("Sigma Delt")){
+                    tags.remove("Sigma Delt");
                     sigdeltOn = false;
                 }
                 else{
-                    tags.put("sigdelt", "");
+                    tags.put("Sigma Delt", "");
                     sigdeltOn = true;
                 }
 
                 sigdelt.setChecked(sigdeltOn);
+                filter();
             }
         });
 
@@ -912,16 +936,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         signu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("signu")){
-                    tags.remove("signu");
+                if (tags.containsKey("Sig Nu")){
+                    tags.remove("Sig Nu");
                     signuOn = false;
                 }
                 else{
-                    tags.put("signu", "");
+                    tags.put("Sig Nu", "");
                     signuOn = true;
                 }
 
                 signu.setChecked(signuOn);
+                filter();
             }
         });
 
@@ -929,16 +954,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         tabard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("tabard")){
-                    tags.remove("tabard");
+                if (tags.containsKey("Tabard")){
+                    tags.remove("Tabard");
                     tabardOn = false;
                 }
                 else{
-                    tags.put("tabard", "");
+                    tags.put("Tabard", "");
                     tabardOn = true;
                 }
 
                 tabard.setChecked(tabardOn);
+                filter();
             }
         });
 
@@ -946,16 +972,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         tdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("tdx")){
-                    tags.remove("tdx");
+                if (tags.containsKey("TDX")){
+                    tags.remove("TDX");
                     tdxOn = false;
                 }
                 else{
-                    tags.put("tdx", "");
+                    tags.put("TDX", "");
                     tdxOn = true;
                 }
 
                 tdx.setChecked(tdxOn);
+                filter();
             }
         });
 
@@ -963,16 +990,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         zete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("zete")){
-                    tags.remove("zete");
+                if (tags.containsKey("Zete")){
+                    tags.remove("Zete");
                     zeteOn = false;
                 }
                 else{
-                    tags.put("zete", "");
+                    tags.put("Zete", "");
                     zeteOn = true;
                 }
 
                 zete.setChecked(zeteOn);
+                filter();
             }
         });
 
@@ -1013,6 +1041,52 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             button.setChecked(map.get(button));
         }
 
+
+    }
+
+
+    public void filter(){
+        PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
+            @Override
+            public void onCallback(ArrayList<Post> posts) {
+                ArrayList<Post> filteredPosts = new ArrayList<>();
+                for(ListIterator<Post> it = posts.listIterator(); it.hasNext();){
+                Post post = it.next();
+                    if (tags.size() != 0 & post.attributes != null){
+                        boolean itsIn = false;
+                        for (String att : post.attributes){
+                            Log.d("att", att);
+                            if (tags.containsKey(att)){
+                                itsIn = true;
+                                break;
+                            }
+                        }
+
+                        if (itsIn){
+                            filteredPosts.add(post);
+                        }
+                    }
+                    else if (tags.size() == 0){
+                        filteredPosts.add(post);
+                    }
+                }
+
+                Log.d("filteredPosts", filteredPosts.toString());
+                Log.d("filteredPosts", tags.toString());
+                for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
+                    arrayOfPosts.remove(i);
+                }
+
+                for (int i =filteredPosts.size() - 1; i > -1; i -= 1){
+                    arrayOfPosts.add(filteredPosts.get(i));
+                }
+
+
+                assert filteredPosts.size() == arrayOfPosts.size();
+
+                postsAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
