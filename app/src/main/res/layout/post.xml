@@ -1,6 +1,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
     android:layout_height="200dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/post_background"
     android:paddingBottom="30dp"
@@ -17,7 +18,7 @@
         android:textSize="21sp"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"
-        android:onClick="onUsernameClick"/>
+        />
 
     <TextView
         android:layout_width="wrap_content"

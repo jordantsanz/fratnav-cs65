@@ -2,6 +2,7 @@ package com.example.fratnav.tools;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.provider.MediaStore;
@@ -26,6 +27,7 @@ import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.Post;
+import com.example.fratnav.profile.Profile;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
@@ -68,6 +70,29 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
 
         TextView postUser = (TextView) convertView.findViewById(R.id.postUser);
+        postUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View parentRow = (View) v.getParent();
+                    Log.d("listview", parentRow.getParent().toString());
+                    ListView lv = (ListView) parentRow.getParent();
+                    Log.d("listview", lv.toString());
+                    int position = lv.getPositionForView(parentRow);
+                    Log.d("listview", String.valueOf(position));
+                    if (position == -1){
+                        return;
+                    }
+
+                    Post post = getItem(position);
+                    assert post != null;
+                    Log.d("listview", post.username);
+                    Log.d("heartClick", post.id);
+                    Intent intent = new Intent(getContext(), Profile.class);
+                    intent.putExtra(Forum.USER_ID_KEY, post.userID);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    v.getContext().startActivity(intent);
+            }
+        });
         TextView postText = (TextView) convertView.findViewById(R.id.postText);
         TextView postLikes = (TextView) convertView.findViewById(R.id.likes);
 
@@ -132,8 +157,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         postText.setText(post.text);
         String likes = post.likes +"";
         postLikes.setText(likes);
-
-        MediaStore.CAMERA
 
 
         // Return the completed view to render on screen

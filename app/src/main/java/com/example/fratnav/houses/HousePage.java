@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.fratnav.MainActivity;
+import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.models.Review;
@@ -43,6 +44,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+
+import java.util.ArrayList;
 
 public class HousePage extends AppCompatActivity {
     BottomNavigationView bottomBar;
@@ -127,6 +130,13 @@ public class HousePage extends AppCompatActivity {
                 Log.d("house", theHouse.toString());
                 TextView houseDateView = findViewById(R.id.house_date);
                 houseDateView.setText(String.valueOf(theHouse.date));
+
+                ReviewDatabaseHelper.getReviewsByHouseId(house.id, new getAllReviewsCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Review> reviews) {
+                        Log.d("reviews", reviews.toString());
+                    }
+                });
 
                 TextView houseNationalView = findViewById(R.id.house_national);
                 String n = "";

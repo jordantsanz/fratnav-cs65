@@ -24,17 +24,22 @@ public class ReviewDatabaseHelper {
 
     public static void getReviewsByHouseId(String houseId, getAllReviewsCallback myCallback){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbRefHouses = database.getReference("/reviews");
+        DatabaseReference dbRefHouses = database.getReference("/houses");
         dbRefHouses.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+                Log.d("snapshotReviewHouse", snapshot.toString());
                 ArrayList<Review> reviews = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     House house = ds.getValue(House.class);
                     assert house != null;
+                    Log.d("houseReviews", house.reviews.toString());
                     for (DataSnapshot dss : ds.child("reviews").getChildren()){
+                        Log.d("dss", dss.toString());
                         Review review =  dss.getValue(Review.class);
+                        assert review != null;
+                        Log.d("review", review.toString());
+
                         reviews.add(review);
                     }
 
