@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,10 +60,10 @@ public class HousesSearch extends AppCompatActivity {
     public HashMap<String, String> houseCategories;
     public String searchText = "";
 
-    public boolean sororityOn;
-    public boolean fraternityOn;
-    public boolean genderOn;
-    public boolean panhelOn;
+    public boolean sororityOn = false;
+    public boolean fraternityOn = false;
+    public boolean genderOn = false;
+    public boolean panOn = false;
     boolean isHouse;
 
 
@@ -100,6 +101,18 @@ public class HousesSearch extends AppCompatActivity {
                 popupWindow = new PopupWindow(container, 520, 240, true);
                 popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 250, 180);
 
+                ToggleButton sor = container.findViewById(R.id.soroTag);
+                sor.setChecked(sororityOn);
+
+                ToggleButton frat = container.findViewById(R.id.fratTag);
+                frat.setChecked(fraternityOn);
+
+                ToggleButton gen = container.findViewById(R.id.genderInclusiveTag);
+                gen.setChecked(genderOn);
+
+                ToggleButton pan = container.findViewById(R.id.nationalPanHellicTag);
+                pan.setChecked(panOn);
+
 
 
                 container.setOnTouchListener(new View.OnTouchListener() {
@@ -115,11 +128,14 @@ public class HousesSearch extends AppCompatActivity {
                         public void onClick(View v) {
                             if (houseCategories.containsKey("sorority")){
                                 houseCategories.remove("sorority");
+                                sororityOn = false;
                             }
                             else{
                                 houseCategories.put("sorority", "");
+                                sororityOn = true;
                             }
                             firebaseHouseSearch();
+
                         }
                     }
                 );
@@ -129,9 +145,11 @@ public class HousesSearch extends AppCompatActivity {
                     public void onClick(View v) {
                         if (houseCategories.containsKey("fraternity")){
                             houseCategories.remove("fraternity");
+                            fraternityOn = false;
                         }
                         else{
                             houseCategories.put("fraternity", "");
+                            fraternityOn = true;
                         }
                         firebaseHouseSearch();
                     }
@@ -142,9 +160,11 @@ public class HousesSearch extends AppCompatActivity {
                     public void onClick(View v) {
                         if (houseCategories.containsKey("genderInclusive")){
                             houseCategories.remove("genderInclusive");
+                            genderOn = false;
                         }
                         else{
                             houseCategories.put("genderInclusive", "");
+                            genderOn = true;
                         }
                         firebaseHouseSearch();
                     }
@@ -155,9 +175,11 @@ public class HousesSearch extends AppCompatActivity {
                     public void onClick(View v) {
                         if (houseCategories.containsKey("pan")){
                             houseCategories.remove("pan");
+                            panOn = false;
                         }
                         else{
                             houseCategories.put("pan", "");
+                            panOn = true;
                         }
                         firebaseHouseSearch();
                     }

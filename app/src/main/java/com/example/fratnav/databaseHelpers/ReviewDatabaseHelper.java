@@ -6,9 +6,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.fratnav.callbacks.createCallback;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
+import com.example.fratnav.houses.HousePage;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Review;
 import com.example.fratnav.models.User;
@@ -19,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static com.example.fratnav.houses.HousePage.arrayOfReviews;
 
 public class ReviewDatabaseHelper {
 
@@ -32,10 +36,10 @@ public class ReviewDatabaseHelper {
                 ArrayList<Review> reviews = new ArrayList<>();
 
                 for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("snapsnap", ds.toString());
                     House house = ds.getValue(House.class);
                     assert house != null;
-
-                    Log.d("reviewss", reviews.toString());
+                    Log.d("house", house.toString());
                     if (house.reviews != null) {
                         for (DataSnapshot dss : ds.child("reviews").getChildren()) {
                             Log.d("dss", dss.toString());
@@ -49,6 +53,7 @@ public class ReviewDatabaseHelper {
 
                 }
 
+                Log.d("reviewsFoundInMethod", reviews.toString());
                 myCallback.onCallback(reviews);
 
 
@@ -95,22 +100,22 @@ public class ReviewDatabaseHelper {
     }
 
 
-    public static void createReview(Review review){
+    public static void createReview(Review review, createCallback myCallback){
 
         // add to reviews database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        // store in user
-        addReviewToObject(database.getReference("/users"), review, review.userID);
-
         // store in house
-        addReviewToObject(database.getReference("/houses"), review, review.houseId);
+        addReviewToObject(database.getReference("/houses"), review, review.houseId, myCallback, "house");
+
+        // store in user
+        addReviewToObject(database.getReference("/users"), review, review.userID, myCallback, "user");
+
 
     }
 
 
-    public static void addReviewToObject(DatabaseReference ref, Review review, String id){
-        Log.d("houseid", review.houseId);
+    public static void addReviewToObject(DatabaseReference ref, Review review, String id, createCallback myCallback, String type){
         ref.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

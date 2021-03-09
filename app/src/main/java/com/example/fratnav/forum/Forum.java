@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,10 +78,36 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     Dialog filterDialog;
 
+    public ToggleButton axa;
+    public ToggleButton aka;
+    public ToggleButton aphi;
+    public ToggleButton alphas;
+    public ToggleButton alphatheta;
+    public ToggleButton axid;
+    public ToggleButton bg;
+    public ToggleButton beta;
+    public ToggleButton chidelt;
+    public ToggleButton chigam;
+    public ToggleButton deltas;
+    public ToggleButton ekt;
+    public ToggleButton gdx;
+    public ToggleButton hereot;
+    public ToggleButton kappa;
+    public ToggleButton kd;
+    public ToggleButton kde;
+    public ToggleButton trikap;
+    public ToggleButton phidelt;
+    public ToggleButton phitau;
+    public ToggleButton psiu;
+    public ToggleButton sigdelt;
+    public ToggleButton signu;
+    public ToggleButton tabard;
+    public ToggleButton tdx;
+    public ToggleButton zete;
+
     boolean isHouse;
     public ListView list;
-
-
+    public HashMap<String, String> tags;
 
     public static final String POST_ID_KEY = "postid_key";
     public static final String USER_ID_KEY = "userid_key";
@@ -92,10 +119,40 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     public static RVPostsAdapter postsAdapter;
     RecyclerView recyclerViewforum;
 
+
+    /// booleans for houses
+    boolean axaOn;
+    boolean akaOn;
+    boolean aphiOn;
+    boolean alphasOn;
+    boolean alphathetaOn;
+    boolean axidOn;
+    boolean bgOn;
+    boolean betaOn;
+    boolean chideltOn;
+    boolean chigamOn;
+    boolean deltasOn;
+    boolean ektOn;
+    boolean gdxOn;
+    boolean hereotOn;
+    boolean kappaOn;
+    boolean kdOn;
+    boolean kdeOn;
+    boolean trikapOn;
+    boolean phideltOn;
+    boolean phitauOn;
+    boolean psiuOn;
+    boolean sigdeltOn;
+    boolean signuOn;
+    boolean tabardOn;
+    boolean tdxOn;
+    boolean zeteOn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
+        tags = new HashMap<>();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -133,6 +190,9 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                         return true;
                     }
                 });
+
+                setOnClickListeners(container);
+                setCurrentColors();
             }
         });
 
@@ -404,7 +464,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
                 if (userId.equals(currentUserInfo.userID)){
                     userDidLike = true;
-                    heart.setBackgroundResource(R.drawable.filledlike);
+
                     break;
                 }
             }
@@ -468,6 +528,491 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);
         startActivity(intent);
+
+    }
+
+
+    public void setOnClickListeners(ViewGroup container){
+        axa = container.findViewById(R.id.axaTagSearch);
+        axa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("axa")){
+                    tags.remove("axa");
+                    axaOn = false;
+                }
+                else{
+                    tags.put("axa", "");
+                    axaOn = true;
+                }
+
+                axa.setChecked(axaOn);
+            }
+        });
+
+         aka = container.findViewById(R.id.akaTagSearch);
+        aka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("aka")){
+                    tags.remove("aka");
+                    akaOn = false;
+                }
+                else{
+                    tags.put("aka", "");
+                    akaOn = true;
+                }
+
+                aka.setChecked(akaOn);
+            }
+        });
+
+         aphi = container.findViewById(R.id.aPhiTagSearch);
+        aphi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("aphi")){
+                    tags.remove("aphi");
+                    aphiOn = false;
+                }
+                else{
+                    tags.put("aphi", "");
+                    aphiOn = true;
+                }
+
+                aphi.setChecked(aphiOn);
+            }
+        });
+
+
+         alphas = container.findViewById(R.id.alphasTagSearch);
+        alphas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("alphas")){
+                    tags.remove("alphas");
+                    alphasOn = false;
+                }
+                else{
+                    tags.put("alphas", "");
+                    alphasOn = true;
+                }
+
+                alphas.setChecked(alphasOn);
+            }
+        });
+
+         alphatheta = container.findViewById(R.id.alphaThetaTagSearch);
+        alphatheta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("alphatheta")){
+                    tags.remove("alphatheta");
+                    aphiOn = false;
+                }
+                else{
+                    tags.put("alphatheta", "");
+                    aphiOn = true;
+                }
+
+                alphatheta.setChecked(alphathetaOn);
+            }
+        });
+
+         axid = container.findViewById(R.id.aXiDTagSearch);
+        axid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("axid")){
+                    tags.remove("axid");
+                    axidOn = false;
+                }
+                else{
+                    tags.put("axid", "");
+                    axidOn = true;
+                }
+
+                axid.setChecked(axidOn);
+            }
+        });
+
+         bg = container.findViewById(R.id.bGTagSearch);
+        bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("bg")){
+                    tags.remove("bg");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("bg", "");
+                    bgOn = true;
+                }
+
+                bg.setChecked(bgOn);
+            }
+        });
+
+         beta = container.findViewById(R.id.betaTagSearch);
+        beta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("beta")){
+                    tags.remove("beta");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("beta", "");
+                    betaOn = true;
+                }
+
+                beta.setChecked(betaOn);
+            }
+        });
+
+         chidelt = container.findViewById(R.id.chiDeltTagSearch);
+        chidelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("chidelt")){
+                    tags.remove("chidelt");
+                    chideltOn = false;
+                }
+                else{
+                    tags.put("chidelt", "");
+                    chideltOn = true;
+                }
+
+                chidelt.setChecked(chideltOn);
+            }
+        });
+
+         chigam = container.findViewById(R.id.chiGamTagSearch);
+        chigam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("chigam")){
+                    tags.remove("chigam");
+                    bgOn = false;
+                }
+                else{
+                    tags.put("chigam", "");
+                    bgOn = true;
+                }
+
+                chigam.setChecked(chigamOn);
+            }
+        });
+
+         deltas = container.findViewById(R.id.deltasTagSearch);
+        deltas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("deltas")){
+                    tags.remove("deltas");
+                    deltasOn = false;
+                }
+                else{
+                    tags.put("deltas", "");
+                    deltasOn = true;
+                }
+
+                deltas.setChecked(deltasOn);
+            }
+        });
+
+         ekt = container.findViewById(R.id.ektTagSearch);
+        ekt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("ekt")){
+                    tags.remove("ekt");
+                    ektOn = false;
+                }
+                else{
+                    tags.put("ekt", "");
+                    ektOn = true;
+                }
+
+                ekt.setChecked(ektOn);
+            }
+        });
+
+         gdx = container.findViewById(R.id.gdxTagSearch);
+        gdx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("gdx")){
+                    tags.remove("gdx");
+                    gdxOn = false;
+                }
+                else{
+                    tags.put("gdx", "");
+                    gdxOn = true;
+                }
+
+                gdx.setChecked(gdxOn);
+            }
+        });
+
+         hereot = container.findViewById(R.id.hereotTagSearch);
+        hereot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("hereot")){
+                    tags.remove("hereot");
+                    hereotOn = false;
+                }
+                else{
+                    tags.put("hereot", "");
+                    hereotOn = true;
+                }
+
+                hereot.setChecked(hereotOn);
+            }
+        });
+
+         kappa = container.findViewById(R.id.kappaTagSearch);
+        kappa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kappa")){
+                    tags.remove("kappa");
+                    kappaOn = false;
+                }
+                else{
+                    tags.put("kappa", "");
+                    kappaOn = true;
+                }
+
+                kappa.setChecked(kappaOn);
+            }
+        });
+
+         kd = container.findViewById(R.id.kdTagSearch);
+        kd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kd")){
+                    tags.remove("kd");
+                    kdOn = false;
+                }
+                else{
+                    tags.put("kd", "");
+                    kdOn = true;
+                }
+
+                kd.setChecked(kdOn);
+            }
+        });
+
+         kde = container.findViewById(R.id.kdeTagSearch);
+        kde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("kde")){
+                    tags.remove("kde");
+                    kdeOn = false;
+                }
+                else{
+                    tags.put("kde", "");
+                    kdeOn = true;
+                }
+
+                kde.setChecked(kdeOn);
+            }
+        });
+
+         trikap = container.findViewById(R.id.triKapTagSearch);
+        trikap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("trikap")){
+                    tags.remove("trikap");
+                    trikapOn = false;
+                }
+                else{
+                    tags.put("trikap", "");
+                    trikapOn = true;
+                }
+
+                trikap.setChecked(trikapOn);
+            }
+        });
+
+         phidelt = container.findViewById(R.id.phiDeltTagSearch);
+        phidelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("phidelt")){
+                    tags.remove("phidelt");
+                    phideltOn = false;
+                }
+                else{
+                    tags.put("phidelt", "");
+                    phideltOn = true;
+                }
+
+                phidelt.setChecked(phideltOn);
+            }
+        });
+
+         phitau = container.findViewById(R.id.phiTauTagSearch);
+        phitau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("phitau")){
+                    tags.remove("phitau");
+                    phitauOn = false;
+                }
+                else{
+                    tags.put("phitau", "");
+                    phitauOn = true;
+                }
+
+                phitau.setChecked(phitauOn);
+            }
+        });
+        psiu = container.findViewById(R.id.psiUTagSearch);
+        psiu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("psiu")){
+                    tags.remove("psiu");
+                    psiuOn = false;
+                }
+                else{
+                    tags.put("psiu", "");
+                    psiuOn = true;
+                }
+
+                psiu.setChecked(psiuOn);
+            }
+        });
+
+
+        sigdelt = container.findViewById(R.id.sigDeltTagSearch);
+        sigdelt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("sigdelt")){
+                    tags.remove("sigdelt");
+                    sigdeltOn = false;
+                }
+                else{
+                    tags.put("sigdelt", "");
+                    sigdeltOn = true;
+                }
+
+                sigdelt.setChecked(sigdeltOn);
+            }
+        });
+
+         signu = container.findViewById(R.id.sigNuTagSearch);
+        signu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("signu")){
+                    tags.remove("signu");
+                    signuOn = false;
+                }
+                else{
+                    tags.put("signu", "");
+                    signuOn = true;
+                }
+
+                signu.setChecked(signuOn);
+            }
+        });
+
+         tabard = container.findViewById(R.id.tabardTagSearch);
+        tabard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("tabard")){
+                    tags.remove("tabard");
+                    tabardOn = false;
+                }
+                else{
+                    tags.put("tabard", "");
+                    tabardOn = true;
+                }
+
+                tabard.setChecked(tabardOn);
+            }
+        });
+
+         tdx = container.findViewById(R.id.tdxTagSearch);
+        tdx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("tdx")){
+                    tags.remove("tdx");
+                    tdxOn = false;
+                }
+                else{
+                    tags.put("tdx", "");
+                    tdxOn = true;
+                }
+
+                tdx.setChecked(tdxOn);
+            }
+        });
+
+        zete = container.findViewById(R.id.zeteTagSearch);
+        zete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("zete")){
+                    tags.remove("zete");
+                    zeteOn = false;
+                }
+                else{
+                    tags.put("zete", "");
+                    zeteOn = true;
+                }
+
+                zete.setChecked(zeteOn);
+            }
+        });
+
+    }
+
+
+    public void setCurrentColors(){
+        HashMap<ToggleButton, Boolean> map = new HashMap<>();
+        map.put(axa, axaOn);
+        map.put(aka, akaOn);
+        map.put(beta, betaOn);
+        map.put(bg, bgOn);
+        map.put(chigam, chigamOn);
+        map.put(hereot, hereotOn);
+        map.put(gdx, gdxOn);
+        map.put(trikap, trikapOn);
+        map.put(phidelt, phideltOn);
+        map.put(psiu, psiuOn);
+        map.put(signu, signuOn);
+        map.put(tdx, tdxOn);
+        map.put(zete, zeteOn);
+        map.put(aphi, aphiOn);
+        map.put(axid, axidOn);
+        map.put(chidelt, chideltOn);
+        map.put(ekt, ektOn);
+        map.put(kd, kdOn);
+        map.put(kde, kdeOn);
+        map.put(kappa, kappaOn);
+        map.put(sigdelt, sigdeltOn);
+        map.put(alphatheta, alphathetaOn);
+        map.put(phitau, phitauOn);
+        map.put(tabard, tabardOn);
+        map.put(alphas, alphasOn);
+        map.put(aka, akaOn);
+        map.put(deltas, deltasOn);
+
+        for (ToggleButton button : map.keySet()){
+            button.setChecked(map.get(button));
+        }
+
 
     }
 

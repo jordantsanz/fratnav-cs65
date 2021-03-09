@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 
 import com.example.fratnav.R;
+import com.example.fratnav.callbacks.createCallback;
+import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
+import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.models.House;
@@ -22,6 +25,10 @@ import com.example.fratnav.models.Review;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+
+import static com.example.fratnav.houses.HousePage.arrayOfReviews;
 
 public class ReviewDialog extends Dialog {
 
@@ -71,8 +78,21 @@ public class ReviewDialog extends Dialog {
 
         Log.d("reviewUserid", review.userID);
         Log.d("houseId", review.houseId);
+        Log.d("housename", theHouse.houseName);
 
-        ReviewDatabaseHelper.createReview(review);
+
+        HousePage.refresh(review);
         dismiss();
+        ReviewDatabaseHelper.createReview(review, new createCallback() {
+            @Override
+            public void onCallback(boolean didFinish) {
+
+                        dismiss();
+                        //notify
+
+                }
+        });
+
+
     }
 }

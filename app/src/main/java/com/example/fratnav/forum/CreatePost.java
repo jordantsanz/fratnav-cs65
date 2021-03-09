@@ -217,10 +217,6 @@ public class CreatePost extends AppCompatActivity {
             }
         }
 
-
-
-
-
         if (names.size() <= 3) {
             Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
                     names, new HashMap<>(), 0);

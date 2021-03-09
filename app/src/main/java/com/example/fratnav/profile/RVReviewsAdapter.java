@@ -1,6 +1,7 @@
 package com.example.fratnav.profile;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,10 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         Review review = getItem(position);
         String userDisplay = "@" + review.username;
+
+        Log.d("thereview", review.toString());
+        Log.d("thereview", review.username);
+        Log.d("thereview", review.houseName);
 
         holder.postUser.setText(String.valueOf(review.username));
         holder.postHouse.setText(String.valueOf(review.houseName));
