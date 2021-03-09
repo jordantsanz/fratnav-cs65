@@ -83,7 +83,6 @@ public class ReviewDialog extends Dialog {
         ReviewDatabaseHelper.createReview(review, new createCallback() {
             @Override
             public void onCallback(boolean didFinish) {
-
                         dismiss();
                         //notify
 

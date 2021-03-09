@@ -7,18 +7,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.R;
+import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.models.Post;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> {
     private ArrayList<Post> posts;
+    boolean userDidLike = false;
+    String currentUserId;
+    FirebaseUser currentUser;
 
 
     public class MyView extends RecyclerView.ViewHolder {
@@ -29,6 +35,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         TextView tag2;
         TextView tag3;
         String userDisplay;
+        ImageButton heart;
 
         public MyView(View view) {
             super(view);
@@ -39,6 +46,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             tag1 = (TextView) view.findViewById(R.id.tag1);
             tag2 = (TextView) view.findViewById(R.id.tag2);
             tag3 = (TextView) view.findViewById(R.id.tag3);
+            heart = (ImageButton) view.findViewById(R.id.heart);
 
             // Populate the data into the template view using the data object
         }
@@ -57,6 +65,8 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         Post post = getItem(position);
+        currentUser = AuthenticationHelper.getCurrentUser();
+        currentUserId = currentUser.getUid();
         String userDisplay = "@" + post.username;
         String likes = post.likes + "";
         holder.setIsRecyclable(false);
@@ -92,6 +102,25 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
             setBackgrounds(holder.tag1, holder.tag2, holder.tag3);
         }
+
+
+
+
+
+        if (post.usersLiked != null){
+            Log.d("post", post.usersLiked.values().toString());
+            for (String userId : post.usersLiked.values()) {
+                if (userId.equals(currentUserId)) {
+                    userDidLike = true;
+                    holder.heart.setBackgroundResource(R.drawable.filledlike);
+                    break;
+                }
+                else{
+                   holder.heart.setBackgroundResource(R.drawable.like);
+                }
+            }
+        }
+        holder.heart.setTag(position);
 
 
     }
@@ -175,7 +204,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
                 case "EKT":
                     tag.setBackgroundResource(R.drawable.rounded_corner_view_purple);
                     break;
-                case "Deltas":
+                case "ΔΣΘ":
                     tag.setBackgroundResource(R.drawable.blue_background);
                     break;
                 case "AXiD":
@@ -190,7 +219,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
                 case "Alpha Theta":
                     tag.setBackgroundResource(R.drawable.rounded_corner_view_teal);
                     break;
-                case "Alphas":
+                case "ΑΦΑ":
                     tag.setBackgroundResource(R.drawable.blue_background);
                     break;
                 case "AKA":
