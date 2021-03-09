@@ -433,7 +433,7 @@ public class HousePage extends AppCompatActivity {
         }
 
 
-        RecyclerView recyclerViewreviews = findViewById(R.id.rv_reviews);
+        RecyclerView recyclerViewreviews = findViewById(R.id.rv_housereviews);
         LinearLayoutManager horizontalLayoutManager2 =
                 new LinearLayoutManager(HousePage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
