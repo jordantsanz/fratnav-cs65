@@ -141,7 +141,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
                 if (userId.equals(currentUserId)) {
                     userDidLike = true;
                     heart.setBackgroundResource(R.drawable.filledlike);
-//                    break;
+                    break;
                 }
                 else{
                     heart.setBackgroundResource(R.drawable.like);
