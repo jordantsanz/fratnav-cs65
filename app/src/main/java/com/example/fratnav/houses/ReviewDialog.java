@@ -80,12 +80,12 @@ public class ReviewDialog extends Dialog {
         Log.d("houseId", review.houseId);
         Log.d("housename", theHouse.houseName);
 
+
+        HousePage.refresh(review);
+        dismiss();
         ReviewDatabaseHelper.createReview(review, new createCallback() {
             @Override
             public void onCallback(boolean didFinish) {
-
-                        dismiss();
-                        //notify
 
                 }
         });

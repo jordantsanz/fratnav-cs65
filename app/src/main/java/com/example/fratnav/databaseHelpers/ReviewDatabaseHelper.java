@@ -36,10 +36,10 @@ public class ReviewDatabaseHelper {
                 ArrayList<Review> reviews = new ArrayList<>();
 
                 for (DataSnapshot ds : snapshot.getChildren()){
+                    Log.d("snapsnap", ds.toString());
                     House house = ds.getValue(House.class);
                     assert house != null;
-
-                    Log.d("reviewss", reviews.toString());
+                    Log.d("house", house.toString());
                     if (house.reviews != null) {
                         for (DataSnapshot dss : ds.child("reviews").getChildren()) {
                             Log.d("dss", dss.toString());
@@ -105,34 +105,17 @@ public class ReviewDatabaseHelper {
         // add to reviews database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        // store in user
-        addReviewToObject(database.getReference("/users"), review, review.userID);
-
         // store in house
-        addReviewToObject(database.getReference("/houses"), review, review.houseId);
+        addReviewToObject(database.getReference("/houses"), review, review.houseId, myCallback, "house");
 
-        ReviewDatabaseHelper.getReviewsByHouseId(review.houseId, new getAllReviewsCallback() {
-            @Override
-            public void onCallback(ArrayList<Review> reviews) {
-                Log.d("reviewsFound", reviews.toString());
-                HousePage.arrayOfReviews = new ArrayList<>();
-                //reset the reviews
-                for (int i = reviews.size() - 1; i > -1; i--){
-                    Review review = reviews.get(i);
-                    HousePage.arrayOfReviews.add(review);
-                }
-                Log.d("reviewsloaded", arrayOfReviews.toString());
-                HousePage.adapterReviews.notifyDataSetChanged();
-                myCallback.onCallback(true);
-                //notify
-            }
-        });
+        // store in user
+        addReviewToObject(database.getReference("/users"), review, review.userID, myCallback, "user");
+
 
     }
 
 
-    public static void addReviewToObject(DatabaseReference ref, Review review, String id){
-        Log.d("houseid", review.houseId);
+    public static void addReviewToObject(DatabaseReference ref, Review review, String id, createCallback myCallback, String type){
         ref.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
