@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.View;
@@ -14,14 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -65,6 +69,30 @@ public class updateProfile extends AppCompatActivity {
     Spinner sexualitySpinner;
     public House theHouse;
     public String userId;
+
+    public static final String NATIONAL_KEY = "nationalkey";
+    public static final String SUMMARY_KEY = "summarykey";
+    public static final String PRESIDENT_KEY = "presidentkey";
+    public static final String VICE_KEY = "vicekey";
+    public static final String TREASURER_KEY = "treasurerkey";
+    public static final String RUSH_KEY = "rushkey";
+    public static final String TOTAL_KEY = "totalkey";
+    public static final String QUEER_KEY = "queerkey";
+    public static final String POC_KEY = "pockey";
+
+    public static final String YEAR_KEY = "year";
+    public static final String SEXUALITY_KEY = "sexuality";
+    public static final String GENDER_KEY = "gender";
+    public static final String FRATS_KEY = "frats";
+    public static final String SRATS_KEY = "srats";
+    public static final String GENDER_INC_KEY = "genderInc";
+    public static final String PAN_KEY = "pan";
+    public static final String HOUSE_AFF_KEY = "houseAff";
+
+
+
+
+    boolean ishouse;
     DatabaseReference.CompletionListener completionListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +108,12 @@ public class updateProfile extends AppCompatActivity {
         }
         userId = currentUser.getUid();
 
-        boolean ishouse = getIntent().getBooleanExtra(Profile.HOUSE_BOOLEAN_KEY, false);
+        ishouse = getIntent().getBooleanExtra(Profile.HOUSE_BOOLEAN_KEY, false);
 
         if (ishouse){
+
             setContentView(R.layout.update_houseprofile);
-            setHouseProfile();
+            setHouseProfile(savedInstanceState);
         }
         else {
             setContentView(R.layout.update_profile);
@@ -124,122 +153,122 @@ public class updateProfile extends AppCompatActivity {
             UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
                 @Override
                 public void onCallback(User user) {
-
-                    username = user.username;
-
-                    RadioButton maleButton = findViewById(R.id.genderUpdateMale);
-                    RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
-                    RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
-                    //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
-
-
-                    RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
-                    RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
-
-                    switch (user.year) {
-                        case "2021":
-                            spinner.setSelection(0);
-                            break;
-                        case "2022":
-                            spinner.setSelection(1);
-                            break;
-                        case "2023":
-                            spinner.setSelection(2);
-                            break;
-                        case "2024":
-                            spinner.setSelection(3);
-                            break;
-                        case "2025":
-                            spinner.setSelection(4);
-                            break;
-                    }
-                    Log.d("user sexuality", user.sexuality);
-                    switch (user.sexuality) {
-                        case "Heterosexual":
-                            sexualitySpinner.setSelection(0);
-                            break;
-                        case "Lesbian":
-                            sexualitySpinner.setSelection(1);
-                            break;
-                        case "Gay":
-                            sexualitySpinner.setSelection(2);
-                            break;
-                        case "Bisexual":
-                            sexualitySpinner.setSelection(3);
-                            break;
-                        case "Transgender":
-                            sexualitySpinner.setSelection(4);
-                            break;
-                        case "Queer":
-                            sexualitySpinner.setSelection(5);
-                            break;
-                        case "N/A":
-                            sexualitySpinner.setSelection(6);
-                            break;
-
-                    }
-
-
-                    spinner.setPrompt(user.year);
-                    sexualitySpinner.setPrompt(user.sexuality);
-                    CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
-                    CheckBox frat = findViewById(R.id.fratCheckboxUpdate);
-                    CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
-                    CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
-
-
-                    if (user.interestedIn != null) {
-                        for (int i = 0; i < user.interestedIn.size(); i++) {
-                            //Log.d("user",user.interestedIn.toString());
-                            if (user.interestedIn.get(i).equals("Fraternities")) {
-                                frat.setChecked(true);
-                            }
-                            if (user.interestedIn.get(i).equals("National Pan-Hellenic")) {
-                                natPanHelic.setChecked(true);
-                            }
-                            if (user.interestedIn.get(i).equals("Gender Inclusive Houses")) {
-                                genderInclusive.setChecked(true);
-                            }
-                            if (user.interestedIn.get(i).equals("Sororities")) {
-                                srat.setChecked(true);
-                            }
-                        }
-                    }
-
-
-                    if (user.gender != null) {
-                        if (user.gender.equals("Male")) {
-                            maleButton.setChecked(true);
-                        } else if (user.gender.equals("Female")) {
-                            femaleButton.setChecked(true);
-                        } else {
-                            nonBinaryButton.setChecked(true);
-                        }
-                    }
-                    if (user.houseAffiliation) {
-                        affiliate.setChecked(true);
+                    if (savedInstanceState != null) {
+                        recoverInstanceState(savedInstanceState, user);
                     } else {
-                        notAffiliate.setChecked(true);
+                        username = user.username;
+
+                        RadioButton maleButton = findViewById(R.id.genderUpdateMale);
+                        RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
+                        RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
+                        //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
+
+
+                        RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
+                        RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
+
+                        switch (user.year) {
+                            case "2021":
+                                spinner.setSelection(0);
+                                break;
+                            case "2022":
+                                spinner.setSelection(1);
+                                break;
+                            case "2023":
+                                spinner.setSelection(2);
+                                break;
+                            case "2024":
+                                spinner.setSelection(3);
+                                break;
+                            case "2025":
+                                spinner.setSelection(4);
+                                break;
+                        }
+                        Log.d("user sexuality", user.sexuality);
+                        switch (user.sexuality) {
+                            case "Heterosexual":
+                                sexualitySpinner.setSelection(0);
+                                break;
+                            case "Lesbian":
+                                sexualitySpinner.setSelection(1);
+                                break;
+                            case "Gay":
+                                sexualitySpinner.setSelection(2);
+                                break;
+                            case "Bisexual":
+                                sexualitySpinner.setSelection(3);
+                                break;
+                            case "Transgender":
+                                sexualitySpinner.setSelection(4);
+                                break;
+                            case "Queer":
+                                sexualitySpinner.setSelection(5);
+                                break;
+                            case "N/A":
+                                sexualitySpinner.setSelection(6);
+                                break;
+
+                        }
+
+
+                        spinner.setPrompt(user.year);
+                        sexualitySpinner.setPrompt(user.sexuality);
+                        CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
+                        CheckBox frat = findViewById(R.id.fratCheckboxUpdate);
+                        CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
+                        CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
+
+
+                        if (user.interestedIn != null) {
+                            for (int i = 0; i < user.interestedIn.size(); i++) {
+                                //Log.d("user",user.interestedIn.toString());
+                                if (user.interestedIn.get(i).equals("Fraternities")) {
+                                    frat.setChecked(true);
+                                }
+                                if (user.interestedIn.get(i).equals("National Pan-Hellenic")) {
+                                    natPanHelic.setChecked(true);
+                                }
+                                if (user.interestedIn.get(i).equals("Gender Inclusive Houses")) {
+                                    genderInclusive.setChecked(true);
+                                }
+                                if (user.interestedIn.get(i).equals("Sororities")) {
+                                    srat.setChecked(true);
+                                }
+                            }
+                        }
+
+
+                        if (user.gender != null) {
+                            if (user.gender.equals("Male")) {
+                                maleButton.setChecked(true);
+                            } else if (user.gender.equals("Female")) {
+                                femaleButton.setChecked(true);
+                            } else {
+                                nonBinaryButton.setChecked(true);
+                            }
+                        }
+                        if (user.houseAffiliation) {
+                            affiliate.setChecked(true);
+                        } else {
+                            notAffiliate.setChecked(true);
+                        }
+
+
+                        Button updateButton = findViewById(R.id.updateAccount);
+
+                        updateButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                updateAccount();
+                            }
+                        });
+
                     }
-
                 }
             });
-
-
-            Button updateButton = findViewById(R.id.updateAccount);
-
-            updateButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateAccount();
-                }
-            });
-
         }
 
-
-
-    }
+        }
 
 
 
@@ -377,7 +406,7 @@ public class updateProfile extends AppCompatActivity {
 
     }
 
-    public void setHouseProfile(){
+    public void setHouseProfile(Bundle savedInstanceState){
         UserDatabaseHelper.getUserById(userId, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -386,38 +415,52 @@ public class updateProfile extends AppCompatActivity {
                     @Override
                     public void onCallback(House house) {
                         theHouse = house;
-                        TextView houseName = findViewById(R.id.house_name);
-                        houseName.setText(house.houseName);
 
-                        RadioButton nationalB = findViewById(R.id.national);
-                        RadioButton localB = findViewById(R.id.local);
+                        if (savedInstanceState != null) {
+                            recoverInstanceState(savedInstanceState, house);
+                        } else {
 
-                        if (house.national){
-                            nationalB.setChecked(true);
-                        }else {
-                            localB.setChecked(true);
+
+                            TextView houseName = findViewById(R.id.house_name);
+                            houseName.setText(house.houseName);
+
+                            TextView subscribers = findViewById(R.id.subscribers);
+                            String subs = String.valueOf(house.subscribers) + " Subscribers";
+                            subscribers.setText(subs);
+
+                            setHouseImage(house);
+
+
+                            RadioButton nationalB = findViewById(R.id.national);
+                            RadioButton localB = findViewById(R.id.local);
+
+                            if (house.national) {
+                                nationalB.setChecked(true);
+                            } else {
+                                localB.setChecked(true);
+                            }
+
+                            EditText editSum = findViewById(R.id.edit_summary);
+                            editSum.setText(house.summary);
+
+                            EditText pres = findViewById(R.id.edit_president);
+                            EditText vp = findViewById(R.id.edit_vp);
+                            EditText treas = findViewById(R.id.edit_treasurer);
+                            EditText rush = findViewById(R.id.edit_rc);
+
+                            pres.setText(house.president);
+                            vp.setText(house.vicePresident);
+                            treas.setText(house.treasurer);
+                            rush.setText(house.rushChair);
+
+                            EditText tot = findViewById(R.id.edit_total);
+                            EditText poc = findViewById(R.id.edit_poc);
+                            EditText queer = findViewById(R.id.edit_lgbtq);
+
+                            tot.setText(house.totalMembers);
+                            poc.setText(house.pocMembers);
+                            queer.setText(house.queerMembers);
                         }
-
-                        EditText editSum = findViewById(R.id.edit_summary);
-                        editSum.setText(house.summary);
-
-                        EditText pres = findViewById(R.id.edit_president);
-                        EditText vp = findViewById(R.id.edit_vp);
-                        EditText treas = findViewById(R.id.edit_treasurer);
-                        EditText rush = findViewById(R.id.edit_rc);
-
-                        pres.setText(house.president);
-                        vp.setText(house.vicePresident);
-                        treas.setText(house.treasurer);
-                        rush.setText(house.rushChair);
-
-                        EditText tot = findViewById(R.id.edit_total);
-                        EditText poc = findViewById(R.id.edit_poc);
-                        EditText queer = findViewById(R.id.edit_lgbtq);
-
-                        tot.setText(house.totalMembers);
-                        poc.setText(house.pocMembers);
-                        queer.setText(house.queerMembers);
                     }
                 });
             }
@@ -470,5 +513,373 @@ public class updateProfile extends AppCompatActivity {
 
         HouseDatabaseHelper.updateHouse(house);
         finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (ishouse) {
+            RadioButton nationalB = findViewById(R.id.national);
+            RadioButton localB = findViewById(R.id.local);
+            boolean national = false;
+            String summary = "";
+            String president = "";
+            String vice = "";
+            String treasurer = "";
+            String rushChair = "";
+            String totalMembers = "";
+            String queerMembers = "";
+            String pocMembers = "";
+
+            if (nationalB.isChecked()) {
+                national = true;
+            }
+
+            EditText editSum = findViewById(R.id.edit_summary);
+            summary = editSum.getText().toString();
+
+
+            EditText pres = findViewById(R.id.edit_president);
+            EditText vp = findViewById(R.id.edit_vp);
+            EditText treas = findViewById(R.id.edit_treasurer);
+            EditText rush = findViewById(R.id.edit_rc);
+
+            president = pres.getText().toString();
+            vice = vp.getText().toString();
+            treasurer = treas.getText().toString();
+            rushChair = rush.getText().toString();
+
+
+            EditText tot = findViewById(R.id.edit_total);
+            EditText poc = findViewById(R.id.edit_poc);
+            EditText queer = findViewById(R.id.edit_lgbtq);
+
+            totalMembers = tot.getText().toString();
+            pocMembers = poc.getText().toString();
+            queerMembers = queer.getText().toString();
+
+            outState.putBoolean(NATIONAL_KEY, national);
+            outState.putString(SUMMARY_KEY, summary);
+            outState.putString(PRESIDENT_KEY, president);
+            outState.putString(VICE_KEY, vice);
+            outState.putString(TREASURER_KEY, treasurer);
+            outState.putString(RUSH_KEY, rushChair);
+            outState.putString(TOTAL_KEY, totalMembers);
+            outState.putString(POC_KEY, pocMembers);
+            outState.putString(QUEER_KEY, queerMembers);
+
+        }
+        else{
+
+            RadioButton maleButton = findViewById(R.id.genderUpdateMale);
+            RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
+            RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
+            //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
+
+            RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
+            RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
+
+            spinner = findViewById(R.id.updateYear);
+            sexualitySpinner = findViewById(R.id.updateSexuality);
+
+            String year = "";
+            String sexuality = "";
+            boolean frats = false;
+            boolean sor = false;
+            boolean gend = false;
+            boolean pan = false;
+            String gender = "";
+            boolean house = false;
+
+            year = spinner.getSelectedItem().toString();
+            sexuality = sexualitySpinner.getSelectedItem().toString();
+            CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
+            CheckBox frat = findViewById(R.id.fratCheckboxUpdate);
+            CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
+            CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
+
+            sor = srat.isChecked();
+            frats = frat.isChecked();
+            gend = genderInclusive.isChecked();
+            pan = natPanHelic.isChecked();
+
+            if (maleButton.isChecked()){
+                gender = "Male";
+            }
+            else if (femaleButton.isChecked()){
+                gender = "Female";
+            }
+            else{
+                gender = "Non-binary";
+            }
+
+            if (affiliate.isChecked()){
+                house = true;
+            }
+
+            outState.putString(YEAR_KEY, year);
+            outState.putString(SEXUALITY_KEY, sexuality);
+            outState.putString(GENDER_KEY, gender);
+            outState.putBoolean(FRATS_KEY, frats);
+            outState.putBoolean(SRATS_KEY, sor);
+            outState.putBoolean(GENDER_INC_KEY, gend);
+            outState.putBoolean(PAN_KEY, pan);
+            outState.putBoolean(HOUSE_AFF_KEY, house);
+        }
+    }
+
+
+    public void recoverInstanceState(Bundle savedInstanceState, House house){
+            TextView houseName = findViewById(R.id.house_name);
+            houseName.setText(house.houseName);
+            TextView subscribers = findViewById(R.id.subscribers);
+            subscribers.setText(house.subscribers);
+            RadioButton nationalB = findViewById(R.id.national);
+            RadioButton localB = findViewById(R.id.local);
+
+            boolean national = savedInstanceState.getBoolean(NATIONAL_KEY);
+            if (national){
+                nationalB.setChecked(true);
+            }
+            else{
+                localB.setChecked(true);
+            }
+
+            String summary = "";
+            String president = "";
+            String vice = "";
+            String treasurer = "";
+            String rushChair = "";
+            String totalMembers = "";
+            String queerMembers = "";
+            String pocMembers = "";
+
+            EditText editSum = findViewById(R.id.edit_summary);
+            summary = savedInstanceState.getString(SUMMARY_KEY, "");
+            editSum.setText(summary);
+
+            EditText pres = findViewById(R.id.edit_president);
+            EditText vp = findViewById(R.id.edit_vp);
+            EditText treas = findViewById(R.id.edit_treasurer);
+            EditText rush = findViewById(R.id.edit_rc);
+
+            president = savedInstanceState.getString(PRESIDENT_KEY, "");
+            pres.setText(president);
+
+            vice = savedInstanceState.getString(VICE_KEY, "");
+            vp.setText(vice);
+
+            treasurer = savedInstanceState.getString(TREASURER_KEY, "");
+            treas.setText(treasurer);
+
+            rushChair = savedInstanceState.getString(RUSH_KEY, "");
+            rush.setText(rushChair);
+
+            totalMembers = savedInstanceState.getString(TOTAL_KEY, "");
+            pocMembers = savedInstanceState.getString(POC_KEY, "");
+            queerMembers = savedInstanceState.getString(QUEER_KEY, "");
+
+            EditText tot = findViewById(R.id.edit_total);
+            EditText poc = findViewById(R.id.edit_poc);
+            EditText queer = findViewById(R.id.edit_lgbtq);
+
+            tot.setText(totalMembers);
+            poc.setText(pocMembers);
+            queer.setText(queerMembers);
+
+    }
+
+    public void recoverInstanceState(Bundle savedInstanceState, User user){
+        String year = savedInstanceState.getString(YEAR_KEY, "");
+        String sexuality = savedInstanceState.getString(SEXUALITY_KEY, "");
+        String gender = savedInstanceState.getString(GENDER_KEY, "");
+        boolean frats = savedInstanceState.getBoolean(FRATS_KEY, false);
+
+        boolean srats = savedInstanceState.getBoolean(SRATS_KEY, false);
+        boolean genderInc = savedInstanceState.getBoolean(GENDER_INC_KEY, false);
+        boolean pan = savedInstanceState.getBoolean(PAN_KEY, false);
+        boolean houseAff = savedInstanceState.getBoolean(HOUSE_AFF_KEY, false);
+
+        username = user.username;
+
+        RadioButton maleButton = findViewById(R.id.genderUpdateMale);
+        RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
+        RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
+        //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
+
+
+        RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
+        RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
+
+        switch (year) {
+            case "2021":
+                spinner.setSelection(0);
+                break;
+            case "2022":
+                spinner.setSelection(1);
+                break;
+            case "2023":
+                spinner.setSelection(2);
+                break;
+            case "2024":
+                spinner.setSelection(3);
+                break;
+            case "2025":
+                spinner.setSelection(4);
+                break;
+        }
+
+        switch (sexuality) {
+            case "Heterosexual":
+                sexualitySpinner.setSelection(0);
+                break;
+            case "Lesbian":
+                sexualitySpinner.setSelection(1);
+                break;
+            case "Gay":
+                sexualitySpinner.setSelection(2);
+                break;
+            case "Bisexual":
+                sexualitySpinner.setSelection(3);
+                break;
+            case "Transgender":
+                sexualitySpinner.setSelection(4);
+                break;
+            case "Queer":
+                sexualitySpinner.setSelection(5);
+                break;
+            case "N/A":
+                sexualitySpinner.setSelection(6);
+                break;
+
+        }
+
+
+        spinner.setPrompt(year);
+        sexualitySpinner.setPrompt(sexuality);
+        CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
+        CheckBox frat = findViewById(R.id.fratCheckboxUpdate);
+        CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
+        CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
+
+            if (frats) {
+                frat.setChecked(true);
+            }
+            if (srats) {
+                natPanHelic.setChecked(true);
+            }
+            if (genderInc) {
+                genderInclusive.setChecked(true);
+            }
+            if (pan) {
+                srat.setChecked(true);
+
+        }
+
+
+        if (!gender.equals("")) {
+            if (gender.equals("Male")) {
+                maleButton.setChecked(true);
+            } else if (gender.equals("Female")) {
+                femaleButton.setChecked(true);
+            } else {
+                nonBinaryButton.setChecked(true);
+            }
+        }
+        if (houseAff) {
+            affiliate.setChecked(true);
+        } else {
+            notAffiliate.setChecked(true);
+        }
+
+    }
+
+    public void setHouseImage(House house){
+        int image = 0;
+        switch (house.houseName) {
+            case "Sig Nu":
+                image = R.drawable.signu1;
+                break;
+            case "TDX":
+                image = R.drawable.tdx;
+                break;
+            case "Zete":
+                image = R.drawable.zetapsi;
+                break;
+            case "Sigma Delt":
+                image = R.drawable.sigdelt;
+                break;
+            case "Tabard":
+                image = R.drawable.tabard;
+                break;
+            case "Tri-Kap":
+                image = R.drawable.trikap;
+                break;
+            case "Kappa":
+                image = R.drawable.kkg;
+                break;
+            case "Hereot":
+                image = R.drawable.heorot;
+                break;
+            case "Phi Delt":
+                image = R.drawable.phidelta;
+                break;
+            case "KD":
+                image = R.drawable.kd;
+                break;
+            case "KDE":
+                image = R.drawable.kde;
+                break;
+            case "Phi Tau":
+                image = R.drawable.phitau;
+                break;
+            case "Alpha Chi":
+                image = R.drawable.ic_axa;
+                break;
+            case "GDX":
+                image = R.drawable.gdx;
+                break;
+            case "Psi U":
+                image = R.drawable.psiu;
+                break;
+            case "Chi Delt":
+                image = R.drawable.chidelt;
+                break;
+            case "Chi Gam":
+                image = R.drawable.chigam;
+                break;
+            case "EKT":
+                image = R.drawable.ekt;
+                break;
+            case "Deltas":
+                image = R.drawable.deltas;
+                break;
+            case "AXiD":
+                image = R.drawable.axid;
+                break;
+            case "Beta":
+                image = R.drawable.beta;
+                break;
+            case "BG":
+                image = R.drawable.bg;
+                break;
+            case "APhi":
+                image = R.drawable.aphi1;
+                break;
+            case "Alpha Theta":
+                image = R.drawable.alphatheta;
+                break;
+            case "Alphas":
+                image = R.drawable.alphas;
+                break;
+            case "AKA":
+                image = R.drawable.aka;
+                break;
+            default:
+                break;
+        }
+        ImageView iv = (ImageView) findViewById(R.id.housePageImage);
+        iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
     }
 }

@@ -2,6 +2,7 @@ package com.example.fratnav.profile;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +12,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.R;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
+import com.example.fratnav.forum.Forum;
+import com.example.fratnav.forum.PostActivity;
 import com.example.fratnav.models.Post;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,6 +41,8 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         TextView tag3;
         String userDisplay;
         ImageButton heart;
+        CoordinatorLayout outer;
+        Context context;
 
         public MyView(View view) {
             super(view);
@@ -47,8 +54,11 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             tag2 = (TextView) view.findViewById(R.id.tag2);
             tag3 = (TextView) view.findViewById(R.id.tag3);
             heart = (ImageButton) view.findViewById(R.id.heart);
+            outer = (CoordinatorLayout) view.findViewById(R.id.postBackground);
+            context = view.getContext();
 
             // Populate the data into the template view using the data object
+
         }
     }
 
@@ -70,6 +80,21 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         String userDisplay = "@" + post.username;
         String likes = post.likes + "";
         holder.setIsRecyclable(false);
+
+        holder.outer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("inOnClick", "lol");
+
+
+                Intent intent = new Intent(holder.context, PostActivity.class);
+                intent.putExtra(Forum.POST_ID_KEY, post.id);
+//                intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
+
+
+                holder.context.startActivity(intent);
+            }
+        });
 
         holder.postUser.setText(userDisplay);
         holder.postText.setText(post.text);
@@ -107,6 +132,9 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
 
 
+
+
+
         if (post.usersLiked != null){
             Log.d("post", post.usersLiked.values().toString());
             for (String userId : post.usersLiked.values()) {
@@ -121,7 +149,6 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             }
         }
         holder.heart.setTag(position);
-
 
     }
 

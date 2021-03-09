@@ -61,10 +61,6 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         Review review = getItem(position);
         String userDisplay = "@" + review.username;
 
-        Log.d("thereview", review.toString());
-        Log.d("thereview", review.username);
-        Log.d("thereview", review.houseName);
-
         holder.postUser.setText(String.valueOf(review.username));
         holder.postHouse.setText(String.valueOf(review.houseName));
         holder.safetyView.setText(String.valueOf(review.safetyRating));

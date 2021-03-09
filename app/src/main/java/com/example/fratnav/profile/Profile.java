@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +46,7 @@ import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
+import com.example.fratnav.forum.PostActivity;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.HouseCardView;
@@ -74,7 +77,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
     private static final String TAG = "RealtimeDB";
@@ -97,6 +100,7 @@ public class Profile extends AppCompatActivity {
     public static String sexuality;
     public static String year;
     public static String gender;
+    public RecyclerView recyclerView;
     public static TextView profileSexuality;
     public static TextView profileUsername;
     public static TextView profileGender;
@@ -226,6 +230,7 @@ public class Profile extends AppCompatActivity {
                         TextView subscribersText = findViewById(R.id.subscribers);
                         String subs = String.valueOf(house.subscribers) + " Subscribers";
                         subscribersText.setText(subs);
+                        setHouseImage(house);
                     }
                 });
 
@@ -432,7 +437,7 @@ public class Profile extends AppCompatActivity {
 
 
         // create recylcerview
-        RecyclerView recyclerView = findViewById(R.id.rv_posts);
+        recyclerView = findViewById(R.id.rv_posts);
         LinearLayoutManager horizontalLayoutManager =
                 new LinearLayoutManager(
                         Profile.this,
@@ -487,24 +492,25 @@ public class Profile extends AppCompatActivity {
         RadioButton notifOn = findViewById(R.id.notificationOn);
         RadioButton notifOff = findViewById(R.id.notificationOff);
 
-        notifOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserDatabaseHelper.updateUserNotifSettings(useriD, true);
-            }
-        });
+        if (notifOn != null) {
+            notifOn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserDatabaseHelper.updateUserNotifSettings(useriD, true);
+                }
+            });
 
-        notifOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserDatabaseHelper.updateUserNotifSettings(useriD, false);
+            notifOff.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserDatabaseHelper.updateUserNotifSettings(useriD, false);
+                }
+            });
+            if (user.notificationSettings) {
+                notifOn.setChecked(true);
+            } else {
+                notifOff.setChecked(true);
             }
-        });
-        if (user.notificationSettings){
-            notifOn.setChecked(true);
-        }
-        else{
-            notifOff.setChecked(true);
         }
 
     }
@@ -554,5 +560,114 @@ public class Profile extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("hereee", "lol");
+        int position = recyclerView.getChildAdapterPosition(v);
+        if (position!=-1) {
+            Log.d("position", String.valueOf(position));
+            long viewId = v.getId();
+            Log.d("click", String.valueOf(viewId));
+            Post post = adapter.getItem(position);
+
+
+            Intent intent = new Intent(Profile.this, PostActivity.class);
+            intent.putExtra(Forum.POST_ID_KEY, post.id);
+            intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
+
+
+            startActivity(intent);
+        }
+    }
+
+
+    public void setHouseImage(House house){
+            int image = 0;
+            switch (house.houseName) {
+                case "Sig Nu":
+                    image = R.drawable.signu1;
+                    break;
+                case "TDX":
+                    image = R.drawable.tdx;
+                    break;
+                case "Zete":
+                    image = R.drawable.zetapsi;
+                    break;
+                case "Sigma Delt":
+                    image = R.drawable.sigdelt;
+                    break;
+                case "Tabard":
+                    image = R.drawable.tabard;
+                    break;
+                case "Tri-Kap":
+                    image = R.drawable.trikap;
+                    break;
+                case "Kappa":
+                    image = R.drawable.kkg;
+                    break;
+                case "Hereot":
+                    image = R.drawable.heorot;
+                    break;
+                case "Phi Delt":
+                    image = R.drawable.phidelta;
+                    break;
+                case "KD":
+                    image = R.drawable.kd;
+                    break;
+                case "KDE":
+                    image = R.drawable.kde;
+                    break;
+                case "Phi Tau":
+                    image = R.drawable.phitau;
+                    break;
+                case "Alpha Chi":
+                    image = R.drawable.ic_axa;
+                    break;
+                case "GDX":
+                    image = R.drawable.gdx;
+                    break;
+                case "Psi U":
+                    image = R.drawable.psiu;
+                    break;
+                case "Chi Delt":
+                    image = R.drawable.chidelt;
+                    break;
+                case "Chi Gam":
+                    image = R.drawable.chigam;
+                    break;
+                case "EKT":
+                    image = R.drawable.ekt;
+                    break;
+                case "Deltas":
+                    image = R.drawable.deltas;
+                    break;
+                case "AXiD":
+                    image = R.drawable.axid;
+                    break;
+                case "Beta":
+                    image = R.drawable.beta;
+                    break;
+                case "BG":
+                    image = R.drawable.bg;
+                    break;
+                case "APhi":
+                    image = R.drawable.aphi1;
+                    break;
+                case "Alpha Theta":
+                    image = R.drawable.alphatheta;
+                    break;
+                case "Alphas":
+                    image = R.drawable.alphas;
+                    break;
+                case "AKA":
+                    image = R.drawable.aka;
+                    break;
+                default:
+                    break;
+            }
+            ImageView iv = (ImageView) findViewById(R.id.housePageImage);
+            iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
     }
 }

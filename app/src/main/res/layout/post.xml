@@ -9,6 +9,7 @@
     android:layout_marginStart="5dp"
     android:descendantFocusability="blocksDescendants"
     android:layout_gravity="center_horizontal"
+    android:id="@+id/postBackground"
     android:onClick="onClick">
 
     <TextView

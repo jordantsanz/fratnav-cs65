@@ -175,8 +175,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.forumCoordinatorLayout);
         filter = (ImageView) findViewById(R.id.filter);
 
-
-
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,8 +195,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 setCurrentColors();
             }
         });
-
-
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.forum);
@@ -242,8 +238,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 };
 
 
-
-
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
@@ -270,6 +264,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         recyclerViewforum.setAdapter(postsAdapter);
 
         postsAdapter.notifyDataSetChanged();
+
+
 
 
 
@@ -324,7 +320,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
 
     // saves post currently
-    public void savePost(View view) {
+    public void savePosts(View view) {
         Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
                 new ArrayList<>(), new HashMap<>(), 0);
 
