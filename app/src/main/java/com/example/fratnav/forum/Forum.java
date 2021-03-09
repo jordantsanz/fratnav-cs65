@@ -203,8 +203,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewforum.setLayoutManager(verticalLayoutManager);
-        recyclerViewforum.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
         recyclerViewforum.setAdapter(postsAdapter);
 

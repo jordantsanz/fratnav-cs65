@@ -437,8 +437,7 @@ public class HousePage extends AppCompatActivity {
         LinearLayoutManager horizontalLayoutManager2 =
                 new LinearLayoutManager(HousePage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
-        recyclerViewreviews.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         adapterReviews = new RVReviewsAdapter(getApplicationContext(), arrayOfReviews);
         recyclerViewreviews.setAdapter(adapterReviews);
 
