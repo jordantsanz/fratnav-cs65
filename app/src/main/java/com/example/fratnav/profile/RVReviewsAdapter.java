@@ -22,6 +22,8 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
 
 
     public class MyView extends RecyclerView.ViewHolder{
+        TextView postUser;
+        TextView postHouse;
         TextView safetyView;
         TextView incView;
         TextView baseView;
@@ -32,6 +34,8 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         public MyView(View view) {
             super(view);
 
+            postUser = (TextView) view.findViewById(R.id.postUser);
+            postHouse = (TextView) view.findViewById(R.id.postHouse);
             safetyView = (TextView) view.findViewById(R.id.safety_review);
             incView = (TextView) view.findViewById(R.id.inclusive_review);
             baseView = (TextView) view.findViewById(R.id.basement_review);
@@ -56,6 +60,8 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         Review review = getItem(position);
         String userDisplay = "@" + review.username;
 
+        holder.postUser.setText(String.valueOf(review.username));
+        holder.postHouse.setText(String.valueOf(review.houseId));
         holder.safetyView.setText(String.valueOf(review.safetyRating));
         holder.incView.setText(String.valueOf(review.inclusivityRating));
         holder.baseView.setText(String.valueOf(review.basementRating));

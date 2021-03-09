@@ -221,7 +221,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@id/house_contacts"
                 android:paddingStart="15dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="5dp"
                 android:hint="CLICK TO EDIT"
@@ -238,7 +238,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_president"
                 android:paddingStart="15dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="CLICK TO EDIT"
@@ -255,7 +255,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_vp"
                 android:paddingStart="15dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="CLICK TO EDIT"
@@ -272,7 +272,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@id/edit_treasurer"
                 android:paddingStart="15dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="8dp"
                 android:hint="CLICK TO EDIT"
@@ -391,11 +391,27 @@
                 android:textSize="16sp"
                 android:text="House Tour:" />
 
-            <Button
+            <com.google.vr.sdk.widgets.pano.VrPanoramaView
+                android:id="@+id/vrPanoramaView"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="35dp"
+                android:layout_below="@id/house_tour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.vr.sdk.widgets.pano.VrPanoramaView>
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/vrPanoramaView"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="230dp"
                 android:onClick="onSaveProfile"
-                android:text="Save profile"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/montserrat"
+                android:background="@drawable/teal_background"
+                android:text="Update Profile"
                 android:id="@+id/saveProfileButton"/>
 
 

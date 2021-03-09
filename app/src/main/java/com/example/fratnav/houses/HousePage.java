@@ -23,8 +23,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.MainActivity;
+import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.likePostCallback;
 import com.example.fratnav.databaseHelpers.ReviewDatabaseHelper;
 import com.example.fratnav.models.Review;
@@ -38,11 +42,14 @@ import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.User;
+import com.example.fratnav.profile.RVReviewsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+
+import java.util.ArrayList;
 
 public class HousePage extends AppCompatActivity {
     BottomNavigationView bottomBar;
@@ -60,7 +67,9 @@ public class HousePage extends AppCompatActivity {
     User currentUserInfo;
     public int subscribers;
     public boolean isHouse;
-
+    public ArrayList<Review> arrayOfReviews;
+    RVReviewsAdapter adapterReviews;
+    public String houseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +152,7 @@ public class HousePage extends AppCompatActivity {
                 houseNationalView.setText(n);
                 iv = findViewById(R.id.housePageImage);
                 setImageView(house.houseName);
+                renderReviews();
 
 
                 url = house.urlToHouseTour;
@@ -174,6 +184,7 @@ public class HousePage extends AppCompatActivity {
                 dialog.show();
             }
         });
+
 
     }
 
@@ -324,6 +335,39 @@ public class HousePage extends AppCompatActivity {
                 break;
         }
         iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
+    }
+
+    public void renderReviews(){
+        arrayOfReviews = new ArrayList<>();
+        Log.d("houseidd",theHouse.id);
+        ReviewDatabaseHelper.getReviewsByHouseId(theHouse.id, new getAllReviewsCallback() {
+            @Override
+            public void onCallback(ArrayList<Review> reviews) {
+                Log.d("reviews", reviews.toString());
+                for (int i = reviews.size() - 1; i > -1; i--){
+                    Review review = reviews.get(i);
+                    arrayOfReviews.add(review);
+                }
+                adapterReviews.notifyDataSetChanged();
+            }
+        });
+
+        if (arrayOfReviews == null) {
+            arrayOfReviews = new ArrayList<Review>();
+        }
+
+
+        RecyclerView recyclerViewreviews = findViewById(R.id.rv_reviews);
+        LinearLayoutManager horizontalLayoutManager2 =
+                new LinearLayoutManager(HousePage.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
+        recyclerViewreviews.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                DividerItemDecoration.HORIZONTAL));
+        adapterReviews = new RVReviewsAdapter(getApplicationContext(), arrayOfReviews);
+        recyclerViewreviews.setAdapter(adapterReviews);
+
+        adapterReviews.notifyDataSetChanged();
+
     }
 
 
