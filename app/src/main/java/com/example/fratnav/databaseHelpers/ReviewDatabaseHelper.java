@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.fratnav.callbacks.createCallback;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
@@ -95,7 +96,7 @@ public class ReviewDatabaseHelper {
     }
 
 
-    public static void createReview(Review review){
+    public static void createReview(Review review, createCallback myCallback){
 
         // add to reviews database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -105,6 +106,8 @@ public class ReviewDatabaseHelper {
 
         // store in house
         addReviewToObject(database.getReference("/houses"), review, review.houseId);
+
+        myCallback.onCallback(true);
 
     }
 

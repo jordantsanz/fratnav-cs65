@@ -78,6 +78,33 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     Dialog filterDialog;
 
+    public ToggleButton axa;
+    public ToggleButton aka;
+    public ToggleButton aphi;
+    public ToggleButton alphas;
+    public ToggleButton alphatheta;
+    public ToggleButton axid;
+    public ToggleButton bg;
+    public ToggleButton beta;
+    public ToggleButton chidelt;
+    public ToggleButton chigam;
+    public ToggleButton deltas;
+    public ToggleButton ekt;
+    public ToggleButton gdx;
+    public ToggleButton hereot;
+    public ToggleButton kappa;
+    public ToggleButton kd;
+    public ToggleButton kde;
+    public ToggleButton trikap;
+    public ToggleButton phidelt;
+    public ToggleButton phitau;
+    public ToggleButton psiu;
+    public ToggleButton sigdelt;
+    public ToggleButton signu;
+    public ToggleButton tabard;
+    public ToggleButton tdx;
+    public ToggleButton zete;
+
     boolean isHouse;
     public ListView list;
     public HashMap<String, String> tags;
@@ -505,7 +532,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
 
     public void setOnClickListeners(ViewGroup container){
-        ToggleButton axa = container.findViewById(R.id.axaTag);
+         axa = container.findViewById(R.id.axaTag);
         axa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -522,7 +549,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton aka = container.findViewById(R.id.akaTag);
+         aka = container.findViewById(R.id.akaTag);
         aka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -539,17 +566,16 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton aphi = container.findViewById(R.id.aPhiTag);
-        String string = "aphi";
+         aphi = container.findViewById(R.id.aPhiTag);
         aphi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey(string)){
-                    tags.remove(string);
+                if (tags.containsKey("aphi")){
+                    tags.remove("aphi");
                     aphiOn = false;
                 }
                 else{
-                    tags.put(string, "");
+                    tags.put("aphi", "");
                     aphiOn = true;
                 }
 
@@ -558,18 +584,16 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
 
-        ToggleButton alphas = container.findViewById(R.id.alphasTag);
-        string = "alphas";
-        String finalString = string;
+         alphas = container.findViewById(R.id.alphasTag);
         alphas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey(finalString)){
-                    tags.remove(finalString);
+                if (tags.containsKey("alphas")){
+                    tags.remove("alphas");
                     alphasOn = false;
                 }
                 else{
-                    tags.put(finalString, "");
+                    tags.put("alphas", "");
                     alphasOn = true;
                 }
 
@@ -577,7 +601,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton alphatheta = container.findViewById(R.id.alphaThetaTag);
+         alphatheta = container.findViewById(R.id.alphaThetaTag);
         alphatheta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -594,7 +618,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton axid = container.findViewById(R.id.aXiDTag);
+         axid = container.findViewById(R.id.aXiDTag);
         axid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -611,7 +635,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton bg = container.findViewById(R.id.bGTag);
+         bg = container.findViewById(R.id.bGTag);
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -628,7 +652,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton beta = container.findViewById(R.id.betaTag);
+         beta = container.findViewById(R.id.betaTag);
         beta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -645,7 +669,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton chidelt = container.findViewById(R.id.chiDeltTag);
+         chidelt = container.findViewById(R.id.chiDeltTag);
         chidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -662,7 +686,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton chigam = container.findViewById(R.id.chiGamTag);
+         chigam = container.findViewById(R.id.chiGamTag);
         chigam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -679,7 +703,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton deltas = container.findViewById(R.id.deltasTag);
+         deltas = container.findViewById(R.id.deltasTag);
         deltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -696,7 +720,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton ekt = container.findViewById(R.id.ektTag);
+         ekt = container.findViewById(R.id.ektTag);
         ekt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -713,7 +737,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton gdx = container.findViewById(R.id.gdxTag);
+         gdx = container.findViewById(R.id.gdxTag);
         gdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -730,7 +754,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton hereot = container.findViewById(R.id.hereotTag);
+         hereot = container.findViewById(R.id.hereotTag);
         hereot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -747,7 +771,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton kappa = container.findViewById(R.id.kappaTagSearch);
+         kappa = container.findViewById(R.id.kappaTagSearch);
         kappa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -764,7 +788,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton kd = container.findViewById(R.id.kdTag);
+         kd = container.findViewById(R.id.kdTag);
         kd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -781,7 +805,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton kde = container.findViewById(R.id.kdeTag);
+         kde = container.findViewById(R.id.kdeTag);
         kde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -798,7 +822,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton trikap = container.findViewById(R.id.triKapTag);
+         trikap = container.findViewById(R.id.triKapTag);
         trikap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -815,7 +839,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton phidelt = container.findViewById(R.id.phiDeltTag);
+         phidelt = container.findViewById(R.id.phiDeltTag);
         phidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -832,7 +856,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton phitau = container.findViewById(R.id.phiTauTag);
+         phitau = container.findViewById(R.id.phiTauTag);
         phitau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -848,8 +872,25 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 phitau.setChecked(phitauOn);
             }
         });
+        psiu = container.findViewById(R.id.psiUTag);
+        psiu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("psiu")){
+                    tags.remove("psiu");
+                    psiuOn = false;
+                }
+                else{
+                    tags.put("psiu", "");
+                    psiuOn = true;
+                }
 
-        ToggleButton sigdelt = container.findViewById(R.id.sigDeltTag);
+                psiu.setChecked(psiuOn);
+            }
+        });
+
+
+        sigdelt = container.findViewById(R.id.sigDeltTag);
         sigdelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -866,7 +907,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton signu = container.findViewById(R.id.sigNuTag);
+         signu = container.findViewById(R.id.sigNuTag);
         signu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -883,7 +924,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton tabard = container.findViewById(R.id.tabardTag);
+         tabard = container.findViewById(R.id.tabardTag);
         tabard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -900,22 +941,45 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        ToggleButton bg = container.findViewById(R.id.bGTag);
-        bg.setOnClickListener(new View.OnClickListener() {
+         tdx = container.findViewById(R.id.tdxTag);
+        tdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("bg")){
-                    tags.remove("bg");
-                    bgOn = false;
+                if (tags.containsKey("tdx")){
+                    tags.remove("tdx");
+                    tdxOn = false;
                 }
                 else{
-                    tags.put("bg", "");
-                    bgOn = true;
+                    tags.put("tdx", "");
+                    tdxOn = true;
                 }
 
-                bg.setChecked(bgOn);
+                tdx.setChecked(tdxOn);
             }
         });
+
+        zete = container.findViewById(R.id.zeteTag);
+        zete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tags.containsKey("zete")){
+                    tags.remove("zete");
+                    zeteOn = false;
+                }
+                else{
+                    tags.put("zete", "");
+                    zeteOn = true;
+                }
+
+                zete.setChecked(zeteOn);
+            }
+        });
+
+    }
+
+
+    public void setCurrentColors(){
+
 
     }
 
