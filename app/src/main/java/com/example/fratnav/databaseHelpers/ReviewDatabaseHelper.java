@@ -34,15 +34,17 @@ public class ReviewDatabaseHelper {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     House house = ds.getValue(House.class);
                     assert house != null;
-                    Log.d("houseReviews", house.reviews.toString());
-                    Log.d("reviewss", reviews.toString());
-                    for (DataSnapshot dss : ds.child("reviews").getChildren()){
-                        Log.d("dss", dss.toString());
-                        Review review =  dss.getValue(Review.class);
-                        assert review != null;
-                        Log.d("review", review.toString());
 
-                        reviews.add(review);
+                    Log.d("reviewss", reviews.toString());
+                    if (house.reviews != null) {
+                        for (DataSnapshot dss : ds.child("reviews").getChildren()) {
+                            Log.d("dss", dss.toString());
+                            Review review = dss.getValue(Review.class);
+                            assert review != null;
+                            Log.d("review", review.toString());
+
+                            reviews.add(review);
+                        }
                     }
 
                 }
