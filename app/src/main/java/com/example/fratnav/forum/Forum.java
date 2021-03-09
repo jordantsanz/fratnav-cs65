@@ -533,7 +533,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
 
     public void setOnClickListeners(ViewGroup container){
-         axa = container.findViewById(R.id.axaTag);
+        axa = container.findViewById(R.id.axaTagSearch);
         axa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -550,7 +550,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         aka = container.findViewById(R.id.akaTag);
+         aka = container.findViewById(R.id.akaTagSearch);
         aka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -567,7 +567,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         aphi = container.findViewById(R.id.aPhiTag);
+         aphi = container.findViewById(R.id.aPhiTagSearch);
         aphi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -585,7 +585,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
 
-         alphas = container.findViewById(R.id.alphasTag);
+         alphas = container.findViewById(R.id.alphasTagSearch);
         alphas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -602,7 +602,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         alphatheta = container.findViewById(R.id.alphaThetaTag);
+         alphatheta = container.findViewById(R.id.alphaThetaTagSearch);
         alphatheta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -619,7 +619,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         axid = container.findViewById(R.id.aXiDTag);
+         axid = container.findViewById(R.id.aXiDTagSearch);
         axid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -636,7 +636,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         bg = container.findViewById(R.id.bGTag);
+         bg = container.findViewById(R.id.bGTagSearch);
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -653,7 +653,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         beta = container.findViewById(R.id.betaTag);
+         beta = container.findViewById(R.id.betaTagSearch);
         beta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -670,7 +670,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         chidelt = container.findViewById(R.id.chiDeltTag);
+         chidelt = container.findViewById(R.id.chiDeltTagSearch);
         chidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -687,7 +687,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         chigam = container.findViewById(R.id.chiGamTag);
+         chigam = container.findViewById(R.id.chiGamTagSearch);
         chigam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -704,7 +704,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         deltas = container.findViewById(R.id.deltasTag);
+         deltas = container.findViewById(R.id.deltasTagSearch);
         deltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -721,7 +721,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         ekt = container.findViewById(R.id.ektTag);
+         ekt = container.findViewById(R.id.ektTagSearch);
         ekt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -738,7 +738,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         gdx = container.findViewById(R.id.gdxTag);
+         gdx = container.findViewById(R.id.gdxTagSearch);
         gdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -755,7 +755,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         hereot = container.findViewById(R.id.hereotTag);
+         hereot = container.findViewById(R.id.hereotTagSearch);
         hereot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -789,7 +789,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         kd = container.findViewById(R.id.kdTag);
+         kd = container.findViewById(R.id.kdTagSearch);
         kd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -806,7 +806,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         kde = container.findViewById(R.id.kdeTag);
+         kde = container.findViewById(R.id.kdeTagSearch);
         kde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -823,7 +823,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         trikap = container.findViewById(R.id.triKapTag);
+         trikap = container.findViewById(R.id.triKapTagSearch);
         trikap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -840,7 +840,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         phidelt = container.findViewById(R.id.phiDeltTag);
+         phidelt = container.findViewById(R.id.phiDeltTagSearch);
         phidelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -857,7 +857,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         phitau = container.findViewById(R.id.phiTauTag);
+         phitau = container.findViewById(R.id.phiTauTagSearch);
         phitau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -873,7 +873,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 phitau.setChecked(phitauOn);
             }
         });
-        psiu = container.findViewById(R.id.psiUTag);
+        psiu = container.findViewById(R.id.psiUTagSearch);
         psiu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -891,7 +891,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
 
-        sigdelt = container.findViewById(R.id.sigDeltTag);
+        sigdelt = container.findViewById(R.id.sigDeltTagSearch);
         sigdelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -908,7 +908,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         signu = container.findViewById(R.id.sigNuTag);
+         signu = container.findViewById(R.id.sigNuTagSearch);
         signu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -925,7 +925,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         tabard = container.findViewById(R.id.tabardTag);
+         tabard = container.findViewById(R.id.tabardTagSearch);
         tabard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -942,7 +942,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-         tdx = container.findViewById(R.id.tdxTag);
+         tdx = container.findViewById(R.id.tdxTagSearch);
         tdx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -959,7 +959,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        zete = container.findViewById(R.id.zeteTag);
+        zete = container.findViewById(R.id.zeteTagSearch);
         zete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -980,6 +980,38 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
 
     public void setCurrentColors(){
+        HashMap<ToggleButton, Boolean> map = new HashMap<>();
+        map.put(axa, axaOn);
+        map.put(aka, akaOn);
+        map.put(beta, betaOn);
+        map.put(bg, bgOn);
+        map.put(chigam, chigamOn);
+        map.put(hereot, hereotOn);
+        map.put(gdx, gdxOn);
+        map.put(trikap, trikapOn);
+        map.put(phidelt, phideltOn);
+        map.put(psiu, psiuOn);
+        map.put(signu, signuOn);
+        map.put(tdx, tdxOn);
+        map.put(zete, zeteOn);
+        map.put(aphi, aphiOn);
+        map.put(axid, axidOn);
+        map.put(chidelt, chideltOn);
+        map.put(ekt, ektOn);
+        map.put(kd, kdOn);
+        map.put(kde, kdeOn);
+        map.put(kappa, kappaOn);
+        map.put(sigdelt, sigdeltOn);
+        map.put(alphatheta, alphathetaOn);
+        map.put(phitau, phitauOn);
+        map.put(tabard, tabardOn);
+        map.put(alphas, alphasOn);
+        map.put(aka, akaOn);
+        map.put(deltas, deltasOn);
+
+        for (ToggleButton button : map.keySet()){
+            button.setChecked(map.get(button));
+        }
 
 
     }
