@@ -83,7 +83,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:fontFamily="@font/montserrat"
-                android:text="Browse By Houses:" />
+                android:text="@string/browseHouse" />
 
         </LinearLayout>
 
@@ -115,7 +115,7 @@
             </LinearLayout>
         </ScrollView>
 
-<!--        </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
 
     </LinearLayout>
 

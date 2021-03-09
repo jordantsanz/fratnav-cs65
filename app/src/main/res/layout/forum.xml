@@ -24,8 +24,8 @@
         app:itemRippleColor="@android:color/transparent"
         app:itemTextColor="@color/backgroundColor"
         app:itemIconTint="@drawable/item_selector"
-        android:id="@+id/bottomBar"
-    />
+        android:id="@+id/bottomBar" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="100dp"
         android:layout_height="40dp"
@@ -85,21 +85,6 @@
             </LinearLayout>
 
 
-<!--
-            <EditText
-                android:id="@+id/postText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/background"
-                android:inputType="text"
-                android:paddingTop="5dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="5dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat"/>
--->
-
         </LinearLayout>
 
 
@@ -120,8 +105,6 @@
                 android:layout_marginBottom="10dp"
                 android:dividerHeight="10.0sp" />
         </FrameLayout>
-
-
 
     </LinearLayout>
 

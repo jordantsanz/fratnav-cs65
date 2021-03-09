@@ -91,4 +91,34 @@
     <string name="TwentyOneSummer"> 21X - continue talking to brothers, and attend rush events</string>
     <string name="TwentyOneFall"> 21F - attend info sessions and fill out the rush form sent by the IFC</string>
     <string name="TwentyTwoWinter"> 22W - meet as many people as you can, try getting to know brothers outside of the basement scene</string>
+    <string name="filterText">chose one to filter the houses</string>
+    <string name="houseName">HOUSE NAME</string>
+    <string name="subscribers"># Subscribers</string>
+    <string name="houseReviews">Reviews:</string>
+    <string name="subscribe">subscribe</string>
+    <string name="houseSummary">House Summary:</string>
+    <string name="pointsOfContacts">Points of Contact:</string>
+    <string name="stats">Self-Reported Stats:</string>
+    <string name="houseTour">House Tour:</string>
+    <string name="exploreHouse">explore the house</string>
+    <string name="leaveReview">leave a review</string>
+    <string name="browseHouse">Browse By Houses:</string>
+    <string name="reviewComments">Comments:</string>
+    <string name="reviewOverall">Overall:</string>
+    <string name="reviewBasement">Basement:</string>
+    <string name="reviewInclusivity">Inclusivity:</string>
+    <string name="reviewSafety">Safety:</string>
+    <string name="outOf5">/5</string>
+    <string name="houseSummaryHint">Click to edit House Summary</string>
+    <string name="national">National</string>
+    <string name="local">Local</string>
+    <string name="president">President:</string>
+    <string name="vice">Vice President:</string>
+    <string name="tres">Treasurer:</string>
+    <string name="rushChair">Rush Chair:</string>
+    <string name="clickToEdit">CLICK TO EDIT</string>
+    <string name="totalMembers">Total Members:</string>    POC Members:
+    <string name="pocMembers">POC Members:</string>
+    <string name="queerMembers">LGBTQ+ Members:</string>
+
 </resources>

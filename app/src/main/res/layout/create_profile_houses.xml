@@ -84,20 +84,6 @@
                     android:textColor="@color/textColor"/>
         </RadioGroup>
 
-    <!--
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat"
-        android:background="@drawable/background"
-        android:layout_gravity="center"
-        android:paddingTop="5dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="5dp"
-        android:id="@+id/createGender"/>
-        -->
     <TextView
         android:layout_width="wrap_content"
         android:textColor="@color/textColor"
@@ -144,19 +130,6 @@
         android:background="@drawable/background"
         android:spinnerMode="dropdown"
         />
-<!--
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/background"
-        android:layout_gravity="center"
-        android:inputType="number"
-        android:paddingTop="5dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="5dp"
-        /> -->
 
     <TextView
         android:layout_width="wrap_content"
