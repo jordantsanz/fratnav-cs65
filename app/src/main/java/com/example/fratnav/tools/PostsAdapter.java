@@ -135,7 +135,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         return super.getItem(position);
     }
 
-
     public void setBackgrounds(TextView tag1, TextView tag2, TextView tag3){
         ArrayList<TextView> tags = new ArrayList<>();
         tags.add(tag1);
@@ -155,6 +154,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
                 default:
                     tag.setBackgroundColor(Color.GREEN);
             }
+
         }
     }
 }

@@ -3,9 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/createPostRelativeLayout"
     android:background="@drawable/grey_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/postUser"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="25dp"
+        android:textColor="@color/textColor"
+        android:textSize="21sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/postHouse"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="230dp"
+        android:textColor="@color/dialog_choose_text_color"
+        android:textSize="21sp"
+        android:background="@drawable/background"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="15dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="100dp"

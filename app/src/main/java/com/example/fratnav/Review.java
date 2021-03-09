@@ -19,6 +19,7 @@ public class Review extends AppCompatActivity {
     private static FirebaseUser currentUser;
     private static User currentUserInfo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

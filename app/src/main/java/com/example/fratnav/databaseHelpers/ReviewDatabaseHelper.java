@@ -30,9 +30,12 @@ public class ReviewDatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("snapshot", snapshot.toString());
                 ArrayList<Review> reviews = new ArrayList<>();
+
                 for (DataSnapshot ds : snapshot.getChildren()){
                     House house = ds.getValue(House.class);
                     assert house != null;
+                    Log.d("reviewss", reviews.toString());
+
                     for (DataSnapshot dss : ds.child("reviews").getChildren()){
                         Review review =  dss.getValue(Review.class);
                         reviews.add(review);

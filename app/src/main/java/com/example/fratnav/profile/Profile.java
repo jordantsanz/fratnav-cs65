@@ -342,31 +342,19 @@ public class Profile extends AppCompatActivity {
                 renderReviews();
                 renderHousesSubscribed(user);
 
-                arrayOfPosts = new ArrayList<>();
-                PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {
-                    @Override
-                    public void onCallback(ArrayList<Post> posts) {
-                        Log.d("posts", posts.toString());;
-                        for (int i = posts.size() - 1; i > -1; i--){
-                            Post post = posts.get(i);
-                            arrayOfPosts.add(post);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
 
-                arrayOfReviews = new ArrayList<>();
-                ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
-                    @Override
-                    public void onCallback(ArrayList<Review> reviews) {
-                        Log.d("reviews", reviews.toString());
-                        for (int i = reviews.size() - 1; i > -1; i--){
-                            Review review = reviews.get(i);
-                            arrayOfReviews.add(review);
-                        }
-                        adapterReviews.notifyDataSetChanged();
-                    }
-                });
+//                arrayOfReviews = new ArrayList<>();
+//                ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
+//                    @Override
+//                    public void onCallback(ArrayList<Review> reviews) {
+//                        Log.d("reviews", reviews.toString());
+//                        for (int i = reviews.size() - 1; i > -1; i--){
+//                            Review review = reviews.get(i);
+//                            arrayOfReviews.add(review);
+//                        }
+//                        adapterReviews.notifyDataSetChanged();
+//                    }
+//                });
 
 
 //                HouseDatabaseHelper.getHousesByUserSubscribed(subscribedtO, new getAllHousesCallback() {
@@ -400,14 +388,6 @@ public class Profile extends AppCompatActivity {
                 // Attach the adapter to a ListView
 //                ListView list = findViewById(android.R.id.list);
 //                list.setAdapter(adapter); // sets adapter for list
-                RecyclerView recyclerView = findViewById(R.id.rv_posts);
-                LinearLayoutManager horizontalLayoutManager =
-                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
-                recyclerView.setLayoutManager(horizontalLayoutManager);
-                recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                        DividerItemDecoration.HORIZONTAL));
-                adapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
-                recyclerView.setAdapter(adapter);
 
             }
 
@@ -472,9 +452,6 @@ public class Profile extends AppCompatActivity {
 
 
     public void renderReviews(){
-                if (arrayofSubscribedTo == null) {
-                    arrayofSubscribedTo = new ArrayList<House>();
-                }
 
         arrayOfReviews = new ArrayList<>();
         ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
@@ -488,6 +465,10 @@ public class Profile extends AppCompatActivity {
                 adapterReviews.notifyDataSetChanged();
             }
         });
+
+        if (arrayOfReviews == null) {
+            arrayOfReviews = new ArrayList<Review>();
+        }
 
 
         RecyclerView recyclerViewreviews = findViewById(R.id.rv_reviews);
@@ -533,6 +514,9 @@ public class Profile extends AppCompatActivity {
 
 
     public void renderHousesSubscribed(User user){
+        if (arrayofSubscribedTo == null) {
+            arrayofSubscribedTo = new ArrayList<House>();
+        }
         HouseDatabaseHelper.getHousesByUserSubscribed(user.subscribedTo, new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
