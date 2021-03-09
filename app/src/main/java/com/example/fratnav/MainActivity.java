@@ -34,6 +34,7 @@ import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
+import com.example.fratnav.profile.RVPostsAdapter;
 import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +46,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.service.autofill.UserData;
 import android.util.Log;
@@ -63,7 +67,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
     public static final String USER_HOUSE_BOOL = "userbool";
@@ -71,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     PostsAdapter adapter;
     ArrayList<Post> arrayOfPosts;
     public User currentUserInfo;
+    RVPostsAdapter postsAdapter;
+    RecyclerView recyclerViewfeed;
 
 
     @Override
@@ -101,9 +107,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onCallback(ArrayList<Post> posts) {
                         Log.d("Posts", posts.toString());
                         for (int i = posts.size() - 1; i > -1; i--){
-                            adapter.add(posts.get(i));
+//                            adapter.add(posts.get(i));
+                            Post post = posts.get(i);
+                            arrayOfPosts.add(post);
                         }
-                        adapter.notifyDataSetChanged();
+                        postsAdapter.notifyDataSetChanged();
+
+//                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -112,40 +122,54 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // Construct the data source
+        if (arrayOfPosts == null) {
+            arrayOfPosts = new ArrayList<Post>();
+        }
 
+        recyclerViewfeed = (RecyclerView) findViewById(R.id.rv_feedposts);
+        LinearLayoutManager verticalLayoutManager =
+                new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewfeed.setLayoutManager(verticalLayoutManager);
+        recyclerViewfeed.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                DividerItemDecoration.HORIZONTAL));
+        postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
+        recyclerViewfeed.setAdapter(postsAdapter);
+
+        postsAdapter.notifyDataSetChanged();
 
 
 
         // Construct the data source
-        arrayOfPosts = new ArrayList<Post>();
+        //arrayOfPosts = new ArrayList<Post>();
         // Create the adapter to convert the array to views
-        adapter = new PostsAdapter(this, arrayOfPosts);
+//        adapter = new PostsAdapter(this, arrayOfPosts);
         // Attach the adapter to a ListView
-        ListView list = findViewById(android.R.id.list);
-        list.setAdapter(adapter); // sets adapter for list
+//        ListView list = findViewById(android.R.id.list);
+//        list.setAdapter(adapter); // sets adapter for list
 
 
 
         // on click listener for posts
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position != -1) {
-                    Log.d("position", String.valueOf(position));
-                    long viewId = view.getId();
-                    Log.d("click", String.valueOf(viewId));
-                    Post post = adapter.getItem(position);
-
-
-                    Intent intent = new Intent(MainActivity.this, PostActivity.class);
-                    assert post != null;
-                    intent.putExtra(Forum.POST_ID_KEY, post.id);
-                    intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
-
-
-                    startActivity(intent);
-                }}});
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (position != -1) {
+//                    Log.d("position", String.valueOf(position));
+//                    long viewId = view.getId();
+//                    Log.d("click", String.valueOf(viewId));
+//                    Post post = adapter.getItem(position);
+//
+//
+//                    Intent intent = new Intent(MainActivity.this, PostActivity.class);
+//                    assert post != null;
+//                    intent.putExtra(Forum.POST_ID_KEY, post.id);
+//                    intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
+//
+//
+//                    startActivity(intent);
+//                }}});
 
 
 
@@ -229,6 +253,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("hereee", "lol");
+        int position = recyclerViewfeed.getChildAdapterPosition(v);
+        if (position!=-1) {
+            Log.d("position", String.valueOf(position));
+            long viewId = v.getId();
+            Log.d("click", String.valueOf(viewId));
+            Post post = postsAdapter.getItem(position);
+
+
+            Intent intent = new Intent(MainActivity.this, PostActivity.class);
+            intent.putExtra(Forum.POST_ID_KEY, post.id);
+            intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
+
+
+            startActivity(intent);
+        }
+    }
+
     //from GitHubRep
     private static class CustomPertDataEntry extends PertDataEntry {
         CustomPertDataEntry(String id, String description, String name, String fullName) {

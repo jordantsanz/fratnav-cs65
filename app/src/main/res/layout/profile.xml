@@ -340,6 +340,7 @@
                 android:textColor="@color/textColor"
                 android:fontFamily="@font/montserrat"
                 android:text="Reviews:"
+                android:layout_marginTop="10dp"
                 android:textSize="20sp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reviews"

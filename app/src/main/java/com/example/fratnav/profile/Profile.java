@@ -437,7 +437,6 @@ public class Profile extends AppCompatActivity {
                         Profile.this,
                         LinearLayoutManager.HORIZONTAL,
                         false);
-
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(getApplicationContext(),
