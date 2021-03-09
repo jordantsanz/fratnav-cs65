@@ -87,11 +87,11 @@
     <string name="firstGen">First-Gen</string>
     <string name="lowIncome">Low Income</string>
     <string name="personalTags">Personal Tags:</string>
-    <string name="TwentyOneSpring"> 21S- start talking to brothers of houses you are interested in</string>
-    <string name="TwentyOneSummer"> 21X - continue talking to brothers, and attend rush events</string>
-    <string name="TwentyOneFall"> 21F - attend info sessions and fill out the rush form sent by the IFC</string>
-    <string name="TwentyTwoWinter"> 22W - meet as many people as you can, try getting to know brothers outside of the basement scene</string>
-    <string name="filterText">chose one to filter the houses</string>
+    <string name="TwentyOneSpring"> 21S - start talking to house members and attend rush events if possible</string>
+    <string name="TwentyOneSummer"> 21X - reach out to rush chairs, or people you know</string>
+    <string name="TwentyOneFall"> 21F - attend info sessions and fill out the rush forms</string>
+    <string name="TwentyTwoWinter"> 22W - continue meeting people in the house you are interested in, meet beyond the basement scene</string>
+    <string name="filterText">choose one to filter the houses</string>
     <string name="houseName">HOUSE NAME</string>
     <string name="subscribers"># Subscribers</string>
     <string name="houseReviews">Reviews:</string>

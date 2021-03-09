@@ -202,7 +202,7 @@ public class HousePage extends AppCompatActivity {
                 else{
                     total += "N/A";
                 }
-                String stats = total + '\n' + queer + '\n'+ queer;
+                String stats = total + '\n' + queer + '\n'+ poc;
                 selfReportedStats.setText(stats);
 
                 if (house.summary != null && house.summary.length() >1){
