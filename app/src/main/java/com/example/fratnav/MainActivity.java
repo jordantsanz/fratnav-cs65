@@ -70,7 +70,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
     BottomNavigationView bottomBar;
     private static FirebaseUser currentUser;
     public static final String USER_HOUSE_BOOL = "userbool";
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PostsAdapter adapter;
     ArrayList<Post> arrayOfPosts;
     public User currentUserInfo;
-    RVPostsAdapter postsAdapter;
+    RVFeedAdapter feedAdapter;
     RecyclerView recyclerViewfeed;
     public String randomKey;
 
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Post post = posts.get(i);
                             arrayOfPosts.add(post);
                         }
-                        postsAdapter.notifyDataSetChanged();
+                        feedAdapter.notifyDataSetChanged();
 
 //                        adapter.notifyDataSetChanged();
                     }
@@ -136,10 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewfeed.setLayoutManager(verticalLayoutManager);
 
-        postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
-        recyclerViewfeed.setAdapter(postsAdapter);
+        feedAdapter = new RVFeedAdapter(getApplicationContext(), arrayOfPosts);
+        recyclerViewfeed.setAdapter(feedAdapter);
 
-        postsAdapter.notifyDataSetChanged();
+        feedAdapter.notifyDataSetChanged();
 
 
 
@@ -257,90 +257,90 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void onHeartClick(View v){
-        View parentRow = (View) v.getParent().getParent();
-        Log.d("parentRow", parentRow.toString());
-        RecyclerView rv = (RecyclerView) parentRow.getParent();
-        Log.d("recycle", rv.toString());
-        int position = rv.getChildLayoutPosition(parentRow);
-        Post post = postsAdapter.getItem(position);
-        assert post != null;
-        Log.d("heartClick", post.id);
+//    public void onHeartClick(View v){
+//        View parentRow = (View) v.getParent().getParent();
+//        Log.d("parentRow", parentRow.toString());
+//        RecyclerView rv = (RecyclerView) parentRow.getParent();
+//        Log.d("recycle", rv.toString());
+//        int position = rv.getChildLayoutPosition(parentRow);
+//        Post post = feedAdapter.getItem(position);
+//        assert post != null;
+//        Log.d("heartClick", post.id);
+//
+//        if (randomKey == null){
+//            randomKey = UUID.randomUUID().toString();
+//        }
 
-        if (randomKey == null){
-            randomKey = UUID.randomUUID().toString();
-        }
-
-        boolean userDidLike = false;
-
-        ImageView heart = findViewById(R.id.heart);
-        heart.getTag();
-
-
-        if (post.usersLiked != null){
-            Log.d("userDidLike", post.usersLiked.toString());
-            for (String userId : post.usersLiked.values()){
-                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
-                if (userId.equals(currentUserInfo.userID)){
-                    userDidLike = true;
-                    break;
-                }
-            }
-        }
-
-        if (userDidLike){
-            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
-                @Override
-                public void onCallback(int likes) {
-                    Forum.refresh();
-                    Log.d("like", "removeLike");
-                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-                    post.likes -= 1;
-                    Log.d("postprof", post.usersLiked.toString());
-
-
-                }
-            });
-
-
-        }
-        else{
-            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
-                @Override
-                public void onCallback(int likes) {
-                    Log.d("like", "addLike");
-                    Forum.refresh();
-                    if (post.usersLiked == null){
-                        post.usersLiked = new HashMap<>();
-                    }
-                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
-                    post.likes += 1;
-
-                }
-            });
-
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        Log.d("hereee", "lol");
-        int position = recyclerViewfeed.getChildAdapterPosition(v);
-        if (position!=-1) {
-            Log.d("position", String.valueOf(position));
-            long viewId = v.getId();
-            Log.d("click", String.valueOf(viewId));
-            Post post = postsAdapter.getItem(position);
-
-
-            Intent intent = new Intent(MainActivity.this, PostActivity.class);
-            intent.putExtra(Forum.POST_ID_KEY, post.id);
-            intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
-
-
-            startActivity(intent);
-        }
-    }
+//        boolean userDidLike = false;
+//
+//        ImageView heart = findViewById(R.id.heart);
+//        heart.getTag();
+//
+//
+//        if (post.usersLiked != null){
+//            Log.d("userDidLike", post.usersLiked.toString());
+//            for (String userId : post.usersLiked.values()){
+//                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+//                if (userId.equals(currentUserInfo.userID)){
+//                    userDidLike = true;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        if (userDidLike){
+//            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
+//                @Override
+//                public void onCallback(int likes) {
+//                    Forum.refresh();
+//                    Log.d("like", "removeLike");
+//                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
+//                    post.likes -= 1;
+//                    Log.d("postprof", post.usersLiked.toString());
+//
+//
+//                }
+//            });
+//
+//
+//        }
+//        else{
+//            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
+//                @Override
+//                public void onCallback(int likes) {
+//                    Log.d("like", "addLike");
+//                    Forum.refresh();
+//                    if (post.usersLiked == null){
+//                        post.usersLiked = new HashMap<>();
+//                    }
+//                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
+//                    post.likes += 1;
+//
+//                }
+//            });
+//
+//        }
+//    }
+//
+//    @Override
+//    public void onClick(View v) {
+//        Log.d("hereee", "lol");
+//        int position = recyclerViewfeed.getChildAdapterPosition(v);
+//        if (position!=-1) {
+//            Log.d("position", String.valueOf(position));
+//            long viewId = v.getId();
+//            Log.d("click", String.valueOf(viewId));
+//            Post post = feedAdapter.getItem(position);
+//
+//
+//            Intent intent = new Intent(MainActivity.this, PostActivity.class);
+//            intent.putExtra(Forum.POST_ID_KEY, post.id);
+//            intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
+//
+//
+//            startActivity(intent);
+//        }
+//    }
 
 
 
