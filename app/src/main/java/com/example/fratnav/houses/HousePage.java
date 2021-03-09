@@ -209,7 +209,7 @@ public class HousePage extends AppCompatActivity {
                 else{
                     total += "N/A";
                 }
-                String stats = total + '\n' + queer + '\n'+ queer;
+                String stats = total + '\n' + queer + '\n'+ poc;
                 selfReportedStats.setText(stats);
 
                 if (house.summary != null && house.summary.length() >1){
@@ -437,8 +437,7 @@ public class HousePage extends AppCompatActivity {
         LinearLayoutManager horizontalLayoutManager2 =
                 new LinearLayoutManager(HousePage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
-        recyclerViewreviews.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         adapterReviews = new RVReviewsAdapter(getApplicationContext(), arrayOfReviews);
         recyclerViewreviews.setAdapter(adapterReviews);
 

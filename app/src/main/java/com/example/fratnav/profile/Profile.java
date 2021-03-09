@@ -439,9 +439,7 @@ public class Profile extends AppCompatActivity {
                         LinearLayoutManager.HORIZONTAL,
                         false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
 
         adapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
         recyclerView.setAdapter(adapter);
@@ -475,8 +473,7 @@ public class Profile extends AppCompatActivity {
         LinearLayoutManager horizontalLayoutManager2 =
                 new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewreviews.setLayoutManager(horizontalLayoutManager2);
-        recyclerViewreviews.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         adapterReviews = new RVReviewsAdapter(getApplicationContext(), arrayOfReviews);
         recyclerViewreviews.setAdapter(adapterReviews);
 

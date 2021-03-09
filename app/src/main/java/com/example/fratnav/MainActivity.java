@@ -131,8 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewfeed.setLayoutManager(verticalLayoutManager);
-        recyclerViewfeed.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
         recyclerViewfeed.setAdapter(postsAdapter);
 

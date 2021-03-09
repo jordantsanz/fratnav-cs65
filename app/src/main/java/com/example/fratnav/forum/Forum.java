@@ -236,8 +236,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewforum.setLayoutManager(verticalLayoutManager);
-        recyclerViewforum.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                DividerItemDecoration.HORIZONTAL));
+
         postsAdapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
         recyclerViewforum.setAdapter(postsAdapter);
 
@@ -443,7 +442,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         }
 
-
                 if (userDidLike){
                     PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
                         @Override
@@ -474,9 +472,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                             }
                             post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
                             post.likes += 1;
-
-
-
 
                         }
                     });
