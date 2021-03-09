@@ -190,7 +190,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     arrayOfPosts.add(post);
                 }
                 postsAdapter.notifyDataSetChanged();
-                list.setAdapter(adapter); // sets adapter for list
+
             }
         });
 
@@ -381,12 +381,11 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 //    }
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
-        ListView lv = (ListView) parentRow.getParent();
-        int position = lv.getPositionForView(parentRow);
-        if (position == -1){
-            return;
-        }
-        Post post = adapter.getItem(position);
+        Log.d("parentRow", parentRow.toString());
+        RecyclerView rv = (RecyclerView) parentRow.getParent();
+        Log.d("recycle", rv.toString());
+        int position = rv.getChildLayoutPosition(parentRow);
+        Post post = postsAdapter.getItem(position);
         assert post != null;
         Log.d("heartClick", post.id);
 
@@ -451,6 +450,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
                 }
             }
+
 
 
     public void onUsernameClick(View v){
