@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.MenuItem;
@@ -533,7 +534,6 @@ public class Profile extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Log.d("sad", "made it item clicked " + item.getTitle());
-                Toast.makeText(Profile.this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 if (item.getItemId()==R.id.houses) {
                     Log.d("swtich", "houses");
                     startActivity(new Intent(Profile.this, HousesSearch.class));
