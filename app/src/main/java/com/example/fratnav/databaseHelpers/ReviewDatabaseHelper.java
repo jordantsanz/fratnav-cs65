@@ -10,6 +10,7 @@ import com.example.fratnav.callbacks.createCallback;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllReviewsCallback;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
+import com.example.fratnav.houses.HousePage;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.Review;
 import com.example.fratnav.models.User;
@@ -20,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static com.example.fratnav.houses.HousePage.arrayOfReviews;
 
 public class ReviewDatabaseHelper {
 
@@ -50,6 +53,7 @@ public class ReviewDatabaseHelper {
 
                 }
 
+                Log.d("reviewsFoundInMethod", reviews.toString());
                 myCallback.onCallback(reviews);
 
 
@@ -107,7 +111,22 @@ public class ReviewDatabaseHelper {
         // store in house
         addReviewToObject(database.getReference("/houses"), review, review.houseId);
 
-        myCallback.onCallback(true);
+        ReviewDatabaseHelper.getReviewsByHouseId(review.houseId, new getAllReviewsCallback() {
+            @Override
+            public void onCallback(ArrayList<Review> reviews) {
+                Log.d("reviewsFound", reviews.toString());
+                HousePage.arrayOfReviews = new ArrayList<>();
+                //reset the reviews
+                for (int i = reviews.size() - 1; i > -1; i--){
+                    Review review = reviews.get(i);
+                    HousePage.arrayOfReviews.add(review);
+                }
+                Log.d("reviewsloaded", arrayOfReviews.toString());
+                HousePage.adapterReviews.notifyDataSetChanged();
+                myCallback.onCallback(true);
+                //notify
+            }
+        });
 
     }
 

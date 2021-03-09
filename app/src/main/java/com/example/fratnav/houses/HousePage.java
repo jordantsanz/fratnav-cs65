@@ -67,8 +67,8 @@ public class HousePage extends AppCompatActivity {
     User currentUserInfo;
     public int subscribers;
     public boolean isHouse;
-    public ArrayList<Review> arrayOfReviews;
-    RVReviewsAdapter adapterReviews;
+    public static ArrayList<Review> arrayOfReviews;
+    public static RVReviewsAdapter adapterReviews;
     public String houseId;
 
     @Override
