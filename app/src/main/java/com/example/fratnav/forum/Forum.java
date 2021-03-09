@@ -328,7 +328,7 @@ public class Forum extends ListActivity {
 
 
                             /// need to change heart image drawable here
-                            heart.setBackgroundResource(R.drawable.like);
+                            //heart.setBackgroundResource(R.drawable.like);
 
                         }
                     });
