@@ -61,15 +61,13 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         String userDisplay = "@" + review.username;
 
         holder.postUser.setText(String.valueOf(review.username));
-        holder.postHouse.setText(String.valueOf(review.houseId));
+        holder.postHouse.setText(String.valueOf(review.houseName));
         holder.safetyView.setText(String.valueOf(review.safetyRating));
         holder.incView.setText(String.valueOf(review.inclusivityRating));
         holder.baseView.setText(String.valueOf(review.basementRating));
         holder.overView.setText(String.valueOf(review.overallRating));
         holder.comments.setText(String.valueOf(review.description));
-
     }
-
 
     @Override
     public int getItemCount(){
