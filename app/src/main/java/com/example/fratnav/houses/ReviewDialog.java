@@ -66,7 +66,7 @@ public class ReviewDialog extends Dialog {
 
 
         Review review = new Review(reviewText, currentUserInfo.username, currentUser.getUid(),
-        safety, incl, basement, overall, theHouse.id);
+        safety, incl, basement, overall, theHouse.houseName);
         Log.d("reviewSent", review.toString());
 
         Log.d("reviewUserid", review.userID);

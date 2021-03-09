@@ -379,6 +379,78 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 //
 //        }
 //    }
+    public void onHeartClick(View v){
+        View parentRow = (View) v.getParent().getParent();
+        ListView lv = (ListView) parentRow.getParent();
+        int position = lv.getPositionForView(parentRow);
+        if (position == -1){
+            return;
+        }
+        Post post = adapter.getItem(position);
+        assert post != null;
+        Log.d("heartClick", post.id);
+
+        if (randomKey == null){
+            randomKey = UUID.randomUUID().toString();
+        }
+
+        boolean userDidLike = false;
+
+        ImageView heart = findViewById(R.id.heart);
+        heart.getTag();
+
+
+        if (post.usersLiked != null){
+            Log.d("userDidLike", post.usersLiked.toString());
+            for (String userId : post.usersLiked.values()){
+                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+                if (userId.equals(currentUserInfo.userID)){
+                    userDidLike = true;
+                    break;
+                }
+            }
+        }
+
+
+                if (userDidLike){
+                    PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                        @Override
+                        public void onCallback(int likes) {
+                            Forum.refresh();
+                            Log.d("like", "removeLike");
+                            post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
+                            post.likes -= 1;
+                            Log.d("postprof", post.usersLiked.toString());
+
+
+                            /// need to change heart image drawable here
+                            //heart.setBackgroundResource(R.drawable.like);
+
+                        }
+                    });
+
+
+                }
+                else{
+                    PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
+                        @Override
+                        public void onCallback(int likes) {
+                            Log.d("like", "addLike");
+                            Forum.refresh();
+                            if (post.usersLiked == null){
+                                post.usersLiked = new HashMap<>();
+                            }
+                            post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
+                            post.likes += 1;
+
+
+
+
+                        }
+                    });
+
+                }
+            }
 
 
 

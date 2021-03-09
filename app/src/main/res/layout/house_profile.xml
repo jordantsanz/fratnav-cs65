@@ -44,7 +44,7 @@
                         android:layout_marginStart="230dp"
                         android:layout_marginTop="45dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="HOUSE NAME"
+                        android:text="@string/houseName"
                         android:textAlignment="center"
                         android:textColor="@color/textColor"
                         android:textSize="24sp" />
@@ -57,7 +57,7 @@
                         android:layout_marginStart="260dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/montserrat"
-                        android:text="# Subscribers"
+                        android:text="@string/subscribers"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
@@ -95,18 +95,6 @@
 
 
                     <TextView
-                        android:id="@+id/notification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/logout"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/montserrat"
-                        android:text="@string/notification"
-                        android:textColor="@color/textColor"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/pastPosts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -116,44 +104,6 @@
                         android:text="@string/past_posts"
                         android:textColor="@color/textColor"
                         android:textSize="20sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/notification"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
-
-                        <RadioGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <RadioButton
-                                android:id="@+id/notificationOn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat"
-                                android:text="@string/on"
-                                android:textColor="@color/textColor"
-                                android:textSize="16sp" />
-
-                            <RadioButton
-                                android:id="@+id/notificationOff"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:fontFamily="@font/montserrat"
-                                android:text="@string/off"
-                                android:textColor="@color/textColor"
-                                android:textSize="16sp" />
-                        </RadioGroup>
-
-
-                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_posts"
@@ -176,7 +126,7 @@
                         android:layout_below="@id/rv_posts"
                         android:layout_marginStart="25dp"
                         android:fontFamily="@font/montserrat"
-                        android:text="Reviews:"
+                        android:text="@string/houseReviews"
                         android:textColor="@color/textColor"
                         android:textSize="20sp" />
 

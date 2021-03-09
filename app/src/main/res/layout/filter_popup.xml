@@ -13,7 +13,7 @@
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:text="chose one to filter the houses"/>
+        android:text="@string/filterText"/>
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,8 +34,8 @@
         android:textOff="@string/sororities"
         android:id="@+id/soroTag"
         android:textColor="@drawable/tags_font_color"
-        android:background="@drawable/sororities_selector"
-        />
+        android:background="@drawable/sororities_selector" />
+
     <androidx.appcompat.widget.AppCompatToggleButton
         android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
@@ -46,8 +46,8 @@
         android:textOff="@string/fraternities"
         android:id="@+id/fratTag"
         android:textColor="@drawable/tags_font_color"
-        android:background="@drawable/frat_button_selector"
-        />
+        android:background="@drawable/frat_button_selector" />
+
     <androidx.appcompat.widget.AppCompatToggleButton
         android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
@@ -58,8 +58,8 @@
         android:textOff="@string/genderInclusiveHouses"
         android:id="@+id/genderInclusiveTag"
         android:textColor="@drawable/tags_font_color"
-        android:background="@drawable/gender_inclusive_selector"
-        />
+        android:background="@drawable/gender_inclusive_selector" />
+
     <androidx.appcompat.widget.AppCompatToggleButton
     android:layout_marginStart="10dp"
     android:layout_width="wrap_content"

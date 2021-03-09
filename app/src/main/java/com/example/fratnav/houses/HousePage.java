@@ -127,6 +127,9 @@ public class HousePage extends AppCompatActivity {
         }
 
         TextView houseNameTextView = findViewById(R.id.house_name);
+        TextView pointsofContact = findViewById(R.id.contactsResponse);
+        TextView selfReportedStats = findViewById(R.id.statsResponse);
+        TextView summaryResponse = findViewById(R.id.summaryResponse);
         String name = getIntent().getStringExtra(HousesSearch.HOUSE_NAME_KEY);
         HouseDatabaseHelper.getHouseByName(name, new getHouseByIdCallback() {
             @Override
@@ -136,6 +139,14 @@ public class HousePage extends AppCompatActivity {
                 Log.d("house", theHouse.toString());
                 TextView houseDateView = findViewById(R.id.house_date);
                 houseDateView.setText(String.valueOf(theHouse.date));
+                String president = "President: ";
+                String vicePresident = "Vice President: ";
+                String tres = "Treasurer: ";
+                String rush = "Rush Chair: ";
+                String poc ="POC Members: ";
+                String queer ="LGBTQ+ Members: ";
+                String total = "Total Members: ";
+                String summary = "House Summary: ";
 
                 TextView houseNationalView = findViewById(R.id.house_national);
                 String n = "";
@@ -144,6 +155,64 @@ public class HousePage extends AppCompatActivity {
                 } else {
                     n = "Local";
                 }
+                if (house.president != null && house.president.length() > 1 ) {
+                    president += house.president;
+                }
+                else{
+                    president += "N/A";
+                }
+                if (house.vicePresident != null && house.vicePresident.length() > 1 ){
+                    vicePresident += house.vicePresident;
+                }
+                else{
+                    vicePresident += "N/A";
+                }
+                if (house.treasurer != null && house.treasurer.length() > 1 ){
+                    tres += house.treasurer;
+                }
+                else{
+                    tres += "N/A";
+                }
+                if(house.rushChair!=null && house.rushChair.length() > 1 ){
+                    rush += house.rushChair;
+                }
+                else{
+                    rush += "N/A";
+                }
+                String contacts = president + '\n' + vicePresident +'\n'+ tres +'\n' + rush;
+                pointsofContact.setText(contacts);
+
+                if(house.pocMembers != null && house.pocMembers.length() >= 1 ){
+                    poc += house.pocMembers;
+                }
+                else{
+                    poc += "N/A";
+                }
+
+                if (house.queerMembers !=null && house.queerMembers.length() >=1){
+                    queer += house.queerMembers;
+                }
+                else{
+                    queer += "N/A";
+                }
+
+                if(house.totalMembers != null && house.totalMembers.length() >=1){
+                    total += house.totalMembers;
+                }
+                else{
+                    total += "N/A";
+                }
+                String stats = total + '\n' + queer + '\n'+ queer;
+                selfReportedStats.setText(stats);
+
+                if (house.summary != null && house.summary.length() >1){
+                    summary += house.summary;
+                }
+                else{
+                    summary +="N/A";
+                }
+                summaryResponse.setText(summary);
+
 
                 TextView subscribersText = findViewById(R.id.subscribers);
                 String subs = String.valueOf(subscribers) + " Subscribers";
