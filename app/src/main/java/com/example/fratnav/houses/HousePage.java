@@ -138,7 +138,8 @@ public class HousePage extends AppCompatActivity {
                 subscribers = theHouse.subscribers;
                 Log.d("house", theHouse.toString());
                 TextView houseDateView = findViewById(R.id.house_date);
-                houseDateView.setText(String.valueOf(theHouse.date));
+                String houseInput = "est. " + String.valueOf(theHouse.date);
+                houseDateView.setText(houseInput);
                 String president = "President: ";
                 String vicePresident = "Vice President: ";
                 String tres = "Treasurer: ";
@@ -249,7 +250,8 @@ public class HousePage extends AppCompatActivity {
                 });
             }
         });
-        houseNameTextView.setText(name);
+        String nameString = "@"+name;
+        houseNameTextView.setText(nameString);
 
 
         Button makeReviewButton = findViewById(R.id.review_button);
