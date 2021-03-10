@@ -12,14 +12,14 @@
     <ScrollView
         android:id="@+id/housepage_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="720dp"
         tools:ignore="MissingConstraints"
         android:layout_marginBottom="100dp">
 
         <android.widget.RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="135dp">
+            >
 
             <ImageView
                 android:layout_width="150dp"
@@ -235,6 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/reviews"
+                android:paddingBottom="50dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"

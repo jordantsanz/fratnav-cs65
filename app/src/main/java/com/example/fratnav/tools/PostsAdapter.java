@@ -183,9 +183,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             String text = tag.getText().toString();
             Log.d("theText", text);
             switch (text){
-                case "Alpha Chi":
-                    tag.setBackgroundResource(R.drawable.rounded_corner_view_teal);
-                    break;
                 case "APhi":
                     tag.setBackgroundResource(R.drawable.rounded_corner_view_purple);
                     break;
@@ -272,6 +269,9 @@ public class PostsAdapter extends ArrayAdapter<Post> {
                     break;
                 case "Low Income":
                     tag.setBackgroundResource(R.drawable.grey_background);
+                    break;
+                case "Alpha Chi":
+                    tag.setBackgroundResource(R.drawable.frat_tag_filled_background);
                     break;
                 default:
                     tag.setBackgroundResource(R.drawable.post_background);

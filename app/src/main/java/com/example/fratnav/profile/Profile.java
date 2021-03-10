@@ -186,7 +186,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 } else {
                     affiliated = "No";
                 }
-                profileUsername.setText(userName);
+                String userNameString = "@"+ userName;
+                profileUsername.setText(userNameString);
                 profileSexuality.setText(sexuality);
                 profileGender.setText(gender);
                 profileYear.setText(year);
@@ -222,7 +223,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onCallback(User user) {
                 TextView houseName = findViewById(R.id.house_name);
-                houseName.setText(user.username);
+                String userNameString ="@"+user.username;
+                houseName.setText(userNameString);
 
                 HouseDatabaseHelper.getHouseById(user.houseId, new getHouseByIdCallback() {
                     @Override

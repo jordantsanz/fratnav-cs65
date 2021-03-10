@@ -23,7 +23,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="25dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -61,7 +62,6 @@
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
-
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
                         android:text="@string/logout"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
+
 
 
                     <TextView
@@ -165,8 +166,8 @@
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        app:itemTextColor="@color/teal"
+        app:itemTextColor="@color/backgroundColor"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navbar" />
+        app:menu="@menu/navbar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
