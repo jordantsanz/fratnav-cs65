@@ -190,9 +190,27 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                 for (DataSnapshot ds : snapshot.getChildren()){
                     Post post = ds.getValue(Post.class);
                     assert post != null;
-                    ds.child("likes").getRef().setValue(post.likes + 1);
-                    ds.child("usersLiked").getRef().child(userId).setValue(userId);
-                    myCallback.onCallback(post.likes + 1);
+
+                    ds.child("usersLiked").getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Log.d("postLikesBeforeUpdate", String.valueOf(post.likes));
+                            if (!snapshot.hasChild(userId)){
+                                ds.child("likes").getRef().setValue(post.likes + 1);
+                                ds.child("usersLiked").getRef().child(userId).setValue(userId);
+                                myCallback.onCallback(post.likes + 1);
+                            }
+                            else{
+                                myCallback.onCallback(post.likes);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
             }
 
@@ -213,9 +231,26 @@ public static void getPostById(String id, getPostByIdCallback myCallback){
                 for (DataSnapshot ds : snapshot.getChildren()){
                     Post post = ds.getValue(Post.class);
                     assert post != null;
-                    ds.child("likes").getRef().setValue(post.likes - 1);
-                    ds.child("usersLiked").getRef().child(userId).removeValue();
-                    myCallback.onCallback(post.likes - 1);
+
+                    ds.child("usersLiked").getRef().getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Log.d("snapshot", snapshot.toString());
+                            if(snapshot.hasChild(userId)){
+                                ds.child("usersLiked").getRef().child(userId).removeValue();
+                                ds.child("likes").getRef().setValue(Math.max(post.likes - 1, 0));
+                                myCallback.onCallback(post.likes -  1);
+                            }
+                            else{
+                                myCallback.onCallback(post.likes);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
 

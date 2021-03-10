@@ -475,8 +475,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                             Forum.refresh();
                             Log.d("like", "removeLike");
                             post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-                            post.likes -= 1;
                             Log.d("postprof", post.usersLiked.toString());
+                            post.likes -= 1;
 
 
                             /// need to change heart image drawable here
@@ -498,7 +498,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                             }
                             post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
                             post.likes += 1;
-
                         }
                     });
 
@@ -571,12 +570,12 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         aphi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tags.containsKey("Aphi")){
-                    tags.remove("Aphi");
+                if (tags.containsKey("APhi")){
+                    tags.remove("APhi");
                     aphiOn = false;
                 }
                 else{
-                    tags.put("Aphi", "");
+                    tags.put("APhi", "");
                     aphiOn = true;
                 }
 
@@ -610,11 +609,11 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             public void onClick(View v) {
                 if (tags.containsKey("Alpha Theta")){
                     tags.remove("Alpha Theta");
-                    aphiOn = false;
+                    alphathetaOn = false;
                 }
                 else{
-                    tags.put("alphatheta", "");
-                    aphiOn = true;
+                    tags.put("Alpha Theta", "");
+                    alphathetaOn = true;
                 }
 
                 alphatheta.setChecked(alphathetaOn);
@@ -664,7 +663,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             public void onClick(View v) {
                 if (tags.containsKey("Beta")){
                     tags.remove("Beta");
-                    bgOn = false;
+                    betaOn = false;
                 }
                 else{
                     tags.put("Beta", "");
@@ -700,11 +699,11 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             public void onClick(View v) {
                 if (tags.containsKey("Chi Gam")){
                     tags.remove("Chi Gam");
-                    bgOn = false;
+                    chigamOn = false;
                 }
                 else{
                     tags.put("Chi Gam", "");
-                    bgOn = true;
+                    chigamOn = true;
                 }
 
                 chigam.setChecked(chigamOn);
