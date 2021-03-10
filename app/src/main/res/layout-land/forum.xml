@@ -34,16 +34,16 @@
         android:text="@string/post"
         android:textSize="18sp"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="600dp"
         android:fontFamily="@font/cabin"
         android:textColor="@color/backgroundColor" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="770dp"
-        android:orientation="vertical"
-        android:paddingBottom="35dp">
+        android:layout_height="match_parent"
+        android:paddingBottom="90dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,9 +99,8 @@
                 android:id="@+id/rv_forumposts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="230dp"
                 android:orientation="vertical"
-                android:configChanges="orientation|screenSize"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>

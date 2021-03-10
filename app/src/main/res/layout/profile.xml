@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingBottom="135dp">
+                    android:paddingBottom="115dp">
 
                     <TextView
                         android:id="@+id/profileUsername"

@@ -462,7 +462,7 @@ public class HousePage extends AppCompatActivity {
 
     //refreshes the reviews
     public static void refresh(Review review){
-        arrayOfReviews.add(review);
+        arrayOfReviews.add(0, review);
         adapterReviews.notifyDataSetChanged();
 
     }
