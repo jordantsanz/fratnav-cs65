@@ -267,10 +267,10 @@ public class HousesSearch extends AppCompatActivity {
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
+
 
                 if (item.getItemId()==R.id.home) {
-                    Log.d("swtich", "home");
+
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                     return true;
@@ -282,7 +282,7 @@ public class HousesSearch extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId()==R.id.forum){
-                    Log.d("swtich", "forum");
+
                     startActivity(new Intent(getApplicationContext(), Forum.class));
                     finish();
                     return true;
@@ -329,13 +329,13 @@ public class HousesSearch extends AppCompatActivity {
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("searchSnap", snapshot.toString());
+
                 gridLayout.removeAllViews();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     House house = ds.getValue(House.class);
                     assert house != null;
                     if (houseCategories.size() == 0 || houseCategories.containsKey(house.houseType)) {
-                        Log.d("house", house.toString());
+
                         HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
                         CardView cardView = housecard.makeCardView();
                         cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
@@ -343,8 +343,6 @@ public class HousesSearch extends AppCompatActivity {
                         cardView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
-//                            Toast.LENGTH_SHORT).show();
                                 ViewGroup viewGroup = (ViewGroup) view;
                                 ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
                                 TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);

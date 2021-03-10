@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class HouseCreation {
 
-
+//CREATES ALL OF THE HOUSES IN THE DATABASE
     public ArrayList<House> houses;
 
     public void createHouses() {

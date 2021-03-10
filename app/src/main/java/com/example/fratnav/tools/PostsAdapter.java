@@ -49,9 +49,10 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         // Get the data item for this position
         post = getItem(position);
 
+        //sets the current user and user id
         currentUser = AuthenticationHelper.getCurrentUser();
         currentUserId = currentUser.getUid();
-        Log.d("post", post.id);
+
 
 
 

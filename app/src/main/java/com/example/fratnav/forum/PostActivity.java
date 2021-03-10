@@ -52,7 +52,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        //gets all of the textviews that need informatoin to be rendered
+        //gets all of the textviews that need information to be rendered
         TextView username = (TextView)findViewById(R.id.postActivityUser);
         TextView textView = (TextView) findViewById(R.id.postActivityText);
         TextView userSexuality = (TextView) findViewById(R.id.postActivityUserSexuality);
@@ -64,7 +64,7 @@ public class PostActivity extends AppCompatActivity {
         arrayOfComments = new ArrayList<>();
         adapter = new CommentsAdapter(getApplicationContext(), arrayOfComments);
 
-        //sets the user information, and post infromation on the XML
+        //sets the user information, and post information on the XML
         PostDatabaseHelper.getPostById(getIntent().getStringExtra(Forum.POST_ID_KEY), new getPostByIdCallback() {
             @Override
             public void onCallback(Post post) {
@@ -111,7 +111,7 @@ public class PostActivity extends AppCompatActivity {
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
-                        Log.d("comments", comments.toString());
+
                         for (Comment comment : comments){
                             adapter.add(comment);
                         }

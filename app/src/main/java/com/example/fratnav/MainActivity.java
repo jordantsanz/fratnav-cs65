@@ -86,14 +86,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.d("home", "home");
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-//        FirebaseFunctions functions = FirebaseFunctions.getInstance();
-//        functions.useEmulator("10.0.2.2.", 5001);
+        //sets the XML
+        setContentView(R.layout.activity_main);
+
+        //gets the current user
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
@@ -105,19 +103,22 @@ public class MainActivity extends AppCompatActivity{
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
+                //gets the user from the database
                 currentUserInfo = user;
+
+                //get the post to display on the feed
                 PostDatabaseHelper.getAllSubscribedPosts(user, new getAllPostsCallback() {
                     @Override
                     public void onCallback(ArrayList<Post> posts) {
-                        Log.d("Posts", posts.toString());
+
                         for (int i = posts.size() - 1; i > -1; i--){
-//                            adapter.add(posts.get(i));
+
                             Post post = posts.get(i);
                             arrayOfPosts.add(post);
                         }
                         feedAdapter.notifyDataSetChanged();
 
-//                        adapter.notifyDataSetChanged();
+
                     }
                 });
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity{
         if (arrayOfPosts == null) {
             arrayOfPosts = new ArrayList<Post>();
         }
-
+        //connects recycler view to the adapter and updates
         recyclerViewfeed = (RecyclerView) findViewById(R.id.rv_feedposts);
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -143,45 +144,16 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        // Construct the data source
-        //arrayOfPosts = new ArrayList<Post>();
-        // Create the adapter to convert the array to views
-//        adapter = new PostsAdapter(this, arrayOfPosts);
-        // Attach the adapter to a ListView
-//        ListView list = findViewById(android.R.id.list);
-//        list.setAdapter(adapter); // sets adapter for list
 
 
-
-        // on click listener for posts
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (position != -1) {
-//                    Log.d("position", String.valueOf(position));
-//                    long viewId = view.getId();
-//                    Log.d("click", String.valueOf(viewId));
-//                    Post post = adapter.getItem(position);
-//
-//
-//                    Intent intent = new Intent(MainActivity.this, PostActivity.class);
-//                    assert post != null;
-//                    intent.putExtra(Forum.POST_ID_KEY, post.id);
-//                    intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
-//
-//
-//                    startActivity(intent);
-//                }}});
-
-
-
+        //checks if user is logged in
         if (currentUser == null){
             Intent intent = new Intent(this, Authentication.class);
             startActivity(intent);
             finish();
         }
 
+        //checks if user is a house
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -190,7 +162,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         try {
-            Log.d("cu", currentUser.toString());
+
         }
         catch(Exception e){
             Intent intent = new Intent(this, Authentication.class);
@@ -200,10 +172,11 @@ public class MainActivity extends AppCompatActivity{
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
         if (currentUser == null) {
-            Log.d("null", "sup");
             startActivity(new Intent(this, Authentication.class));
             return;
         }
+
+        //navBar
         bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.home);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -211,19 +184,19 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId()==R.id.houses) {
-                    Log.d("swtich", "houses");
+
                     startActivity(new Intent(MainActivity.this, HousesSearch.class));
                     finish();
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
-                    Log.d("swtich", "profile");
+
                     Intent intent = new Intent(MainActivity.this, Profile.class);
                     intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
                     startActivity(intent);
                     finish();
                     return true;
                 } else if (item.getItemId()==R.id.forum) {
-                    Log.d("swtich", "forum");
+
                     startActivity(new Intent(MainActivity.this, Forum.class));
                     finish();
                     return true;
@@ -233,7 +206,7 @@ public class MainActivity extends AppCompatActivity{
 
         });
 
-
+        //follow the github implementation
         VerticalStepView setpview5 = (VerticalStepView) findViewById(R.id.step_view0);
         List<String> list0 = new ArrayList<>();
         list0.add(getResources().getString(R.string.TwentyOneSpring));
@@ -250,102 +223,14 @@ public class MainActivity extends AppCompatActivity{
                 .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))//设置StepsViewIndicator未完成线的颜色
                 .setStepViewComplectedTextColor(ContextCompat.getColor(this, android.R.color.white))//设置StepsView text完成线的颜色
                 .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))//设置StepsView text未完成线的颜色
-//                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))//设置StepsViewIndicator CompleteIcon
                 .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));//设置StepsViewIndicator DefaultIcon
-               // .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
 
 
     }
 
-//    public void onHeartClick(View v){
-//        View parentRow = (View) v.getParent().getParent();
-//        Log.d("parentRow", parentRow.toString());
-//        RecyclerView rv = (RecyclerView) parentRow.getParent();
-//        Log.d("recycle", rv.toString());
-//        int position = rv.getChildLayoutPosition(parentRow);
-//        Post post = feedAdapter.getItem(position);
-//        assert post != null;
-//        Log.d("heartClick", post.id);
-//
-//        if (randomKey == null){
-//            randomKey = UUID.randomUUID().toString();
-//        }
-
-//        boolean userDidLike = false;
-//
-//        ImageView heart = findViewById(R.id.heart);
-//        heart.getTag();
-//
-//
-//        if (post.usersLiked != null){
-//            Log.d("userDidLike", post.usersLiked.toString());
-//            for (String userId : post.usersLiked.values()){
-//                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
-//                if (userId.equals(currentUserInfo.userID)){
-//                    userDidLike = true;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        if (userDidLike){
-//            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Forum.refresh();
-//                    Log.d("like", "removeLike");
-//                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes -= 1;
-//                    Log.d("postprof", post.usersLiked.toString());
-//
-//
-//                }
-//            });
-//
-//
-//        }
-//        else{
-//            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Log.d("like", "addLike");
-//                    Forum.refresh();
-//                    if (post.usersLiked == null){
-//                        post.usersLiked = new HashMap<>();
-//                    }
-//                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes += 1;
-//
-//                }
-//            });
-//
-//        }
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
-//        Log.d("hereee", "lol");
-//        int position = recyclerViewfeed.getChildAdapterPosition(v);
-//        if (position!=-1) {
-//            Log.d("position", String.valueOf(position));
-//            long viewId = v.getId();
-//            Log.d("click", String.valueOf(viewId));
-//            Post post = feedAdapter.getItem(position);
-//
-//
-//            Intent intent = new Intent(MainActivity.this, PostActivity.class);
-//            intent.putExtra(Forum.POST_ID_KEY, post.id);
-//            intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
-//
-//
-//            startActivity(intent);
-//        }
-//    }
 
 
-
-
-
+    //inflates the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -369,7 +254,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
+    //log out
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();

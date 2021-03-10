@@ -173,7 +173,6 @@ public class CreateProfile extends AppCompatActivity  {
         UserDatabaseHelper.createUser(newUser);
 
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        Log.d("intentintent", "onComplete: ");
         startActivity(intent);
         finish();
 

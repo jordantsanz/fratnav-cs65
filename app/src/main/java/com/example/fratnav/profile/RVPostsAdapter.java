@@ -83,7 +83,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         holder.outer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("inOnClick", "lol");
+
 
 
                 Intent intent = new Intent(holder.context, PostActivity.class);
@@ -135,7 +135,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
 
         if (post.usersLiked != null){
-            Log.d("postUsers", post.usersLiked.values().toString());
+
             if (post.usersLiked.values().size() == 0){holder.heart.setBackgroundResource(R.drawable.like);}
             for (String userId : post.usersLiked.values()) {
                 if (userId.equals(currentUserId)) {
@@ -172,7 +172,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
         for (TextView tag : tags) {
             String text = tag.getText().toString();
-            Log.d("theText", text);
+
             switch (text) {
                 case "Alpha Chi":
                     tag.setBackgroundResource(R.drawable.frat_tag_filled_background);
