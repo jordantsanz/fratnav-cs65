@@ -153,9 +153,13 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //connects XML
         setContentView(R.layout.forum);
+
+        //instantiates the tags hashmap
         tags = new HashMap<>();
 
+        //gets the current user
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // checks to make sure the user is currently logged in; otherwise, send to authentication
@@ -164,6 +168,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             finish();
             return;
         }
+
+        //sets the current user information and checks if the account is a house
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -174,7 +180,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.forumCoordinatorLayout);
         filter = (ImageView) findViewById(R.id.filter);
-
+        //filter pop up wiht options to filter by tags
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +202,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
+        //sets the nav bar
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.forum);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -237,7 +244,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     }
                 };
 
-
+        // gets all the post and adds the post to an array liust to be updated in the adapter
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
@@ -254,7 +261,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         if (arrayOfPosts == null) {
             arrayOfPosts = new ArrayList<Post>();
         }
-
+        //connecting the recycler view to the adapter and the xml
         recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
@@ -265,33 +272,10 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
         postsAdapter.notifyDataSetChanged();
 
-
-
-
-
-        // on click listener for posts
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (position != -1) {
-//                    Log.d("position", String.valueOf(position));
-//                    long viewId = view.getId();
-//                    Log.d("click", String.valueOf(viewId));
-//                    Post post = adapter.getItem(position);
-//
-//
-//                    Intent intent = new Intent(Forum.this, PostActivity.class);
-//                    intent.putExtra(POST_ID_KEY, post.id);
-//                    intent.putExtra(USER_ID_KEY, currentUserInfo.username);
-//
-//
-//                    startActivity(intent);
-//                }}});
-
     }
 
     @Override
+    //on click method of the post to open the PostActivity class
     public void onClick(View v) {
         Log.d("hereee", "lol");
         int position = recyclerViewforum.getChildAdapterPosition(v);
@@ -347,12 +331,13 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    //opens the activity to create a post
     public void openPostCreate(View view) {
         Intent intent = new Intent (Forum.this, CreatePost.class);
         startActivity(intent);
     }
 
-
+    //on refresh
     public static void refresh(){
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
@@ -363,79 +348,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
     }
-
-//    public void onHeartClick(View v){
-//        View parentRow = (View) v.getParent().getParent();
-//        ListView lv = (ListView) parentRow.getParent();
-//        int position = lv.getPositionForView(parentRow);
-//        if (position == -1){
-//            return;
-//        }
-//        Post post = adapter.getItem(position);
-//        assert post != null;
-//        Log.d("heartClick", post.id);
-//
-//        if (randomKey == null){
-//            randomKey = UUID.randomUUID().toString();
-//        }
-//
-//        boolean userDidLike = false;
-//
-//        ImageView heart = findViewById(R.id.heart);
-//        heart.getTag();
-//
-//
-//        if (post.usersLiked != null){
-//            Log.d("userDidLike", post.usersLiked.toString());
-//            for (String userId : post.usersLiked.values()){
-//                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
-//                if (userId.equals(currentUserInfo.userID)){
-//                    userDidLike = true;
-//                    break;
-//                }
-//            }
-//        }
-//
-//
-//        if (userDidLike){
-//            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Forum.refresh();
-//                    Log.d("like", "removeLike");
-//                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes -= 1;
-//                    Log.d("postprof", post.usersLiked.toString());
-//
-//
-//                    /// need to change heart image drawable here
-//                    heart.setBackgroundResource(R.drawable.like);
-//
-//                }
-//            });
-//
-//
-//        }
-//        else{
-//            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Log.d("like", "addLike");
-//                    Forum.refresh();
-//                    if (post.usersLiked == null){
-//                        post.usersLiked = new HashMap<>();
-//                    }
-//                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes += 1;
-//
-//
-//
-//
-//                }
-//            });
-//
-//        }
-//    }
+    // for likes
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
         Log.d("parentRow", parentRow.toString());
@@ -478,10 +391,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                             Log.d("postprof", post.usersLiked.toString());
                             post.likes -= 1;
 
-
-                            /// need to change heart image drawable here
-                            //heart.setBackgroundResource(R.drawable.like);
-
                         }
                     });
 
@@ -505,7 +414,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             }
 
 
-
+    // clicks for username pops up the user profile page
     public void onUsernameClick(View v){
         View parentRow = (View) v.getParent();
         Log.d("listview", parentRow.getParent().toString());
@@ -528,7 +437,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-
+    //creates listensers for yearh tag in the filter
     public void setOnClickListeners(ViewGroup container){
         axa = container.findViewById(R.id.axaTagSearch);
         axa.setOnClickListener(new View.OnClickListener() {
@@ -1001,7 +910,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-
+    //sets the colors for each tag
     public void setCurrentColors(){
         HashMap<ToggleButton, Boolean> map = new HashMap<>();
         map.put(axa, axaOn);
@@ -1039,13 +948,15 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-
+    //filters the post by tags
     public void filter(){
         PostDatabaseHelper.getAllPosts(new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
+                //array list for the filtered post
                 ArrayList<Post> filteredPosts = new ArrayList<>();
                 for(ListIterator<Post> it = posts.listIterator(); it.hasNext();){
+                  //goes through the post and checks if the tag was clicked base off of the listeners
                 Post post = it.next();
                     if (tags.size() != 0 & post.attributes != null){
                         boolean itsIn = false;
@@ -1071,14 +982,14 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
                     arrayOfPosts.remove(i);
                 }
-
+                //adds the post to the arraylist
                 for (int i =filteredPosts.size() - 1; i > -1; i -= 1){
                     arrayOfPosts.add(filteredPosts.get(i));
                 }
 
 
                 assert filteredPosts.size() == arrayOfPosts.size();
-
+                //sends the information over
                 postsAdapter.notifyDataSetChanged();
             }
         });

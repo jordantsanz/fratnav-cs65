@@ -72,11 +72,18 @@ public class HousesSearch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //sets XML
         setContentView(R.layout.houses_search);
+
+        ///gets the current user
         FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
 
+
+        //instantiates the house categories hashmap
         houseCategories = new HashMap<>();
 
+
+        // cheecks if the user is a house account
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -84,15 +91,16 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
 
         coordinatorLayout = (ConstraintLayout) findViewById(R.id.houseSearchConstrainLayout);
         filter = (ImageView) findViewById(R.id.searchFilter);
 
+        //implements the filter
         searchThings();
 
+
+        //filter poppUpWindow for filtering by type of house and sets on click listeners
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +130,7 @@ public class HousesSearch extends AppCompatActivity {
                         return true;
                     }
                 });
+                //listener for sororities
                 container.findViewById(R.id.soroTag).setOnClickListener(
                         new View.OnClickListener() {
                         @Override
@@ -140,6 +149,8 @@ public class HousesSearch extends AppCompatActivity {
                     }
                 );
 
+
+                //listener for frats
                 container.findViewById(R.id.fratTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -155,6 +166,7 @@ public class HousesSearch extends AppCompatActivity {
                     }
                 });
 
+                //listener for gender inclusive houses
                 container.findViewById(R.id.genderInclusiveTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -170,6 +182,7 @@ public class HousesSearch extends AppCompatActivity {
                     }
                 });
 
+                //listener for national pan hellic
                 container.findViewById(R.id.nationalPanHellicTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -187,8 +200,7 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
-
-//        initSearchWidgets();
+        //get the houses and shows the houses on the page
         HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
@@ -198,11 +210,11 @@ public class HousesSearch extends AppCompatActivity {
                     CardView cardView = housecard.makeCardView();
                     cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
 
+
+                    //sets a listener and opens the house page accordingly
                     cardView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
-//                            Toast.LENGTH_SHORT).show();
                             ViewGroup viewGroup = (ViewGroup) view;
                             ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
                             TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
@@ -212,6 +224,8 @@ public class HousesSearch extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+
+                    //adds the cardview to the grid layout
                     gridLayout.addView(cardView);
 
 
@@ -220,6 +234,7 @@ public class HousesSearch extends AppCompatActivity {
         });
 
 
+        //nav bar
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.houses);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

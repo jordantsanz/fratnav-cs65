@@ -87,10 +87,12 @@ public class HousePage extends AppCompatActivity {
             }
         });
 
+        //gets button
         subscribeButton = findViewById(R.id.subscribe_button);
-
+        // instantiates a new dialog
         dialog = new AlertDialog.Builder(this);
 
+        //nav bar info
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         if (bottomBar != null) {
             bottomBar.setSelectedItemId(R.id.houses);
@@ -126,6 +128,7 @@ public class HousePage extends AppCompatActivity {
             });
         }
 
+        //textviews for information that needs to be rendered from the database
         TextView houseNameTextView = findViewById(R.id.house_name);
         TextView pointsofContact = findViewById(R.id.contactsResponse);
         TextView selfReportedStats = findViewById(R.id.statsResponse);
@@ -134,12 +137,16 @@ public class HousePage extends AppCompatActivity {
         HouseDatabaseHelper.getHouseByName(name, new getHouseByIdCallback() {
             @Override
             public void onCallback(House house) {
+
+                //updates the house and the subscribers
                 theHouse = house;
                 subscribers = theHouse.subscribers;
                 Log.d("house", theHouse.toString());
                 TextView houseDateView = findViewById(R.id.house_date);
+                //sets the house established date
                 String houseInput = "est. " + String.valueOf(theHouse.date);
                 houseDateView.setText(houseInput);
+                //sets all of the self resported stats
                 String president = "President: ";
                 String vicePresident = "Vice President: ";
                 String tres = "Treasurer: ";
@@ -155,6 +162,7 @@ public class HousePage extends AppCompatActivity {
                         Log.d("reviews", reviews.toString());
                     }
                 });
+                //sets the house national or local status
 
                 TextView houseNationalView = findViewById(R.id.house_national);
                 String n = "";
@@ -163,6 +171,7 @@ public class HousePage extends AppCompatActivity {
                 } else {
                     n = "Local";
                 }
+                //sets self reported stats
                 if (house.president != null && house.president.length() > 1 ) {
                     president += house.president;
                 }
@@ -221,7 +230,7 @@ public class HousePage extends AppCompatActivity {
                 }
                 summaryResponse.setText(summary);
 
-
+                // sets subscribers
                 TextView subscribersText = findViewById(R.id.subscribers);
                 String subs = String.valueOf(subscribers) + " Subscribers";
                 subscribersText.setText(subs);
@@ -234,6 +243,7 @@ public class HousePage extends AppCompatActivity {
 
                 url = house.urlToHouseTour;
 
+                // checks if user is subscribed and sets the button accordingly
                 UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
                     @Override
                     public void onCallback(User user) {
@@ -250,10 +260,12 @@ public class HousePage extends AppCompatActivity {
                 });
             }
         });
+
+        //sets house username with @ symbol
         String nameString = "@"+name;
         houseNameTextView.setText(nameString);
 
-
+        //chekcs review button on click and opens review dialoge
         Button makeReviewButton = findViewById(R.id.review_button);
         makeReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,7 +282,7 @@ public class HousePage extends AppCompatActivity {
         startActivity(new Intent(HousePage.this, HousesSearch.class));
         finish();
     }
-
+    //opens house tour activity if there is one
     public void onHouseTour(View view) {
         if (!url.equals("")) {
             Intent i = new Intent(this, HouseTourActivity.class);
@@ -281,7 +293,7 @@ public class HousePage extends AppCompatActivity {
         }
 
     }
-
+    //updates the subcribed value if user subscribes/unsubscribes
     public void subscribe(View view) {
         if (subbed) {
             UserDatabaseHelper.removeHouseFromUserSubscribed(theHouse, currentUser.getUid());
@@ -327,7 +339,7 @@ public class HousePage extends AppCompatActivity {
         }
     }
 
-
+    //sets the image according to the house
     public void setImageView(String name) {
         int image = 0;
         switch (name) {
@@ -415,6 +427,7 @@ public class HousePage extends AppCompatActivity {
         iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
     }
 
+    // shows reviews on the profile with RecyclerView and cusotm adapter
     public void renderReviews(){
         arrayOfReviews = new ArrayList<>();
         Log.d("houseidd",theHouse.id);
@@ -447,6 +460,7 @@ public class HousePage extends AppCompatActivity {
 
     }
 
+    //refreshes the reviews
     public static void refresh(Review review){
         arrayOfReviews.add(review);
         adapterReviews.notifyDataSetChanged();

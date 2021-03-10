@@ -63,13 +63,19 @@ public class CreatePost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //connects the xmls
         setContentView(R.layout.create_post);
+
+        //gets the current user
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //gets all of the components that will be rendered with information from the database
         userName = (TextView) findViewById(R.id.createPostUsername);
         userText = (EditText) findViewById(R.id.postUserText);
         info = (ImageView) findViewById(R.id.houseTagsInformation);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.createPostRelativeLayout);
 
+        //opens a popupWindow for the tags color  legend
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,12 +95,13 @@ public class CreatePost extends AppCompatActivity {
 
 
 
-
+        //goes to log in page if there is no currentUser
         if (currentUser == null) {
             startActivity(new Intent(this, Authentication.class));
             finish();
             return;
         }
+        //uses userdatabasehelper to get the current user information
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -116,23 +123,21 @@ public class CreatePost extends AppCompatActivity {
                     }
                 };
 
-
+        //gets firebase database
         database = FirebaseDatabase.getInstance();
+        // sends post to database
         dbRefPosts = database.getReference("/posts");
     }
 
 
-
+    //method of returning back to forum page/canceling the post
     public void cancelPost(View view) {
         Intent intent = new Intent(CreatePost.this, Forum.class);
         startActivity(intent);
         finish();
 
     }
-    public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
+
 
     // if error
     private void notifyUser(String message) {
@@ -177,6 +182,7 @@ public class CreatePost extends AppCompatActivity {
         ToggleButton firstGenTag = findViewById(R.id.firstGenTag);
         ToggleButton lowincTag = findViewById(R.id.lowIncome);
 
+        //adds all of the buttons
         toggles.add(axaTag);
         toggles.add(akaTag);
         toggles.add(aphiTag);
@@ -209,34 +215,39 @@ public class CreatePost extends AppCompatActivity {
         toggles.add(lowincTag);
 
         ArrayList<String> names = new ArrayList<>();
-
+        //adds clicked tags
         for (ToggleButton toggle : toggles){
             if (toggle.isChecked()){
                 names.add(toggle.getText().toString());
             }
         }
-
+        //checks that no more than 3 tags are added
         if (names.size() <= 3) {
+            //creates a post
             Post post = new Post(currentUserInfo.username, currentUser.getUid(), userText.getText().toString(),
                     names, new HashMap<>(), 0);
 
+            // preps a push
             DatabaseReference pushRef = dbRefPosts.push();
 
             post.id = pushRef.getKey();
 
+            //pushed the post to the database
             pushRef.setValue(post);
 
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            // issues here
+
             Forum.arrayOfPosts.add(0, post);
             Forum.postsAdapter.notifyDataSetChanged();
             UserDatabaseHelper.addPostToUser(post, currentUser, currentUserInfo);
 
+            //sends toast to the user
             Toast.makeText(this, "Post successfully created.", Toast.LENGTH_SHORT).show();
             finish();
         }
         else{
+            //lets the user know to only choose 3 tags
             Toast.makeText(this, "Please only select a maximum of three tags.", Toast.LENGTH_SHORT).show();
         }
     }

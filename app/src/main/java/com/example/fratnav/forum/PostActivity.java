@@ -38,19 +38,21 @@ public class PostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //connects XML
         setContentView(R.layout.activity_post);
 
-
+        //gets the current user
         FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
 
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
+                // sets the user
                 userInfo = user;
             }
         });
 
-
+        //gets all of the textviews that need informatoin to be rendered
         TextView username = (TextView)findViewById(R.id.postActivityUser);
         TextView textView = (TextView) findViewById(R.id.postActivityText);
         TextView userSexuality = (TextView) findViewById(R.id.postActivityUserSexuality);
@@ -58,11 +60,11 @@ public class PostActivity extends AppCompatActivity {
         TextView userAffilation= (TextView) findViewById(R.id.postActivityUserAffiliation);
         TextView userYear= (TextView) findViewById(R.id.postActivityUserYear);
 
-
+        //sets a new arraylist and adapter
         arrayOfComments = new ArrayList<>();
         adapter = new CommentsAdapter(getApplicationContext(), arrayOfComments);
 
-
+        //sets the user information, and post infromation on the XML
         PostDatabaseHelper.getPostById(getIntent().getStringExtra(Forum.POST_ID_KEY), new getPostByIdCallback() {
             @Override
             public void onCallback(Post post) {
@@ -105,7 +107,7 @@ public class PostActivity extends AppCompatActivity {
 
                     }
                 });
-
+                //adds the comments on the post to the adapter
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
@@ -113,23 +115,26 @@ public class PostActivity extends AppCompatActivity {
                         for (Comment comment : comments){
                             adapter.add(comment);
                         }
+                        //adapter is updated
                         adapter.notifyDataSetChanged();
                     }
                 });
             }
         });
 
-
+        //comments adapter
         ListView list = findViewById(android.R.id.list);
         list.setAdapter(adapter); // sets adapter for list
     }
+
+    //cancles the comment and returns to the forum
     public void cancelComment(View view) {
         Intent intent = new Intent(PostActivity.this, Forum.class);
         startActivity(intent);
         finish();
 
     }
-
+    //creates the comment and send sthe comment to the database
     public void createNewComment(View view){
         EditText ed = findViewById(R.id.commentEditText);
         Comment comment = new Comment(getIntent().getStringExtra(Forum.USER_ID_KEY), ed.getText().toString(), userInfo.username);

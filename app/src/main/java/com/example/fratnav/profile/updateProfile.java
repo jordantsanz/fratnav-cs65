@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.service.autofill.UserData;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,11 +32,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.example.fratnav.MainActivity;
 import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getHouseByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.HouseDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
+import com.example.fratnav.forum.Forum;
+import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.models.House;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
@@ -372,6 +376,38 @@ public class updateProfile extends AppCompatActivity {
         }
 
     }
+    public void setNavBar(){
+        Log.d("navbar", "setNavBar: ");;
+        bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
+        bottomBar.setSelectedItemId(R.id.profile);
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.d("sad", "made it item clicked " + item.getTitle());
+                if (item.getItemId()==R.id.houses) {
+                    Log.d("swtich", "houses");
+                    startActivity(new Intent(updateProfile.this, HousesSearch.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId()==R.id.home) {
+                    Log.d("swtich", "home");
+                    startActivity(new Intent(updateProfile.this, MainActivity.class));
+                    finish();
+                    return true;
+                }
+                else if  (item.getItemId()==R.id.forum){
+                    Log.d("swtich", "forum");
+                    startActivity(new Intent(updateProfile.this, Forum.class));
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
+    }
 
     public void upload(Uri filepath){
         File file = new File(filepath.getPath());
@@ -407,6 +443,7 @@ public class updateProfile extends AppCompatActivity {
     }
 
     public void setHouseProfile(Bundle savedInstanceState){
+        setNavBar();
         UserDatabaseHelper.getUserById(userId, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -465,6 +502,7 @@ public class updateProfile extends AppCompatActivity {
                 });
             }
         });
+
     }
 
     public void onSaveProfile(View v){
