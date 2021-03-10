@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        tools:context=".onboarding.Authentication">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="50dp"
+        android:textSize="60sp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:text="@string/profileInfo"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/textColor"
+        android:text="@string/gender"
+        android:layout_marginStart="25dp"
+        />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderRadioGroup"
+            android:layout_marginStart="25dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/genderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textColor="@color/textColor">
+
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/genderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textColor="@color/textColor"/>
+
+
+                <RadioButton
+                    android:id="@+id/genderNonBinary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nonBinary"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"/>
+        </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/textColor"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:text="@string/sexuality"
+        android:layout_marginStart="25dp" />
+
+    <Spinner
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/background"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:layout_gravity="center"
+        android:id="@+id/createSexuality"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:text="@string/year"
+        android:layout_marginStart="25dp"
+        android:textColor="@color/textColor"/>
+
+    <Spinner
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:paddingTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:fontFamily="@font/montserrat"
+        android:id="@+id/createYear"
+        android:layout_gravity="center"
+        android:background="@drawable/background"
+        android:spinnerMode="dropdown"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/houseAffiliation"
+        android:layout_marginStart="25dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/textColor"/>
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/createAffiliated"
+
+        android:orientation="horizontal">
+
+            <RadioButton
+                android:textColor="@color/textColor"
+                android:id="@+id/createYesAffiliated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_marginStart="30dp"/>
+            <RadioButton
+                android:layout_marginStart="25dp"
+                android:textColor="@color/textColor"
+                android:layout_width="wrap_content"
+                android:id="@+id/createNoAffiliated"
+                android:layout_height="wrap_content"
+                android:text="@string/no"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp">
+            </RadioButton>
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/interestedIn"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:layout_marginStart="25dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp">
+        <CheckBox
+            android:id="@+id/soroCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:text="@string/sororities"
+            />
+
+        <CheckBox
+            android:id="@+id/natPanHelicChackBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/nationalPanHellenic"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <CheckBox
+            android:id="@+id/fratCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fraternities"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="25dp"/>
+
+        <CheckBox
+            android:id="@+id/genderInclusiveCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/genderInclusiveHouses"
+            android:layout_marginStart="25dp"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center"
+        android:textColor="@color/textColor"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/teal_background"
+        android:text="@string/createAccount"
+        android:onClick="createAccount2" />
+
+        </LinearLayout>
+    </ScrollView>
