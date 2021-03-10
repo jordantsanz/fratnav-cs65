@@ -1,5 +1,8 @@
 package com.example.fratnav.models;
 
+/**
+ * Comment class
+ */
 public class Comment {
 
     public String userId;

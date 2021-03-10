@@ -1,5 +1,9 @@
 package com.example.fratnav.models;
 
+/**
+ * Review class
+ *
+ */
 public class Review {
 
     public String reviewID;

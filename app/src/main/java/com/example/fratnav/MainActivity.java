@@ -4,71 +4,38 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-import com.anychart.chart.common.dataentry.PertDataEntry;
 import com.baoyachi.stepview.VerticalStepView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.PertDataEntry;
-import com.anychart.charts.Pert;
-import com.anychart.core.pert.Milestones;
-import com.anychart.core.pert.Tasks;
-import com.anychart.core.ui.Tooltip;
-import com.anychart.enums.TreeFillingMethod;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
-import com.example.fratnav.callbacks.likePostCallback;
-import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 
 import com.example.fratnav.forum.Forum;
-import com.example.fratnav.forum.PostActivity;
 import com.example.fratnav.houses.HousesSearch;
-import com.example.fratnav.models.MySingleton;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
-import com.example.fratnav.profile.RVPostsAdapter;
 import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.functions.FirebaseFunctions;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity{
     BottomNavigationView bottomBar;
