@@ -36,6 +36,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.example.fratnav.MainActivity;
 import com.example.fratnav.R;
+import com.example.fratnav.RVFeedAdapter;
 import com.example.fratnav.callbacks.getAllHousesCallback;
 import com.example.fratnav.callbacks.getAllPostsCallback;
 import com.example.fratnav.callbacks.getAllReviewsCallback;
@@ -86,7 +87,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private EditText userText;
     private TextView helloUser;
     //PostsAdapter adapter;
-    RVPostsAdapter adapter;
+    RVFeedAdapter adapter;
     RVReviewsAdapter adapterReviews;
     GridLayout gridLayout;
 //    RVSubscribedAdapter adapterHouses;
@@ -446,7 +447,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         recyclerView.setLayoutManager(horizontalLayoutManager);
 
 
-        adapter = new RVPostsAdapter(getApplicationContext(), arrayOfPosts);
+        adapter = new RVFeedAdapter(getApplicationContext(), arrayOfPosts);
         recyclerView.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
