@@ -122,8 +122,6 @@ public class MainActivity extends AppCompatActivity{
                 });
 
 
-
-
             }
         });
         // Construct the data source

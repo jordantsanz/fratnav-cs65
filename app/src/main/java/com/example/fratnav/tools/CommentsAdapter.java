@@ -1,11 +1,14 @@
 package com.example.fratnav.tools;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.fratnav.R;
@@ -15,6 +18,7 @@ import com.example.fratnav.models.Post;
 import java.util.ArrayList;
 
 public class CommentsAdapter extends ArrayAdapter<Comment> {
+
     public CommentsAdapter(Context context, ArrayList<Comment> comments) {
         super(context, 0, comments);
     }
@@ -27,14 +31,18 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.comment, parent, false);
         }
+//        ListView lv = (ListView) convertView.findViewById(android.R.id.list);
+//        Typeface tf = Typeface.createFromAsset(getAssets(),)
         TextView commentUser = (TextView) convertView.findViewById(R.id.commentUser);
         TextView commentText = (TextView) convertView.findViewById(R.id.commentText);
         // Populate the data into the template view using the data object
         //Log.d("userr", comment.userId);
+
         String user = "@" + comment.usernamePoster;
         commentUser.setText(user);
         //Log.d("postuser", post.stringify());
         commentText.setText(comment.comment);
+
         // Return the completed view to render on screen
         return convertView;
     }
