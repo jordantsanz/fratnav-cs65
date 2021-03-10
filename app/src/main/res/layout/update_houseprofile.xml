@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/housepage_scroll"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
+        android:layout_height="700dp"
         tools:ignore="MissingConstraints">
 
         <android.widget.RelativeLayout
@@ -29,7 +29,6 @@
                 android:id="@+id/top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="230dp"
                 android:orientation="vertical">
 
@@ -47,7 +46,7 @@
 
                 <TextView
                     android:id="@+id/subscribers"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
@@ -56,21 +55,21 @@
                     android:text="@string/subscribers"
                     android:textColor="@color/textColor"
                     android:textSize="16sp" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/teal_background"
+                    android:fontFamily="@font/cabin"
+                    android:onClick="imagePicker"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/uploadPhoto"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="240dp"
-                android:layout_marginTop="125dp"
-                android:background="@drawable/teal_background"
-                android:fontFamily="@font/cabin"
-                android:onClick="imagePicker"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/uploadPhoto"
-                android:textColor="@color/textColor"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/house_summary"
@@ -361,41 +360,18 @@
                 android:textColorHint="@color/textColor" />
 
 
-            <TextView
-                android:id="@+id/house_tour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/queer_members"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/houseTour"
-                android:textColor="@color/textColor"
-                android:textSize="16sp" />
-
-            <com.google.vr.sdk.widgets.pano.VrPanoramaView
-                android:id="@+id/vrPanoramaView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/house_tour"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="10dp">
-
-            </com.google.vr.sdk.widgets.pano.VrPanoramaView>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saveProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/vrPanoramaView"
-                android:layout_marginStart="230dp"
+                android:layout_below="@id/edit_lgbtq"
+                android:layout_marginStart="140dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/teal_background"
                 android:fontFamily="@font/montserrat"
-                android:gravity="center_vertical"
+                android:gravity="center_horizontal"
                 android:onClick="onSaveProfile"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="10dp"
                 android:text="@string/updateProfile"
 
                 android:textColor="@color/textColor" />

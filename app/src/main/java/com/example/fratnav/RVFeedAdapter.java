@@ -134,7 +134,7 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
             Log.d("theText", text);
             switch (text) {
                 case "Alpha Chi":
-                    tag.setBackgroundResource(R.drawable.rounded_corner_view_teal);
+                    tag.setBackgroundResource(R.drawable.frat_tag_background);
                     break;
                 case "APhi":
                     tag.setBackgroundResource(R.drawable.rounded_corner_view_purple);
