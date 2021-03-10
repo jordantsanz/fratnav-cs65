@@ -61,11 +61,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference dbRef;
     private EditText userText;
     private TextView helloUser;
-    //PostsAdapter adapter;
     RVFeedAdapter adapter;
     RVReviewsAdapter adapterReviews;
     GridLayout gridLayout;
-//    RVSubscribedAdapter adapterHouses;
     public ArrayList<Review> arrayOfReviews;
     public ArrayList<Post> arrayOfPosts;
     public ArrayList<House> arrayofSubscribedTo;
@@ -84,7 +82,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public static TextView profileAffiliated;
     public User currentUserInfo;
     public static String useriD;
-    public HashMap<String,String> subscribedtO;
     public static final String RESET_KEY = "reset";
 
     boolean ishouse;
@@ -131,6 +128,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     }
     //refreshed the information as necessary
     public static void refresh() {
+        // calls helper method to render user info
         UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -161,6 +159,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 } else {
                     affiliated = "No";
                 }
+                // Populate the data into the view using the data object
                 String userNameString = "@"+ userName;
                 profileUsername.setText(userNameString);
                 profileSexuality.setText(sexuality);
@@ -182,9 +181,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         finishAffinity();
     }
 
-
+    // method to open update profile when user wants to edit
     public void edit(View view) {
-
         Intent intent = new Intent(this, updateProfile.class);
         intent.putExtra(HOUSE_BOOLEAN_KEY, ishouse);
         startActivity(intent);

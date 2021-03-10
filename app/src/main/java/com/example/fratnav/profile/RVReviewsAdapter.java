@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+// Recycler view adapter for reviews
 public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyView>{
     private ArrayList<Review> reviews;
 
@@ -35,6 +36,7 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         public MyView(View view) {
             super(view);
 
+            // get text views from review xml
             postUser = (TextView) view.findViewById(R.id.postUser);
             postHouse = (TextView) view.findViewById(R.id.postHouse);
             safetyView = (TextView) view.findViewById(R.id.safety_review);
@@ -42,7 +44,6 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
             baseView = (TextView) view.findViewById(R.id.basement_review);
             overView = (TextView) view.findViewById(R.id.overall_review);
             comments = (TextView) view.findViewById(R.id.review_comment);
-            // Populate the data into the template view using the data object
         }
     }
 
@@ -52,6 +53,7 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
 
     @Override
     public MyView onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Lookup view for data population
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_post,parent,false);
         return new MyView(itemView);
     }
@@ -59,9 +61,14 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         Review review = getItem(position);
-        String userDisplay = "@" + review.username;
 
+<<<<<<< HEAD
+        // Populate the data into the template view using the data object
+        String userDisplay = "@" + review.username;
+        holder.postUser.setText(String.valueOf(review.username));
+=======
         holder.postUser.setText(String.valueOf(userDisplay));
+>>>>>>> 1663de7bf84e5ab80ee4ae7fd90f27516b1c5b3a
         holder.postHouse.setText(String.valueOf(review.houseName));
         String safety;
         String inc;
