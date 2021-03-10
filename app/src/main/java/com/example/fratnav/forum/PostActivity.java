@@ -121,12 +121,7 @@ public class PostActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
                         Log.d("comments", comments.toString());
-//                        for (Comment comment : comments){
-//                            adapter.add(comment);
-//                        }
-//                        //adapter is updated
-//                        adapter.notifyDataSetChanged();
-                        for (int i = comments.size() - 1; i > -1; i--) {
+                        for (int i = 0; i < comments.size(); i++) {
 //                            adapter.add(posts.get(i));
                             Comment comment = comments.get(i);
                             arrayOfComments.add(comment);
@@ -183,5 +178,6 @@ public class PostActivity extends AppCompatActivity {
         PostDatabaseHelper.addPostComment(thePost, comment);
 
         Toast.makeText(this, "Comment left.", Toast.LENGTH_SHORT).show();
+        ed.setText("");
     }
 }
