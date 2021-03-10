@@ -16,6 +16,7 @@ import com.example.fratnav.R;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
+import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
 import com.example.fratnav.forum.Forum;
@@ -23,6 +24,7 @@ import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.tools.CommentsAdapter;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -31,11 +33,22 @@ public class PostActivity extends AppCompatActivity {
     Post thePost;
     CommentsAdapter adapter;
     ArrayList<Comment> arrayOfComments;
+    User userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+
+        FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
+
+        UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+            @Override
+            public void onCallback(User user) {
+                userInfo = user;
+            }
+        });
 
 
         TextView username = (TextView)findViewById(R.id.postActivityUser);
@@ -119,7 +132,7 @@ public class PostActivity extends AppCompatActivity {
 
     public void createNewComment(View view){
         EditText ed = findViewById(R.id.commentEditText);
-        Comment comment = new Comment(getIntent().getStringExtra(Forum.USER_ID_KEY), ed.getText().toString());
+        Comment comment = new Comment(getIntent().getStringExtra(Forum.USER_ID_KEY), ed.getText().toString(), userInfo.username);
 
         arrayOfComments.add(comment);
 
