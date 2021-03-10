@@ -17,7 +17,6 @@ import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
-import com.example.fratnav.tools.PostsAdapter;
 import com.example.fratnav.tools.RVFeedAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity{
     private static FirebaseUser currentUser;
     public static final String USER_HOUSE_BOOL = "userbool";
     boolean isHouse;
-    PostsAdapter adapter;
     ArrayList<Post> arrayOfPosts;
     public User currentUserInfo;
     RVFeedAdapter feedAdapter;

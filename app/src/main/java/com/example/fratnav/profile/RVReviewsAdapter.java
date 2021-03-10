@@ -62,13 +62,10 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         Review review = getItem(position);
 
-<<<<<<< HEAD
         // Populate the data into the template view using the data object
         String userDisplay = "@" + review.username;
         holder.postUser.setText(String.valueOf(review.username));
-=======
         holder.postUser.setText(String.valueOf(userDisplay));
->>>>>>> 1663de7bf84e5ab80ee4ae7fd90f27516b1c5b3a
         holder.postHouse.setText(String.valueOf(review.houseName));
         String safety;
         String inc;
