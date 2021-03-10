@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+// Recycler view adapter for reviews
 public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyView>{
     private ArrayList<Review> reviews;
 
@@ -35,6 +36,7 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         public MyView(View view) {
             super(view);
 
+            // get text views from review xml
             postUser = (TextView) view.findViewById(R.id.postUser);
             postHouse = (TextView) view.findViewById(R.id.postHouse);
             safetyView = (TextView) view.findViewById(R.id.safety_review);
@@ -42,7 +44,6 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
             baseView = (TextView) view.findViewById(R.id.basement_review);
             overView = (TextView) view.findViewById(R.id.overall_review);
             comments = (TextView) view.findViewById(R.id.review_comment);
-            // Populate the data into the template view using the data object
         }
     }
 
@@ -52,6 +53,7 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
 
     @Override
     public MyView onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Lookup view for data population
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_post,parent,false);
         return new MyView(itemView);
     }
@@ -59,14 +61,51 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         Review review = getItem(position);
-        String userDisplay = "@" + review.username;
 
+        // Populate the data into the template view using the data object
+        String userDisplay = "@" + review.username;
         holder.postUser.setText(String.valueOf(review.username));
+        holder.postUser.setText(String.valueOf(userDisplay));
         holder.postHouse.setText(String.valueOf(review.houseName));
-        holder.safetyView.setText(String.valueOf(review.safetyRating));
-        holder.incView.setText(String.valueOf(review.inclusivityRating));
-        holder.baseView.setText(String.valueOf(review.basementRating));
-        holder.overView.setText(String.valueOf(review.overallRating));
+        String safety;
+        String inc;
+        String basement;
+        String overall;
+
+        if (review.safetyRating % 1 == 0){
+            safety = String.valueOf((int) review.safetyRating);
+        }
+        else{
+            safety = String.valueOf(review.safetyRating);
+        }
+
+        if (review.inclusivityRating % 1 == 0){
+            inc = String.valueOf((int) review.inclusivityRating);
+        }
+        else{
+            inc = String.valueOf(review.inclusivityRating);
+        }
+
+        if (review.basementRating % 1 == 0){
+            basement = String.valueOf((int) review.basementRating);
+        }
+        else{
+            basement = String.valueOf(review.basementRating);
+        }
+
+        if (review.overallRating % 1 == 0){
+            overall = String.valueOf((int) review.overallRating);
+        }
+        else{
+            overall = String.valueOf(review.overallRating);
+        }
+
+
+
+        holder.safetyView.setText(safety);
+        holder.incView.setText(inc);
+        holder.baseView.setText(basement);
+        holder.overView.setText(overall);
         holder.comments.setText(String.valueOf(review.description));
     }
 

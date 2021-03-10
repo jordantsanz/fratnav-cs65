@@ -107,14 +107,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-<!--            <ListView-->
-<!--                android:id="@android:id/list"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginBottom="10dp"-->
-<!--                android:dividerHeight="10.0sp"-->
-<!--                android:paddingBottom="15dp" />-->
         </FrameLayout>
     </LinearLayout>
 

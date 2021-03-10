@@ -6,24 +6,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fratnav.MainActivity;
 import com.example.fratnav.R;
-import com.example.fratnav.RVFeedAdapter;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
 import com.example.fratnav.databaseHelpers.AuthenticationHelper;
 import com.example.fratnav.databaseHelpers.PostDatabaseHelper;
 import com.example.fratnav.databaseHelpers.UserDatabaseHelper;
-import com.example.fratnav.forum.Forum;
 import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
@@ -120,7 +115,6 @@ public class PostActivity extends AppCompatActivity {
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
-                        Log.d("comments", comments.toString());
                         for (int i = 0; i < comments.size(); i++) {
 //                            adapter.add(posts.get(i));
                             Comment comment = comments.get(i);

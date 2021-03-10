@@ -45,11 +45,9 @@ public class UserDatabaseHelper {
         dbRefUser.orderByKey().equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("userSnapshot", snapshot.toString());
 
                 // add post id to user's posts
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("userSnapshotds", ds.toString());
                     ds.child("posts").getRef().push().setValue(post.id);
                    }
 
@@ -69,7 +67,6 @@ public class UserDatabaseHelper {
             dbRefHouses.orderByKey().equalTo(currentUserInfo.houseId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.d("Datasnapshot", "onDataChange: ");
 
                     // add post to house information
                     for (DataSnapshot ds : snapshot.getChildren()){
@@ -117,7 +114,6 @@ public class UserDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
                 for (DataSnapshot ds : snapshot.getChildren()){
                     User user = ds.getValue(User.class);
                     assert user != null;
@@ -134,18 +130,32 @@ public class UserDatabaseHelper {
         });
     }
 
+    /**
+     * Updates a user profile given specific user updates
+     *
+     * @param userId
+     * @param user
+     */
     public static void updateUserProfile(String userId, User user){
+
+        // updates from user
         HashMap<String, Object> userUpdates = user.toMap();
+
+        // open database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbUserRef = database.getReference("/users");
+
+        // find user
         dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
+                // pushes updates
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("updates", ds.getRef().updateChildren(userUpdates).toString());
+                   ds.getRef().updateChildren(userUpdates);
                 }
 
+                // refreshes profile view
                 Profile.refresh();
             }
 
@@ -157,15 +167,27 @@ public class UserDatabaseHelper {
 
     }
 
+    /**
+     * Updates user notification settings
+     *
+     * @param userId - id of user
+     * @param notifOn - if notifications should be on or not
+     */
     public static void updateUserNotifSettings(String userId, boolean notifOn){
+        // make user updates
         User user = new User(userId, notifOn);
         HashMap<String, Object> map = user.toMapNotif();
+
+        // open database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbUserRef = database.getReference("/users");
+
+        // find user
         dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
+                // updates children
                 for (DataSnapshot ds : snapshot.getChildren()){
                     ds.getRef().updateChildren(map);
                 }
@@ -178,14 +200,25 @@ public class UserDatabaseHelper {
         });
     }
 
+    /**
+     * Adds a house to a user's subcribed houses
+     *
+     * @param house - house to be added
+     * @param userId - user id
+     */
     public static void addHouseToUserSubscribed(House house, String userId){
+
+        // open database
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRefUsers = db.getReference("/users");
 
+
+        // gets user
         dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
+                // adds house to subscribed
                 for (DataSnapshot ds : snapshot.getChildren()){
                     ds.child("subscribedTo").getRef().child(house.id).setValue(house.houseName);
                 }
@@ -199,14 +232,24 @@ public class UserDatabaseHelper {
 
     }
 
+    /**
+     * Removes house from user subscribed houses
+     *
+     * @param house - house
+     * @param userId - userId
+     */
     public static void removeHouseFromUserSubscribed(House house, String userId){
+
+        // open database
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRefUsers = db.getReference("/users");
 
+        // finds specific user
         dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
+                // removes house from user list of subscriptions
                 for (DataSnapshot ds : snapshot.getChildren()){
                     ds.child("subscribedTo").getRef().child(house.id).removeValue();
                 }

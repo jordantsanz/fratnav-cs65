@@ -11,6 +11,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Post class
+ */
 public class Post implements Parcelable {
     public String username = "";
     public String userID = "";

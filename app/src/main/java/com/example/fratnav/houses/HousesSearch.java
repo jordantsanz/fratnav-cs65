@@ -203,7 +203,6 @@ public class HousesSearch extends AppCompatActivity {
             HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
                 @Override
                 public void onCallback(ArrayList<House> houses) {
-                    Log.d("house", houses.toString());
                     cards = new ArrayList<>();
                     for (House house : houses) {
                         HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
@@ -306,7 +305,6 @@ public class HousesSearch extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchText = searchView.getQuery().toString();
-                Log.d("searchText", searchText);
                 firebaseHouseSearch();
                 return true;
             }

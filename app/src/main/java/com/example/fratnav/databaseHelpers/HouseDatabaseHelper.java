@@ -43,7 +43,6 @@ public class HouseDatabaseHelper {
         dbRefHouses.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("datasnapshot", dataSnapshot.toString());
 
                 // for each house
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -81,7 +80,6 @@ public class HouseDatabaseHelper {
         dbRefHouses.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // for each house found
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -120,7 +118,7 @@ public class HouseDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
 
                 // for houses found (will just be one)
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -174,7 +172,7 @@ public class HouseDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
+
 
                 // for house, save url to urlToHouseTour child node
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -205,7 +203,7 @@ public class HouseDatabaseHelper {
             dbHousesRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.d("snapshot", snapshot.toString());
+
 
                     // for each house
                     for (DataSnapshot ds : snapshot.getChildren()){
@@ -236,7 +234,6 @@ public class HouseDatabaseHelper {
 
                 }
             });
-        Log.d("houses", houses.toString());
         myCallback.onCallback(houses);
     }
 
@@ -259,7 +256,6 @@ public class HouseDatabaseHelper {
         dbRefHouse.orderByKey().equalTo(house.id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // update house
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -289,7 +285,6 @@ public class HouseDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // for house
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -324,7 +319,6 @@ public class HouseDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // for house
                 for (DataSnapshot ds : snapshot.getChildren()){

@@ -105,6 +105,7 @@ public class PostDatabaseHelper {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("error", error.toString());
+
             }
         });
 }
@@ -124,7 +125,6 @@ public class PostDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // for post
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -160,7 +160,6 @@ public class PostDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(post.id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("post", snapshot.toString());
 
                 // adds comment to post's comments
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -193,7 +192,6 @@ public class PostDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(post.id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("postSnapshot", snapshot.toString());
 
                 // for post
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -227,7 +225,6 @@ public class PostDatabaseHelper {
 
                             }
                         });
-                        Log.d("obj", obj.toString());
                     }
 
                 }
@@ -257,7 +254,6 @@ public class PostDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(postId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // for post
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -316,7 +312,6 @@ public class PostDatabaseHelper {
         dbRefPosts.orderByKey().equalTo(postId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // get post
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -328,7 +323,6 @@ public class PostDatabaseHelper {
                     ds.child("usersLiked").getRef().getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Log.d("snapshot", snapshot.toString());
 
                             // if user has liked already
                             if(snapshot.hasChild(userId)){
@@ -379,7 +373,6 @@ public class PostDatabaseHelper {
 
                 // for house in houses
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("snapshot", ds.toString());
 
                     // if user has subscribed to things
                     if (user.subscribedTo != null) {
