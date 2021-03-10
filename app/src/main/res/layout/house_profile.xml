@@ -35,18 +35,29 @@
                         android:id="@+id/housePageImage"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        android:background="@drawable/post_background"
+                        android:padding="10dp"
                         android:layout_marginStart="55dp"
                         android:layout_marginTop="40dp" />
+
+                    <LinearLayout
+                        android:layout_marginStart="230dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/top"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        >
 
                     <TextView
                         android:id="@+id/house_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="230dp"
                         android:layout_marginTop="45dp"
                         android:fontFamily="@font/montserrat_bold"
                         android:text="@string/houseName"
-                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textColor="@color/textColor"
                         android:textSize="24sp" />
 
@@ -54,20 +65,21 @@
                         android:id="@+id/subscribers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/house_name"
-                        android:layout_marginStart="260dp"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/subscribers"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
+                    </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/housePageImage"
-                        android:layout_marginStart="225dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="215dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/purple_background"
                         android:fontFamily="@font/cabin"
                         android:onClick="edit"
@@ -82,8 +94,8 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/housePageImage"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/teal_background"
                         android:fontFamily="@font/cabin"
                         android:onClick="logout"
@@ -100,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="350dp"
+                        android:layout_marginTop="280dp"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/past_posts"
                         android:textColor="@color/textColor"
@@ -126,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rv_posts"
                         android:layout_marginStart="25dp"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/houseReviews"
                         android:textColor="@color/textColor"
@@ -139,6 +152,7 @@
                         android:layout_marginStart="20sp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal"
                         android:padding="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">

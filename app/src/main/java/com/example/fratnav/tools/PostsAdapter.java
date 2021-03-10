@@ -55,12 +55,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
 
 
-
-
-
-
-
-
         // Lookup view for data population
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post, parent, false);

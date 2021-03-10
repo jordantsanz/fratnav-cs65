@@ -2,38 +2,16 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="400dp"
-    android:layout_height="700dp"
+    android:layout_height="500dp"
     android:background="@drawable/grey_background">
 
 
-    <TextView
-        android:id="@+id/postUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/textColor"
-        android:textSize="21sp" />
-
-    <TextView
-        android:id="@+id/postHouse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/background"
-        android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/dialog_choose_text_color"
-        android:textSize="21sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reviewSave"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="255dp"
+        android:layout_marginStart="260dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/purple_background"
         android:fontFamily="@font/cabin"
@@ -134,7 +112,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="365dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/reviewComments"
@@ -143,14 +121,17 @@
     <EditText
         android:id="@+id/reviewUserEditText"
         android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="410dp"
         android:background="@drawable/post_background"
         android:fontFamily="@font/montserrat"
         android:inputType="text"
+        android:singleLine="true"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:textColor="@color/textColor" />
 
 
