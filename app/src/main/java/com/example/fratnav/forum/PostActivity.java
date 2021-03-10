@@ -165,7 +165,7 @@ public class PostActivity extends AppCompatActivity {
         EditText ed = findViewById(R.id.commentEditText);
         String string = ed.getText().toString();
         if (string.equals("")){ Toast.makeText(PostActivity.this, "Please enter in a comment to post.", Toast.LENGTH_SHORT).show();
-        return; }
+            return; }
         Comment comment = new Comment(getIntent().getStringExtra(Forum.USER_ID_KEY), ed.getText().toString(), userInfo.username);
 
         arrayOfComments.add(comment);
@@ -181,3 +181,4 @@ public class PostActivity extends AppCompatActivity {
         ed.setText("");
     }
 }
+

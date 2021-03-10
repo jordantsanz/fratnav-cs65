@@ -65,6 +65,7 @@ public class HouseAccounts {
         createHouseAccountAuth("deltas@dartmouth.edu" ,"deltas", "-MUqoqkHhtNKvWtrvpsj");
     }
 
+    //screates the house account with all of the necessary info
     public static void createHouseAccountAuth(String email, String username, String houseId){
 
         mAuth.createUserWithEmailAndPassword(email, "hello123") // temp password
@@ -78,8 +79,6 @@ public class HouseAccounts {
 
                         } else {
 
-                            Log.d("error", "Unsuccessful task");
-                            Log.d("error", Objects.requireNonNull(task.getException()).toString());
                         }
 
                     }

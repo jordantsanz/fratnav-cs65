@@ -77,11 +77,7 @@ public class ReviewDialog extends Dialog {
         //creates the review
         Review review = new Review(reviewText, currentUserInfo.username, currentUser.getUid(),
         safety, incl, basement, overall, theHouse.id, theHouse.houseName);
-        Log.d("reviewSent", review.toString());
 
-        Log.d("reviewUserid", review.userID);
-        Log.d("houseId", review.houseId);
-        Log.d("housename", theHouse.houseName);
 
         //sends it to the database
         HousePage.refresh(review);

@@ -99,10 +99,10 @@ public class HousePage extends AppCompatActivity {
             bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Log.d("sad", "made it item clicked " + item.getTitle());
+                    
 
                     if (item.getItemId() == R.id.home) {
-                        Log.d("swtich", "home");
+
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                         return true;
@@ -113,12 +113,12 @@ public class HousePage extends AppCompatActivity {
                             startActivity(intent);
                             return true;
                     } else if (item.getItemId() == R.id.forum) {
-                        Log.d("swtich", "forum");
+
                         startActivity(new Intent(getApplicationContext(), Forum.class));
                         finish();
                         return true;
                     } else if (item.getItemId()==R.id.houses) {
-                        Log.d("swtich", "houses");
+
                         startActivity(new Intent(getApplicationContext(), HousesSearch.class));
                         finish();
                         return true;
@@ -430,11 +430,11 @@ public class HousePage extends AppCompatActivity {
     // shows reviews on the profile with RecyclerView and cusotm adapter
     public void renderReviews(){
         arrayOfReviews = new ArrayList<>();
-        Log.d("houseidd",theHouse.id);
+
         ReviewDatabaseHelper.getReviewsByHouseId(theHouse.id, new getAllReviewsCallback() {
             @Override
             public void onCallback(ArrayList<Review> reviews) {
-                Log.d("reviews", reviews.toString());
+
                 for (int i = reviews.size() - 1; i > -1; i--){
                     Review review = reviews.get(i);
                     arrayOfReviews.add(review);

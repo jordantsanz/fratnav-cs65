@@ -37,11 +37,11 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         TextView commentUser = (TextView) convertView.findViewById(R.id.commentUser);
         TextView commentText = (TextView) convertView.findViewById(R.id.commentText);
         // Populate the data into the template view using the data object
-        //Log.d("userr", comment.userId);
+
+
 
         String user = "@" + comment.usernamePoster;
         commentUser.setText(user);
-        //Log.d("postuser", post.stringify());
         commentText.setText(comment.comment);
 
         // Return the completed view to render on screen

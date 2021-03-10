@@ -23,14 +23,18 @@ public class Review extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //connects XML
         setContentView(R.layout.create_post);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //checks if user is logged in if not, then takes them to log in page
         if (currentUser == null) {
             startActivity(new Intent(this, Authentication.class));
             finish();
             return;
         }
+        //gets the user that is completing the review
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -39,6 +43,8 @@ public class Review extends AppCompatActivity {
         });
 
     }
+
+    ///cancels the review from uploading
     public void cancelPost(View view) {
         Intent intent = new Intent(Review.this, HousePage.class);
         startActivity(intent);
