@@ -91,6 +91,11 @@ public class Authentication extends AppCompatActivity {
         email = emailV.getText().toString();
         password = passwordV.getText().toString();
 
+        if (email.equals("") | password.equals("")){
+            Toast.makeText(this, "Please enter in an email and password.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
