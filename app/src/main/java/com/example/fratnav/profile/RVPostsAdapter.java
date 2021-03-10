@@ -133,6 +133,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
         // check if user has liked the post then set heart drawable accordingly
         if (post.usersLiked != null){
+
             if (post.usersLiked.values().size() == 0){holder.heart.setBackgroundResource(R.drawable.like);}
             for (String userId : post.usersLiked.values()) {
                 if (userId.equals(currentUserId)) {
@@ -169,7 +170,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         // check based on tag text
         for (TextView tag : tags) {
             String text = tag.getText().toString();
-            Log.d("theText", text);
+
             switch (text) {
                 case "Alpha Chi":
                     tag.setBackgroundResource(R.drawable.frat_tag_filled_background);

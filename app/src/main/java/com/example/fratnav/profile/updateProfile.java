@@ -114,15 +114,17 @@ public class updateProfile extends AppCompatActivity {
 
         ishouse = getIntent().getBooleanExtra(Profile.HOUSE_BOOLEAN_KEY, false);
 
+        //checks if the account is a house and renders the house update profile
         if (ishouse){
 
             setContentView(R.layout.update_houseprofile);
             setHouseProfile(savedInstanceState);
         }
+        //otherwise renders user update profile
         else {
             setContentView(R.layout.update_profile);
 
-
+            //create and set spinner
             spinner = findViewById(R.id.updateYear);
             sexualitySpinner = findViewById(R.id.updateSexuality);
 
@@ -151,7 +153,7 @@ public class updateProfile extends AppCompatActivity {
             sexualitySpinner.setAdapter(sexualityAdapter);
 
             String useriD = currentUser.getUid();
-            Log.d("firebaseuser", currentUser.getUid());
+
 
 
             UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
@@ -165,12 +167,12 @@ public class updateProfile extends AppCompatActivity {
                         RadioButton maleButton = findViewById(R.id.genderUpdateMale);
                         RadioButton femaleButton = findViewById(R.id.genderUpdateFemale);
                         RadioButton nonBinaryButton = findViewById(R.id.genderUpdateNonBinary);
-                        //RadioGroup affiliatedRadioGroup = findViewById(R.id.affiliationUpdate);
 
 
                         RadioButton affiliate = findViewById(R.id.updateYesAffiliated);
                         RadioButton notAffiliate = findViewById(R.id.updateNoAffiliated);
 
+                        //sets the default to the data in the database
                         switch (user.year) {
                             case "2021":
                                 spinner.setSelection(0);
@@ -188,7 +190,8 @@ public class updateProfile extends AppCompatActivity {
                                 spinner.setSelection(4);
                                 break;
                         }
-                        Log.d("user sexuality", user.sexuality);
+
+                        //sets the default to the data in the database
                         switch (user.sexuality) {
                             case "Heterosexual":
                                 sexualitySpinner.setSelection(0);
@@ -214,7 +217,7 @@ public class updateProfile extends AppCompatActivity {
 
                         }
 
-
+                        //sets the default to the data in the database
                         spinner.setPrompt(user.year);
                         sexualitySpinner.setPrompt(user.sexuality);
                         CheckBox srat = findViewById(R.id.soroCheckboxUpdate);
@@ -222,10 +225,9 @@ public class updateProfile extends AppCompatActivity {
                         CheckBox natPanHelic = findViewById(R.id.natPanHelicChackBoxUpdate);
                         CheckBox genderInclusive = findViewById(R.id.genderInclusiveCheckBoxUpdate);
 
-
+                        //sets the default to the data in the database
                         if (user.interestedIn != null) {
                             for (int i = 0; i < user.interestedIn.size(); i++) {
-                                //Log.d("user",user.interestedIn.toString());
                                 if (user.interestedIn.get(i).equals("Fraternities")) {
                                     frat.setChecked(true);
                                 }
@@ -242,6 +244,7 @@ public class updateProfile extends AppCompatActivity {
                         }
 
 
+                        //sets the default to the data in the database
                         if (user.gender != null) {
                             if (user.gender.equals("Male")) {
                                 maleButton.setChecked(true);
@@ -251,13 +254,15 @@ public class updateProfile extends AppCompatActivity {
                                 nonBinaryButton.setChecked(true);
                             }
                         }
+
+                        //sets the default to the data in the database
                         if (user.houseAffiliation) {
                             affiliate.setChecked(true);
                         } else {
                             notAffiliate.setChecked(true);
                         }
 
-
+                        //sets an onclick listener in order to update the information
                         Button updateButton = findViewById(R.id.updateAccount);
 
                         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -275,7 +280,7 @@ public class updateProfile extends AppCompatActivity {
         }
 
 
-
+    //this send the information collected from the inputs and sends it to database to update
     public void updateAccount(){
 
         String gender = "";
@@ -309,7 +314,7 @@ public class updateProfile extends AppCompatActivity {
 
         String houseAffiliationString = afButton.getText().toString();
 
-        Log.d("affil", houseAffiliationString);
+
 
         if (houseAffiliationString.equals("yes")){
             houseAffiliation = true;
@@ -343,6 +348,7 @@ public class updateProfile extends AppCompatActivity {
         finish();
     }
 
+    //image picks from camera
     public void imagePicker(View view){
         ImagePicker.Companion.with(this)
                 .crop()	    			//Crop image(Optional), Check Customization for more option
@@ -357,7 +363,7 @@ public class updateProfile extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK){
             assert data != null;
             Uri uri = data.getData();
-            Log.d("uri", uri.toString());
+
 
 
 
@@ -376,28 +382,30 @@ public class updateProfile extends AppCompatActivity {
         }
 
     }
+
+    //sets nav bar
     public void setNavBar(){
-        Log.d("navbar", "setNavBar: ");;
+
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.profile);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
+
                 if (item.getItemId()==R.id.houses) {
-                    Log.d("swtich", "houses");
+
                     startActivity(new Intent(updateProfile.this, HousesSearch.class));
                     finish();
                     return true;
                 }
                 else if (item.getItemId()==R.id.home) {
-                    Log.d("swtich", "home");
+
                     startActivity(new Intent(updateProfile.this, MainActivity.class));
                     finish();
                     return true;
                 }
                 else if  (item.getItemId()==R.id.forum){
-                    Log.d("swtich", "forum");
+
                     startActivity(new Intent(updateProfile.this, Forum.class));
                     finish();
                     return true;
@@ -409,6 +417,8 @@ public class updateProfile extends AppCompatActivity {
 
     }
 
+
+    //uploads an image
     public void upload(Uri filepath){
         File file = new File(filepath.getPath());
         AmazonS3Client s3Client =   new AmazonS3Client(new BasicAWSCredentials( key, secret ));
@@ -425,12 +435,13 @@ public class updateProfile extends AppCompatActivity {
                 random +
                 "." +
                 extension;
-        Log.d("stringbuilder", url);
+
 
         // will put in house user id here
         HouseDatabaseHelper.addUrlToHouse(currentUser.getUid(), url);
     }
 
+    //checks permisions for app
     private void checkPermissions() {
         if(Build.VERSION.SDK_INT < 23)
             return;
@@ -442,6 +453,7 @@ public class updateProfile extends AppCompatActivity {
 
     }
 
+    //set the house profile accordingly
     public void setHouseProfile(Bundle savedInstanceState){
         setNavBar();
         UserDatabaseHelper.getUserById(userId, new getUserByIdCallback() {
@@ -458,6 +470,7 @@ public class updateProfile extends AppCompatActivity {
                         } else {
 
 
+                            //sets given information ot the textViews
                             TextView houseName = findViewById(R.id.house_name);
                             houseName.setText(house.houseName);
 
@@ -505,6 +518,7 @@ public class updateProfile extends AppCompatActivity {
 
     }
 
+    //saves the profile information
     public void onSaveProfile(View v){
         RadioButton nationalB = findViewById(R.id.national);
         RadioButton localB = findViewById(R.id.local);
@@ -554,6 +568,7 @@ public class updateProfile extends AppCompatActivity {
     }
 
     @Override
+    //saves input-ed information on orientation change
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -667,12 +682,11 @@ public class updateProfile extends AppCompatActivity {
         }
     }
 
-
+    //sets everyting from the saved instance state for houses
     public void recoverInstanceState(Bundle savedInstanceState, House house){
             TextView houseName = findViewById(R.id.house_name);
             houseName.setText(house.houseName);
             TextView subscribers = findViewById(R.id.subscribers);
-            Log.d("housesubs", String.valueOf(house.subscribers));
             String subs = String.valueOf(house.subscribers) + " Subscribers";
             subscribers.setText(subs);
             setHouseImage(house);
@@ -730,7 +744,7 @@ public class updateProfile extends AppCompatActivity {
             queer.setText(queerMembers);
 
     }
-
+    //sets everyting from the saved instance state for user
     public void recoverInstanceState(Bundle savedInstanceState, User user){
         String year = savedInstanceState.getString(YEAR_KEY, "");
         String sexuality = savedInstanceState.getString(SEXUALITY_KEY, "");

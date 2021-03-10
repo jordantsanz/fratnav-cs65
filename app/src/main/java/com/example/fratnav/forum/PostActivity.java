@@ -120,13 +120,7 @@ public class PostActivity extends AppCompatActivity {
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
-                        Log.d("comments", comments.toString());
-//                        for (Comment comment : comments){
-//                            adapter.add(comment);
-//                        }
-//                        //adapter is updated
-//                        adapter.notifyDataSetChanged();
-                        for (int i = comments.size() - 1; i > -1; i--) {
+                        for (int i = 0; i < comments.size(); i++) {
 //                            adapter.add(posts.get(i));
                             Comment comment = comments.get(i);
                             arrayOfComments.add(comment);
@@ -170,7 +164,7 @@ public class PostActivity extends AppCompatActivity {
         EditText ed = findViewById(R.id.commentEditText);
         String string = ed.getText().toString();
         if (string.equals("")){ Toast.makeText(PostActivity.this, "Please enter in a comment to post.", Toast.LENGTH_SHORT).show();
-        return; }
+            return; }
         Comment comment = new Comment(getIntent().getStringExtra(Forum.USER_ID_KEY), ed.getText().toString(), userInfo.username);
 
         arrayOfComments.add(comment);
@@ -183,5 +177,7 @@ public class PostActivity extends AppCompatActivity {
         PostDatabaseHelper.addPostComment(thePost, comment);
 
         Toast.makeText(this, "Comment left.", Toast.LENGTH_SHORT).show();
+        ed.setText("");
     }
 }
+

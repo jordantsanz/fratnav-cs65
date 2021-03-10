@@ -32,13 +32,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         String notificationTitle = null, notificationBody = null;
-        Log.d(TAG, "onMessageReceived: ");
+
 
         // Check if message contains a notification payload
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+
             notificationTitle = remoteMessage.getNotification().getTitle();
-            Log.d(TAG, "Message Notification Title:  " + remoteMessage.getNotification().getTitle());
+
             notificationBody = remoteMessage.getNotification().getBody();
         }
 
@@ -53,7 +53,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             @Override
             public void onCallback(User user) {
                 if (user.notificationSettings) {
-                    Log.d(TAG, "sendLocalNotification: ");
+
                     Intent intent = new Intent(getApplicationContext(), Forum.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,
@@ -71,7 +71,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                             .setContentTitle(notificationTitle)
                             .setContentText(notificationBody)
                             .setSound(defaultSoundUri);
-                    Log.d(TAG, "sendLocalNotification: about to send");
+
 
 
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -88,7 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
 
                     notificationManager.notify(0, notificationBuilder.build());
-                    Log.d(TAG, "sendLocalNotification: notified");
+
                 }
             }
         });

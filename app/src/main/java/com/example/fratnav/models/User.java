@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * User class
+ * Stores user information in database
+ *
+ */
 public class User {
 
     public String email;
@@ -26,6 +31,7 @@ public class User {
     public String houseId;
     public String token;
 
+    // create new user
     public User(String email, String username, String gender, String sexuality, String userID, String year, boolean houseAffiliation,
                 ArrayList<String> interestedIn, HashMap<String, String> subscribedTo, HashMap<String, String> posts, boolean notificationSettings){
         this.email = email;
@@ -45,10 +51,12 @@ public class User {
 
     public User(){}
 
+    // for updating user notif settings
     public User(String userId, boolean notificationSettings){
         this.userID = userId;
         this.notificationSettings = notificationSettings;
     }
+
 
     public User(String userId, String token){
         this.token = token;
@@ -65,6 +73,7 @@ public class User {
         this.houseId = houseId;
     }
 
+    // create user updates
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> map = new HashMap<>();
 

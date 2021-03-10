@@ -194,10 +194,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             user = mAuth.getCurrentUser();
                             assert user != null;
                             Toast.makeText(CreateAccountActivity.this, "New user created: now tell us about yourself!", Toast.LENGTH_LONG).show();
-//                            User newUser = new User(email, randomUsername(), "Male", "gay", user.getUid(), 2022,
-//                                    true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
-//                                    false);
-//                            UserDatabaseHelper.createUser(newUser);
+//
 
                             Intent intent = new Intent(getBaseContext(), CreateProfile.class);
                             intent.putExtra("email", email);

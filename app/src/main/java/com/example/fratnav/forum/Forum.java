@@ -161,21 +161,21 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         //connects XML
         setContentView(R.layout.forum);
 
-        //instantiates the tags hashmap
 
-        Log.d("create", "onCreate: jsjsjsjs");
+
+
         setContentView(R.layout.forum);
         recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
         recyclerViewforum.removeAllViews();
 
         if (arrayOfPosts != null) {
-            Log.d("create", "onCrdsfsdfseate: ");
+
             for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1) {
                 arrayOfPosts.remove(i);
             }
         }
 
-
+        //instantiates the tags hashmap
         tags = new HashMap<>();
 
         //gets the current user
@@ -206,7 +206,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                 layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.tag_filter_popup, null);
                 popupWindow = new PopupWindow(container, 520, 240, true);
-                Log.d("popupWindo", popupWindow.toString());
+
                 popupWindow.showAtLocation(coordinatorLayout, Gravity.NO_GRAVITY, 250, 240);
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -227,20 +227,19 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
+
                 if (item.getItemId()==R.id.houses) {
-                    Log.d("swtich", "houses");
+
                     startActivity(new Intent(Forum.this, HousesSearch.class));
                     finish();
                     return true;
                 } else if (item.getItemId()==R.id.profile) {
-                    Log.d("swtich", "profile");
+
                     Intent intent = new Intent(Forum.this, Profile.class);
                     intent.putExtra(MainActivity.USER_HOUSE_BOOL, isHouse);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId()==R.id.home) {
-                    Log.d("swtich", "home");
                     startActivity(new Intent(Forum.this, MainActivity.class));
                     finish();
                     return true;
@@ -321,12 +320,12 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     @Override
     //on click method of the post to open the PostActivity class
     public void onClick(View v) {
-        Log.d("hereee", "lol");
+
         int position = recyclerViewforum.getChildAdapterPosition(v);
         if (position!=-1) {
-            Log.d("position", String.valueOf(position));
+
             long viewId = v.getId();
-            Log.d("click", String.valueOf(viewId));
+
             Post post = postsAdapter.getItem(position);
 
 
@@ -396,13 +395,13 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     // for likes
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
-        Log.d("parentRow", parentRow.toString());
+
         RecyclerView rv = (RecyclerView) parentRow.getParent();
-        Log.d("recycle", rv.toString());
+
         int position = rv.getChildLayoutPosition(parentRow);
         Post post = postsAdapter.getItem(position);
         assert post != null;
-        Log.d("heartClick", post.id);
+
 
         if (randomKey == null){
             randomKey = UUID.randomUUID().toString();
@@ -415,9 +414,9 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
 
         if (post.usersLiked != null){
-            Log.d("userDidLike", post.usersLiked.toString());
+
             for (String userId : post.usersLiked.values()){
-                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
+
                 if (userId.equals(currentUserInfo.userID)){
                     userDidLike = true;
 
@@ -431,9 +430,9 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void onCallback(int likes) {
                             Forum.refresh();
-                            Log.d("like", "removeLike");
+
                             post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-                            Log.d("postprof", post.usersLiked.toString());
+
                             post.likes -= 1;
 
                         }
@@ -445,7 +444,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
                         @Override
                         public void onCallback(int likes) {
-                            Log.d("like", "addLike");
                             Forum.refresh();
                             if (post.usersLiked == null){
                                 post.usersLiked = new HashMap<>();
@@ -462,19 +460,17 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     // clicks for username pops up the user profile page
     public void onUsernameClick(View v){
         View parentRow = (View) v.getParent();
-        Log.d("listview", parentRow.getParent().toString());
+
         RecyclerView rv = (RecyclerView) parentRow.getParent();
-        Log.d("listview", rv.toString());
+
         int position = rv.getChildLayoutPosition(parentRow);
-        Log.d("listview", String.valueOf(position));
+
         if (position == -1){
             return;
         }
 
         Post post = postsAdapter.getItem(position);
         assert post != null;
-        Log.d("listview", post.username);
-        Log.d("heartClick", post.id);
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);
         startActivity(intent);
@@ -1005,7 +1001,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     if (tags.size() != 0 & post.attributes != null){
                         boolean itsIn = false;
                         for (String att : post.attributes){
-                            Log.d("att", att);
+
                             if (tags.containsKey(att)){
                                 itsIn = true;
                                 break;
@@ -1021,8 +1017,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     }
                 }
 
-                Log.d("filteredPosts", filteredPosts.toString());
-                Log.d("filteredPosts", tags.toString());
                 for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
                     arrayOfPosts.remove(i);
                 }

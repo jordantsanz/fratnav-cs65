@@ -116,7 +116,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //conditional rendering for house v. user accounts
         if (getIntent().getStringExtra(Forum.USER_ID_KEY) == null || getIntent().getStringExtra(RESET_KEY) != null) {
             currentUser = FirebaseAuth.getInstance().getCurrentUser();
             // checks to make sure the user is currently logged in; otherwise, send to authentication
@@ -127,7 +127,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
             useriD = currentUser.getUid();
             ishouse = getIntent().getBooleanExtra(MainActivity.USER_HOUSE_BOOL, false);
-            Log.d("ishouse", String.valueOf(ishouse));
+
+            //sets appropriate XML
             if (ishouse) {
                 setContentView(R.layout.house_profile);
                 setHouseProfile();
@@ -137,6 +138,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         }
         else{
+            //viewing the profile and information rendered as such
             useriD = getIntent().getStringExtra(Forum.USER_ID_KEY);
             UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
                 @Override
@@ -149,13 +151,14 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             });
         }
     }
-
+    //refreshed the information as necessary
     public static void refresh() {
         // calls helper method to render user info
         UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
-                Log.d("username", user.username);
+
+                //sets the attributes input-ed during the onboarding process
                 if (user.username != null) {
                     userName = user.username;
                 } else {
@@ -197,7 +200,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Toast.LENGTH_SHORT).show();
     }
 
-    // logout method
+    //logouts the user
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         finishAffinity();
@@ -211,9 +214,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
+    //sets the house profile
     public void setHouseProfile(){
-        Log.d("houseProf", "setHouseProfile: ");;
         setNavBar();
         UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
             @Override
@@ -239,7 +241,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         });
 
     }
-
+    //sets the user profile while checking if they are viewing or not another users profile or their own
     public void setUserProfile(boolean viewing){
 
         UserDatabaseHelper.getUserById(useriD, new getUserByIdCallback() {
@@ -251,11 +253,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 profileGender = (TextView) findViewById(R.id.genderResponse);
                 profileYear = (TextView) findViewById(R.id.yearResponse);
                 profileAffiliated = (TextView) findViewById(R.id.affiliatedResponse);
-
-
-
-
-
 
                 if (!viewing) {
                     RadioButton notifOn = findViewById(R.id.notificationOn);
@@ -282,20 +279,18 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 HouseDatabaseHelper.getHousesByUserSubscribed(user.subscribedTo, new getAllHousesCallback() {
                     @Override
                     public void onCallback(ArrayList<House> houses) {
-                        Log.d("housesFound", houses.toString());
                         for (int i = houses.size() -1; i > -1; i --){
-                            Log.d("housesss", houses.toString());
+
                             House house = houses.get(i);
                             arrayofSubscribedTo.add(house);
                         }
-                        Log.d("subscribeee",arrayofSubscribedTo.toString());
+
                         for (House house : arrayofSubscribedTo) {
                             HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
                             CardView cardView = housecard.makeSmallCardView();
-                            Log.d("here", "lol");
+
                             cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
 
-                            //adapterHouses.notifyDataSetChanged();
                             gridLayout.addView(cardView);
 
                         }
@@ -348,52 +343,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 renderHousesSubscribed(user);
 
 
-//                arrayOfReviews = new ArrayList<>();
-//                ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
-//                    @Override
-//                    public void onCallback(ArrayList<Review> reviews) {
-//                        Log.d("reviews", reviews.toString());
-//                        for (int i = reviews.size() - 1; i > -1; i--){
-//                            Review review = reviews.get(i);
-//                            arrayOfReviews.add(review);
-//                        }
-//                        adapterReviews.notifyDataSetChanged();
-//                    }
-//                });
-
-
-//                HouseDatabaseHelper.getHousesByUserSubscribed(subscribedtO, new getAllHousesCallback() {
-//                    @Override
-//                    public void onCallback(ArrayList<House> houses) {
-//                        Log.d("hereee","lol");
-//                        Log.d("hereee",houses.toString());
-//                        for (int i = houses.size() -1; i > -1; i --){
-//                            Log.d("housesss", houses.toString());
-//                            House house = houses.get(i);
-//                            arrayofSubscribedTo.add(house);
-//                        }
-//                        Log.d("subscribeee",arrayofSubscribedTo.toString());
-//                        for (House house : arrayofSubscribedTo) {
-//                            HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
-//                            CardView cardView = housecard.makeCardView();
-//                            cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
-//
-//                            //adapterHouses.notifyDataSetChanged();
-//                            gridLayout.addView(cardView);
-//
-//                        }
-//
-//                    }
-//                });
-
-
-
-                // Create the adapter to convert the array to views
-                //adapter = new PostsAdapter(getApplicationContext(), arrayOfPosts);
-                // Attach the adapter to a ListView
-//                ListView list = findViewById(android.R.id.list);
-//                list.setAdapter(adapter); // sets adapter for list
-
             }
 
 
@@ -401,16 +350,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-//                RecyclerView recyclerViewhouses = findViewById(R.id.rv_subscribed);
-//                LinearLayoutManager horizontalLayoutManager3 =
-//                        new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
-//                recyclerViewhouses.setLayoutManager(horizontalLayoutManager3);
-//                recyclerViewhouses.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-//                        DividerItemDecoration.HORIZONTAL));
-//                adapterHouses = new RVSubscribedAdapter(getApplicationContext(), arrayofSubscribedTo);
-//                recyclerViewhouses.setAdapter(adapterHouses);
-//
-//                adapterHouses.notifyDataSetChanged();
 
 
     public void renderPosts(){
@@ -420,7 +359,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         PostDatabaseHelper.getAllPostsByUser(useriD, new getAllPostsCallback() {
             @Override
             public void onCallback(ArrayList<Post> posts) {
-                Log.d("posts", posts.toString());;
                 for (int i = posts.size() - 1; i > -1; i--){
                     Post post = posts.get(i);
                     arrayOfPosts.add(post);
@@ -452,14 +390,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
+    //renders the reviews on the given page
     public void renderReviews(){
 
         arrayOfReviews = new ArrayList<>();
         ReviewDatabaseHelper.getReviewsByUserId(useriD, new getAllReviewsCallback() {
             @Override
             public void onCallback(ArrayList<Review> reviews) {
-                Log.d("reviews", reviews.toString());
                 for (int i = reviews.size() - 1; i > -1; i--){
                     Review review = reviews.get(i);
                     arrayOfReviews.add(review);
@@ -472,7 +409,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             arrayOfReviews = new ArrayList<Review>();
         }
 
-
+        //connects the array list to the recycler view
         RecyclerView recyclerViewreviews = findViewById(R.id.rv_reviews);
         LinearLayoutManager horizontalLayoutManager2 =
                 new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
@@ -485,7 +422,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
+    // checks if notificaiton are on, if they are they allow notifications
     public void setNotifications(User user){
 
         RadioButton notifOn = findViewById(R.id.notificationOn);
@@ -514,7 +451,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
+    //renders the houses the user is subscribed to
     public void renderHousesSubscribed(User user){
         if (arrayofSubscribedTo == null) {
             arrayofSubscribedTo = new ArrayList<House>();
@@ -522,34 +459,29 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         HouseDatabaseHelper.getHousesByUserSubscribed(user.subscribedTo, new getAllHousesCallback() {
             @Override
             public void onCallback(ArrayList<House> houses) {
-                Log.d("housesFound", houses.toString());
+
             }
         });
     }
 
-
+    //set the nav bar for any type of account
     public void setNavBar(){
-        Log.d("navbar", "setNavBar: ");;
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.profile);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
                 if (item.getItemId()==R.id.houses) {
-                    Log.d("swtich", "houses");
                     startActivity(new Intent(Profile.this, HousesSearch.class));
                     finish();
                     return true;
                 }
                 else if (item.getItemId()==R.id.home) {
-                    Log.d("swtich", "home");
                     startActivity(new Intent(Profile.this, MainActivity.class));
                     finish();
                     return true;
                 }
                 else if  (item.getItemId()==R.id.forum){
-                    Log.d("swtich", "forum");
                     startActivity(new Intent(Profile.this, Forum.class));
                     finish();
                     return true;
@@ -581,15 +513,14 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         });
 
     }
-
+    //checks which user is clicked and opens that PostActivity to comment
     @Override
     public void onClick(View v) {
-        Log.d("hereee", "lol");
         int position = recyclerView.getChildAdapterPosition(v);
         if (position!=-1) {
-            Log.d("position", String.valueOf(position));
+
             long viewId = v.getId();
-            Log.d("click", String.valueOf(viewId));
+
             Post post = adapter.getItem(position);
 
 
@@ -602,7 +533,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
+    //sets the appropriate image for the house account
     public void setHouseImage(House house){
             int image = 0;
             switch (house.houseName) {
@@ -687,6 +618,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 default:
                     break;
             }
+            //sets the image
             ImageView iv = (ImageView) findViewById(R.id.housePageImage);
             iv.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), image, null));
     }

@@ -23,48 +23,6 @@ import com.example.fratnav.R;
 
 public class HouseCardView implements Parcelable {
 
-    /**
-     *
-     *  <androidx.cardview.widget.CardView
-     *                     android:id="@+id/cardview1"
-     *                     android:layout_width="0dp"
-     *                     android:layout_height="0dp"
-     *                     android:layout_rowWeight="1"
-     *                     android:layout_columnWeight="1"
-     *                     android:layout_marginLeft="16dp"
-     *                     android:layout_marginRight="16dp"
-     *                     android:layout_marginBottom="16dp"
-     *                     card_view:cardCornerRadius="8dp"
-     *                     card_view:cardElevation="8dp">
-     *
-     *                     <LinearLayout
-     *                         android:layout_width="wrap_content"
-     *                         android:layout_height="wrap_content"
-     *                         android:layout_gravity="center_horizontal|center_vertical"
-     *                         android:layout_margin="16dp"
-     *                         android:orientation="vertical">
-     *
-     *                         <TextView
-     *                             android:id="@+id/house1"
-     *                             android:layout_width="wrap_content"
-     *                             android:layout_height="wrap_content"
-     *                             android:text="APhi"
-     *                             android:textAlignment="center"
-     *                             android:textColor="@color/black"
-     *                             android:textSize="18sp"
-     *                             android:textStyle="bold" />
-     *
-     *                         <ImageView
-     *                             android:layout_width="wrap_content"
-     *                             android:layout_height="wrap_content"
-     *                             android:layout_gravity="center_horizontal"
-     *                             android:src="@drawable/aphi" />
-     *
-     *                     </LinearLayout>
-     *
-     *         </androidx.cardview.widget.CardView>
-     */
-
     public String name;
     public Context context;
     public int drawable;
@@ -92,7 +50,8 @@ public class HouseCardView implements Parcelable {
         }
     };
 
-    public CardView makeCardView(){ // need to put drawable in there as well
+    // makes a new cardview object
+    public CardView makeCardView(){
         CardView cd = new CardView(context);
         CardView.LayoutParams params = new CardView.LayoutParams(300, 300);
         params.setMargins(16, 0, 16, 16);
@@ -100,6 +59,7 @@ public class HouseCardView implements Parcelable {
         cd.setRadius(8);
         cd.setLayoutParams(params);
 
+        // makes linear layout
         LinearLayout l = new LinearLayout(context);
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         l.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
@@ -108,6 +68,7 @@ public class HouseCardView implements Parcelable {
         lparams.setMargins(16, 16, 16, 16);
         l.setLayoutParams(lparams);
 
+        // makes textview
         TextView tv = new TextView(context);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -122,6 +83,7 @@ public class HouseCardView implements Parcelable {
         tv.setLayoutParams(p);
 
 
+        // makes imageview
         ImageView iv = new ImageView(context);
         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -131,7 +93,6 @@ public class HouseCardView implements Parcelable {
         if (drawable == R.drawable.signu1){
             bool = true;
         }
-        Log.d("areTheyTheSame", String.valueOf(bool));
 
         int image = 0;
         switch(name){
@@ -222,17 +183,18 @@ public class HouseCardView implements Parcelable {
         imageParams.setMargins(0, 0, 0, 35);
 
 
+        // adds views together
         l.addView(iv);
         l.addView(tv);
 
         cd.addView(l);
 
-        Log.d("cd", cd.toString());
-
+        // return cardview
         return cd;
     }
 
-    public CardView makeSmallCardView(){ // need to put drawable in there as well
+    // makes a small cardview
+    public CardView makeSmallCardView(){
         CardView cd = new CardView(context);
         CardView.LayoutParams params = new CardView.LayoutParams(150, 150);
         params.setMargins(16, 0, 16, 16);
@@ -240,6 +202,7 @@ public class HouseCardView implements Parcelable {
         cd.setRadius(8);
         cd.setLayoutParams(params);
 
+        // makes layout
         LinearLayout l = new LinearLayout(context);
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         l.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
@@ -248,6 +211,7 @@ public class HouseCardView implements Parcelable {
         lparams.setMargins(16, 16, 16, 16);
         l.setLayoutParams(lparams);
 
+        // makes textview
         TextView tv = new TextView(context);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -262,6 +226,7 @@ public class HouseCardView implements Parcelable {
         tv.setLayoutParams(p);
 
 
+        // make imageview
         ImageView iv = new ImageView(context);
         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -271,7 +236,6 @@ public class HouseCardView implements Parcelable {
         if (drawable == R.drawable.signu1){
             bool = true;
         }
-        Log.d("areTheyTheSame", String.valueOf(bool));
 
         int image = 0;
         switch(name){
@@ -362,16 +326,17 @@ public class HouseCardView implements Parcelable {
         imageParams.setMargins(0, 0, 0, 35);
 
 
+        // add views together
         l.addView(iv);
         l.addView(tv);
 
         cd.addView(l);
 
-        Log.d("cd", cd.toString());
-
+        // return cardview
         return cd;
     }
 
+    // parcel writing
     @Override
     public int describeContents() {
         return 0;

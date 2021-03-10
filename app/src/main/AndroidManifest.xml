@@ -68,7 +68,6 @@
         <activity android:name=".profile.updateProfile" />
         <activity android:name=".onboarding.CreateAccountActivity" />
         <activity android:name=".onboarding.CreateProfile" />
-        <activity android:name=".databaseHelpers.RealtimeFirebaseDB" />
         <activity android:name=".onboarding.Authentication" />
         <activity
             android:name=".MainActivity"
@@ -96,11 +95,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity
-            android:name=".tools.camera.ShooterActivity"
-            android:configChanges="orientation" >
-
-        </activity>
     </application>
 
 </manifest>
