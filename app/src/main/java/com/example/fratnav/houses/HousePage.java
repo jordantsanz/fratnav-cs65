@@ -448,7 +448,7 @@ public class HousePage extends AppCompatActivity {
     }
 
     public static void refresh(Review review){
-        arrayOfReviews.add(review);
+        arrayOfReviews.add(0, review);
         adapterReviews.notifyDataSetChanged();
 
     }
