@@ -53,12 +53,17 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //sets XML
         setContentView(R.layout.create_account);
         mAuth = FirebaseAuth.getInstance();
         Button createAccountButton = findViewById(R.id.createAccountButton);
+
+        //imageview for popup
         info = (ImageView) findViewById(R.id.passwordInfo);
         linearLayout = (LinearLayout) findViewById(R.id.createaccountLinearLayout);
 
+
+        //creates the popupWindow
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +80,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 });
             }
         });
-
+        //link the listener to the createAccount method
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +111,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         return randomStringBuilder.toString();
     }
 
+    //creates an account from the input-ed information
     public void createAccount(View view){
 
         EditText emailView = (EditText) findViewById(R.id.createEmail);
@@ -157,26 +163,28 @@ public class CreateAccountActivity extends AppCompatActivity {
         String emailCon = emailViewConfirm.getText().toString();
         String passwordCon = passwordViewConfirm.getText().toString();
 
+        //makes sure that the user submits an email and password
         if (email == null || password == null){
             Toast.makeText(CreateAccountActivity.this, "Please enter in email and password", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //makes sure the password is at least 6 charaters
         if (password.length() < 6){
             Toast.makeText(CreateAccountActivity.this, "Your password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!email.equals(emailCon)){
+        //makes sure emails match
+       if (!email.equals(emailCon)){
             Toast.makeText(this, "Your emails do not match!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //makes sure password match
         if (!password.equals(passwordCon)){
             Toast.makeText(this, "Your passwords do not match!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //sends the username and password to firebase authentication
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -219,6 +227,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 });
     }
 
+
+    //hides keyboard
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);

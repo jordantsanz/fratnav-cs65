@@ -23,12 +23,17 @@ public class HouseTourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //connects XML
         setContentView(R.layout.activity_house_tour);
 
+        //gets the Panorama View
         mVRPanoramaView = (VrPanoramaView) findViewById(R.id.vrPanoramaView);
 
+        // gets the url for the panorama view from s3
         String url = getIntent().getStringExtra(HousePage.URL_KEY);
 
+        //runs a thread to start and display the panorama view
         new Thread() {
             @Override
             public void run() {

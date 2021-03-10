@@ -53,15 +53,22 @@ public class CreateProfile extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_profile_houses);
-        mAuth = FirebaseAuth.getInstance();
 
+        //sets XML
+        setContentView(R.layout.create_profile_houses);
+        //checks authentication
+        mAuth = FirebaseAuth.getInstance();
+        //gets all of the information from the passed in bundle
         email = getIntent().getStringExtra("email");
         password = getIntent().getStringExtra("password");
         username = getIntent().getStringExtra("userName");
+
+        //instantiates the spinners
         spinner = findViewById(R.id.createYear);
         sexualitySpinner =findViewById(R.id.createSexuality);
 
+
+        //adds to an array list for the year spinner
         ArrayList<String> yearOptions = new ArrayList<>();
         yearOptions.add("2021");
         yearOptions.add("2022");
@@ -69,9 +76,10 @@ public class CreateProfile extends AppCompatActivity  {
         yearOptions.add("2024");
         yearOptions.add("2025");
 
+        //creates the spinner using an array adapter and the arraylist
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearOptions);
 
-
+        //adds to an array list for the sexuality spinner
         ArrayList<String> sexualityOptions = new ArrayList<>();
         sexualityOptions.add("Heterosexual");
         sexualityOptions.add("Lesbian");
@@ -80,10 +88,12 @@ public class CreateProfile extends AppCompatActivity  {
         sexualityOptions.add("Transgender");
         sexualityOptions.add("Queer");
         sexualityOptions.add("N/A");
+
+        //creates the spinner using an array adapter and the arraylist
         ArrayAdapter<String> sexualityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexualityOptions);
 
 
-
+        //sets the adapter
         spinner.setAdapter(yearAdapter);
         sexualitySpinner.setAdapter(sexualityAdapter);
 
@@ -91,7 +101,7 @@ public class CreateProfile extends AppCompatActivity  {
 
 
     }
-
+    //creates the account in the Firebase Realtime Database
     public void createAccount2(View view) {
        // EditText genderView = (EditText) findViewById(R.id.createGender);
 

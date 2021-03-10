@@ -20,10 +20,11 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //sets XML
         setContentView(R.layout.forgot_password);
     }
 
-
+    //sends the email to Firbase to sent the email and recover the password
     public void onSubmitEmail(View view){
         TextView emailText = findViewById(R.id.email_recovery);
         String email = emailText.getText().toString();

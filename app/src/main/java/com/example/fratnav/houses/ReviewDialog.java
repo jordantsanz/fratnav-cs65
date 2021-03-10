@@ -50,14 +50,17 @@ public class ReviewDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //sets the XML
         setContentView(R.layout.review);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        //sets the onclick listener to onClick
         reviewSave = findViewById(R.id.reviewSave);
         reviewSave.setOnClickListener(this::onClick);
 
     }
 
+    //saves the review
     public void onClick(View v){
         RatingBar safetyRatingbar = findViewById(R.id.safetyRating);
         RatingBar inclusivityRatingbar = findViewById(R.id.inclusivityRating);
@@ -71,7 +74,7 @@ public class ReviewDialog extends Dialog {
         float overall = overallRatingbar.getRating();
         String reviewText = reviewEditText.getText().toString();
 
-
+        //creates the review
         Review review = new Review(reviewText, currentUserInfo.username, currentUser.getUid(),
         safety, incl, basement, overall, theHouse.id, theHouse.houseName);
         Log.d("reviewSent", review.toString());
@@ -80,7 +83,7 @@ public class ReviewDialog extends Dialog {
         Log.d("houseId", review.houseId);
         Log.d("housename", theHouse.houseName);
 
-
+        //sends it to the database
         HousePage.refresh(review);
         dismiss();
         ReviewDatabaseHelper.createReview(review, new createCallback() {

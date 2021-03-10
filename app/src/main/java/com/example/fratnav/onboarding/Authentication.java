@@ -39,6 +39,7 @@ public class Authentication extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        //sets a listener for when the user is done typing
         findViewById(R.id.email).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -47,7 +48,7 @@ public class Authentication extends AppCompatActivity {
                 }
             }
         });
-
+        //sets a listener for when the user is done typing
         findViewById(R.id.password).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -76,11 +77,14 @@ public class Authentication extends AppCompatActivity {
         textview.setText(text);
 
     }
+
+    //opens forgot password xml
     public void forgotPassword(View view){
         Intent intent = new Intent(Authentication.this, ForgotPassword.class);
         startActivity(intent);
     }
 
+    //signs users in and sends the information given to Firebase for authentication
     public void signinUsers(View view){
         EditText emailV = (EditText) findViewById(R.id.email);
         EditText passwordV = (EditText) findViewById(R.id.password);
@@ -108,12 +112,12 @@ public class Authentication extends AppCompatActivity {
 
     }
 
-
+    //hides keyboard
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
+    //opens create account xml
     public void launchCreateAccount(View view){
         Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
