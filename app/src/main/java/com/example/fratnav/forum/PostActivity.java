@@ -1,6 +1,8 @@
 package com.example.fratnav.forum;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fratnav.MainActivity;
 import com.example.fratnav.R;
+import com.example.fratnav.RVFeedAdapter;
 import com.example.fratnav.callbacks.getCommentsByPostIdCallback;
 import com.example.fratnav.callbacks.getPostByIdCallback;
 import com.example.fratnav.callbacks.getUserByIdCallback;
@@ -24,6 +28,7 @@ import com.example.fratnav.models.Comment;
 import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.tools.CommentsAdapter;
+import com.example.fratnav.tools.RVCommentsAdapter;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
@@ -34,6 +39,8 @@ public class PostActivity extends AppCompatActivity {
     CommentsAdapter adapter;
     ArrayList<Comment> arrayOfComments;
     User userInfo;
+    RVCommentsAdapter commentsAdapter;
+    RecyclerView recyclerViewcomments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +68,10 @@ public class PostActivity extends AppCompatActivity {
         TextView userYear= (TextView) findViewById(R.id.postActivityUserYear);
 
         //sets a new arraylist and adapter
+//        arrayOfComments = new ArrayList<>();
+//        adapter = new CommentsAdapter(getApplicationContext(), arrayOfComments);
         arrayOfComments = new ArrayList<>();
-        adapter = new CommentsAdapter(getApplicationContext(), arrayOfComments);
+        commentsAdapter = new RVCommentsAdapter(getApplicationContext(), arrayOfComments);
 
         //sets the user information, and post infromation on the XML
         PostDatabaseHelper.getPostById(getIntent().getStringExtra(Forum.POST_ID_KEY), new getPostByIdCallback() {
@@ -112,19 +121,41 @@ public class PostActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
                         Log.d("comments", comments.toString());
-                        for (Comment comment : comments){
-                            adapter.add(comment);
+//                        for (Comment comment : comments){
+//                            adapter.add(comment);
+//                        }
+//                        //adapter is updated
+//                        adapter.notifyDataSetChanged();
+                        for (int i = comments.size() - 1; i > -1; i--) {
+//                            adapter.add(posts.get(i));
+                            Comment comment = comments.get(i);
+                            arrayOfComments.add(comment);
                         }
-                        //adapter is updated
-                        adapter.notifyDataSetChanged();
+                        commentsAdapter.notifyDataSetChanged();
+
                     }
                 });
             }
         });
 
+        if (arrayOfComments == null) {
+            arrayOfComments = new ArrayList<Comment>();
+        }
+
+        recyclerViewcomments = (RecyclerView) findViewById(R.id.rv_comments);
+        LinearLayoutManager verticalLayoutManager =
+                new LinearLayoutManager(PostActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewcomments.setLayoutManager(verticalLayoutManager);
+
+        commentsAdapter = new RVCommentsAdapter(getApplicationContext(), arrayOfComments);
+        recyclerViewcomments.setAdapter(commentsAdapter);
+
+        commentsAdapter.notifyDataSetChanged();
         //comments adapter
-        ListView list = findViewById(android.R.id.list);
-        list.setAdapter(adapter); // sets adapter for list
+//        ListView list = findViewById(android.R.id.list);
+//        list.setAdapter(adapter); // sets adapter for list
+
+
     }
 
     //cancles the comment and returns to the forum
@@ -147,7 +178,8 @@ public class PostActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+        commentsAdapter.notifyDataSetChanged();
         PostDatabaseHelper.addPostComment(thePost, comment);
 
         Toast.makeText(this, "Comment left.", Toast.LENGTH_SHORT).show();

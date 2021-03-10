@@ -172,16 +172,25 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <ListView
-                    android:foregroundGravity="center_horizontal"
-                    android:id="@android:id/list"
+<!--                <ListView-->
+<!--                    android:foregroundGravity="center_horizontal"-->
+<!--                    android:id="@android:id/list"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="30dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:dividerHeight="10.0sp"-->
+<!--                    tools:ignore="NestedScrolling" />-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_comments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:orientation="vertical"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="15dp"
-                    android:dividerHeight="10.0sp"
-                    tools:ignore="NestedScrolling" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </FrameLayout>
             </LinearLayout>
         </LinearLayout>
