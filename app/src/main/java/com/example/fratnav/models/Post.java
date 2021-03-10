@@ -1,12 +1,17 @@
 package com.example.fratnav.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.navigation.NavType;
+
 import com.example.fratnav.models.Comment;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Post {
+public class Post implements Parcelable {
     public String username = "";
     public String userID = "";
     public String text = "";
@@ -28,6 +33,28 @@ public class Post {
     }
 
     public Post(){}
+
+    protected Post(Parcel in) {
+        username = in.readString();
+        userID = in.readString();
+        text = in.readString();
+        title = in.readString();
+        attributes = in.createStringArrayList();
+        likes = in.readInt();
+        id = in.readString();
+    }
+
+    public static final Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
 
     public void setId(String id){
         this.id = id;
@@ -52,5 +79,21 @@ public class Post {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(userID);
+        dest.writeString(text);
+        dest.writeString(title);
+        dest.writeStringList(attributes);
+        dest.writeInt(likes);
+        dest.writeString(id);
     }
 }

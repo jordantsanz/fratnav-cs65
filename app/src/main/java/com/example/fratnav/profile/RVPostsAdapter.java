@@ -79,7 +79,6 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         currentUserId = currentUser.getUid();
         String userDisplay = "@" + post.username;
         String likes = post.likes + "";
-        holder.setIsRecyclable(false);
 
         holder.outer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +135,8 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
 
         if (post.usersLiked != null){
-            Log.d("post", post.usersLiked.values().toString());
+            Log.d("postUsers", post.usersLiked.values().toString());
+            if (post.usersLiked.values().size() == 0){holder.heart.setBackgroundResource(R.drawable.like);}
             for (String userId : post.usersLiked.values()) {
                 if (userId.equals(currentUserId)) {
                     userDidLike = true;
