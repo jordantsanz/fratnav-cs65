@@ -293,7 +293,7 @@ public class HousePage extends AppCompatActivity {
         }
 
     }
-    //updates the subcribed value if user subscribes/unsubscribes
+    //updates the subscribed value if user subscribes/unsubscribed
     public void subscribe(View view) {
         if (subbed) {
             UserDatabaseHelper.removeHouseFromUserSubscribed(theHouse, currentUser.getUid());

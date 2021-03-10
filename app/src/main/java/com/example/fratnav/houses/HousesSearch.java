@@ -75,11 +75,15 @@ public class HousesSearch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //sets XML
         setContentView(R.layout.houses_search);
         FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
 
+        //instantiates the hashmap
         houseCategories = new HashMap<>();
 
+        //checks if the user is a house
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -87,15 +91,18 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        //sets up gridLayout
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
 
+        //
         coordinatorLayout = (ConstraintLayout) findViewById(R.id.houseSearchConstrainLayout);
         filter = (ImageView) findViewById(R.id.searchFilter);
 
+        //implements the search functionality
         searchThings();
 
+
+        //popupWindow for the filter and sets the onClickListener for each filterable tag
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +198,7 @@ public class HousesSearch extends AppCompatActivity {
         });
 
 
-//        initSearchWidgets();
+        //sets the card view and onclicklistener to pull up the specific house account page
         if (savedInstanceState == null) {
             HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
                 @Override
@@ -206,8 +213,6 @@ public class HousesSearch extends AppCompatActivity {
                         cardView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
-//                            Toast.LENGTH_SHORT).show();
                                 ViewGroup viewGroup = (ViewGroup) view;
                                 ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
                                 TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
@@ -228,6 +233,7 @@ public class HousesSearch extends AppCompatActivity {
                 }
             });
         }
+        //renders information from the savedInstanceState
         else{
             cards = savedInstanceState.getParcelableArrayList(HOUSECARDS_KEY);
             gridLayout.removeAllViews();
@@ -255,6 +261,7 @@ public class HousesSearch extends AppCompatActivity {
         }
 
 
+        //navBar
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.houses);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -285,6 +292,8 @@ public class HousesSearch extends AppCompatActivity {
         });
     }
 
+
+    //search functionality
     public void searchThings(){
         androidx.appcompat.widget.SearchView searchView = findViewById(R.id.search_view);
 
@@ -305,12 +314,15 @@ public class HousesSearch extends AppCompatActivity {
 
     }
 
+
+    //saved information for each page
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(HOUSECARDS_KEY, cards);
     }
 
+    //searches the database and organized the gridLayout
     public void firebaseHouseSearch(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/houses");
         Query q = databaseReference.orderByChild("query").startAt(searchText.toUpperCase()).endAt(searchText.toUpperCase() + "\uf8ff");

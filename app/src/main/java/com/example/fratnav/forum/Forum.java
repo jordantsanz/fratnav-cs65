@@ -394,7 +394,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     }
 
     // for likes
-
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
         Log.d("parentRow", parentRow.toString());
@@ -482,7 +481,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-    //creates listensers for yearh tag in the filter
+    //creates listeners for each tag in the filter
     public void setOnClickListeners(ViewGroup container){
         axa = container.findViewById(R.id.axaTagSearch);
         axa.setOnClickListener(new View.OnClickListener() {
