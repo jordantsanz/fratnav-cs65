@@ -49,7 +49,6 @@ import com.example.fratnav.models.Post;
 import com.example.fratnav.models.User;
 import com.example.fratnav.profile.RVPostsAdapter;
 import com.example.fratnav.profile.RVReviewsAdapter;
-import com.example.fratnav.tools.PostsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

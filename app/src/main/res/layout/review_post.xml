@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/postHouse"
         android:fontFamily="@font/montserrat_bold"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="210dp"
         android:textColor="@color/dialog_choose_text_color"
         android:textSize="21sp"
         android:paddingStart="10dp"
