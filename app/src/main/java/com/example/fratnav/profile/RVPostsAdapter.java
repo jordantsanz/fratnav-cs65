@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
+// Recycler view adapter for forum posts
 public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> {
     private ArrayList<Post> posts;
     boolean userDidLike = false;
@@ -47,6 +48,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         public MyView(View view) {
             super(view);
 
+            // get text views from post xml
             postUser = (TextView) view.findViewById(R.id.postUser);
             postText = (TextView) view.findViewById(R.id.postText);
             postLikes = (TextView) view.findViewById(R.id.likes);
@@ -57,8 +59,6 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             outer = (CoordinatorLayout) view.findViewById(R.id.postBackground);
             context = view.getContext();
 
-            // Populate the data into the template view using the data object
-
         }
     }
 
@@ -68,36 +68,40 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
 
     @Override
     public MyView onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Lookup view for data population
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.post, parent, false);
         return new MyView(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
+        // Get the data item for this position
         Post post = getItem(position);
         currentUser = AuthenticationHelper.getCurrentUser();
         currentUserId = currentUser.getUid();
+
+        // get data from object
         String userDisplay = "@" + post.username;
         String likes = post.likes + "";
 
+        //set on click listener on post for likes
         holder.outer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("inOnClick", "lol");
-
 
                 Intent intent = new Intent(holder.context, PostActivity.class);
                 intent.putExtra(Forum.POST_ID_KEY, post.id);
-//                intent.putExtra(Forum.USER_ID_KEY, currentUserInfo.username);
-
 
                 holder.context.startActivity(intent);
             }
         });
 
+        // Populate the data into the template view using the data object
         holder.postUser.setText(userDisplay);
         holder.postText.setText(post.text);
         holder.postLikes.setText(likes);
+
+        // check for positioning tags in array list, then populate them on correct position
         if (post.attributes != null) {
             switch (post.attributes.size()) {
                 case 0:
@@ -127,15 +131,8 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             setBackgrounds(holder.tag1, holder.tag2, holder.tag3);
         }
 
-
-
-
-
-
-
-
+        // check if user has liked the post then set heart drawable accordingly
         if (post.usersLiked != null){
-            Log.d("postUsers", post.usersLiked.values().toString());
             if (post.usersLiked.values().size() == 0){holder.heart.setBackgroundResource(R.drawable.like);}
             for (String userId : post.usersLiked.values()) {
                 if (userId.equals(currentUserId)) {
@@ -149,7 +146,6 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
             }
         }
         holder.heart.setTag(position);
-
     }
 
 
@@ -162,7 +158,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         return posts.get(position);
     }
 
-
+    // method for setting the correct background color on tags
     @SuppressLint("ResourceAsColor")
     public void setBackgrounds(TextView tag1, TextView tag2, TextView tag3) {
         ArrayList<TextView> tags = new ArrayList<>();
@@ -170,6 +166,7 @@ public class RVPostsAdapter extends RecyclerView.Adapter<RVPostsAdapter.MyView> 
         tags.add(tag2);
         tags.add(tag3);
 
+        // check based on tag text
         for (TextView tag : tags) {
             String text = tag.getText().toString();
             Log.d("theText", text);

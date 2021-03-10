@@ -24,23 +24,30 @@
         android:layout_marginTop="10dp"
         android:onClick="onUsernameClick"
         />
-
+    <LinearLayout
+        android:id="@+id/likes_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="298dp"
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:textColor="@color/textColor"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:textSize="16sp"
         android:fontFamily="@font/cabin"
-        android:layout_marginStart="300dp"
         android:id="@+id/likes"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:layout_marginStart="298dp"
         android:textColor="@color/textColor"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="@string/likes"/>
+    </LinearLayout>
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"

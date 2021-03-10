@@ -25,11 +25,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
+// Recycler view adapter for feed posts and past posts
 public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
     private ArrayList<Post> posts;
     String currentUserId;
     FirebaseUser currentUser;
-
 
     public class MyView extends RecyclerView.ViewHolder {
         TextView postUser;
@@ -44,6 +44,7 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
         public MyView(View view) {
             super(view);
 
+            // get text views from feed post xml
             postUser = (TextView) view.findViewById(R.id.postUser);
             postText = (TextView) view.findViewById(R.id.postText);
             postLikes = (TextView) view.findViewById(R.id.likes);
@@ -53,7 +54,6 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
 
             context = view.getContext();
 
-            // Populate the data into the template view using the data object
 
         }
     }
@@ -64,21 +64,25 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
 
     @Override
     public MyView onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Lookup view for data population
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_post, parent, false);
         return new MyView(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
+        // Get the data item for this position
         Post post = getItem(position);
         currentUser = AuthenticationHelper.getCurrentUser();
         currentUserId = currentUser.getUid();
+
+        // Populate the data into the template view using the data object
         String userDisplay = "@" + post.username;
         holder.setIsRecyclable(false);
-
-
         holder.postUser.setText(userDisplay);
         holder.postText.setText(post.text);
+
+        // check for positioning tags in array list, then populate them on correct position
         if (post.attributes != null) {
             switch (post.attributes.size()) {
                 case 0:
@@ -105,6 +109,7 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
                     break;
             }
 
+            // set background colors on respective tags
             setBackgrounds(holder.tag1, holder.tag2, holder.tag3);
         }
 
@@ -121,7 +126,7 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
         return posts.get(position);
     }
 
-
+    // method for setting the correct background color on tags
     @SuppressLint("ResourceAsColor")
     public void setBackgrounds(TextView tag1, TextView tag2, TextView tag3) {
         ArrayList<TextView> tags = new ArrayList<>();
@@ -129,6 +134,7 @@ public class RVFeedAdapter extends RecyclerView.Adapter<RVFeedAdapter.MyView> {
         tags.add(tag2);
         tags.add(tag3);
 
+        // check based on tag text
         for (TextView tag : tags) {
             String text = tag.getText().toString();
             Log.d("theText", text);
