@@ -18,6 +18,7 @@ import com.example.fratnav.models.User;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.profile.Profile;
 import com.example.fratnav.tools.PostsAdapter;
+import com.example.fratnav.tools.RVFeedAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +29,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
