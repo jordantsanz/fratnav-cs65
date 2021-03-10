@@ -31,6 +31,7 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.comment, parent, false);
         }
+
 //        ListView lv = (ListView) convertView.findViewById(android.R.id.list);
 //        Typeface tf = Typeface.createFromAsset(getAssets(),)
         TextView commentUser = (TextView) convertView.findViewById(R.id.commentUser);

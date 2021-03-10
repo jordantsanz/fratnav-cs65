@@ -68,7 +68,6 @@
         <activity android:name=".profile.updateProfile" />
         <activity android:name=".onboarding.CreateAccountActivity" />
         <activity android:name=".onboarding.CreateProfile" />
-        <activity android:name=".databaseHelpers.RealtimeFirebaseDB" />
         <activity android:name=".onboarding.Authentication" />
         <activity
             android:name=".MainActivity"
