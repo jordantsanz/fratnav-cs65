@@ -432,7 +432,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                             Forum.refresh();
 
                             post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-                            Log.d("postprof", post.usersLiked.toString());
+
                             post.likes -= 1;
 
                         }
@@ -471,8 +471,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
         Post post = postsAdapter.getItem(position);
         assert post != null;
-        Log.d("listview", post.username);
-        Log.d("heartClick", post.id);
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);
         startActivity(intent);
@@ -1003,7 +1001,7 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     if (tags.size() != 0 & post.attributes != null){
                         boolean itsIn = false;
                         for (String att : post.attributes){
-                            Log.d("att", att);
+
                             if (tags.containsKey(att)){
                                 itsIn = true;
                                 break;
@@ -1019,8 +1017,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
                     }
                 }
 
-                Log.d("filteredPosts", filteredPosts.toString());
-                Log.d("filteredPosts", tags.toString());
                 for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
                     arrayOfPosts.remove(i);
                 }

@@ -147,7 +147,7 @@
         android:textColor="@color/textColor"
         android:onClick="createAccount"
         android:id="@+id/createAccountButton"
-        android:text="Next"/>
+        android:text="@string/next"/>
 
 
 </LinearLayout>

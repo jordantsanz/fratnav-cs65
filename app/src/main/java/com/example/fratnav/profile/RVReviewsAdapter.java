@@ -61,12 +61,47 @@ public class RVReviewsAdapter extends RecyclerView.Adapter<RVReviewsAdapter.MyVi
         Review review = getItem(position);
         String userDisplay = "@" + review.username;
 
-        holder.postUser.setText(String.valueOf(review.username));
+        holder.postUser.setText(String.valueOf(userDisplay));
         holder.postHouse.setText(String.valueOf(review.houseName));
-        holder.safetyView.setText(String.valueOf(review.safetyRating));
-        holder.incView.setText(String.valueOf(review.inclusivityRating));
-        holder.baseView.setText(String.valueOf(review.basementRating));
-        holder.overView.setText(String.valueOf(review.overallRating));
+        String safety;
+        String inc;
+        String basement;
+        String overall;
+
+        if (review.safetyRating % 1 == 0){
+            safety = String.valueOf((int) review.safetyRating);
+        }
+        else{
+            safety = String.valueOf(review.safetyRating);
+        }
+
+        if (review.inclusivityRating % 1 == 0){
+            inc = String.valueOf((int) review.inclusivityRating);
+        }
+        else{
+            inc = String.valueOf(review.inclusivityRating);
+        }
+
+        if (review.basementRating % 1 == 0){
+            basement = String.valueOf((int) review.basementRating);
+        }
+        else{
+            basement = String.valueOf(review.basementRating);
+        }
+
+        if (review.overallRating % 1 == 0){
+            overall = String.valueOf((int) review.overallRating);
+        }
+        else{
+            overall = String.valueOf(review.overallRating);
+        }
+
+
+
+        holder.safetyView.setText(safety);
+        holder.incView.setText(inc);
+        holder.baseView.setText(basement);
+        holder.overView.setText(overall);
         holder.comments.setText(String.valueOf(review.description));
     }
 

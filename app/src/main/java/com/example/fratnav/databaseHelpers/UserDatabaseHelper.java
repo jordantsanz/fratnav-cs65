@@ -45,11 +45,9 @@ public class UserDatabaseHelper {
         dbRefUser.orderByKey().equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("userSnapshot", snapshot.toString());
 
                 // add post id to user's posts
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("userSnapshotds", ds.toString());
                     ds.child("posts").getRef().push().setValue(post.id);
                    }
 
@@ -69,7 +67,6 @@ public class UserDatabaseHelper {
             dbRefHouses.orderByKey().equalTo(currentUserInfo.houseId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.d("Datasnapshot", "onDataChange: ");
 
                     // add post to house information
                     for (DataSnapshot ds : snapshot.getChildren()){
@@ -117,7 +114,6 @@ public class UserDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
                 for (DataSnapshot ds : snapshot.getChildren()){
                     User user = ds.getValue(User.class);
                     assert user != null;
@@ -153,11 +149,10 @@ public class UserDatabaseHelper {
         dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // pushes updates
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    Log.d("updates", ds.getRef().updateChildren(userUpdates).toString());
+                   ds.getRef().updateChildren(userUpdates);
                 }
 
                 // refreshes profile view
@@ -191,7 +186,6 @@ public class UserDatabaseHelper {
         dbUserRef.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // updates children
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -223,7 +217,6 @@ public class UserDatabaseHelper {
         dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // adds house to subscribed
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -255,7 +248,6 @@ public class UserDatabaseHelper {
         dbRefUsers.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // removes house from user list of subscriptions
                 for (DataSnapshot ds : snapshot.getChildren()){

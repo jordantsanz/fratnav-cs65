@@ -473,7 +473,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("sad", "made it item clicked " + item.getTitle());
                 if (item.getItemId()==R.id.houses) {
                     startActivity(new Intent(Profile.this, HousesSearch.class));
                     finish();

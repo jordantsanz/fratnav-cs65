@@ -228,7 +228,6 @@ public class updateProfile extends AppCompatActivity {
                         //sets the default to the data in the database
                         if (user.interestedIn != null) {
                             for (int i = 0; i < user.interestedIn.size(); i++) {
-                                //Log.d("user",user.interestedIn.toString());
                                 if (user.interestedIn.get(i).equals("Fraternities")) {
                                     frat.setChecked(true);
                                 }
@@ -688,7 +687,6 @@ public class updateProfile extends AppCompatActivity {
             TextView houseName = findViewById(R.id.house_name);
             houseName.setText(house.houseName);
             TextView subscribers = findViewById(R.id.subscribers);
-            Log.d("housesubs", String.valueOf(house.subscribers));
             String subs = String.valueOf(house.subscribers) + " Subscribers";
             subscribers.setText(subs);
             setHouseImage(house);

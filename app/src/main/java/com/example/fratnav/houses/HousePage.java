@@ -141,7 +141,7 @@ public class HousePage extends AppCompatActivity {
                 //updates the house and the subscribers
                 theHouse = house;
                 subscribers = theHouse.subscribers;
-                Log.d("house", theHouse.toString());
+
                 TextView houseDateView = findViewById(R.id.house_date);
                 //sets the house established date
                 String houseInput = "est. " + String.valueOf(theHouse.date);
@@ -159,7 +159,7 @@ public class HousePage extends AppCompatActivity {
                 ReviewDatabaseHelper.getReviewsByHouseId(house.id, new getAllReviewsCallback() {
                     @Override
                     public void onCallback(ArrayList<Review> reviews) {
-                        Log.d("reviews", reviews.toString());
+
                     }
                 });
                 //sets the house national or local status

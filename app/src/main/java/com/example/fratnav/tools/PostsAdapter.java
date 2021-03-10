@@ -69,9 +69,9 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 View parentRow = (View) v.getParent();
-                    Log.d("listview", parentRow.getParent().toString());
+
                     ListView lv = (ListView) parentRow.getParent();
-                    Log.d("listview", lv.toString());
+
                     int position = lv.getPositionForView(parentRow);
                     Log.d("listview", String.valueOf(position));
                     if (position == -1){

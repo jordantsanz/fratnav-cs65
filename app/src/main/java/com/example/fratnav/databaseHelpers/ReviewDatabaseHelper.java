@@ -46,7 +46,6 @@ public class ReviewDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(houseId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshotReviewHouse", snapshot.toString());
                 ArrayList<Review> reviews = new ArrayList<>();
 
                 // for each house
@@ -94,7 +93,6 @@ public class ReviewDatabaseHelper {
         dbRefHouses.orderByKey().equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
                 ArrayList<Review> reviews = new ArrayList<>();
 
                 // for user
@@ -159,7 +157,6 @@ public class ReviewDatabaseHelper {
         ref.orderByKey().equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", snapshot.toString());
 
                 // add to reviews
                 for (DataSnapshot ds : snapshot.getChildren()){

@@ -120,7 +120,6 @@ public class PostActivity extends AppCompatActivity {
                 PostDatabaseHelper.getAllCommentsByPostId(post, new getCommentsByPostIdCallback() {
                     @Override
                     public void onCallback(ArrayList<Comment> comments) {
-                        Log.d("comments", comments.toString());
                         for (int i = 0; i < comments.size(); i++) {
 //                            adapter.add(posts.get(i));
                             Comment comment = comments.get(i);
