@@ -57,7 +57,6 @@ public class CreatePost extends AppCompatActivity {
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     CoordinatorLayout coordinatorLayout;
-    Dialog filterDialog;
 
 
 

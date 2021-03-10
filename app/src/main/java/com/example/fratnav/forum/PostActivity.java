@@ -54,7 +54,8 @@ public class PostActivity extends AppCompatActivity {
             public void onCallback(Post post) {
                 thePost = post;
                 textView.setText(post.text);
-                username.setText(post.username);
+                String usernameString = "@" + post.username;
+                username.setText(usernameString);
                 UserDatabaseHelper.getUserById(post.userID, new getUserByIdCallback() {
                     @Override
                     public void onCallback(User user) {
@@ -66,10 +67,27 @@ public class PostActivity extends AppCompatActivity {
                             String notAffiliated = "Not Affiliated";
                             userAffilation.setText(notAffiliated);
                         }
-
-                        userGender.setText(user.gender);
-                        userSexuality.setText(user.sexuality);
-                        userYear.setText(user.year);
+                        if (user.gender ==  null ){
+                            userGender.setBackgroundResource(R.drawable.background_color_background);
+                            userGender.setTextColor(getResources().getColor(R.color.backgroundColor));
+                        }
+                        else {
+                            userGender.setText(user.gender);
+                        }
+                        if (user.sexuality == null ){
+                            userSexuality.setTextColor(getResources().getColor(R.color.backgroundColor));
+                            userSexuality.setBackgroundResource(R.drawable.background_color_background);
+                        }
+                        else{
+                            userSexuality.setText(user.sexuality);
+                        }
+                        if(user.year == null){
+                            userYear.setBackgroundResource(R.drawable.background_color_background);
+                            userYear.setTextColor(getResources().getColor(R.color.backgroundColor));
+                        }
+                        else{
+                            userYear.setText(user.year);
+                        }
 
                     }
                 });
