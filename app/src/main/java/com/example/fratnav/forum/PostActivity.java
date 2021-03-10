@@ -93,22 +93,22 @@ public class PostActivity extends AppCompatActivity {
                             userAffilation.setText(notAffiliated);
                         }
                         if (user.gender ==  null ){
-                            userGender.setBackgroundResource(R.drawable.background_color_background);
-                            userGender.setTextColor(getResources().getColor(R.color.backgroundColor));
+                            userGender.setBackgroundResource(R.drawable.post_background);
+                            userGender.setTextColor(getResources().getColor(R.color.postBackground));
                         }
                         else {
                             userGender.setText(user.gender);
                         }
                         if (user.sexuality == null ){
-                            userSexuality.setTextColor(getResources().getColor(R.color.backgroundColor));
-                            userSexuality.setBackgroundResource(R.drawable.background_color_background);
+                            userSexuality.setTextColor(getResources().getColor(R.color.postBackground));
+                            userSexuality.setBackgroundResource(R.drawable.post_background);
                         }
                         else{
                             userSexuality.setText(user.sexuality);
                         }
                         if(user.year == null){
-                            userYear.setBackgroundResource(R.drawable.background_color_background);
-                            userYear.setTextColor(getResources().getColor(R.color.backgroundColor));
+                            userYear.setBackgroundResource(R.drawable.post_background);
+                            userYear.setTextColor(getResources().getColor(R.color.postBackground));
                         }
                         else{
                             userYear.setText(user.year);
