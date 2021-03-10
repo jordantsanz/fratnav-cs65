@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.callbacks.likePostCallback;
+import com.example.fratnav.houses.HousePage;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.MainActivity;
@@ -80,6 +82,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     public String randomKey;
 
     Dialog filterDialog;
+
+    public static final String POSTS_KEY = "postskey";
 
     public ToggleButton axa;
     public ToggleButton aka;
@@ -153,10 +157,25 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //connects XML
         setContentView(R.layout.forum);
 
         //instantiates the tags hashmap
+
+        Log.d("create", "onCreate: jsjsjsjs");
+        setContentView(R.layout.forum);
+        recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
+        recyclerViewforum.removeAllViews();
+
+        if (arrayOfPosts != null) {
+            Log.d("create", "onCrdsfsdfseate: ");
+            for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1) {
+                arrayOfPosts.remove(i);
+            }
+        }
+
+
         tags = new HashMap<>();
 
         //gets the current user
@@ -263,6 +282,24 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         }
         //connecting the recycler view to the adapter and the xml
         recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
+
+
+        if (savedInstanceState != null){
+            ArrayList<Post> posts = savedInstanceState.getParcelableArrayList(POSTS_KEY);
+            for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
+                arrayOfPosts.remove(i);
+            }
+
+            for (int i = 0; i < posts.size(); i+= 1){
+                arrayOfPosts.add(posts.get(i));
+            }
+            if (postsAdapter != null) {
+                postsAdapter.notifyDataSetChanged();
+            }
+        }
+
+
+
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewforum.setLayoutManager(verticalLayoutManager);
@@ -271,6 +308,13 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         recyclerViewforum.setAdapter(postsAdapter);
 
         postsAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(POSTS_KEY, arrayOfPosts);
 
     }
 
@@ -348,7 +392,9 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
     }
+
     // for likes
+
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
         Log.d("parentRow", parentRow.toString());
@@ -429,7 +475,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         Post post = postsAdapter.getItem(position);
         assert post != null;
         Log.d("listview", post.username);
-        assert post != null;
         Log.d("heartClick", post.id);
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);

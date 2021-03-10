@@ -100,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12.5dp"
                 android:orientation="vertical"
+                android:configChanges="orientation|screenSize"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>

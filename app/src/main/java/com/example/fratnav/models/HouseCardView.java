@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -19,7 +21,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.fratnav.R;
 
-public class HouseCardView {
+public class HouseCardView implements Parcelable {
 
     /**
      *
@@ -72,6 +74,23 @@ public class HouseCardView {
         this.context = context;
         this.drawable = drawable;
     }
+
+    protected HouseCardView(Parcel in) {
+        name = in.readString();
+        drawable = in.readInt();
+    }
+
+    public static final Creator<HouseCardView> CREATOR = new Creator<HouseCardView>() {
+        @Override
+        public HouseCardView createFromParcel(Parcel in) {
+            return new HouseCardView(in);
+        }
+
+        @Override
+        public HouseCardView[] newArray(int size) {
+            return new HouseCardView[size];
+        }
+    };
 
     public CardView makeCardView(){ // need to put drawable in there as well
         CardView cd = new CardView(context);
@@ -351,5 +370,16 @@ public class HouseCardView {
         Log.d("cd", cd.toString());
 
         return cd;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(drawable);
     }
 }

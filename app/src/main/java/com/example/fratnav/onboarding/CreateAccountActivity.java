@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import java.util.Random;
@@ -161,6 +162,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             return;
         }
 
+        if (password.length() < 6){
+            Toast.makeText(CreateAccountActivity.this, "Your password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!email.equals(emailCon)){
             Toast.makeText(this, "Your emails do not match!", Toast.LENGTH_SHORT).show();
             return;
@@ -195,12 +201,20 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
+                            switch(Objects.requireNonNull(task.getException()).toString()){
+                                case "com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The email address is badly formatted.":
+                                    Toast.makeText(CreateAccountActivity.this, "The email address you're trying to use is not valid.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case "com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.":
+                                    Toast.makeText(CreateAccountActivity.this, "That email address is already in use by another account.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    Toast.makeText(CreateAccountActivity.this, "Something happened. Try again!", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
                             Log.w("authentication", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CreateAccountActivity.this, task.toString(),
-                                    Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
                     }
                 });
     }

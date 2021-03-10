@@ -3,6 +3,7 @@ package com.example.fratnav.houses;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.MainActivity;
 import com.example.fratnav.callbacks.getUserByIdCallback;
@@ -52,10 +54,11 @@ public class HousesSearch extends AppCompatActivity {
     BottomNavigationView bottomBar;
     GridLayout gridLayout;
     FirebaseUser user;
-
+    ArrayList<HouseCardView> cards;
     ImageView filter;
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
+    public static final String HOUSECARDS_KEY = "housecards";
     ConstraintLayout coordinatorLayout;
     public HashMap<String, String> houseCategories;
     public String searchText = "";
@@ -72,18 +75,11 @@ public class HousesSearch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //sets XML
         setContentView(R.layout.houses_search);
-
-        ///gets the current user
         FirebaseUser currentUser = AuthenticationHelper.getCurrentUser();
 
-
-        //instantiates the house categories hashmap
         houseCategories = new HashMap<>();
 
-
-        // cheecks if the user is a house account
         UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
             @Override
             public void onCallback(User user) {
@@ -91,16 +87,15 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         gridLayout = (GridLayout) findViewById(R.id.grid_layout);
 
         coordinatorLayout = (ConstraintLayout) findViewById(R.id.houseSearchConstrainLayout);
         filter = (ImageView) findViewById(R.id.searchFilter);
 
-        //implements the filter
         searchThings();
 
-
-        //filter poppUpWindow for filtering by type of house and sets on click listeners
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,27 +125,24 @@ public class HousesSearch extends AppCompatActivity {
                         return true;
                     }
                 });
-                //listener for sororities
                 container.findViewById(R.id.soroTag).setOnClickListener(
                         new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (houseCategories.containsKey("sorority")){
-                                houseCategories.remove("sorority");
-                                sororityOn = false;
-                            }
-                            else{
-                                houseCategories.put("sorority", "");
-                                sororityOn = true;
-                            }
-                            firebaseHouseSearch();
+                            @Override
+                            public void onClick(View v) {
+                                if (houseCategories.containsKey("sorority")){
+                                    houseCategories.remove("sorority");
+                                    sororityOn = false;
+                                }
+                                else{
+                                    houseCategories.put("sorority", "");
+                                    sororityOn = true;
+                                }
+                                firebaseHouseSearch();
 
+                            }
                         }
-                    }
                 );
 
-
-                //listener for frats
                 container.findViewById(R.id.fratTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -166,7 +158,6 @@ public class HousesSearch extends AppCompatActivity {
                     }
                 });
 
-                //listener for gender inclusive houses
                 container.findViewById(R.id.genderInclusiveTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -182,7 +173,6 @@ public class HousesSearch extends AppCompatActivity {
                     }
                 });
 
-                //listener for national pan hellic
                 container.findViewById(R.id.nationalPanHellicTag).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -200,41 +190,71 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
-        //get the houses and shows the houses on the page
-        HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
-            @Override
-            public void onCallback(ArrayList<House> houses) {
-                Log.d("house", houses.toString());
-                for (House house : houses){
-                    HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
-                    CardView cardView = housecard.makeCardView();
-                    cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+
+//        initSearchWidgets();
+        if (savedInstanceState == null) {
+            HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
+                @Override
+                public void onCallback(ArrayList<House> houses) {
+                    Log.d("house", houses.toString());
+                    cards = new ArrayList<>();
+                    for (House house : houses) {
+                        HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
+                        CardView cardView = housecard.makeCardView();
+                        cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+
+                        cardView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
+//                            Toast.LENGTH_SHORT).show();
+                                ViewGroup viewGroup = (ViewGroup) view;
+                                ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
+                                TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
+
+                                Intent intent = new Intent(HousesSearch.this, HousePage.class);
+                                intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
 
 
-                    //sets a listener and opens the house page accordingly
-                    cardView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ViewGroup viewGroup = (ViewGroup) view;
-                            ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
-                            TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
+                        gridLayout.addView(cardView);
 
-                            Intent intent = new Intent(HousesSearch.this, HousePage.class);
-                            intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
-                            startActivity(intent);
-                        }
-                    });
 
-                    //adds the cardview to the grid layout
-                    gridLayout.addView(cardView);
+                    }
 
 
                 }
+            });
+        }
+        else{
+            cards = savedInstanceState.getParcelableArrayList(HOUSECARDS_KEY);
+            gridLayout.removeAllViews();
+            for (HouseCardView houseCardView : cards){
+                CardView cardView = houseCardView.makeCardView();
+                cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
+//                            Toast.LENGTH_SHORT).show();
+                        ViewGroup viewGroup = (ViewGroup) view;
+                        ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
+                        TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
+
+                        Intent intent = new Intent(HousesSearch.this, HousePage.class);
+                        intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
+                        startActivity(intent);
+                    }
+                });
+                gridLayout.addView(cardView);
             }
-        });
+
+        }
 
 
-        //nav bar
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
         bottomBar.setSelectedItemId(R.id.houses);
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -285,6 +305,12 @@ public class HousesSearch extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(HOUSECARDS_KEY, cards);
+    }
+
     public void firebaseHouseSearch(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/houses");
         Query q = databaseReference.orderByChild("query").startAt(searchText.toUpperCase()).endAt(searchText.toUpperCase() + "\uf8ff");
@@ -331,5 +357,3 @@ public class HousesSearch extends AppCompatActivity {
 
     }
 }
-
-
