@@ -337,7 +337,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 else{
                     affiliated = "No";
                 }
-                profileUsername.setText(userName);
+                String userNameString = "@"+ userName;
+                profileUsername.setText(userNameString);
                 profileSexuality.setText(sexuality);
                 profileGender.setText(gender);
                 profileYear.setText(year);

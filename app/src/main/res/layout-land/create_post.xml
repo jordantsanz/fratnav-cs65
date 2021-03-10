@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/createPostRelativeLayout"
@@ -22,7 +23,7 @@
         android:fontFamily="@font/cabin"
         android:layout_height="wrap_content"
         android:background="@drawable/purple_background"
-        android:layout_marginStart="295dp"
+        android:layout_marginStart="720dp"
         android:textColor="@color/textColor"
         android:onClick="savePost"
         android:textSize="18sp"
@@ -46,12 +47,13 @@
         android:textSize="18sp"
         android:onClick="cancelPost"
         app:layout_anchor="@+id/postCancel"
-        app:layout_anchorGravity="center" />
+        app:layout_anchorGravity="center"
+        tools:ignore="NotSibling" />
 
 
     <EditText
         android:id="@+id/postUserText"
-        android:layout_width="360dp"
+        android:layout_width="660dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
@@ -72,7 +74,7 @@
         android:textColor="@color/textColor"
         android:textSize="22sp"
         android:layout_marginTop="120dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="100dp"
         android:id="@+id/createPostUsername"/>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -102,7 +104,6 @@
         android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_below="@+id/tags"
         android:layout_marginTop="355dp">
 
         <LinearLayout
@@ -427,11 +428,7 @@
 
     </HorizontalScrollView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -439,17 +436,22 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/montserrat"
             android:text="@string/personalTags"
-            android:layout_marginTop="60dp"
+            android:layout_below="@+id/horizontalScroll"
+            android:layout_marginTop="10dp"
             android:textColor="@color/textColor"
             android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="200dp"
+                >
         <HorizontalScrollView
             android:id="@+id/horizontalScroll2"
-            android:layout_marginStart="30dp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_below="@+id/tags"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="465dp">
+            android:layout_marginTop="255dp"
+            android:layout_marginStart="30dp">
 
             <LinearLayout
                 android:id="@+id/personalTags"
@@ -480,18 +482,19 @@
                     android:textColor="@drawable/tags_font_color"
                     android:background="@drawable/person_tags_selector"
                     />
+
                 <androidx.appcompat.widget.AppCompatToggleButton
-                    android:layout_marginStart="10dp"
+                    android:id="@+id/firstGenTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/person_tags_selector"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:textOn="@string/firstGen"
-                    android:textOff="@string/firstGen"
-                    android:id="@+id/firstGenTag"
                     android:textColor="@drawable/tags_font_color"
-                    android:background="@drawable/person_tags_selector"
-                    />
+                    android:textOff="@string/firstGen"
+                    android:textOn="@string/firstGen" />
+
                 <androidx.appcompat.widget.AppCompatToggleButton
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"

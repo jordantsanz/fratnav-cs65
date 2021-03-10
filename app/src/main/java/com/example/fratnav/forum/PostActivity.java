@@ -2,6 +2,7 @@ package com.example.fratnav.forum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -108,6 +109,12 @@ public class PostActivity extends AppCompatActivity {
 
         ListView list = findViewById(android.R.id.list);
         list.setAdapter(adapter); // sets adapter for list
+    }
+    public void cancelComment(View view) {
+        Intent intent = new Intent(PostActivity.this, Forum.class);
+        startActivity(intent);
+        finish();
+
     }
 
     public void createNewComment(View view){

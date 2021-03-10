@@ -4,142 +4,174 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".forum.PostActivity"
-    android:layout_centerHorizontal="true"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    tools:context=".forum.PostActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="793dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginTop="20dp"
-        android:textSize="16sp"
-        android:layout_marginStart="25dp"
-        android:id="@+id/postActivityUser" />
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin"
-                android:textSize="16sp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/background"
-                android:id="@+id/postActivityUserAffiliation"/>
-            <TextView
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin"
-                android:textSize="16sp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/background"
-                android:id="@+id/postActivityUserYear"/>
-            <TextView
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin"
-                android:textSize="16sp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/background"
-                android:id="@+id/postActivityUserGender"/>
-            <TextView
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin"
-                android:textSize="16sp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/background"
-                android:id="@+id/postActivityUserSexuality"/>
-
-
-
-        </LinearLayout>
-        </HorizontalScrollView>
-
-
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/montserrat"
-        android:textSize="18sp"
-        android:layout_marginStart="25dp"
-        android:id="@+id/postActivityText" />
-
-    <EditText
-        android:layout_marginTop="5dp"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:id="@+id/commentEditText"
-        android:background="@drawable/background"
-        android:layout_marginStart="25dp"
-        android:singleLine="true"
-        android:textSize="18sp"
-        android:paddingStart="15sp"
-        android:paddingEnd="15sp"
-        android:paddingTop="05dp"
-        android:paddingBottom="05dp"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/teal_background"
-        android:text="@string/submitComment"
-        android:id="@+id/submitcomment"
-        android:onClick="createNewComment"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:paddingStart="15sp"
-        android:paddingEnd="15sp"/>
-    </LinearLayout>
-
-        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:layout_margin="10dp"
-            >
-            <ListView
-                android:id="@android:id/list"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:dividerHeight="10.0sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"/>
-        </FrameLayout>
-    </LinearLayout>
+            android:layout_height="500dp"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="600dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/post_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/postActivityUser"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp" />
+
+
+                <TextView
+                    android:id="@+id/postActivityText"
+                    android:layout_width="560dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/grey_background"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingStart="15dp"
+                    android:paddingTop="05dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="05dp"
+                    android:textColor="@color/backgroundColor"
+                    android:textSize="18sp" />
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/postActivityUserAffiliation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/grey_background"
+                            android:fontFamily="@font/cabin"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/postActivityUserYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/grey_background"
+                            android:fontFamily="@font/cabin"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/postActivityUserGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/grey_background"
+                            android:fontFamily="@font/cabin"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/postActivityUserSexuality"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/grey_background"
+                            android:fontFamily="@font/cabin"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/commentEditText"
+                    android:layout_width="560dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingStart="15sp"
+                    android:paddingTop="05dp"
+                    android:paddingEnd="15sp"
+                    android:paddingBottom="05dp"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitcomment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/teal_background"
+                    android:onClick="createNewComment"
+                    android:paddingStart="15sp"
+                    android:paddingEnd="15sp"
+                    android:text="@string/submitComment" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cancelComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/teal_background"
+                    android:onClick="cancelComment"
+                    android:paddingStart="15sp"
+                    android:paddingEnd="15sp"
+                    android:text="@string/cancelComment" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ListView
+                    android:foregroundGravity="center_horizontal"
+                    android:id="@android:id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:dividerHeight="10.0sp" />
+            </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

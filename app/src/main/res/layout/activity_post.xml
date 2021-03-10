@@ -131,6 +131,18 @@
         android:paddingStart="15sp"
         android:layout_gravity="center_horizontal"
         android:paddingEnd="15sp"/>
+
+         <androidx.appcompat.widget.AppCompatButton
+             android:id="@+id/cancelComment"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginTop="18dp"
+             android:background="@drawable/teal_background"
+             android:onClick="cancelComment"
+             android:paddingStart="15sp"
+             android:paddingEnd="15sp"
+             android:text="@string/cancelComment" />
     </LinearLayout>
 
         <FrameLayout
@@ -141,8 +153,9 @@
             android:layout_margin="10dp"
             >
             <ListView
+                android:foregroundGravity="center_horizontal"
                 android:id="@android:id/list"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="65dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:dividerHeight="10.0sp"

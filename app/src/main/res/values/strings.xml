@@ -124,5 +124,6 @@
     <string name="totalMembers">Total Members:</string>    POC Members:
     <string name="pocMembers">POC Members:</string>
     <string name="queerMembers">LGBTQ+ Members:</string>
+    <string name="cancelComment">Cancel Comment</string>
 
 </resources>
