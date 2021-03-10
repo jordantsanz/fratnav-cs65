@@ -634,7 +634,10 @@ public class updateProfile extends AppCompatActivity {
             TextView houseName = findViewById(R.id.house_name);
             houseName.setText(house.houseName);
             TextView subscribers = findViewById(R.id.subscribers);
-            subscribers.setText(house.subscribers);
+            Log.d("housesubs", String.valueOf(house.subscribers));
+            String subs = String.valueOf(house.subscribers) + " Subscribers";
+            subscribers.setText(subs);
+            setHouseImage(house);
             RadioButton nationalB = findViewById(R.id.national);
             RadioButton localB = findViewById(R.id.local);
 

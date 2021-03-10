@@ -110,6 +110,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public User currentUserInfo;
     public static String useriD;
     public HashMap<String,String> subscribedtO;
+    public static final String RESET_KEY = "reset";
 
     boolean ishouse;
 
@@ -119,7 +120,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getIntent().getStringExtra(Forum.USER_ID_KEY) == null) {
+        if (getIntent().getStringExtra(Forum.USER_ID_KEY) == null || getIntent().getStringExtra(RESET_KEY) != null) {
             currentUser = FirebaseAuth.getInstance().getCurrentUser();
             // checks to make sure the user is currently logged in; otherwise, send to authentication
             if (currentUser == null) {
@@ -144,14 +145,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onCallback(User user) {
                     currentUserInfo = user;
-                    if (currentUserInfo.house){
-                        setContentView(R.layout.house_profile);
-                        setHouseProfile();
-                    }
-                    else{
                         setContentView(R.layout.view_profile);
                         setUserProfile(true);
-                    }
+
                 }
             });
         }
@@ -558,6 +554,27 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     startActivity(new Intent(Profile.this, Forum.class));
                     finish();
                     return true;
+                }
+                else if (item.getItemId()==R.id.profile){
+                    Intent intent = new Intent(Profile.this, Profile.class);
+                    intent.putExtra(RESET_KEY, "reset");
+                    UserDatabaseHelper.getUserById(currentUser.getUid(), new getUserByIdCallback() {
+                        @Override
+                        public void onCallback(User user) {
+                            currentUserInfo = user;
+                            if (currentUserInfo.house){
+                                intent.putExtra(MainActivity.USER_HOUSE_BOOL, true);
+                            }
+                            else{
+                                intent.putExtra(MainActivity.USER_HOUSE_BOOL, false);
+                            }
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    });
+                    return true;
+
                 }
                 return false;
             }

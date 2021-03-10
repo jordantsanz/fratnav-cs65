@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.callbacks.likePostCallback;
+import com.example.fratnav.houses.HousePage;
 import com.example.fratnav.onboarding.Authentication;
 import com.example.fratnav.houses.HousesSearch;
 import com.example.fratnav.MainActivity;
@@ -80,6 +82,8 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     public String randomKey;
 
     Dialog filterDialog;
+
+    public static final String POSTS_KEY = "postskey";
 
     public ToggleButton axa;
     public ToggleButton aka;
@@ -153,7 +157,18 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("create", "onCreate: jsjsjsjs");
         setContentView(R.layout.forum);
+        recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
+        recyclerViewforum.removeAllViews();
+
+        if (arrayOfPosts != null) {
+            Log.d("create", "onCrdsfsdfseate: ");
+            for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1) {
+                arrayOfPosts.remove(i);
+            }
+        }
+
         tags = new HashMap<>();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -255,7 +270,21 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
             arrayOfPosts = new ArrayList<Post>();
         }
 
-        recyclerViewforum = (RecyclerView) findViewById(R.id.rv_forumposts);
+        if (savedInstanceState != null){
+            ArrayList<Post> posts = savedInstanceState.getParcelableArrayList(POSTS_KEY);
+            for (int i = arrayOfPosts.size() - 1; i > -1; i -= 1){
+                arrayOfPosts.remove(i);
+            }
+
+            for (int i = 0; i < posts.size(); i+= 1){
+                arrayOfPosts.add(posts.get(i));
+            }
+            if (postsAdapter != null) {
+                postsAdapter.notifyDataSetChanged();
+            }
+        }
+
+
         LinearLayoutManager verticalLayoutManager =
                 new LinearLayoutManager(Forum.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewforum.setLayoutManager(verticalLayoutManager);
@@ -265,30 +294,12 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
 
         postsAdapter.notifyDataSetChanged();
 
+    }
 
-
-
-
-        // on click listener for posts
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (position != -1) {
-//                    Log.d("position", String.valueOf(position));
-//                    long viewId = view.getId();
-//                    Log.d("click", String.valueOf(viewId));
-//                    Post post = adapter.getItem(position);
-//
-//
-//                    Intent intent = new Intent(Forum.this, PostActivity.class);
-//                    intent.putExtra(POST_ID_KEY, post.id);
-//                    intent.putExtra(USER_ID_KEY, currentUserInfo.username);
-//
-//
-//                    startActivity(intent);
-//                }}});
-
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(POSTS_KEY, arrayOfPosts);
     }
 
     @Override
@@ -363,79 +374,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         });
 
     }
-
-//    public void onHeartClick(View v){
-//        View parentRow = (View) v.getParent().getParent();
-//        ListView lv = (ListView) parentRow.getParent();
-//        int position = lv.getPositionForView(parentRow);
-//        if (position == -1){
-//            return;
-//        }
-//        Post post = adapter.getItem(position);
-//        assert post != null;
-//        Log.d("heartClick", post.id);
-//
-//        if (randomKey == null){
-//            randomKey = UUID.randomUUID().toString();
-//        }
-//
-//        boolean userDidLike = false;
-//
-//        ImageView heart = findViewById(R.id.heart);
-//        heart.getTag();
-//
-//
-//        if (post.usersLiked != null){
-//            Log.d("userDidLike", post.usersLiked.toString());
-//            for (String userId : post.usersLiked.values()){
-//                Log.d("userDidLike", userId + ", " + currentUserInfo.userID);
-//                if (userId.equals(currentUserInfo.userID)){
-//                    userDidLike = true;
-//                    break;
-//                }
-//            }
-//        }
-//
-//
-//        if (userDidLike){
-//            PostDatabaseHelper.removeLikefromPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Forum.refresh();
-//                    Log.d("like", "removeLike");
-//                    post.usersLiked.remove(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes -= 1;
-//                    Log.d("postprof", post.usersLiked.toString());
-//
-//
-//                    /// need to change heart image drawable here
-//                    heart.setBackgroundResource(R.drawable.like);
-//
-//                }
-//            });
-//
-//
-//        }
-//        else{
-//            PostDatabaseHelper.addLiketoPost(currentUserInfo.userID, post.id, new likePostCallback() {
-//                @Override
-//                public void onCallback(int likes) {
-//                    Log.d("like", "addLike");
-//                    Forum.refresh();
-//                    if (post.usersLiked == null){
-//                        post.usersLiked = new HashMap<>();
-//                    }
-//                    post.usersLiked.put(currentUserInfo.userID, currentUserInfo.userID);
-//                    post.likes += 1;
-//
-//
-//
-//
-//                }
-//            });
-//
-//        }
-//    }
     public void onHeartClick(View v){
         View parentRow = (View) v.getParent().getParent();
         Log.d("parentRow", parentRow.toString());
@@ -520,7 +458,6 @@ public class Forum extends AppCompatActivity implements View.OnClickListener{
         Post post = postsAdapter.getItem(position);
         assert post != null;
         Log.d("listview", post.username);
-        assert post != null;
         Log.d("heartClick", post.id);
         Intent intent = new Intent(getApplicationContext(), Profile.class);
         intent.putExtra(USER_ID_KEY, post.userID);

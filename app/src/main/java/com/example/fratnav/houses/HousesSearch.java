@@ -3,6 +3,7 @@ package com.example.fratnav.houses;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fratnav.MainActivity;
 import com.example.fratnav.callbacks.getUserByIdCallback;
@@ -52,10 +54,11 @@ public class HousesSearch extends AppCompatActivity {
     BottomNavigationView bottomBar;
     GridLayout gridLayout;
     FirebaseUser user;
-
+    ArrayList<HouseCardView> cards;
     ImageView filter;
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
+    public static final String HOUSECARDS_KEY = "housecards";
     ConstraintLayout coordinatorLayout;
     public HashMap<String, String> houseCategories;
     public String searchText = "";
@@ -189,35 +192,67 @@ public class HousesSearch extends AppCompatActivity {
 
 
 //        initSearchWidgets();
-        HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
-            @Override
-            public void onCallback(ArrayList<House> houses) {
-                Log.d("house", houses.toString());
-                for (House house : houses){
-                    HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
-                    CardView cardView = housecard.makeCardView();
-                    cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+        if (savedInstanceState == null) {
+            HouseDatabaseHelper.getAllHouses(new getAllHousesCallback() {
+                @Override
+                public void onCallback(ArrayList<House> houses) {
+                    Log.d("house", houses.toString());
+                    cards = new ArrayList<>();
+                    for (House house : houses) {
+                        HouseCardView housecard = new HouseCardView(house.houseName, getApplicationContext(), house.imageName);
+                        CardView cardView = housecard.makeCardView();
+                        cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
 
-                    cardView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+                        cardView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 //                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
 //                            Toast.LENGTH_SHORT).show();
-                            ViewGroup viewGroup = (ViewGroup) view;
-                            ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
-                            TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
+                                ViewGroup viewGroup = (ViewGroup) view;
+                                ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
+                                TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
 
-                            Intent intent = new Intent(HousesSearch.this, HousePage.class);
-                            intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
-                            startActivity(intent);
-                        }
-                    });
-                    gridLayout.addView(cardView);
+                                Intent intent = new Intent(HousesSearch.this, HousePage.class);
+                                intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
+
+
+                        gridLayout.addView(cardView);
+
+
+                    }
 
 
                 }
+            });
+        }
+        else{
+            cards = savedInstanceState.getParcelableArrayList(HOUSECARDS_KEY);
+            gridLayout.removeAllViews();
+            for (HouseCardView houseCardView : cards){
+                CardView cardView = houseCardView.makeCardView();
+                cardView.setCardBackgroundColor(Color.parseColor("#2D2F35"));
+
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                    Toast.makeText(MainActivity.this,"Clicked at index "+ finalI,
+//                            Toast.LENGTH_SHORT).show();
+                        ViewGroup viewGroup = (ViewGroup) view;
+                        ViewGroup linearLayout = (ViewGroup) viewGroup.getChildAt(0);
+                        TextView houseNameTextView = (TextView) linearLayout.getChildAt(1);
+
+                        Intent intent = new Intent(HousesSearch.this, HousePage.class);
+                        intent.putExtra(HOUSE_NAME_KEY, houseNameTextView.getText().toString());
+                        startActivity(intent);
+                    }
+                });
+                gridLayout.addView(cardView);
             }
-        });
+
+        }
 
 
         bottomBar = (BottomNavigationView) findViewById(R.id.bottomBar);
@@ -268,6 +303,12 @@ public class HousesSearch extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(HOUSECARDS_KEY, cards);
     }
 
     public void firebaseHouseSearch(){
